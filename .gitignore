@@ -1,0 +1,70 @@
+# ==============================================================================
+# DigiBuddy4U - Root Git Ignore Configuration
+# ==============================================================================
+
+# 1. Dependency Directories
+node_modules/
+*/node_modules/
+
+# 2. Environment Variables & Secrets (CRITICAL)
+.env
+.env.*
+*.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*/.env
+*/.env.*
+*/.env.local
+*/.env.*.local
+
+# Allow example environment templates
+!*.env.example
+!*/*.env.example
+
+# 3. Build & Distribution Artifacts
+dist/
+dist-ssr/
+build/
+out/
+*/dist/
+*/dist-ssr/
+*/build/
+*/out/
+
+# 4. Logs and Diagnostic Files
+logs/
+*.log
+*/logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 5. OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# 6. IDE & Editor Files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# 7. Certificates, Keys & Temporary Files
+*.pem
+*.key
+*.cert
+scratch*
+*.tmp
+*.bak

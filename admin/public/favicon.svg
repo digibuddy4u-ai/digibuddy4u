@@ -1,0 +1,26 @@
+<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="db_bg_grad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#22D3EE"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+    <linearGradient id="db_arrow_grad" x1="28" y1="64" x2="72" y2="36" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#FBBF24"/>
+    </linearGradient>
+  </defs>
+
+  <!-- App Icon Base: Rounded Cyan-to-Blue Box -->
+  <rect width="100" height="100" rx="26" fill="url(#db_bg_grad)"/>
+
+  <!-- Golden 4-point Sparkle Star in Top-Right -->
+  <path d="M84 15C84 20 87 22.5 91 23.5C87 24.5 84 27 84 32C84 27 81 24.5 77 23.5C81 22.5 84 20 84 15Z" fill="#FDE047"/>
+
+  <!-- White Speech Bubble with Tail -->
+  <path d="M22 36C22 28.268 28.268 22 36 22H68C75.732 22 82 28.268 82 36V52C82 59.732 75.732 66 68 66H37.5L25 76V65C23.15 62.9 22 59.8 22 56V36Z" fill="#FFFFFF"/>
+
+  <!-- Golden Trending Growth Arrow Inside Bubble -->
+  <path d="M33 55.5L45 43.5L53 51.5L67 36.5" stroke="url(#db_arrow_grad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Arrow Head -->
+  <path d="M57 36.5H67V46.5" stroke="url(#db_arrow_grad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

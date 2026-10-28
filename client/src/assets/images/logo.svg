@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" fill="none">
+  <!-- Brand Icon Box -->
+  <rect x="2" y="6" width="48" height="48" rx="14" fill="#071A38"/>
+  <path d="M14 38L22 26L28 32L38 18" stroke="url(#blue_grad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="38" cy="18" r="4" fill="#FFC629"/>
+  <circle cx="28" cy="32" r="3" fill="#0866F5"/>
+  <circle cx="22" cy="26" r="3" fill="#18D5E8"/>
+  <circle cx="14" cy="38" r="3" fill="#18D5E8"/>
+  
+  <!-- Brand Typography -->
+  <text x="62" y="38" font-family="'Poppins', sans-serif" font-weight="700" font-size="28" fill="#071A38">Digi<tspan fill="#0866F5">Buddy</tspan><tspan fill="#FFC629" font-weight="900">4U</tspan></text>
+  <text x="63" y="49" font-family="'Inter', sans-serif" font-weight="600" font-size="8.5" fill="#52627A" letter-spacing="1.5">YOUR DIGITAL GROWTH PARTNER</text>
+
+  <defs>
+    <linearGradient id="blue_grad" x1="14" y1="38" x2="38" y2="18" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#18D5E8"/>
+      <stop offset="1" stop-color="#0866F5"/>
+    </linearGradient>
+  </defs>
+</svg>

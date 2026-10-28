@@ -1,0 +1,193 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    overflow-x: clip;
+    background-color: #ffffff;
+    color: #071A38;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Headings Hierarchy — Poppins (Bold, Modern Geometric Sans-Serif) */
+  h1, h2, h3, h4, h5, h6, .font-heading {
+    font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: -0.025em;
+  }
+
+  h1 {
+    font-weight: 700;
+    line-height: 1.14;
+    letter-spacing: -0.035em;
+  }
+
+  h2 {
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
+
+  h3 {
+    font-weight: 600;
+    line-height: 1.28;
+    letter-spacing: -0.02em;
+  }
+
+  h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+  }
+
+  /* Body Text & UI Elements — Inter (Screen-Optimized Neo-Grotesque) */
+  p, .text-body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.65;
+    letter-spacing: -0.011em;
+  }
+
+  button, input, select, textarea, label {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  /* Monospace & Tabular Numbers — JetBrains Mono (Technical Precision) */
+  code, kbd, samp, pre, .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  /* Full-width responsive site container (92-96% viewport up to 1640px on widescreen) */
+  .site-container {
+    width: min(94%, 1600px);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  @media (min-width: 640px) {
+    .site-container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .site-container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+  @media (min-width: 1536px) {
+    .site-container {
+      width: min(95%, 1680px);
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+    }
+  }
+
+  .site-container-fluid {
+    width: min(96%, 1760px);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  @media (min-width: 640px) {
+    .site-container-fluid {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .site-container-fluid {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-cyan-accent to-primary;
+  }
+  .gradient-text-alt {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-accent to-accent-yellow;
+  }
+
+  /* Typography Hierarchy Utilities */
+  .text-hero-headline {
+    @apply font-heading font-extrabold tracking-tight leading-[1.08];
+  }
+  .text-section-headline {
+    @apply font-heading font-bold tracking-tight leading-[1.18];
+  }
+  .text-card-headline {
+    @apply font-heading font-semibold tracking-tight leading-snug;
+  }
+  .text-eyebrow {
+    @apply font-mono text-[11px] sm:text-xs font-bold uppercase tracking-widest;
+  }
+  .text-lead {
+    @apply font-sans text-base sm:text-lg leading-relaxed font-normal;
+  }
+}
+
+/* Custom smooth scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #F8FAFC;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0866F5;
+}
+
+/* ========================================================= */
+/* Platforms & Technologies Infinite Marquee Animations */
+/* ========================================================= */
+@keyframes marquee-scroll-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-scroll-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll-left 40s linear infinite;
+}
+
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll-right 40s linear infinite;
+}
+
+.animate-marquee-left:hover,
+.animate-marquee-right:hover {
+  animation-play-state: paused;
+}
+
