@@ -267,34 +267,21 @@ export default function ServicesOverviewSection() {
       const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024;
       let currentActiveIndex = 0;
 
-      if (isDesktop) {
-        const firstEl = cardRefs.current[0];
-        const stickyTop = firstEl
-          ? parseFloat(window.getComputedStyle(firstEl).top) || 128
-          : 128;
-        // Buffer (+25px) ensures smooth bidirectional transition as cards slide over
-        const threshold = stickyTop + 25;
+      const firstEl = cardRefs.current[0];
+      const stickyTop = firstEl
+        ? parseFloat(window.getComputedStyle(firstEl).top) || (isDesktop ? 128 : 80)
+        : (isDesktop ? 128 : 80);
+      // Buffer (+25px) ensures smooth bidirectional transition as cards slide over
+      const threshold = stickyTop + 25;
 
-        for (let i = 0; i < services.length; i++) {
-          const el = cardRefs.current[i];
-          if (!el) continue;
-          const rect = el.getBoundingClientRect();
+      for (let i = 0; i < services.length; i++) {
+        const el = cardRefs.current[i];
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
 
-          // When a card's top reaches or passes the sticky threshold, it is active and on top
-          if (rect.top <= threshold) {
-            currentActiveIndex = i;
-          }
-        }
-      } else {
-        // Mobile / Tablet: track based on upper-middle viewport
-        const viewportThreshold = window.innerHeight * 0.45;
-        for (let i = 0; i < services.length; i++) {
-          const el = cardRefs.current[i];
-          if (!el) continue;
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= viewportThreshold) {
-            currentActiveIndex = i;
-          }
+        // When a card's top reaches or passes the sticky threshold, it is active and on top
+        if (rect.top <= threshold) {
+          currentActiveIndex = i;
         }
       }
 
@@ -341,16 +328,27 @@ export default function ServicesOverviewSection() {
 
       <div className="site-container relative">
         {/* Mobile Header: Visible only on small devices */}
-        <div className="mb-10 lg:hidden text-center sm:text-left">
-          <h2 className="text-2xl sm:text-4xl font-heading font-extrabold text-white leading-tight">
-            Our Core Services & <br />
-            <span className="text-primary">
-              Practical Benefits.
-            </span>
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-400 mt-2 max-w-lg">
-            Explore what we offer and the tangible commercial value each capability delivers for your brand.
-          </p>
+        <div className="mb-8 lg:hidden flex items-end justify-between border-b border-white/10 pb-4">
+          <div>
+            <h2 className="text-2xl sm:text-4xl font-heading font-extrabold text-white leading-tight">
+              Our Core Services & <br />
+              <span className="text-primary">
+                Practical Benefits.
+              </span>
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-400 mt-2 max-w-sm">
+              Scroll down to stack services and explore commercial deliverables.
+            </p>
+          </div>
+          <div
+            className="text-5xl font-light text-transparent select-none font-mono tracking-tight pb-1 flex-shrink-0"
+            style={{
+              WebkitTextStroke: '2px rgba(8, 102, 245, 0.9)',
+              textShadow: '0 0 30px rgba(8, 102, 245, 0.35)',
+            }}
+          >
+            {activeNumber}
+          </div>
         </div>
 
         {/* Main Two-Column Layout (Sticky Tracking Counter Left + Stacking Cards Right) */}
@@ -405,9 +403,9 @@ export default function ServicesOverviewSection() {
                   key={service.id}
                   ref={(el) => (cardRefs.current[index] = el)}
                   id={`service-stack-card-${service.slug || service.id}`}
-                  className={`relative lg:sticky lg:top-32 flex flex-col rounded-[32px] sm:rounded-[40px] p-6 sm:p-10 lg:p-12 ${
-                    isLast ? 'mb-0 lg:mb-0' : 'mb-8 sm:mb-10 lg:mb-32'
-                  } transition-all duration-300 motion-reduce:transition-none`}
+                  className={`sticky top-20 sm:top-24 lg:top-32 flex flex-col rounded-[28px] sm:rounded-[40px] p-5 sm:p-10 lg:p-12 ${
+                    isLast ? 'mb-8 lg:mb-16' : 'mb-16 sm:mb-24 lg:mb-32'
+                  } transition-all duration-300`}
                   style={{
                     zIndex: index + 1,
                     backgroundColor: '#071A38',
