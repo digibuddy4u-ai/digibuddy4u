@@ -475,7 +475,7 @@ export default function Navbar() {
               })}
             </nav>
 
-            {/* Right: Actions (Login Button Only — Let's Talk removed as requested) */}
+            {/* Right: Actions (WhatsApp Button — Login removed as requested) */}
             <div className="hidden lg:flex items-center gap-2 xl:gap-3">
               {totalCount > 0 && (
                 <button
@@ -491,29 +491,29 @@ export default function Navbar() {
                 </button>
               )}
 
-              {isAuthenticated ? (
+              {isAuthenticated && (
                 <Link
                   to="/customer/dashboard"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100/90 hover:bg-slate-200 text-navy-950 font-heading font-bold text-xs transition-colors border border-slate-200/90 shadow-xs"
+                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-slate-100 hover:bg-slate-200 text-navy-950 font-heading font-bold text-xs transition-colors border border-slate-200 shadow-xs"
                 >
                   <User className="w-3.5 h-3.5 text-primary" />
                   <span>{customer?.name?.split(' ')[0] || 'My Portal'}</span>
                 </Link>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() =>
-                    promptLogin(null, 'Enter your credentials to access your client dashboard, active campaigns, and saved proposals.')
-                  }
-                  className="inline-flex items-center gap-2 rounded-full bg-accent-yellow hover:bg-yellow-400 text-navy-950 font-heading font-bold text-xs sm:text-sm px-5 py-2 shadow-xs hover:shadow-md transition-all active:scale-95"
-                >
-                  <User className="w-4 h-4" />
-                  <span>Login</span>
-                </button>
               )}
+
+              <a
+                href={settings.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-[#25D366] hover:bg-[#1EBE5D] text-white font-heading font-bold text-xs sm:text-sm px-4 sm:px-5 py-2 shadow-md hover:shadow-lg transition-all active:scale-95 hover:scale-105"
+                title="Chat with us on WhatsApp"
+              >
+                <MessageCircle className="w-4 h-4 fill-current" />
+                <span>WhatsApp</span>
+              </a>
             </div>
 
-            {/* Mobile Top Controls (Login & Menu — Let's Talk removed) */}
+            {/* Mobile Top Controls (WhatsApp & Menu) */}
             <div className="flex items-center gap-2 lg:hidden">
               {totalCount > 0 && (
                 <button
@@ -529,7 +529,7 @@ export default function Navbar() {
                 </button>
               )}
 
-              {isAuthenticated ? (
+              {isAuthenticated && (
                 <Link
                   to="/customer/dashboard"
                   className="p-2 rounded-full bg-slate-100 text-primary font-bold text-xs border border-slate-200"
@@ -537,18 +537,18 @@ export default function Navbar() {
                 >
                   <User className="w-4 h-4" />
                 </Link>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() =>
-                    promptLogin(null, 'Enter your credentials to access your client dashboard, active campaigns, and saved proposals.')
-                  }
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-navy-950 bg-accent-yellow hover:bg-yellow-400 px-3.5 py-1.5 rounded-full shadow-xs active:scale-95 transition-all"
-                >
-                  <User className="w-3.5 h-3.5" />
-                  <span>Login</span>
-                </button>
               )}
+
+              <a
+                href={settings.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-[#25D366] hover:bg-[#1EBE5D] px-3.5 py-1.5 rounded-full shadow-sm active:scale-95 transition-all"
+                title="Chat on WhatsApp"
+              >
+                <MessageCircle className="w-3.5 h-3.5 fill-current" />
+                <span>WhatsApp</span>
+              </a>
 
               <button
                 type="button"

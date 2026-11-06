@@ -25,6 +25,7 @@ import { useCustomerAuth } from '../context/CustomerAuthContext';
 import { BRAND } from '../utils/brandConstants';
 import { API_URL } from '../utils/api';
 import AddonsSection from '../components/addons/AddonsSection';
+import PackageEnquiryChoiceModal from '../components/packages/PackageEnquiryChoiceModal';
 
 // 3 Official Social Media Management Packages
 const FALLBACK_PACKAGES = [
@@ -102,6 +103,7 @@ const FALLBACK_PACKAGES = [
 export default function PackagesPage() {
   const [packages, setPackages] = useState(FALLBACK_PACKAGES);
   const [loading, setLoading] = useState(true);
+  const [enquiryModalPkg, setEnquiryModalPkg] = useState(null);
   const navigate = useNavigate();
 
   const {
@@ -144,7 +146,7 @@ export default function PackagesPage() {
 
   const handleGetStarted = (pkg) => {
     trackEvent?.('package_page_get_started_click', { slug: pkg.slug, name: pkg.name });
-    navigate(`/contact?plan=${encodeURIComponent(`${pkg.name} Package (${pkg.priceDisplay || `₹${pkg.monthlyPrice}/mo`})`)}`);
+    setEnquiryModalPkg(pkg);
   };
 
   const handleMoreDetails = (pkg) => {
@@ -424,6 +426,13 @@ export default function PackagesPage() {
 
       {/* A La Carte Add-Ons & Extra Services Section */}
       <AddonsSection />
+
+      {/* Choice Modal: Enquire on WhatsApp vs Website */}
+      <PackageEnquiryChoiceModal
+        isOpen={Boolean(enquiryModalPkg)}
+        onClose={() => setEnquiryModalPkg(null)}
+        pkg={enquiryModalPkg}
+      />
     </>
   );
 }

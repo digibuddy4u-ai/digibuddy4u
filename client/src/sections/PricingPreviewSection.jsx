@@ -4,6 +4,7 @@ import { Check, Sparkles, ArrowRight, Download, Heart, Layers, Video, Camera, Sh
 import SectionHeader from '../components/common/SectionHeader';
 import Button from '../components/common/Button';
 import Badge from '../components/common/Badge';
+import PackageEnquiryChoiceModal from '../components/packages/PackageEnquiryChoiceModal';
 import { useCustomerAuth } from '../context/CustomerAuthContext';
 import { API_URL } from '../utils/api';
 
@@ -81,6 +82,7 @@ const DEFAULT_PACKAGES = [
 export default function PricingPreviewSection() {
   const [packages, setPackages] = useState(DEFAULT_PACKAGES);
   const [loading, setLoading] = useState(true);
+  const [enquiryModalPkg, setEnquiryModalPkg] = useState(null);
   const navigate = useNavigate();
 
   const {
@@ -124,7 +126,7 @@ export default function PricingPreviewSection() {
 
   const handleGetStarted = (pkg) => {
     trackEvent?.('package_get_started_click', { slug: pkg.slug, name: pkg.name });
-    navigate(`/contact?plan=${encodeURIComponent(`${pkg.name} Package (${pkg.priceDisplay || `₹${pkg.monthlyPrice}/mo`})`)}`);
+    setEnquiryModalPkg(pkg);
   };
 
   const handleCardClick = (pkg) => {
@@ -337,6 +339,13 @@ export default function PricingPreviewSection() {
           </Button>
         </div>
       </div>
+
+      {/* Choice Modal: Enquire on WhatsApp vs Website Form */}
+      <PackageEnquiryChoiceModal
+        isOpen={Boolean(enquiryModalPkg)}
+        onClose={() => setEnquiryModalPkg(null)}
+        pkg={enquiryModalPkg}
+      />
     </section>
   );
 }
