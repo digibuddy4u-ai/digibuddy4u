@@ -15,7 +15,7 @@ export default function FinalCTASection() {
       <div className="relative site-container text-center space-y-6 sm:space-y-8">
         <div className="max-w-4xl xl:max-w-5xl mx-auto space-y-4 sm:space-y-5">
           {/* Headline */}
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold tracking-tight text-navy-950 leading-tight">
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold tracking-tight text-navy-950 leading-tight break-words">
             Ready to Build a Stronger{' '}
             <span className="bg-gradient-to-r from-primary to-cyan-500 bg-clip-text text-transparent">Digital Presence?</span>
           </h2>
@@ -27,13 +27,13 @@ export default function FinalCTASection() {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 pt-2 w-full sm:w-auto">
           <Button
             to="/contact"
             variant="yellow"
             size="lg"
             icon={ArrowRight}
-            className="w-full sm:w-auto shadow-elevated font-bold"
+            className="w-full sm:w-auto justify-center text-center shadow-elevated font-bold"
           >
             Let's Grow Together
           </Button>
@@ -42,7 +42,7 @@ export default function FinalCTASection() {
             href={settings.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#25D366] text-white font-bold text-base hover:bg-[#1EBE5D] transition-all shadow-md hover:shadow-lg"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3.5 rounded-xl bg-[#25D366] text-white font-bold text-sm sm:text-base hover:bg-[#1EBE5D] transition-all shadow-md hover:shadow-lg text-center"
           >
             <MessageCircle className="w-5 h-5 fill-current" />
             <span>Chat on WhatsApp ({settings.phone})</span>

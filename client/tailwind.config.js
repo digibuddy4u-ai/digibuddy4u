@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        'xs': '420px',
+      },
       colors: {
         navy: {
           950: '#030D1C',

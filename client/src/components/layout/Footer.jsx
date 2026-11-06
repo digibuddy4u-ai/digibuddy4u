@@ -281,11 +281,11 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 text-center sm:text-left">
           <p>
             &copy; {currentYear} {BRAND.name}. All rights reserved. {BRAND.tagline}.
           </p>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3.5 sm:gap-6">
             <Link to="/privacy-policy" className="hover:text-primary transition-colors">
               Privacy Policy
             </Link>

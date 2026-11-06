@@ -94,12 +94,12 @@ export default function FeaturedPortfolioSection() {
         <div className="rounded-[32px] bg-slate-900/90 border border-slate-700/70 overflow-hidden shadow-2xl backdrop-blur-xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
             {/* Left: Vertical Smartphone / Reel Mockup (5 cols on lg) */}
-            <div className="lg:col-span-5 p-6 sm:p-8 lg:p-10 flex flex-col items-center justify-center relative bg-gradient-to-br from-slate-950 via-[#140f0a] to-slate-900 border-b lg:border-b-0 lg:border-r border-slate-800">
+            <div className="lg:col-span-5 p-3.5 xs:p-6 sm:p-8 lg:p-10 flex flex-col items-center justify-center relative bg-gradient-to-br from-slate-950 via-[#140f0a] to-slate-900 border-b lg:border-b-0 lg:border-r border-slate-800">
               {/* Backlight halo behind phone */}
               <div className="absolute w-64 h-80 bg-amber-500/20 rounded-full blur-3xl pointer-events-none" />
 
               {/* Status Header above mockup */}
-              <div className="w-full max-w-[310px] flex items-center justify-center mb-4 text-xs">
+              <div className="w-full max-w-[270px] xs:max-w-[310px] flex items-center justify-center mb-4 text-xs">
                 <span className="flex items-center gap-1.5 font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-3.5 py-1 rounded-full shadow-xs">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   Active Instagram Reel
@@ -107,9 +107,9 @@ export default function FeaturedPortfolioSection() {
               </div>
 
               {/* Phone Frame Device */}
-              <div className="relative w-full max-w-[300px] sm:max-w-[320px] rounded-[38px] bg-[#111827] p-3 shadow-2xl ring-1 ring-white/20 shadow-amber-500/10">
+              <div className="relative w-full max-w-[270px] xs:max-w-[290px] sm:max-w-[320px] rounded-[34px] sm:rounded-[38px] bg-[#111827] p-2.5 sm:p-3 shadow-2xl ring-1 ring-white/20 shadow-amber-500/10">
                 {/* Screen Content */}
-                <div className="relative rounded-[30px] overflow-hidden bg-gradient-to-b from-[#2a1306] via-[#1a0a02] to-black aspect-[9/18] flex flex-col justify-between text-white border border-white/10">
+                <div className="relative rounded-[28px] sm:rounded-[30px] overflow-hidden bg-gradient-to-b from-[#2a1306] via-[#1a0a02] to-black aspect-[9/18] flex flex-col justify-between text-white border border-white/10">
                   {/* Dynamic Island Notch */}
                   <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-20 h-4 bg-black rounded-full z-30 flex items-center justify-center space-x-1.5">
                     <div className="w-2 h-2 rounded-full bg-slate-800" />
@@ -152,7 +152,7 @@ export default function FeaturedPortfolioSection() {
                       <img
                         src="/images/portfolio/rotiwala-logo.png"
                         alt="RotiWala Official Logo"
-                        className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full object-contain mx-auto shadow-2xl ring-4 ring-amber-400/40 p-1.5 bg-white/10 backdrop-blur-md"
+                        className="relative w-28 h-28 xs:w-32 xs:h-32 sm:w-36 sm:h-36 rounded-full object-contain mx-auto shadow-2xl ring-4 ring-amber-400/40 p-1.5 bg-white/10 backdrop-blur-md"
                       />
                       <div className="absolute bottom-1 right-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full p-1.5 shadow-lg border-2 border-black">
                         <Flame className="w-3.5 h-3.5 text-white" />
@@ -231,7 +231,7 @@ export default function FeaturedPortfolioSection() {
             </div>
 
             {/* Right: Campaign Strategy, Deliverables & Actions (7 cols on lg) */}
-            <div className="lg:col-span-7 p-6 sm:p-8 lg:p-10 space-y-6 flex flex-col justify-between">
+            <div className="lg:col-span-7 p-4 xs:p-6 sm:p-8 lg:p-10 space-y-6 flex flex-col justify-between">
               <div>
                 {/* Category & Status Row */}
                 <div className="flex flex-wrap items-center gap-2 mb-3">
@@ -244,7 +244,7 @@ export default function FeaturedPortfolioSection() {
                   </span>
                 </div>
 
-                <h3 className="text-2xl sm:text-4xl font-heading font-black text-white leading-tight">
+                <h3 className="text-xl xs:text-2xl sm:text-4xl font-heading font-black text-white leading-tight break-words">
                   RotiWala – Building a Strong Digital Brand Presence
                 </h3>
 
@@ -335,23 +335,23 @@ export default function FeaturedPortfolioSection() {
               </div>
 
               {/* Bottom Actions Row */}
-              <div className="pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3">
+              <div className="pt-6 border-t border-slate-800 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-between gap-3">
                 <Button
                   to="/case-studies/rotiwala"
                   variant="yellow"
                   size="md"
                   icon={ArrowRight}
-                  className="font-bold shadow-lg shadow-amber-500/20"
+                  className="w-full sm:w-auto justify-center font-bold shadow-lg shadow-amber-500/20 text-center"
                 >
                   View Complete Case Study
                 </Button>
 
-                <div className="flex flex-wrap items-center gap-2.5">
+                <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 w-full sm:w-auto">
                   <a
                     href="https://www.instagram.com/rotiwaladelivery/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#E1306C] via-[#FD1D1D] to-[#F77737] text-white font-bold text-xs hover:opacity-95 transition-all shadow-md hover:scale-105"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#E1306C] via-[#FD1D1D] to-[#F77737] text-white font-bold text-xs hover:opacity-95 transition-all shadow-md hover:scale-105 w-full sm:w-auto text-center"
                   >
                     <InstagramIcon className="w-4 h-4 fill-current" />
                     <span>Visit Instagram (@rotiwaladelivery)</span>
@@ -362,7 +362,7 @@ export default function FeaturedPortfolioSection() {
                     to="/portfolio"
                     variant="outline"
                     size="md"
-                    className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white text-xs"
+                    className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white text-xs w-full sm:w-auto justify-center text-center"
                   >
                     All Client Work
                   </Button>

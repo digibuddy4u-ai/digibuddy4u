@@ -752,17 +752,15 @@ export default function Navbar() {
                       <span>My Account Portal</span>
                     </Link>
                   ) : (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsOpen(false);
-                        promptLogin(null, 'Log in to access your package specifications.');
-                      }}
-                      className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-full bg-accent-yellow hover:bg-yellow-400 text-navy-950 font-heading font-bold text-xs shadow-xs transition-colors"
+                    <a
+                      href={settings.whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-full bg-[#25D366] hover:bg-[#1EBE5D] text-white font-heading font-bold text-xs shadow-md transition-all active:scale-95"
                     >
-                      <User className="w-4 h-4" />
-                      <span>Login</span>
-                    </button>
+                      <MessageCircle className="w-4 h-4 fill-current" />
+                      <span>Connect on WhatsApp</span>
+                    </a>
                   )}
 
                   <div className="pt-1 flex flex-col gap-1.5 text-xs text-content-muted">
@@ -831,9 +829,9 @@ export default function Navbar() {
          ======================================================== */}
       <nav
         aria-label="Mobile Bottom Navigation Dock"
-        className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 lg:hidden pointer-events-auto"
+        className="fixed bottom-3.5 left-1/2 -translate-x-1/2 z-50 lg:hidden pointer-events-auto max-w-[calc(100vw-16px)]"
       >
-        <div className="flex items-center gap-1.5 p-1.5 rounded-full bg-white/90 backdrop-blur-xl border border-slate-200/90 shadow-[0_12px_40px_rgba(0,0,0,0.18)] ring-1 ring-black/5">
+        <div className="flex items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 rounded-full bg-white/90 backdrop-blur-xl border border-slate-200/90 shadow-[0_12px_40px_rgba(0,0,0,0.18)] ring-1 ring-black/5 overflow-x-auto no-scrollbar">
           {/* 1. Home Tab (with filled capsule highlight when active) */}
           <Link
             to="/"

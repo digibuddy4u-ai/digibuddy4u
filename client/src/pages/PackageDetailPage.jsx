@@ -321,16 +321,16 @@ export default function PackageDetailPage() {
                 )}
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-navy-950 mt-2">
+              <h1 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-navy-950 mt-2 break-words">
                 {pkg.name} Package Specification
               </h1>
 
               <div className="flex flex-wrap items-baseline gap-3 mt-3">
-                <span className="text-3xl sm:text-4xl font-heading font-black text-primary">
+                <span className="text-2xl xs:text-3xl sm:text-4xl font-heading font-black text-primary">
                   {pkg.priceDisplay || `₹${pkg.monthlyPrice?.toLocaleString('en-IN')}/month`}
                 </span>
                 {pkg.alternativePriceDisplay && (
-                  <span className="text-sm font-semibold text-cyan-700 bg-cyan-50 px-3 py-1 rounded-full border border-cyan-200">
+                  <span className="text-xs xs:text-sm font-semibold text-cyan-700 bg-cyan-50 px-3 py-1 rounded-full border border-cyan-200">
                     {pkg.alternativePriceDisplay}
                   </span>
                 )}
@@ -338,12 +338,12 @@ export default function PackageDetailPage() {
             </div>
 
             {/* Top Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto">
+            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3 w-full lg:w-auto">
               <button
                 type="button"
                 onClick={handleDownloadPdf}
                 disabled={downloadingPdf}
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-primary text-white font-heading font-bold text-sm hover:bg-primary-hover transition-colors shadow-md"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-primary text-white font-heading font-bold text-sm hover:bg-primary-hover transition-colors shadow-md w-full sm:w-auto text-center"
               >
                 <Download className="w-4 h-4" />
                 <span>{downloadingPdf ? 'Generating PDF...' : 'Download Official PDF'}</span>
@@ -352,7 +352,7 @@ export default function PackageDetailPage() {
               <button
                 type="button"
                 onClick={() => toggleSavePackage(pkg.slug)}
-                className={`p-3 rounded-xl border transition-all ${
+                className={`p-3 rounded-xl border transition-all flex items-center justify-center ${
                   isSaved
                     ? 'bg-red-500 border-red-500 text-white'
                     : 'bg-white border-slate-200 text-slate-700 hover:text-navy-950 hover:border-slate-300 shadow-xs'
@@ -364,7 +364,7 @@ export default function PackageDetailPage() {
 
               <a
                 href="#enquiry-form"
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-accent-yellow text-navy-950 font-heading font-bold text-sm hover:bg-accent-yellowHover transition-colors shadow-md"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-accent-yellow text-navy-950 font-heading font-bold text-sm hover:bg-accent-yellowHover transition-colors shadow-md w-full sm:w-auto text-center"
               >
                 <span>Request Consultation</span>
               </a>

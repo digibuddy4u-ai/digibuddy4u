@@ -252,7 +252,7 @@ export default function PackagesPage() {
                 return (
                   <div
                     key={pkg.slug}
-                    className={`rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 relative group ${
+                    className={`rounded-2xl sm:rounded-3xl p-4 xs:p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 relative group ${
                       isFeatured
                         ? 'bg-white border-2 border-primary shadow-2xl ring-4 ring-primary/10 lg:-translate-y-2'
                         : 'bg-white border border-slate-200/90 shadow-card-soft hover:shadow-card-hover'

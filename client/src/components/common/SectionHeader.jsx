@@ -19,7 +19,7 @@ export default function SectionHeader({
       className={`max-w-4xl xl:max-w-5xl ${isCentered ? 'mx-auto text-center' : 'text-left'} mb-8 sm:mb-10 md:mb-12 ${className}`}
     >
       <h2
-        className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.2] font-heading ${
+        className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.2] font-heading break-words ${
           isDark ? 'text-white' : 'text-navy-900'
         }`}
       >
@@ -39,7 +39,7 @@ export default function SectionHeader({
 
       {description && (
         <p
-          className={`mt-4 text-base sm:text-lg leading-relaxed ${
+          className={`mt-3.5 sm:mt-4 text-sm sm:text-base md:text-lg leading-relaxed break-words ${
             isDark ? 'text-slate-300' : 'text-content-muted'
           }`}
         >

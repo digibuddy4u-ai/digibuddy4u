@@ -242,19 +242,19 @@ export default function HeroSection() {
 
         {/* 2. Cinema Video Camera Floating Vector (Exact User Reference Image) */}
         <div
-          className="absolute right-2 top-4 sm:right-4 sm:top-6 lg:-right-8 xl:right-6 2xl:right-14 w-32 h-32 sm:w-44 sm:h-44 lg:w-52 lg:h-52 xl:w-60 xl:h-60 rounded-full pointer-events-none opacity-90 lg:opacity-95 animate-[heroFloat_12s_ease-in-out_infinite] select-none flex items-center justify-center p-3.5 sm:p-5 lg:p-6 bg-white"
+          className="absolute right-1 top-2 sm:right-4 sm:top-6 lg:-right-8 xl:right-6 2xl:right-14 w-20 h-20 xs:w-28 xs:h-28 sm:w-44 sm:h-44 lg:w-52 lg:h-52 xl:w-60 xl:h-60 rounded-full pointer-events-none opacity-40 xs:opacity-80 lg:opacity-95 animate-[heroFloat_12s_ease-in-out_infinite] select-none flex items-center justify-center p-2 xs:p-3.5 sm:p-5 lg:p-6 bg-white"
           style={{
             boxShadow:
-              '0 24px 60px -15px rgba(8, 102, 245, 0.45), 0 0 0 8px #FFFFFF, 0 0 0 12px #0866F5',
+              '0 24px 60px -15px rgba(8, 102, 245, 0.45), 0 0 0 4px #FFFFFF, 0 0 0 7px #0866F5',
           }}
         >
           {/* Inner Dashed Ring with Cinema Camera Vector */}
-          <div className="relative w-full h-full rounded-full border-2 border-dashed border-[#0866F5]/40 flex items-center justify-center p-2.5 sm:p-4">
+          <div className="relative w-full h-full rounded-full border-2 border-dashed border-[#0866F5]/40 flex items-center justify-center p-1.5 xs:p-2.5 sm:p-4">
             <CinemaCameraIcon className="w-full h-auto text-navy-950 drop-shadow-sm transition-transform duration-500 hover:scale-105" />
 
             {/* Small Recording Indicator Badge on Camera */}
-            <div className="absolute top-2 right-2 sm:top-3 sm:right-3 lg:top-4 lg:right-4 flex items-center gap-1 bg-rose-500 text-white font-bold text-[8px] sm:text-[9px] px-1.5 sm:px-2 py-0.5 rounded-full shadow-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
+            <div className="absolute top-1 right-1 xs:top-2 xs:right-2 sm:top-3 sm:right-3 lg:top-4 lg:right-4 flex items-center gap-1 bg-rose-500 text-white font-bold text-[7px] xs:text-[8px] sm:text-[9px] px-1 xs:px-1.5 sm:px-2 py-0.5 rounded-full shadow-sm">
+              <span className="w-1 h-1 xs:w-1.5 xs:h-1.5 rounded-full bg-white animate-ping" />
               <span>REC</span>
             </div>
           </div>
@@ -293,7 +293,7 @@ export default function HeroSection() {
               onMouseLeave={() => setIsPaused(false)}
             >
               <div
-                className="relative w-full max-w-[300px] sm:max-w-[325px] h-[480px] rounded-[160px_160px_28px_28px] overflow-hidden bg-navy-950 border-2 border-blue-500/30 shadow-[0_34px_60px_-24px_rgba(7,26,56,0.45)] select-none transition-transform duration-300 hover:scale-[1.01]"
+                className="relative w-full max-w-[270px] xs:max-w-[300px] sm:max-w-[325px] h-[450px] xs:h-[480px] rounded-[130px_130px_28px_28px] xs:rounded-[160px_160px_28px_28px] overflow-hidden bg-navy-950 border-2 border-blue-500/30 shadow-[0_34px_60px_-24px_rgba(7,26,56,0.45)] select-none transition-transform duration-300 hover:scale-[1.01]"
                 style={{
                   boxShadow:
                     '0 30px 60px -20px rgba(8, 102, 245, 0.35), 0 10px 25px -10px rgba(7, 26, 56, 0.3)',
@@ -485,14 +485,14 @@ export default function HeroSection() {
             {/* ----------------------------------------------------- */}
             {/* COLUMN 2: HERO CONTENT & COPYWRITING (Lemon Mirch)    */}
             {/* ----------------------------------------------------- */}
-            <div className="order-1 lg:order-2 flex flex-col items-start text-left lg:pr-8 xl:pr-14 relative z-20">
+            <div className="order-1 lg:order-2 flex flex-col items-start text-left lg:pr-8 xl:pr-14 relative z-20 w-full">
               {/* Dynamic Typewriter Headline */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold font-heading text-navy-950 leading-[1.08] tracking-tight max-w-xl xl:max-w-2xl grid">
+              <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold font-heading text-navy-950 leading-[1.12] sm:leading-[1.08] tracking-tight max-w-xl xl:max-w-2xl grid break-words">
                 {/* Invisible Sizers: covers ALL 8 typewriter phrases so the grid height remains 100% stable across all screen widths without layout shifts */}
                 {HERO_TYPEWRITER_PHRASES.map((phrase) => (
                   <span
                     key={phrase}
-                    className="invisible pointer-events-none select-none col-start-1 row-start-1 text-left"
+                    className="invisible pointer-events-none select-none col-start-1 row-start-1 text-left break-words"
                     aria-hidden="true"
                   >
                     <span className="text-navy-950">We </span>
@@ -502,7 +502,7 @@ export default function HeroSection() {
                 ))}
 
                 {/* Visible Animated Typewriter Content */}
-                <span className="col-start-1 row-start-1 text-left" aria-hidden="true">
+                <span className="col-start-1 row-start-1 text-left break-words" aria-hidden="true">
                   <span className="text-navy-950">We </span>
                   <span className="text-primary not-italic inline">
                     {typewriterText}
@@ -522,15 +522,15 @@ export default function HeroSection() {
               </h1>
 
               {/* Signature Yellow Accent Bar */}
-              <div className="w-28 sm:w-36 h-2.5 bg-[#FFC629] rounded-full mt-4 sm:mt-5" />
+              <div className="w-24 xs:w-28 sm:w-36 h-2 xs:h-2.5 bg-[#FFC629] rounded-full mt-3.5 sm:mt-5" />
 
               {/* Subtitle Description */}
-              <p className="text-base sm:text-lg text-slate-600 max-w-lg my-5 sm:my-6 font-normal leading-relaxed">
+              <p className="text-sm xs:text-base sm:text-lg text-slate-600 max-w-lg my-4 sm:my-6 font-normal leading-relaxed">
                 We help brands stand out with strategic marketing, creative content, high-performing websites, and innovative IT solutions that turn ideas into measurable growth.
               </p>
 
               {/* CTA Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3.5 sm:gap-4 pt-1 w-full sm:w-auto">
+              <div className="flex flex-col xs:flex-row flex-wrap items-stretch xs:items-center gap-3 sm:gap-4 pt-1 w-full sm:w-auto">
                 <Link
                   to="/contact"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-white px-7 py-3.5 rounded-full font-semibold text-sm sm:text-base transition-all duration-200 shadow-lg shadow-primary/25 hover:-translate-y-0.5 active:translate-y-0 text-center"

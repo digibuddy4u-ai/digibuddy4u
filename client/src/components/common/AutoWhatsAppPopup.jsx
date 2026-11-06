@@ -45,9 +45,9 @@ export default function AutoWhatsAppPopup({ delayMs = 60000 }) {
     <div
       role="dialog"
       aria-labelledby="auto-wp-title"
-      className="fixed bottom-24 sm:bottom-24 right-4 sm:right-6 z-50 max-w-sm w-[calc(100vw-32px)] sm:w-96 animate-in fade-in slide-in-from-bottom-5 duration-300"
+      className="fixed bottom-20 sm:bottom-24 right-2.5 xs:right-4 sm:right-6 z-50 max-w-sm w-[calc(100vw-20px)] xs:w-[calc(100vw-32px)] sm:w-96 animate-in fade-in slide-in-from-bottom-5 duration-300"
     >
-      <div className="rounded-3xl bg-white border-2 border-emerald-500/40 shadow-2xl p-5 text-navy-950 relative overflow-hidden ring-4 ring-emerald-500/10">
+      <div className="rounded-2xl sm:rounded-3xl bg-white border-2 border-emerald-500/40 shadow-2xl p-4 sm:p-5 text-navy-950 relative overflow-hidden ring-4 ring-emerald-500/10">
         {/* Subtle decorative glow */}
         <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
 
@@ -62,7 +62,7 @@ export default function AutoWhatsAppPopup({ delayMs = 60000 }) {
         </button>
 
         {/* Active Support Header */}
-        <div className="flex items-center gap-2 mb-3">
+        <div className="flex flex-wrap items-center gap-2 mb-3">
           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             Active on WhatsApp Now
@@ -75,7 +75,7 @@ export default function AutoWhatsAppPopup({ delayMs = 60000 }) {
 
         {/* Content Body */}
         <div className="space-y-1.5 pr-4">
-          <h3 id="auto-wp-title" className="text-base sm:text-lg font-heading font-extrabold text-navy-950 leading-snug">
+          <h3 id="auto-wp-title" className="text-base sm:text-lg font-heading font-extrabold text-navy-950 leading-snug break-words">
             Need Help Choosing the Right Plan? 👋
           </h3>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -84,11 +84,11 @@ export default function AutoWhatsAppPopup({ delayMs = 60000 }) {
         </div>
 
         {/* Action Row */}
-        <div className="pt-4 mt-3 border-t border-slate-100 flex items-center gap-2.5">
+        <div className="pt-3.5 mt-3 border-t border-slate-100 flex flex-col xs:flex-row items-stretch xs:items-center gap-2 xs:gap-2.5">
           <button
             type="button"
             onClick={handleOpenWhatsApp}
-            className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#25D366] to-[#1EBE5D] text-white font-heading font-bold text-xs sm:text-sm hover:brightness-105 transition-all shadow-md active:scale-95"
+            className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#25D366] to-[#1EBE5D] text-white font-heading font-bold text-xs sm:text-sm hover:brightness-105 transition-all shadow-md active:scale-95 text-center"
           >
             <MessageCircle className="w-4 h-4 fill-current" />
             <span>Chat on WhatsApp</span>
@@ -98,7 +98,7 @@ export default function AutoWhatsAppPopup({ delayMs = 60000 }) {
           <button
             type="button"
             onClick={handleDismiss}
-            className="px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-500 hover:text-navy-950 hover:bg-slate-100 transition-colors"
+            className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-500 hover:text-navy-950 hover:bg-slate-100 transition-colors text-center"
           >
             Maybe later
           </button>
