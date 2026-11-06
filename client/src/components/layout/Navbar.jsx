@@ -424,7 +424,7 @@ export default function Navbar() {
                             </Link>
 
                             <Link
-                              to="/case-studies"
+                              to="/case-studies/rotiwala"
                               className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 group transition-colors"
                               role="menuitem"
                             >
@@ -708,7 +708,7 @@ export default function Navbar() {
                               <span>Portfolio (All Projects)</span>
                             </Link>
                             <Link
-                              to="/case-studies"
+                              to="/case-studies/rotiwala"
                               className="flex items-center justify-between px-3 py-2 text-xs font-medium text-navy-900 hover:text-primary hover:bg-slate-50 rounded-lg"
                             >
                               <div className="flex items-center gap-2">

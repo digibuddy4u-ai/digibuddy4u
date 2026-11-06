@@ -237,15 +237,35 @@ export default function Footer() {
               Client Showcase
             </h3>
             <div className="p-4 rounded-xl bg-white border border-slate-200/90 shadow-card-soft space-y-2.5">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-primary block">
-                Featured Brand
-              </span>
-              <h4 className="text-sm font-bold text-navy-950">RotiWala</h4>
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-primary block">
+                  Featured Brand
+                </span>
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              </div>
+              <div className="flex items-center gap-2.5">
+                <img
+                  src="/images/portfolio/rotiwala-logo.png"
+                  alt="RotiWala Logo"
+                  className="w-8 h-8 rounded-full object-contain ring-1 ring-slate-200"
+                />
+                <div>
+                  <h4 className="text-sm font-bold text-navy-950 leading-tight">RotiWala</h4>
+                  <a
+                    href="https://www.instagram.com/rotiwaladelivery/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[11px] font-mono text-[#E1306C] hover:underline flex items-center gap-1"
+                  >
+                    <span>@rotiwaladelivery</span>
+                  </a>
+                </div>
+              </div>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Brand positioning, video reels, and social media management for homestyle daily meals.
               </p>
               <Link
-                to="/case-studies"
+                to="/case-studies/rotiwala"
                 className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline pt-1"
               >
                 <span>Read Case Study</span>

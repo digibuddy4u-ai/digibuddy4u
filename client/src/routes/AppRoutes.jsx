@@ -10,6 +10,7 @@ import ServicesPage from '../pages/ServicesPage';
 import ServiceDetailPage from '../pages/ServiceDetailPage';
 import PortfolioPage from '../pages/PortfolioPage';
 import CaseStudiesPage from '../pages/CaseStudiesPage';
+import RotiWalaCaseStudyPage from '../pages/RotiWalaCaseStudyPage';
 import PackagesPage from '../pages/PackagesPage';
 import PackageDetailPage from '../pages/PackageDetailPage';
 import CustomerDashboardPage from '../pages/CustomerDashboardPage';
@@ -32,7 +33,10 @@ export default function AppRoutes() {
           <Route path="packages/:slug" element={<PackageDetailPage />} />
           <Route path="pricing" element={<PackagesPage />} />
           <Route path="portfolio" element={<PortfolioPage />} />
-          <Route path="case-studies" element={<CaseStudiesPage />} />
+          <Route path="case-studies" element={<RotiWalaCaseStudyPage />} />
+          <Route path="case-studies/rotiwala" element={<RotiWalaCaseStudyPage />} />
+          <Route path="case-study/rotiwala" element={<RotiWalaCaseStudyPage />} />
+          <Route path="case-study" element={<RotiWalaCaseStudyPage />} />
           <Route path="contact" element={<ContactPage />} />
           <Route path="customer/dashboard" element={<CustomerDashboardPage />} />
           <Route path="login" element={<CustomerLoginPage />} />

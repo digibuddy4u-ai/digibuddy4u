@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Utensils, CheckCircle, ShieldAlert, Sparkles } from 'lucide-react';
+import { ArrowRight, Utensils, CheckCircle, ShieldAlert, Sparkles, ExternalLink } from 'lucide-react';
+import { InstagramIcon } from '../common/SocialIcons';
 import Badge from '../common/Badge';
 
 export default function PortfolioCard({ project }) {
@@ -27,8 +28,16 @@ export default function PortfolioCard({ project }) {
 
         {/* Graphic Showcase Center */}
         <div className="relative z-10 my-auto text-center py-2">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 text-white shadow-lg mb-3">
-            <Utensils className="w-8 h-8" />
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white shadow-lg mb-2 p-1">
+            {isRotiWala || project.logo ? (
+              <img
+                src={project.logo || '/images/portfolio/rotiwala-logo.png'}
+                alt={project.client}
+                className="w-full h-full rounded-full object-contain"
+              />
+            ) : (
+              <Utensils className="w-8 h-8" />
+            )}
           </div>
           <h4 className="text-2xl sm:text-3xl font-heading font-extrabold tracking-tight drop-shadow-sm">
             {project.client}
@@ -36,6 +45,18 @@ export default function PortfolioCard({ project }) {
           <p className="text-xs sm:text-sm text-white/90 font-medium max-w-sm mx-auto mt-1 line-clamp-1">
             {project.tagline}
           </p>
+          {project.instagramUrl && (
+            <a
+              href={project.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-[11px] font-mono text-accent-yellow hover:underline mt-1 bg-black/30 px-2.5 py-0.5 rounded-full border border-white/10"
+            >
+              <InstagramIcon className="w-3 h-3 text-[#E1306C]" />
+              <span>@{project.instagramHandle}</span>
+              <ExternalLink className="w-2.5 h-2.5 opacity-80" />
+            </a>
+          )}
         </div>
 
         {/* Bottom Banner Tag */}
@@ -85,17 +106,27 @@ export default function PortfolioCard({ project }) {
         )}
 
         {/* Action Link */}
-        <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+        <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
           <Link
-            to="/case-studies"
+            to={isRotiWala ? '/case-studies/rotiwala' : '/case-studies'}
             className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary-hover group-hover:translate-x-1 transition-all"
           >
             <span>View Full Case Study</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
-          <span className="text-xs text-content-muted font-medium">
-            Active Campaign
-          </span>
+
+          {project.instagramUrl && (
+            <a
+              href={project.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-pink-50 hover:bg-pink-100 text-[#E1306C] text-xs font-bold transition-colors"
+            >
+              <InstagramIcon className="w-3.5 h-3.5" />
+              <span>Instagram</span>
+              <ExternalLink className="w-3 h-3" />
+            </a>
+          )}
         </div>
       </div>
     </div>

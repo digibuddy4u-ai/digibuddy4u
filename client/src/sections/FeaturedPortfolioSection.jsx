@@ -10,7 +10,9 @@ import {
   Palette,
   MessageCircle,
   FileText,
+  ExternalLink,
 } from 'lucide-react';
+import { InstagramIcon } from '../components/common/SocialIcons';
 import SectionHeader from '../components/common/SectionHeader';
 import Button from '../components/common/Button';
 import Badge from '../components/common/Badge';
@@ -90,19 +92,33 @@ export default function FeaturedPortfolioSection() {
 
               {/* RotiWala Brand Centerpiece */}
               <div className="relative z-10 my-6 sm:my-8 text-center space-y-3.5">
-                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center mx-auto text-accent-yellow shadow-2xl">
-                  <Utensils className="w-10 h-10 sm:w-12 sm:h-12" />
+                <div className="relative inline-block mx-auto group">
+                  <img
+                    src="/images/portfolio/rotiwala-logo.png"
+                    alt="RotiWala Official Brand Logo"
+                    className="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-contain mx-auto shadow-2xl ring-4 ring-white/30 p-1 bg-white/10 backdrop-blur-sm transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute -bottom-1 -right-1 bg-emerald-500 rounded-full p-1 ring-2 ring-white">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+                  </div>
                 </div>
                 <div>
                   <h3 className="text-3xl sm:text-4xl font-heading font-black tracking-tight text-white">
                     RotiWala
                   </h3>
-                  <p className="text-xs uppercase tracking-widest text-amber-300 font-semibold mt-1 font-mono">
-                    Freshness & Homestyle Meals
-                  </p>
+                  <a
+                    href="https://www.instagram.com/rotiwaladelivery/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-mono text-accent-yellow hover:underline mt-1 bg-black/25 px-3 py-1 rounded-full border border-white/15"
+                  >
+                    <InstagramIcon className="w-3.5 h-3.5 text-accent-yellow" />
+                    <span>@rotiwaladelivery</span>
+                    <ExternalLink className="w-3 h-3 opacity-80" />
+                  </a>
                 </div>
                 <p className="text-sm text-amber-100/90 font-medium max-w-xs mx-auto leading-relaxed">
-                  Delivering warm, fresh, wholesome rotis and daily meals to households and working professionals.
+                  Fresh, soft and ghar-jaisi rotis for customers in Ahmedabad and Gandhinagar.
                 </p>
 
                 {/* Scope Pillars Quick Chips */}
@@ -221,22 +237,34 @@ export default function FeaturedPortfolioSection() {
               </div>
 
               {/* Bottom Actions */}
-              <div className="pt-6 border-t border-slate-100 flex flex-wrap items-center justify-between gap-4">
+              <div className="pt-6 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
                 <Button
-                  to="/case-studies"
+                  to="/case-studies/rotiwala"
                   variant="primary"
                   size="md"
                   icon={ArrowRight}
                 >
                   View Project Case Study
                 </Button>
-                <Button
-                  to="/portfolio"
-                  variant="secondary"
-                  size="md"
-                >
-                  Explore Our Work
-                </Button>
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <a
+                    href="https://www.instagram.com/rotiwaladelivery/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#E1306C] via-[#FD1D1D] to-[#F77737] text-white font-bold text-xs hover:opacity-95 transition-all shadow-sm"
+                  >
+                    <InstagramIcon className="w-4 h-4 fill-current" />
+                    <span>Visit Instagram</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                  <Button
+                    to="/portfolio"
+                    variant="secondary"
+                    size="md"
+                  >
+                    Explore Our Work
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
