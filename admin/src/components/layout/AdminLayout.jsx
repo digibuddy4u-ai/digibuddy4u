@@ -29,6 +29,7 @@ const NAV_ITEMS = [
   { name: 'Dashboard', path: '/', icon: LayoutDashboard },
   { name: 'Leads CRM', path: '/leads', icon: Users, permissionKey: 'leads' },
   { name: 'Packages & Pricing', path: '/packages', icon: Package, permissionKey: 'packages' },
+  { name: 'Add-Ons & Extras', path: '/addons', icon: Sparkles, permissionKey: 'packages' },
   { name: 'Package Analytics', path: '/package-analytics', icon: BarChart3, permissionKey: 'packageAnalytics' },
   { name: 'Enquiries', path: '/enquiries', icon: Inbox, permissionKey: 'enquiries' },
   { name: 'Customer Accounts', path: '/customers', icon: UserCheck, permissionKey: 'customers' },

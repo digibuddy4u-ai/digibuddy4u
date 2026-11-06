@@ -160,8 +160,19 @@ export default function HeroSection() {
     setPrefersReducedMotion(mq.matches);
 
     const onChange = (e) => setPrefersReducedMotion(e.matches);
-    mq.addEventListener?.('change', onChange);
-    return () => mq.removeEventListener?.('change', onChange);
+    if (mq.addEventListener) {
+      mq.addEventListener('change', onChange);
+    } else if (mq.addListener) {
+      mq.addListener(onChange);
+    }
+
+    return () => {
+      if (mq.removeEventListener) {
+        mq.removeEventListener('change', onChange);
+      } else if (mq.removeListener) {
+        mq.removeListener(onChange);
+      }
+    };
   }, []);
 
   // Typewriter animation loop (cycles through the 8 phrases)
@@ -204,16 +215,16 @@ export default function HeroSection() {
     return () => clearTimeout(timeoutId);
   }, [typewriterText, isDeleting, typewriterIndex, prefersReducedMotion]);
 
-  // Auto-cycle through vector service cards every 3.5 seconds
+  // Auto-cycle through vector service cards every 3.5 seconds (paused if hovered or reduced motion)
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || prefersReducedMotion) return;
 
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % VECTOR_SERVICES.length);
     }, 3500);
 
     return () => clearInterval(timer);
-  }, [isPaused]);
+  }, [isPaused, prefersReducedMotion]);
 
   return (
     <>
@@ -282,7 +293,7 @@ export default function HeroSection() {
               onMouseLeave={() => setIsPaused(false)}
             >
               <div
-                className="relative w-[300px] sm:w-[325px] h-[480px] rounded-[160px_160px_28px_28px] overflow-hidden bg-navy-950 border-2 border-blue-500/30 shadow-[0_34px_60px_-24px_rgba(7,26,56,0.45)] select-none transition-transform duration-300 hover:scale-[1.01]"
+                className="relative w-full max-w-[300px] sm:max-w-[325px] h-[480px] rounded-[160px_160px_28px_28px] overflow-hidden bg-navy-950 border-2 border-blue-500/30 shadow-[0_34px_60px_-24px_rgba(7,26,56,0.45)] select-none transition-transform duration-300 hover:scale-[1.01]"
                 style={{
                   boxShadow:
                     '0 30px 60px -20px rgba(8, 102, 245, 0.35), 0 10px 25px -10px rgba(7, 26, 56, 0.3)',
@@ -477,15 +488,18 @@ export default function HeroSection() {
             <div className="order-1 lg:order-2 flex flex-col items-start text-left lg:pr-8 xl:pr-14 relative z-20">
               {/* Dynamic Typewriter Headline */}
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold font-heading text-navy-950 leading-[1.08] tracking-tight max-w-xl xl:max-w-2xl grid">
-                {/* Invisible Sizers: lock the natural height across all screen sizes to eliminate layout shifts and excessive gaps */}
-                <span className="invisible pointer-events-none select-none col-start-1 row-start-1 text-left" aria-hidden="true">
-                  <span className="text-navy-950">We </span>
-                  <span className="text-primary not-italic">Turn Clicks Into Customers</span>
-                </span>
-                <span className="invisible pointer-events-none select-none col-start-1 row-start-1 text-left" aria-hidden="true">
-                  <span className="text-navy-950">We </span>
-                  <span className="text-primary not-italic">Create Digital Experiences</span>
-                </span>
+                {/* Invisible Sizers: covers ALL 8 typewriter phrases so the grid height remains 100% stable across all screen widths without layout shifts */}
+                {HERO_TYPEWRITER_PHRASES.map((phrase) => (
+                  <span
+                    key={phrase}
+                    className="invisible pointer-events-none select-none col-start-1 row-start-1 text-left"
+                    aria-hidden="true"
+                  >
+                    <span className="text-navy-950">We </span>
+                    <span className="text-primary not-italic">{phrase}</span>
+                    <span className="inline-block w-[3px] sm:w-[4px] lg:w-[5px] ml-1.5" />
+                  </span>
+                ))}
 
                 {/* Visible Animated Typewriter Content */}
                 <span className="col-start-1 row-start-1 text-left" aria-hidden="true">
@@ -516,10 +530,10 @@ export default function HeroSection() {
               </p>
 
               {/* CTA Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3.5 sm:gap-4 pt-1">
+              <div className="flex flex-wrap items-center gap-3.5 sm:gap-4 pt-1 w-full sm:w-auto">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-white px-7 py-3.5 rounded-full font-semibold text-sm sm:text-base transition-all duration-200 shadow-lg shadow-primary/25 hover:-translate-y-0.5 active:translate-y-0"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-white px-7 py-3.5 rounded-full font-semibold text-sm sm:text-base transition-all duration-200 shadow-lg shadow-primary/25 hover:-translate-y-0.5 active:translate-y-0 text-center"
                 >
                   <span>Start your project</span>
                   <ArrowRight className="w-4 h-4" />
@@ -527,7 +541,7 @@ export default function HeroSection() {
 
                 <Link
                   to="/services"
-                  className="inline-flex items-center justify-center bg-transparent text-primary hover:bg-primary/5 px-7 py-3.5 rounded-full font-semibold text-sm sm:text-base border-2 border-primary transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0"
+                  className="w-full sm:w-auto inline-flex items-center justify-center bg-transparent text-primary hover:bg-primary/5 px-7 py-3.5 rounded-full font-semibold text-sm sm:text-base border-2 border-primary transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 text-center"
                 >
                   See our work
                 </Link>
@@ -542,7 +556,7 @@ export default function HeroSection() {
       {/* ========================================================= */}
       <div className="overflow-hidden py-6 sm:py-8 bg-white" aria-hidden="true">
         <div className="bg-primary text-white -rotate-1 sm:-rotate-1.5 -mx-8 py-3.5 sm:py-4 overflow-hidden shadow-md">
-          <div className="flex w-max animate-[ribbonScroll_32s_linear_infinite]">
+          <div className="flex w-max animate-[ribbonScroll_32s_linear_infinite] will-change-transform transform-gpu">
             {Array.from({ length: 4 }).map((_, blockIdx) => (
               <div key={blockIdx} className="flex items-center gap-8 sm:gap-12 pl-8 sm:pl-12">
                 <span className="flex items-center gap-8 sm:gap-12 whitespace-nowrap uppercase font-heading font-extrabold text-xl sm:text-3xl tracking-wide">
@@ -581,6 +595,16 @@ export default function HeroSection() {
         .stroke-text {
           color: transparent;
           -webkit-text-stroke: 1.5px #FFFFFF;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .animate-\\[heroFloat_12s_ease-in-out_infinite\\],
+          .animate-\\[heroFloat_12s_ease-in-out_infinite_-4s\\],
+          .animate-\\[heroFloat_12s_ease-in-out_infinite_-7s\\],
+          .animate-\\[ribbonScroll_32s_linear_infinite\\] {
+            animation: none !important;
+            transform: none !important;
+          }
         }
       `}</style>
     </>

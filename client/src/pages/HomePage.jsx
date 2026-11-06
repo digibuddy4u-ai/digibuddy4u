@@ -7,6 +7,7 @@ import WhyAgencySection from '../sections/WhyAgencySection';
 import WhyChooseUsSection from '../sections/WhyChooseUsSection';
 import FeaturedPortfolioSection from '../sections/FeaturedPortfolioSection';
 import PricingPreviewSection from '../sections/PricingPreviewSection';
+import AddonsSection from '../components/addons/AddonsSection';
 import WorkProcessSection from '../sections/WorkProcessSection';
 import FAQSection from '../sections/FAQSection';
 import FinalCTASection from '../sections/FinalCTASection';
@@ -20,7 +21,7 @@ export default function HomePage() {
         description="From social media and performance marketing to websites, mobile apps, and custom software — DigiBuddy4U helps businesses build a stronger digital presence."
       />
 
-      {/* 1. Hero Section */}
+      {/* 1. Hero Section (with Vector Reel Card, Typewriter Headline & Tilted Ribbon) */}
       <HeroSection />
 
       {/* 2. Our Core Services — Digital Marketing and IT Services (Stacking Cards) */}
@@ -35,19 +36,22 @@ export default function HomePage() {
       {/* 5. Why DigiBuddy4U — Genuine service benefits without fabricated statistics */}
       <WhyChooseUsSection />
 
-      {/* 4. Featured Work — Real client showcase (RotiWala) */}
+      {/* 6. Featured Work — Real client showcase (RotiWala) */}
       <FeaturedPortfolioSection />
 
-      {/* 5. Packages — 5 official packages, PDF download & login-gated details */}
+      {/* 7. Social Media Management Packages — Basic, Growth, Premium */}
       <PricingPreviewSection />
 
-      {/* 6. How We Work — Discover, Plan, Create, Optimize */}
+      {/* 7b. Add-Ons & Extra Services — A La Carte On-Demand Capabilities */}
+      <AddonsSection />
+
+      {/* 8. How We Work — Discover, Plan, Create, Optimize */}
       <WorkProcessSection />
 
-      {/* 7. FAQ Section */}
+      {/* 9. FAQ Section */}
       <FAQSection />
 
-      {/* 8. Final Contact CTA */}
+      {/* 10. Final Contact CTA */}
       <FinalCTASection />
     </>
   );

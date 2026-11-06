@@ -2,6 +2,7 @@ import app from './app.js';
 import { connectDB } from './config/db.js';
 import { ENV } from './config/env.js';
 import { seedPackagesIfEmpty } from './controllers/packageController.js';
+import { seedAddOnsIfEmpty } from './controllers/addonController.js';
 
 async function startServer() {
   // Connect to Database
@@ -9,6 +10,9 @@ async function startServer() {
 
   // Auto-seed packages from PDF catalog if empty
   await seedPackagesIfEmpty();
+
+  // Auto-seed add-ons catalog if empty
+  await seedAddOnsIfEmpty();
 
   const PORT = ENV.PORT;
   const server = app.listen(PORT, () => {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Sparkles,
   Plus,
@@ -20,6 +21,7 @@ import {
   Video,
   Camera,
   Home,
+  Package,
 } from 'lucide-react';
 import Modal from '../components/ui/Modal';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
@@ -124,7 +126,15 @@ export default function PackagesPage() {
   };
 
   const handleOpenEdit = (pkg) => {
-    setEditingPkg({ ...pkg, showOnHome: pkg.showOnHome !== false });
+    setEditingPkg({
+      ...EMPTY_PACKAGE,
+      ...pkg,
+      storiesCount: pkg.storiesCount || '8 stories/month',
+      reelsCount: pkg.reelsCount || '2–3 reels/month',
+      postsCount: pkg.postsCount || '8 posts/month',
+      shootsCount: pkg.shootsCount || 'Not included',
+      showOnHome: pkg.showOnHome !== false,
+    });
     setTextHighlights((pkg.keyHighlights || []).join('\n'));
     setTextInclusions((pkg.fullInclusions || []).join('\n'));
     setTextExclusions((pkg.exclusions || []).join('\n'));
@@ -142,6 +152,10 @@ export default function PackagesPage() {
     try {
       const payload = {
         ...editingPkg,
+        storiesCount: (editingPkg.storiesCount || '').trim() || '8 stories/month',
+        reelsCount: (editingPkg.reelsCount || '').trim() || '2–3 reels/month',
+        postsCount: (editingPkg.postsCount || '').trim() || '8 posts/month',
+        shootsCount: (editingPkg.shootsCount || '').trim() || 'Not included',
         keyHighlights: textHighlights.split('\n').map((s) => s.trim()).filter(Boolean),
         fullInclusions: textInclusions.split('\n').map((s) => s.trim()).filter(Boolean),
         exclusions: textExclusions.split('\n').map((s) => s.trim()).filter(Boolean),
@@ -195,18 +209,19 @@ export default function PackagesPage() {
 
   const handleToggleStatus = async (pkg, field) => {
     try {
+      const nextValue = !pkg[field];
       const res = await fetch(`${API_BASE_URL}/packages/admin/${pkg._id}/status`, {
         method: 'PATCH',
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ [field]: !pkg[field] }),
+        body: JSON.stringify({ [field]: nextValue }),
       });
       const data = await res.json();
       if (data.success) {
         setPackages((prev) =>
-          prev.map((p) => (p._id === pkg._id ? { ...p, [field]: !p[field] } : p))
+          prev.map((p) => (p._id === pkg._id ? { ...p, [field]: nextValue } : p))
         );
       }
     } catch (err) {
@@ -253,7 +268,7 @@ export default function PackagesPage() {
             </span>
           </div>
           <p className="text-xs sm:text-sm text-content-muted mt-1">
-            Manage the 5 official growth packages (Basic, Standard, Growth, Pro, Elite) with deliverables, shoot days, Meta Ads, and PDF gating.
+            Manage the official Social Media Management packages (Basic, Growth, Premium) with deliverables, shoot days, and website display rules.
           </p>
         </div>
 
@@ -265,6 +280,30 @@ export default function PackagesPage() {
           <Plus className="w-4 h-4" />
           <span>Create New Package</span>
         </button>
+      </div>
+
+      {/* Sub-navigation Switcher between Packages and Add-Ons */}
+      <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
+        <Link
+          to="/packages"
+          className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-primary text-white shadow-xs flex items-center gap-2"
+        >
+          <Package className="w-4 h-4" />
+          <span>Social Media Packages ({packages.length || 3})</span>
+        </Link>
+        <Link
+          to="/addons"
+          className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-navy-900 hover:bg-slate-100 transition-colors flex items-center gap-2"
+        >
+          <Sparkles className="w-4 h-4" />
+          <span>Add-Ons & Extras (15)</span>
+        </Link>
+        <Link
+          to="/package-analytics"
+          className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-navy-900 hover:bg-slate-100 transition-colors"
+        >
+          Analytics & Logs
+        </Link>
       </div>
 
       {/* Filter / Search Bar & View Mode Toggle */}
@@ -802,7 +841,7 @@ export default function PackagesPage() {
                       <input
                         type="text"
                         required
-                        value={editingPkg.name}
+                        value={editingPkg.name || ''}
                         onChange={(e) => setEditingPkg({ ...editingPkg, name: e.target.value })}
                         className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-primary"
                         placeholder="e.g. Growth"
@@ -813,7 +852,7 @@ export default function PackagesPage() {
                       <input
                         type="text"
                         required
-                        value={editingPkg.slug}
+                        value={editingPkg.slug || ''}
                         onChange={(e) => setEditingPkg({ ...editingPkg, slug: e.target.value.toLowerCase().trim() })}
                         className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-primary font-mono"
                         placeholder="e.g. growth"
@@ -827,7 +866,7 @@ export default function PackagesPage() {
                       <input
                         type="number"
                         required
-                        value={editingPkg.monthlyPrice}
+                        value={editingPkg.monthlyPrice || 0}
                         onChange={(e) =>
                           setEditingPkg({
                             ...editingPkg,
@@ -843,7 +882,7 @@ export default function PackagesPage() {
                       <input
                         type="text"
                         required
-                        value={editingPkg.priceDisplay}
+                        value={editingPkg.priceDisplay || ''}
                         onChange={(e) => setEditingPkg({ ...editingPkg, priceDisplay: e.target.value })}
                         className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-primary"
                         placeholder="₹20,000/month"
@@ -853,7 +892,7 @@ export default function PackagesPage() {
                       <label className="block font-bold text-navy-900 mb-1">Badge Tag</label>
                       <input
                         type="text"
-                        value={editingPkg.badge}
+                        value={editingPkg.badge || ''}
                         onChange={(e) => setEditingPkg({ ...editingPkg, badge: e.target.value })}
                         className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-primary"
                         placeholder="e.g. Most Popular"
@@ -942,7 +981,7 @@ export default function PackagesPage() {
                       <input
                         type="text"
                         required
-                        value={editingPkg.reelsCount}
+                        value={editingPkg.reelsCount || ''}
                         onChange={(e) => setEditingPkg({ ...editingPkg, reelsCount: e.target.value })}
                         className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-primary"
                         placeholder="8 reels/month"
@@ -952,7 +991,7 @@ export default function PackagesPage() {
                       <label className="block font-bold text-navy-900 mb-1">Reels Specification Details</label>
                       <input
                         type="text"
-                        value={editingPkg.reelsDetails}
+                        value={editingPkg.reelsDetails || ''}
                         onChange={(e) => setEditingPkg({ ...editingPkg, reelsDetails: e.target.value })}
                         className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-primary"
                         placeholder="3 shoot, 2 UGC, 2 AI, 1 educational"
@@ -966,7 +1005,7 @@ export default function PackagesPage() {
                       <input
                         type="text"
                         required
-                        value={editingPkg.postsCount}
+                        value={editingPkg.postsCount || ''}
                         onChange={(e) => setEditingPkg({ ...editingPkg, postsCount: e.target.value })}
                         className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-primary"
                         placeholder="12 posts/month"
@@ -977,7 +1016,7 @@ export default function PackagesPage() {
                       <input
                         type="text"
                         required
-                        value={editingPkg.storiesCount}
+                        value={editingPkg.storiesCount || ''}
                         onChange={(e) => setEditingPkg({ ...editingPkg, storiesCount: e.target.value })}
                         className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-primary"
                         placeholder="16 stories/month"
@@ -990,7 +1029,7 @@ export default function PackagesPage() {
                       <label className="block font-bold text-navy-900 mb-1">Shoots Count</label>
                       <input
                         type="text"
-                        value={editingPkg.shootsCount}
+                        value={editingPkg.shootsCount || ''}
                         onChange={(e) => setEditingPkg({ ...editingPkg, shootsCount: e.target.value })}
                         className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-primary"
                         placeholder="1 shoot day (up to 3-4 hours)"
@@ -1000,7 +1039,7 @@ export default function PackagesPage() {
                       <label className="block font-bold text-navy-900 mb-1">Shoots Specification</label>
                       <input
                         type="text"
-                        value={editingPkg.shootsDetails}
+                        value={editingPkg.shootsDetails || ''}
                         onChange={(e) => setEditingPkg({ ...editingPkg, shootsDetails: e.target.value })}
                         className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-primary"
                         placeholder="Inside Ahmedabad with lights, mic, gimbal"
@@ -1010,11 +1049,11 @@ export default function PackagesPage() {
 
                   <div>
                     <label className="block font-bold text-navy-900 mb-1">
-                      Influencer Reels (for Elite package)
+                      Creator / Influencer Direction (for Premium package)
                     </label>
                     <input
                       type="text"
-                      value={editingPkg.influencerReels}
+                      value={editingPkg.influencerReels || ''}
                       onChange={(e) => setEditingPkg({ ...editingPkg, influencerReels: e.target.value })}
                       className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-primary"
                       placeholder="2 micro-influencer collaboration reels/month"
@@ -1030,7 +1069,7 @@ export default function PackagesPage() {
                     <label className="block font-bold text-navy-900 mb-1">Meta Ads Terms & Scope</label>
                     <input
                       type="text"
-                      value={editingPkg.metaAds}
+                      value={editingPkg.metaAds || ''}
                       onChange={(e) => setEditingPkg({ ...editingPkg, metaAds: e.target.value })}
                       className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-primary"
                       placeholder="2 active campaigns included (leads/reach)"
@@ -1042,7 +1081,7 @@ export default function PackagesPage() {
                       <label className="block font-bold text-navy-900 mb-1">Suggested Ad Budget (Direct to Meta)</label>
                       <input
                         type="text"
-                        value={editingPkg.minSuggestedAdBudget}
+                        value={editingPkg.minSuggestedAdBudget || ''}
                         onChange={(e) => setEditingPkg({ ...editingPkg, minSuggestedAdBudget: e.target.value })}
                         className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-primary"
                         placeholder="₹10,000/month"
@@ -1052,7 +1091,7 @@ export default function PackagesPage() {
                       <label className="block font-bold text-navy-900 mb-1">Comments & DM Handling</label>
                       <input
                         type="text"
-                        value={editingPkg.commentsAndDMs}
+                        value={editingPkg.commentsAndDMs || ''}
                         onChange={(e) => setEditingPkg({ ...editingPkg, commentsAndDMs: e.target.value })}
                         className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-primary"
                         placeholder="Replies on weekdays. Simple answers only."
@@ -1064,7 +1103,7 @@ export default function PackagesPage() {
                     <label className="block font-bold text-navy-900 mb-1">Competitor / Market Analysis Scope</label>
                     <input
                       type="text"
-                      value={editingPkg.competitorCaseStudy}
+                      value={editingPkg.competitorCaseStudy || ''}
                       onChange={(e) => setEditingPkg({ ...editingPkg, competitorCaseStudy: e.target.value })}
                       className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-primary"
                       placeholder="5-6 page Market Position Case Study"
@@ -1076,7 +1115,7 @@ export default function PackagesPage() {
                       <label className="block font-bold text-navy-900 mb-1">Revisions Limit</label>
                       <input
                         type="text"
-                        value={editingPkg.revisions}
+                        value={editingPkg.revisions || ''}
                         onChange={(e) => setEditingPkg({ ...editingPkg, revisions: e.target.value })}
                         className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-primary"
                         placeholder="2 per item"
@@ -1086,7 +1125,7 @@ export default function PackagesPage() {
                       <label className="block font-bold text-navy-900 mb-1">Reporting & Updates</label>
                       <input
                         type="text"
-                        value={editingPkg.reporting}
+                        value={editingPkg.reporting || ''}
                         onChange={(e) => setEditingPkg({ ...editingPkg, reporting: e.target.value })}
                         className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-primary"
                         placeholder="Monthly report with content & ad results"

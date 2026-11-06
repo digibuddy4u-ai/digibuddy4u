@@ -245,8 +245,30 @@ export async function adminCreatePackage(req, res) {
  */
 export async function adminUpdatePackage(req, res) {
   try {
+    const existing = await Package.findById(req.params.id);
+    if (!existing) {
+      return res.status(404).json({
+        success: false,
+        message: 'Package not found.',
+      });
+    }
+
+    // Ensure vital string deliverables are never sent as empty strings
+    if (!req.body.storiesCount || !String(req.body.storiesCount).trim()) {
+      req.body.storiesCount = existing.storiesCount || '8 stories/month';
+    }
+    if (!req.body.reelsCount || !String(req.body.reelsCount).trim()) {
+      req.body.reelsCount = existing.reelsCount || '2–3 reels/month';
+    }
+    if (!req.body.postsCount || !String(req.body.postsCount).trim()) {
+      req.body.postsCount = existing.postsCount || '8 posts/month';
+    }
+    if (!req.body.shootsCount || !String(req.body.shootsCount).trim()) {
+      req.body.shootsCount = existing.shootsCount || 'Not included';
+    }
+
     const updated = await Package.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
+      returnDocument: 'after',
       runValidators: true,
     });
 
@@ -300,14 +322,15 @@ export async function adminDeletePackage(req, res) {
  */
 export async function adminToggleStatus(req, res) {
   try {
-    const { isPublished, isFeatured, requiresLoginForDetails, requiresLoginForPdf } = req.body;
+    const { isPublished, isFeatured, requiresLoginForDetails, requiresLoginForPdf, showOnHome } = req.body;
     const updates = {};
     if (typeof isPublished === 'boolean') updates.isPublished = isPublished;
     if (typeof isFeatured === 'boolean') updates.isFeatured = isFeatured;
     if (typeof requiresLoginForDetails === 'boolean') updates.requiresLoginForDetails = requiresLoginForDetails;
     if (typeof requiresLoginForPdf === 'boolean') updates.requiresLoginForPdf = requiresLoginForPdf;
+    if (typeof showOnHome === 'boolean') updates.showOnHome = showOnHome;
 
-    const updated = await Package.findByIdAndUpdate(req.params.id, updates, { new: true });
+    const updated = await Package.findByIdAndUpdate(req.params.id, updates, { returnDocument: 'after' });
     res.status(200).json({
       success: true,
       data: updated,

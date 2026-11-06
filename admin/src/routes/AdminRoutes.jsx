@@ -12,6 +12,7 @@ import ServicesPage from '../pages/ServicesPage';
 import PortfolioPage from '../pages/PortfolioPage';
 import CaseStudiesPage from '../pages/CaseStudiesPage';
 import PackagesPage from '../pages/PackagesPage';
+import AddonsPage from '../pages/AddonsPage';
 import LeadsCRMPage from '../pages/LeadsCRMPage';
 import PackageAnalyticsPage from '../pages/PackageAnalyticsPage';
 import TestimonialsPage from '../pages/TestimonialsPage';
@@ -126,6 +127,14 @@ export default function AdminRoutes() {
           element={
             <PermissionRoute permissionKey="packages">
               <PackagesPage />
+            </PermissionRoute>
+          }
+        />
+        <Route
+          path="addons"
+          element={
+            <PermissionRoute permissionKey="packages">
+              <AddonsPage />
             </PermissionRoute>
           }
         />

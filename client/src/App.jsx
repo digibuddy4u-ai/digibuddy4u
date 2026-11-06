@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from './routes/AppRoutes';
 import { CustomerAuthProvider } from './context/CustomerAuthContext';
 import { SiteSettingsProvider } from './context/SiteSettingsContext';
+import { AddonCartProvider } from './context/AddonCartContext';
 import ScrollToTop from './components/common/ScrollToTop';
 
 export default function App() {
@@ -11,7 +12,9 @@ export default function App() {
       <ScrollToTop />
       <SiteSettingsProvider>
         <CustomerAuthProvider>
-          <AppRoutes />
+          <AddonCartProvider>
+            <AppRoutes />
+          </AddonCartProvider>
         </CustomerAuthProvider>
       </SiteSettingsProvider>
     </BrowserRouter>

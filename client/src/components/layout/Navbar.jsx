@@ -41,6 +41,7 @@ import { FALLBACK_SERVICES } from '../../utils/servicesCatalog';
 import { api } from '../../utils/api';
 import { useCustomerAuth } from '../../context/CustomerAuthContext';
 import { useSiteSettings } from '../../context/SiteSettingsContext';
+import { useAddonCart } from '../../context/AddonCartContext';
 
 // Icon Map helper for services
 const ICON_MAP = {
@@ -82,6 +83,7 @@ export default function Navbar() {
   const workTimeoutRef = useRef(null);
   const location = useLocation();
   const { customer, isAuthenticated, promptLogin } = useCustomerAuth();
+  const { totalCount, openDrawer } = useAddonCart();
 
   // Close menus on route change
   useEffect(() => {
@@ -475,6 +477,20 @@ export default function Navbar() {
 
             {/* Right: Actions (Login Button Only — Let's Talk removed as requested) */}
             <div className="hidden lg:flex items-center gap-2 xl:gap-3">
+              {totalCount > 0 && (
+                <button
+                  type="button"
+                  onClick={openDrawer}
+                  className="relative p-2 rounded-full bg-primary/10 hover:bg-primary/20 text-primary transition-all flex items-center justify-center animate-in fade-in"
+                  title="View Shortlisted Add-Ons"
+                >
+                  <ShoppingBag className="w-4 h-4" />
+                  <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-accent-yellow text-navy-950 text-[10px] font-extrabold flex items-center justify-center shadow-xs">
+                    {totalCount}
+                  </span>
+                </button>
+              )}
+
               {isAuthenticated ? (
                 <Link
                   to="/customer/dashboard"
@@ -499,6 +515,20 @@ export default function Navbar() {
 
             {/* Mobile Top Controls (Login & Menu — Let's Talk removed) */}
             <div className="flex items-center gap-2 lg:hidden">
+              {totalCount > 0 && (
+                <button
+                  type="button"
+                  onClick={openDrawer}
+                  className="relative p-2 rounded-full bg-primary/10 text-primary transition-all flex items-center justify-center"
+                  title="View Shortlisted Add-Ons"
+                >
+                  <ShoppingBag className="w-4 h-4" />
+                  <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-accent-yellow text-navy-950 text-[10px] font-extrabold flex items-center justify-center shadow-xs">
+                    {totalCount}
+                  </span>
+                </button>
+              )}
+
               {isAuthenticated ? (
                 <Link
                   to="/customer/dashboard"

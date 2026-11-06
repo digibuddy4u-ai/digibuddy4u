@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 /**
  * IntroSplash Component
@@ -9,11 +9,24 @@ import React, { useState, useEffect } from 'react';
  *   2. "Buddy" (#FFC629) slides up second
  *   3. "4U" (#18D5E8) slides up third
  * - Brief pause to admire the full brand, then the screen wipes up smoothly.
+ * - Respects prefers-reduced-motion: skips immediately to avoid locking user view.
+ * - Safely cleans up all timers and document.body scroll locks on unmount.
  */
 export default function IntroSplash() {
   const [stage, setStage] = useState('entering'); // 'entering' | 'wiping' | 'done'
+  const dismissTimerRef = useRef(null);
 
   useEffect(() => {
+    // Respect user's motion preference: skip splash immediately if reduced motion is requested
+    if (typeof window !== 'undefined') {
+      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (mq.matches) {
+        setStage('done');
+        document.body.style.overflow = '';
+        return;
+      }
+    }
+
     // 1. Lock scroll while intro is playing
     document.body.style.overflow = 'hidden';
 
@@ -31,6 +44,9 @@ export default function IntroSplash() {
     return () => {
       clearTimeout(wipeTimer);
       clearTimeout(removeTimer);
+      if (dismissTimerRef.current) {
+        clearTimeout(dismissTimerRef.current);
+      }
       document.body.style.overflow = '';
     };
   }, []);
@@ -38,7 +54,10 @@ export default function IntroSplash() {
   const handleDismiss = () => {
     setStage('wiping');
     document.body.style.overflow = '';
-    setTimeout(() => {
+    if (dismissTimerRef.current) {
+      clearTimeout(dismissTimerRef.current);
+    }
+    dismissTimerRef.current = setTimeout(() => {
       setStage('done');
     }, 850);
   };
@@ -116,6 +135,17 @@ export default function IntroSplash() {
         @keyframes wordmarkUp {
           to {
             transform: translateY(0%);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .splash-span {
+            transform: none !important;
+            animation: none !important;
+          }
+          .intro-wiping {
+            transform: none !important;
+            transition: none !important;
           }
         }
       `}</style>

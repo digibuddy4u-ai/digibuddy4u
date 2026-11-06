@@ -54,8 +54,8 @@ const packageSchema = new mongoose.Schema(
     },
     reelsCount: {
       type: String,
-      required: true,
       trim: true,
+      default: '2–3 reels/month',
     },
     reelsDetails: {
       type: String,
@@ -64,8 +64,8 @@ const packageSchema = new mongoose.Schema(
     },
     postsCount: {
       type: String,
-      required: true,
       trim: true,
+      default: '8 posts/month',
     },
     postsDetails: {
       type: String,
@@ -74,8 +74,8 @@ const packageSchema = new mongoose.Schema(
     },
     storiesCount: {
       type: String,
-      required: true,
       trim: true,
+      default: '8 stories/month',
     },
     storiesDetails: {
       type: String,

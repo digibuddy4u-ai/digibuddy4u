@@ -52,7 +52,7 @@ const IT_TECHNOLOGIES = [
 ];
 
 // Platform Bubble Item Component (Card with Crisp Black Icon)
-function PlatformBubble({ item }) {
+function PlatformBubble({ item, isAriaHidden = false }) {
   const iconSrc = item.isCustomSvg
     ? null
     : `https://cdn.simpleicons.org/${item.slug}/000000`;
@@ -61,20 +61,21 @@ function PlatformBubble({ item }) {
     <div
       className="group relative flex-shrink-0 flex flex-col items-center mx-2.5 sm:mx-3.5 my-2"
       title={`${item.name} (${item.category})`}
+      aria-hidden={isAriaHidden}
     >
       {/* The White / Light Card Bubble with Black Icon */}
       <div
-        className="w-16 h-16 sm:w-20 sm:h-20 lg:w-22 lg:h-22 rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 shadow-sm shadow-slate-200 flex items-center justify-center p-3 sm:p-4 transition-all duration-300 transform group-hover:scale-110 group-hover:-translate-y-1 group-hover:shadow-xl group-hover:shadow-primary/15 group-hover:border-primary/50 cursor-pointer select-none"
+        className="w-16 h-16 sm:w-20 sm:h-20 lg:w-22 lg:h-22 rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 shadow-sm shadow-slate-200 flex items-center justify-center p-3 sm:p-4 transition-all duration-300 transform group-hover:scale-110 group-hover:-translate-y-1 group-hover:shadow-xl group-hover:shadow-primary/15 group-hover:border-primary/50 cursor-pointer select-none motion-reduce:transition-none motion-reduce:transform-none"
       >
         {item.isCustomSvg ? (
           <LinkedInBlackIcon />
         ) : (
           <img
             src={iconSrc}
-            alt={item.name}
+            alt={isAriaHidden ? '' : item.name}
             width={44}
             height={44}
-            className="w-7 h-7 sm:w-9 sm:h-9 object-contain filter contrast-125 transition-transform duration-200 group-hover:scale-105 pointer-events-none"
+            className="w-7 h-7 sm:w-9 sm:h-9 object-contain filter contrast-125 transition-transform duration-200 group-hover:scale-105 pointer-events-none motion-reduce:transition-none motion-reduce:transform-none"
             loading="lazy"
             draggable="false"
             onError={(e) => {
@@ -96,10 +97,6 @@ function PlatformBubble({ item }) {
 }
 
 export default function PlatformsTechnologiesSection() {
-  // Duplicate arrays to create continuous infinite loops
-  const row1Items = [...MARKETING_PLATFORMS, ...MARKETING_PLATFORMS];
-  const row2Items = [...IT_TECHNOLOGIES, ...IT_TECHNOLOGIES];
-
   return (
     <section
       id="platforms-technologies"
@@ -131,15 +128,23 @@ export default function PlatformsTechnologiesSection() {
         <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-36 lg:w-48 bg-gradient-to-l from-white via-white/85 to-transparent z-10" />
 
         {/* ======================================================== */}
-        {/* ROW 1: Scrolling Left */}
+        {/* ROW 1: Scrolling Left (Marketing Platforms)             */}
         {/* ======================================================== */}
         <div className="mb-3 sm:mb-4">
-          <div className="relative overflow-hidden w-full flex">
-            <div className="animate-marquee-left flex py-1">
-              {row1Items.map((item, index) => (
+          <div className="relative overflow-x-auto overflow-y-hidden w-full flex scrollbar-none [scrollbar-width:none] [-ms-overflow-style:none]">
+            <div className="animate-marquee-left flex py-1 will-change-transform">
+              {MARKETING_PLATFORMS.map((item, index) => (
                 <PlatformBubble
-                  key={`mkt-${item.name}-${index}`}
+                  key={`mkt-pri-${item.name}-${index}`}
                   item={item}
+                  isAriaHidden={false}
+                />
+              ))}
+              {MARKETING_PLATFORMS.map((item, index) => (
+                <PlatformBubble
+                  key={`mkt-dup-${item.name}-${index}`}
+                  item={item}
+                  isAriaHidden={true}
                 />
               ))}
             </div>
@@ -147,15 +152,23 @@ export default function PlatformsTechnologiesSection() {
         </div>
 
         {/* ======================================================== */}
-        {/* ROW 2: Scrolling Right */}
+        {/* ROW 2: Scrolling Right (IT & Cloud Frameworks)           */}
         {/* ======================================================== */}
         <div>
-          <div className="relative overflow-hidden w-full flex">
-            <div className="animate-marquee-right flex py-1">
-              {row2Items.map((item, index) => (
+          <div className="relative overflow-x-auto overflow-y-hidden w-full flex scrollbar-none [scrollbar-width:none] [-ms-overflow-style:none]">
+            <div className="animate-marquee-right flex py-1 will-change-transform">
+              {IT_TECHNOLOGIES.map((item, index) => (
                 <PlatformBubble
-                  key={`it-${item.name}-${index}`}
+                  key={`it-pri-${item.name}-${index}`}
                   item={item}
+                  isAriaHidden={false}
+                />
+              ))}
+              {IT_TECHNOLOGIES.map((item, index) => (
+                <PlatformBubble
+                  key={`it-dup-${item.name}-${index}`}
+                  item={item}
+                  isAriaHidden={true}
                 />
               ))}
             </div>

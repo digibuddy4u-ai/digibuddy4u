@@ -254,31 +254,47 @@ export default function ServicesOverviewSection() {
   // Dynamically tracks the visible stacked card on top during both
   // UP-TO-DOWN (01 -> 02 -> 03 -> 04 -> 05 -> 06) and
   // DOWN-TO-UP (06 -> 05 -> 04 -> 03 -> 02 -> 01) scrolling.
+  // Uses responsive threshold: sticky offset on desktop (lg+), viewport threshold on mobile/tablet.
   useEffect(() => {
     if (!services || services.length === 0) return;
 
     let ticking = false;
+    let rafId = null;
 
     const updateActiveCard = () => {
       if (!cardRefs.current || cardRefs.current.length === 0) return;
 
-      const firstEl = cardRefs.current[0];
-      const stickyTop = firstEl
-        ? parseFloat(window.getComputedStyle(firstEl).top) || 128
-        : 128;
-      // Buffer (+25px) ensures smooth bidirectional transition as cards slide over
-      const threshold = stickyTop + 25;
-
+      const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024;
       let currentActiveIndex = 0;
 
-      for (let i = 0; i < services.length; i++) {
-        const el = cardRefs.current[i];
-        if (!el) continue;
-        const rect = el.getBoundingClientRect();
+      if (isDesktop) {
+        const firstEl = cardRefs.current[0];
+        const stickyTop = firstEl
+          ? parseFloat(window.getComputedStyle(firstEl).top) || 128
+          : 128;
+        // Buffer (+25px) ensures smooth bidirectional transition as cards slide over
+        const threshold = stickyTop + 25;
 
-        // When a card's top reaches or passes the sticky threshold, it is active and on top
-        if (rect.top <= threshold) {
-          currentActiveIndex = i;
+        for (let i = 0; i < services.length; i++) {
+          const el = cardRefs.current[i];
+          if (!el) continue;
+          const rect = el.getBoundingClientRect();
+
+          // When a card's top reaches or passes the sticky threshold, it is active and on top
+          if (rect.top <= threshold) {
+            currentActiveIndex = i;
+          }
+        }
+      } else {
+        // Mobile / Tablet: track based on upper-middle viewport
+        const viewportThreshold = window.innerHeight * 0.45;
+        for (let i = 0; i < services.length; i++) {
+          const el = cardRefs.current[i];
+          if (!el) continue;
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= viewportThreshold) {
+            currentActiveIndex = i;
+          }
         }
       }
 
@@ -289,7 +305,7 @@ export default function ServicesOverviewSection() {
 
     const onScroll = () => {
       if (!ticking) {
-        requestAnimationFrame(updateActiveCard);
+        rafId = requestAnimationFrame(updateActiveCard);
         ticking = true;
       }
     };
@@ -301,6 +317,9 @@ export default function ServicesOverviewSection() {
     window.addEventListener('resize', onScroll, { passive: true });
 
     return () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
     };
@@ -386,7 +405,9 @@ export default function ServicesOverviewSection() {
                   key={service.id}
                   ref={(el) => (cardRefs.current[index] = el)}
                   id={`service-stack-card-${service.slug || service.id}`}
-                  className="sticky top-20 sm:top-24 lg:top-32 flex flex-col rounded-[32px] sm:rounded-[40px] p-6 sm:p-10 lg:p-12 mb-16 sm:mb-24 lg:mb-32 transition-all duration-300"
+                  className={`relative lg:sticky lg:top-32 flex flex-col rounded-[32px] sm:rounded-[40px] p-6 sm:p-10 lg:p-12 ${
+                    isLast ? 'mb-0 lg:mb-0' : 'mb-8 sm:mb-10 lg:mb-32'
+                  } transition-all duration-300 motion-reduce:transition-none`}
                   style={{
                     zIndex: index + 1,
                     backgroundColor: '#071A38',

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Check, Sparkles, ArrowRight, Download, Heart } from 'lucide-react';
+import { Check, Sparkles, ArrowRight, Download, Heart, Layers, Video, Camera, Share2 } from 'lucide-react';
 import SectionHeader from '../components/common/SectionHeader';
 import Button from '../components/common/Button';
 import Badge from '../components/common/Badge';
 import { useCustomerAuth } from '../context/CustomerAuthContext';
 import { API_URL } from '../utils/api';
 
-// 5 Official packages from PDF
+// Official Social Media Management Packages
 const DEFAULT_PACKAGES = [
   {
     name: 'Basic',
@@ -16,277 +16,299 @@ const DEFAULT_PACKAGES = [
     monthlyPrice: 5000,
     priceDisplay: '₹5,000/month',
     minimumCommitment: 'Monthly',
-    platforms: ['Instagram'],
-    reelsCount: '2–3 reels/month',
-    postsCount: '8 posts/month',
-    metaAds: '+₹1,000/mo optional',
+    platforms: ['1 Social Media Platform'],
+    postsCount: '6 Posts',
+    reelsCount: '3 Reels',
     keyHighlights: [
-      'Instagram focus (2–3 reels + 8 posts)',
-      '1 revision per item',
-      'Starting 1-page Mini Snapshot competitor study',
-      'Basic monthly reach & follower report',
-    ],
-  },
-  {
-    name: 'Standard',
-    slug: 'standard',
-    badge: 'Dual Platform',
-    monthlyPrice: 7500,
-    priceDisplay: '₹7,500/month',
-    minimumCommitment: 'Minimum 3 months',
-    platforms: ['Instagram', 'Facebook'],
-    reelsCount: '4 reels/month',
-    postsCount: '10 posts/month',
-    metaAds: '1 active campaign included',
-    keyHighlights: [
-      'Instagram + Facebook management',
-      '4 reels/month (3 clips + 1 AI)',
-      '1 active Meta Ads campaign included',
-      '2–3 page Competitor Study',
+      '6 Posts',
+      '3 Reels',
+      '1 Social Media Platform',
+      'Caption Writing',
+      'Hashtag Research',
+      'Content Writing',
+      'Social Media Account Audit',
     ],
   },
   {
     name: 'Growth',
     slug: 'growth',
     badge: 'Most Popular',
-    monthlyPrice: 20000,
-    priceDisplay: '₹20,000/month',
-    alternativePriceDisplay: '₹15,000 without ads',
-    minimumCommitment: 'Minimum 3 months',
+    monthlyPrice: 10000,
+    priceDisplay: '₹10,000/month',
+    minimumCommitment: 'Monthly',
     platforms: ['Instagram', 'Facebook'],
-    reelsCount: '8 reels/month',
-    postsCount: '12 posts/month',
-    shootsCount: '1 shoot day (up to 3-4h)',
-    metaAds: '2 active campaigns included',
+    postsCount: '10 Posts',
+    reelsCount: '10 Reels',
     isFeatured: true,
     keyHighlights: [
-      '1 on-location shoot day/mo in Ahmedabad',
-      '8 reels & 12 posts & 16 stories',
-      '2 active Meta Ads campaigns',
-      'Weekday comments & DM management',
-      '5–6 page Market Position Case Study',
+      '10 Posts',
+      '10 Reels',
+      '6 Carousel Posts',
+      'Instagram + Facebook Management',
+      'Profile Optimization for Both Platforms',
+      'Caption Writing',
+      'Hashtag Research',
+      'Content Writing',
+      'Monthly Content Planning',
     ],
   },
   {
-    name: 'Pro',
-    slug: 'pro',
-    badge: 'Multi-Channel Scale',
-    monthlyPrice: 30000,
-    priceDisplay: '₹30,000/month',
-    alternativePriceDisplay: '₹25,000 without ads',
-    minimumCommitment: 'Minimum 6 months',
-    platforms: ['Instagram', 'Facebook', 'YouTube / LinkedIn'],
-    reelsCount: '12 reels/month',
-    postsCount: '16 posts/month',
-    shootsCount: '2 shoot days (Camera + iPhone)',
-    metaAds: '3 active campaigns included',
+    name: 'Premium',
+    slug: 'premium',
+    badge: 'Full Production',
+    monthlyPrice: 20000,
+    priceDisplay: '₹20,000/month',
+    minimumCommitment: 'Monthly',
+    platforms: ['Instagram', 'Facebook'],
+    postsCount: '15 Posts',
+    reelsCount: '10 Reels',
+    shootsCount: '1 Professional Shoot Day',
     keyHighlights: [
-      '3 channels: IG + FB + YouTube/LinkedIn',
-      '2 shoot days/mo (Camera crew + iPhone)',
-      '12 reels/month + 16 posts',
-      '3 active Meta Ads campaigns',
-      'Competitor ad tracking & ideal buyer profile',
-    ],
-  },
-  {
-    name: 'Elite',
-    slug: 'elite',
-    badge: 'Enterprise Scale',
-    monthlyPrice: 40000,
-    priceDisplay: '₹40,000/month',
-    minimumCommitment: 'Minimum 6 months',
-    platforms: ['Instagram', 'Facebook', 'YouTube', 'Google Business'],
-    reelsCount: '16 reels/month',
-    postsCount: '20 posts/month',
-    shootsCount: '2 shoot days (up to 5h each)',
-    metaAds: '3 campaigns (retargeting & lookalikes)',
-    keyHighlights: [
-      'Omnichannel: IG + FB + YT + GBP',
-      '2 full production shoot days/mo (5h each)',
-      '16 reels + 2 micro-influencer collabs',
-      '3 Meta Ads campaigns with custom lookalikes',
-      'Full Brand & Market Strategy 12-mo roadmap',
+      '15 Posts',
+      '10 Reels',
+      '3 Carousel Posts',
+      '2 Meme Creatives',
+      '1 Professional Shoot Day at Client Location by Our Team',
+      'Instagram + Facebook Management',
+      'Caption Writing',
+      'Hashtag Research',
+      'Content Writing',
+      'Monthly Content Calendar',
     ],
   },
 ];
 
 export default function PricingPreviewSection() {
   const [packages, setPackages] = useState(DEFAULT_PACKAGES);
-  const { isAuthenticated, promptLogin, toggleSavePackage, isPackageSaved } = useCustomerAuth();
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  const {
+    isAuthenticated,
+    customer,
+    savedPackages,
+    toggleSavePackage,
+    isPackageSaved,
+    promptLogin,
+    token,
+    trackEvent,
+  } = useCustomerAuth();
+
+  // Load packages from API with auto-fallback
   useEffect(() => {
-    async function load() {
+    let isMounted = true;
+    async function loadPackages() {
       try {
         const res = await fetch(`${API_URL}/packages`);
-        const data = await res.json();
-        if (data.success && Array.isArray(data.data) && data.data.length > 0) {
-          setPackages(data.data);
+        const json = await res.json();
+        if (isMounted && json.success && Array.isArray(json.data) && json.data.length > 0) {
+          setPackages(json.data);
         }
-      } catch (e) {
-        // Fallback default
+      } catch (err) {
+        // Fallback silently to DEFAULT_PACKAGES
+      } finally {
+        if (isMounted) setLoading(false);
       }
     }
 
-    load();
+    loadPackages();
 
-    // Auto-update whenever user refocuses / switches to website tab from Admin
-    const handleFocus = () => load();
+    const handleFocus = () => loadPackages();
     window.addEventListener('focus', handleFocus);
 
-    // Also periodic poll every 15s to keep live data in sync with Admin panel
-    const interval = setInterval(load, 15000);
-
     return () => {
+      isMounted = false;
       window.removeEventListener('focus', handleFocus);
-      clearInterval(interval);
     };
   }, []);
 
+  const handleGetStarted = (pkg) => {
+    trackEvent?.('package_get_started_click', { slug: pkg.slug, name: pkg.name });
+    navigate(`/contact?plan=${encodeURIComponent(`${pkg.name} Package (${pkg.priceDisplay || `₹${pkg.monthlyPrice}/mo`})`)}`);
+  };
+
   const handleCardClick = (pkg) => {
+    trackEvent?.('package_card_click', { slug: pkg.slug, name: pkg.name });
     if (pkg.requiresLoginForDetails && !isAuthenticated) {
       promptLogin(
         pkg.slug,
-        `Create a free account or log in to unlock complete deliverables, shooting schedules, ad spend guides, and download the official ${pkg.name} Package PDF.`
+        `Create a free account or log in to unlock complete deliverables, shooting schedules, and download the official ${pkg.name} Package PDF.`
       );
     } else {
       navigate(`/packages/${pkg.slug}`);
     }
   };
 
+  const handleDownloadPdf = async (pkg, e) => {
+    e?.stopPropagation();
+    trackEvent?.('package_pdf_download_click', { slug: pkg.slug, name: pkg.name });
+
+    if (pkg.requiresLoginForPdf && !isAuthenticated) {
+      promptLogin(
+        pkg.slug,
+        `Please log in or create an account to download the official ${pkg.name} Package PDF specification.`
+      );
+      return;
+    }
+
+    try {
+      const headers = {};
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+
+      const res = await fetch(`${API_URL}/packages/${pkg.slug}/pdf`, { headers });
+      if (!res.ok) {
+        throw new Error('Failed to download PDF. Please log in.');
+      }
+
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `DigiBuddy4U_${pkg.name}_Package.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (err) {
+      promptLogin(pkg.slug, 'Authentication required to download this official package PDF.');
+    }
+  };
+
+  // Filter packages for display (display Basic, Growth, Premium)
+  const displayedPackages = packages.filter(
+    (pkg) => pkg.showOnHome !== false && pkg.isPublished !== false
+  );
+
   return (
-    <section id="pricing" className="py-12 sm:py-16 lg:py-20 bg-surface-light">
-      <div className="site-container">
+    <section id="pricing" className="py-14 sm:py-20 lg:py-24 bg-surface-light relative">
+      {/* Background ambient lighting */}
+      <div className="absolute top-10 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-cyan-accent/5 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="site-container relative z-10">
+        {/* Section Header */}
         <SectionHeader
-          badge="Packages & Pricing"
+          badge="Social Media Management"
           badgeVariant="blue"
-          title="Digital Growth Packages Designed for"
-          titleHighlight="Measurable Impact"
-          description="Source of truth pricing based on authentic shoot hours, verified deliverables, and transparent ad-spend rules. Zero hidden retainers."
+          title="Social Media Management"
+          titleHighlight="Packages"
+          description="Consistent, high-impact content production and community growth designed to scale your brand presence across social platforms."
           align="center"
         />
 
-        {/* Homepage Packages Grid (Filtered by Admin Show On Home selection) */}
-        {(() => {
-          const displayedPackages = packages.filter(
-            (pkg) => pkg.showOnHome !== false && pkg.isPublished !== false
-          );
+        {/* 3 Modern Social Media Packages Grid */}
+        <div className="mt-10 sm:mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch max-w-6xl mx-auto">
+          {displayedPackages.map((pkg) => {
+            const isFeatured = pkg.isFeatured || pkg.slug === 'growth';
+            const isSaved = isPackageSaved(pkg._id || pkg.slug);
 
-          if (displayedPackages.length === 0) {
             return (
-              <div className="p-12 text-center bg-white rounded-3xl border border-slate-200">
-                <p className="text-sm text-content-muted">No packages currently selected for homepage preview.</p>
-                <Link to="/packages" className="text-xs font-bold text-primary hover:underline mt-2 inline-block">
-                  View Full Packages Catalog →
-                </Link>
-              </div>
-            );
-          }
-
-          const gridCols =
-            displayedPackages.length === 1
-              ? 'max-w-md mx-auto grid-cols-1'
-              : displayedPackages.length === 2
-              ? 'max-w-3xl mx-auto grid-cols-1 md:grid-cols-2'
-              : displayedPackages.length === 3
-              ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto'
-              : displayedPackages.length === 4
-              ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4'
-              : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5';
-
-          return (
-            <div className={`grid ${gridCols} gap-5 sm:gap-6 items-stretch`}>
-              {displayedPackages.map((pkg) => {
-                const isFeatured = pkg.isFeatured || pkg.slug === 'growth';
-                const isSaved = isPackageSaved(pkg._id || pkg.slug);
-
-                return (
-                  <div
-                    key={pkg.slug}
-                    className={`rounded-3xl p-6 sm:p-6.5 flex flex-col justify-between transition-all duration-300 relative ${
-                      isFeatured
-                        ? 'bg-white border-2 border-primary shadow-xl ring-4 ring-primary/10 -translate-y-1 sm:-translate-y-2'
-                        : 'bg-white border border-slate-200/90 shadow-card-soft hover:shadow-card-hover'
-                    }`}
-                  >
-                {/* Most Popular Badge */}
+              <div
+                key={pkg.slug}
+                className={`rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 relative group ${
+                  isFeatured
+                    ? 'bg-white border-2 border-primary shadow-2xl ring-4 ring-primary/10 lg:-translate-y-2'
+                    : 'bg-white border border-slate-200/90 shadow-card-soft hover:shadow-card-hover'
+                }`}
+              >
+                {/* Most Popular Badge on Growth Package */}
                 {isFeatured && (
                   <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent-yellow text-navy-950 font-bold text-xs uppercase tracking-wider shadow-md">
-                      <Sparkles className="w-3.5 h-3.5" />
+                    <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-accent-yellow text-navy-950 font-heading font-extrabold text-xs uppercase tracking-wider shadow-md">
+                      <Sparkles className="w-3.5 h-3.5 fill-current" />
                       Most Popular
                     </span>
                   </div>
                 )}
 
-                <div className="space-y-3.5">
+                <div className="space-y-5">
+                  {/* Top Bar: Badge & Shortlist Heart */}
                   <div className="flex items-center justify-between">
                     <Badge variant={isFeatured ? 'blue' : 'slate'} size="sm">
-                      {pkg.badge || 'Package'}
+                      {pkg.badge || (isFeatured ? 'Most Popular' : 'Monthly Retainer')}
                     </Badge>
+
                     <button
                       type="button"
                       onClick={() => toggleSavePackage(pkg.slug)}
-                      className={`p-1.5 rounded-lg transition-colors ${
-                        isSaved ? 'text-red-500' : 'text-slate-300 hover:text-red-500'
+                      className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${
+                        isSaved
+                          ? 'bg-red-50 text-red-500 shadow-xs'
+                          : 'bg-slate-100 text-slate-400 hover:text-red-500 hover:bg-red-50'
                       }`}
-                      title={isSaved ? 'Saved' : 'Save to shortlist'}
+                      title={isSaved ? 'Remove from shortlist' : 'Save to shortlist'}
+                      aria-label="Save to shortlist"
                     >
                       <Heart className={`w-4 h-4 ${isSaved ? 'fill-current' : ''}`} />
                     </button>
                   </div>
 
+                  {/* Package Title & Price */}
                   <div>
-                    <h3 className="text-xl font-bold font-heading text-navy-900">
+                    <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-navy-900 tracking-tight">
                       {pkg.name}
                     </h3>
-                    <div className="text-2xl font-black font-heading text-navy-900 mt-1">
-                      {pkg.priceDisplay || `₹${pkg.monthlyPrice?.toLocaleString('en-IN')}/mo`}
+                    <div className="text-3xl sm:text-4xl font-heading font-black text-navy-900 mt-2 tracking-tight">
+                      {pkg.priceDisplay || `₹${pkg.monthlyPrice?.toLocaleString('en-IN')}/month`}
                     </div>
-                    {pkg.minimumCommitment && (
-                      <span className="text-[11px] text-content-muted block mt-0.5">
-                        {pkg.minimumCommitment}
-                      </span>
-                    )}
-                    {pkg.alternativePriceDisplay && (
-                      <span className="text-[10px] text-primary font-bold block mt-0.5">
-                        {pkg.alternativePriceDisplay}
-                      </span>
-                    )}
+                    <span className="text-xs text-content-muted block mt-1 font-medium">
+                      Billed monthly &bull; Guaranteed deliverables
+                    </span>
                   </div>
 
-                  {/* Highlights list */}
-                  <div className="pt-2 border-t border-slate-100 space-y-2 text-xs text-content-dark">
-                    {(pkg.keyHighlights || []).slice(0, 4).map((h, idx) => (
-                      <div key={idx} className="flex items-start gap-2">
-                        <Check className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
-                        <span className="leading-snug">{h}</span>
+                  {/* Deliverables Checklist */}
+                  <div className="pt-4 border-t border-slate-100 space-y-2.5 text-xs sm:text-sm text-content-dark">
+                    {(pkg.keyHighlights || []).map((highlight, idx) => (
+                      <div key={idx} className="flex items-start gap-2.5">
+                        <div className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <Check className="w-3.5 h-3.5 stroke-[2.5]" />
+                        </div>
+                        <span className="leading-snug font-medium text-navy-900">{highlight}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="pt-5 mt-4 border-t border-slate-100 space-y-2">
+                {/* Bottom Actions: Clear "Get Started" CTA */}
+                <div className="pt-6 mt-6 border-t border-slate-100 space-y-2.5">
                   <Button
                     type="button"
-                    onClick={() => handleCardClick(pkg)}
+                    onClick={() => handleGetStarted(pkg)}
                     variant={isFeatured ? 'yellow' : 'primary'}
-                    size="sm"
-                    className="w-full justify-center text-xs font-bold"
+                    size="lg"
+                    className="w-full justify-center font-heading font-bold text-sm shadow-md transition-all active:scale-98"
                     icon={ArrowRight}
                   >
-                    More Details
+                    Get Started
                   </Button>
+
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => handleCardClick(pkg)}
+                      className="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-navy-900 font-heading font-bold text-xs transition-colors"
+                    >
+                      <span>Full Scope</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={(e) => handleDownloadPdf(pkg, e)}
+                      className="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-navy-900 font-heading font-bold text-xs transition-colors"
+                      title={`Download official ${pkg.name} Package PDF`}
+                    >
+                      <Download className="w-3.5 h-3.5 text-primary" />
+                      <span>PDF</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             );
           })}
         </div>
-      );
-    })()}
 
-        {/* Bottom CTA to Full Comparison Page */}
-        <div className="mt-10 sm:mt-12 text-center flex flex-col sm:flex-row items-center justify-center gap-4">
+        {/* Bottom CTA navigation strip */}
+        <div className="mt-12 sm:mt-16 text-center flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button
             to="/packages"
             variant="outlinePrimary"
@@ -294,7 +316,24 @@ export default function PricingPreviewSection() {
             icon={ArrowRight}
             className="w-full sm:w-auto font-bold"
           >
-            Compare All 5 Packages & Download PDFs
+            Compare All 3 Packages & Full Scope
+          </Button>
+
+          <a
+            href="#addons"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-primary/30 bg-primary/5 hover:bg-primary/10 text-primary font-heading font-bold text-sm transition-all"
+          >
+            <span>Explore 15 Add-Ons & Extras ↓</span>
+          </a>
+
+          <Button
+            to="/contact"
+            variant="yellow"
+            size="lg"
+            icon={ArrowRight}
+            className="w-full sm:w-auto font-bold"
+          >
+            Request Custom Scope / Consultation
           </Button>
         </div>
       </div>
