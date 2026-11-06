@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MessageCircle, Globe, X, ArrowRight, Sparkles, CheckCircle2, ExternalLink } from 'lucide-react';
+import { MessageCircle, FileText, X, ArrowRight, Sparkles, ExternalLink, ShieldCheck } from 'lucide-react';
 import { useSiteSettings } from '../../context/SiteSettingsContext';
 import { BRAND } from '../../utils/brandConstants';
 
@@ -12,7 +12,8 @@ export default function PackageEnquiryChoiceModal({ isOpen, onClose, pkg }) {
 
   const phone = settings?.phone || BRAND.phone;
   const cleanPhone = phone.replace(/\D/g, '');
-  const packageTitle = `${pkg.name} Package (${pkg.priceDisplay || `₹${pkg.monthlyPrice?.toLocaleString('en-IN')}/month`})`;
+  const packagePrice = pkg.priceDisplay || `₹${pkg.monthlyPrice?.toLocaleString('en-IN')}/month`;
+  const packageTitle = `${pkg.name} Package (${packagePrice})`;
 
   const handleWhatsAppClick = () => {
     const text = encodeURIComponent(
@@ -21,11 +22,6 @@ export default function PackageEnquiryChoiceModal({ isOpen, onClose, pkg }) {
     const url = `https://wa.me/${cleanPhone}?text=${text}`;
     window.open(url, '_blank', 'noopener,noreferrer');
     onClose();
-  };
-
-  const handleWebsiteClick = () => {
-    onClose();
-    navigate(`/contact?plan=${encodeURIComponent(packageTitle)}`);
   };
 
   const handleViewDetailsClick = () => {
@@ -38,12 +34,12 @@ export default function PackageEnquiryChoiceModal({ isOpen, onClose, pkg }) {
       role="dialog"
       aria-modal="true"
       aria-labelledby="choice-modal-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy-950/70 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy-950/75 backdrop-blur-md animate-in fade-in duration-200"
     >
       <div className="relative w-full max-w-lg rounded-3xl bg-white border border-slate-200/90 shadow-2xl p-6 sm:p-8 text-navy-950 overflow-hidden animate-in zoom-in-95 duration-200">
-        {/* Decorative Top Accent Glow */}
+        {/* Decorative Top Ambient Glow */}
         <div className="absolute top-0 right-0 w-48 h-48 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-0 left-0 w-48 h-48 bg-[#25D366]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 left-0 w-48 h-48 bg-[#25D366]/15 rounded-full blur-3xl pointer-events-none" />
 
         {/* Close Button */}
         <button
@@ -59,23 +55,23 @@ export default function PackageEnquiryChoiceModal({ isOpen, onClose, pkg }) {
         <div className="space-y-2 mb-6">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-primary/10 text-primary">
             <Sparkles className="w-3.5 h-3.5 text-primary" />
-            <span>Package Selected: {pkg.name}</span>
+            <span>Selected Plan: {pkg.name} • {packagePrice}</span>
           </div>
 
           <h2 id="choice-modal-title" className="text-2xl sm:text-3xl font-heading font-black text-navy-950 tracking-tight leading-snug">
-            તમે કેવી રીતે આગળ વધવા માંગો છો?
+            Ready to Get Started with {pkg.name}?
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Would you like to enquire directly on <strong>WhatsApp</strong> or continue on the <strong>Website</strong>?
+            Connect directly with our digital growth strategist on <strong>WhatsApp</strong> for instant onboarding, or explore the full deliverables specification.
           </p>
         </div>
 
-        {/* 2 Main Choice Options */}
+        {/* Action Options */}
         <div className="space-y-3.5">
-          {/* Option 1: WhatsApp Enquiry (Featured & Recommended) */}
+          {/* Primary Option: WhatsApp Connect */}
           <div
             onClick={handleWhatsAppClick}
-            className="group relative p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-50/80 via-white to-emerald-50/40 border-2 border-[#25D366] hover:border-[#1EBE5D] hover:shadow-lg transition-all cursor-pointer ring-2 ring-emerald-500/10"
+            className="group relative p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-50/90 via-white to-emerald-50/40 border-2 border-[#25D366] hover:border-[#1EBE5D] hover:shadow-lg transition-all cursor-pointer ring-2 ring-emerald-500/10"
           >
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-start gap-3.5">
@@ -85,14 +81,14 @@ export default function PackageEnquiryChoiceModal({ isOpen, onClose, pkg }) {
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
                     <h3 className="text-base sm:text-lg font-heading font-extrabold text-navy-950">
-                      WhatsApp પર Inquiry કરો
+                      Connect on WhatsApp
                     </h3>
                     <span className="text-[10px] font-bold uppercase tracking-wider bg-[#25D366] text-white px-2 py-0.5 rounded-full">
-                      Fastest • 5 Min
+                      Fastest • ~5 Mins
                     </span>
                   </div>
                   <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                    અમારા Marketing Strategist સાથે સીધી વાત કરો. પેકેજ ડિટેલ્સ અને ઑનબોર્ડિંગ પ્લાન તરત જ WhatsApp પર મળશે.
+                    Chat directly with our marketing strategist. Get the complete campaign roadmap, posting calendar, and onboarding details instantly.
                   </p>
                 </div>
               </div>
@@ -108,27 +104,27 @@ export default function PackageEnquiryChoiceModal({ isOpen, onClose, pkg }) {
             </div>
           </div>
 
-          {/* Option 2: Website Direct Flow */}
+          {/* Secondary Option: View Full Package Details */}
           <div
-            onClick={handleWebsiteClick}
+            onClick={handleViewDetailsClick}
             className="group relative p-4 sm:p-5 rounded-2xl bg-slate-50 hover:bg-white border-2 border-slate-200 hover:border-primary/50 hover:shadow-md transition-all cursor-pointer"
           >
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-start gap-3.5">
                 <div className="w-11 h-11 rounded-2xl bg-slate-200/80 group-hover:bg-primary text-slate-700 group-hover:text-white flex items-center justify-center shadow-xs flex-shrink-0 mt-0.5 group-hover:scale-110 transition-all">
-                  <Globe className="w-6 h-6" />
+                  <FileText className="w-6 h-6" />
                 </div>
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
                     <h3 className="text-base sm:text-lg font-heading font-extrabold text-navy-950">
-                      Website પર ફોર્મ ભરીને જુઓ
+                      View Full Package Scope
                     </h3>
                     <span className="text-[10px] font-semibold uppercase tracking-wider bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full">
-                      Online Form
+                      Specifications
                     </span>
                   </div>
                   <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                    તમારી બિઝનેસ વિગતો વેબસાઇટ પર જ ભરો અને ઓનલાઇન Custom Quote મેળવો.
+                    Inspect complete reels schedules, camera shooting specs, carousel limits, and deliverables on the site.
                   </p>
                 </div>
               </div>
@@ -137,14 +133,15 @@ export default function PackageEnquiryChoiceModal({ isOpen, onClose, pkg }) {
           </div>
         </div>
 
-        {/* Alternative link: View full details on site */}
+        {/* Footer Link: Maybe Later / Direct Details */}
         <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
           <button
             type="button"
             onClick={handleViewDetailsClick}
-            className="text-primary hover:underline font-bold"
+            className="text-primary hover:underline font-bold flex items-center gap-1"
           >
-            Explore {pkg.name} Full Deliverables Scope &rarr;
+            <span>Maybe Later, Explore {pkg.name} Details</span>
+            <ArrowRight className="w-3.5 h-3.5" />
           </button>
 
           <button
@@ -152,7 +149,7 @@ export default function PackageEnquiryChoiceModal({ isOpen, onClose, pkg }) {
             onClick={onClose}
             className="text-slate-400 hover:text-slate-600 font-medium"
           >
-            Cancel
+            Close
           </button>
         </div>
       </div>
