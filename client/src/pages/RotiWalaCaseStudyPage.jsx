@@ -21,6 +21,14 @@ import {
   ChevronRight,
   Flame,
   Award,
+  Play,
+  Heart,
+  Share2,
+  Bookmark,
+  Volume2,
+  ChefHat,
+  Clock,
+  Check,
 } from 'lucide-react';
 import { InstagramIcon } from '../components/common/SocialIcons';
 import SEO from '../components/common/SEO';
@@ -38,86 +46,87 @@ export default function RotiWalaCaseStudyPage() {
     <>
       <SEO
         title="RotiWala Case Study — Building a Strong Digital Brand Presence | DigiBuddy4U"
-        description="Discover how DigiBuddy4U crafted an attractive digital presence, AI promotional reels, creative designs, and targeted festive campaigns for RotiWala in Ahmedabad and Gandhinagar."
+        description="Discover how DigiBuddy4U crafted an appetizing digital presence, AI promotional food reels, creative designs, and targeted festive campaigns for RotiWala in Ahmedabad and Gandhinagar."
       />
 
       {/* Breadcrumb Navigation Bar */}
-      <div className="bg-slate-50 border-b border-slate-200/80 py-3">
-        <div className="site-container flex items-center gap-2 text-xs font-medium text-slate-500">
-          <Link to="/" className="hover:text-primary transition-colors">
+      <div className="bg-slate-900 border-b border-slate-800 py-3 text-slate-400">
+        <div className="site-container flex items-center gap-2 text-xs font-medium">
+          <Link to="/" className="hover:text-accent-yellow transition-colors">
             Home
           </Link>
-          <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-          <Link to="/portfolio" className="hover:text-primary transition-colors">
+          <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
+          <Link to="/portfolio" className="hover:text-accent-yellow transition-colors">
             Our Work
           </Link>
-          <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-          <span className="text-navy-950 font-bold">RotiWala Case Study</span>
+          <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
+          <span className="text-white font-bold">RotiWala Case Study</span>
         </div>
       </div>
 
       {/* Case Study Hero Section */}
-      <section className="bg-gradient-to-b from-white via-surface-light to-white text-navy-950 py-12 sm:py-16 lg:py-20 relative overflow-hidden border-b border-slate-100">
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+      <section className="bg-gradient-to-b from-slate-900 via-navy-950 to-slate-950 text-white py-12 sm:py-16 lg:py-24 relative overflow-hidden border-b border-slate-800">
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-amber-500/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-primary/20 rounded-full blur-3xl pointer-events-none" />
 
         <div className="site-container relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-6">
               <div className="flex flex-wrap items-center gap-2.5">
-                <Badge variant="yellow" size="sm">
-                  Active Client Case Study
-                </Badge>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 border border-amber-500/30 text-accent-yellow">
+                  <Flame className="w-3.5 h-3.5" />
+                  Official Client Case Study
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   Food & Beverage
                 </span>
-                <span className="text-xs font-semibold text-slate-500 flex items-center gap-1">
-                  <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                <span className="text-xs font-semibold text-slate-400 flex items-center gap-1 font-mono">
+                  <MapPin className="w-3.5 h-3.5 text-primary" />
                   Ahmedabad & Gandhinagar
                 </span>
               </div>
 
-              <h1 className="text-3xl sm:text-5xl lg:text-5xl font-heading font-black tracking-tight text-navy-950 leading-tight">
+              <h1 className="text-3xl sm:text-5xl lg:text-5xl font-heading font-black tracking-tight text-white leading-tight">
                 RotiWala – Building a Strong Digital Brand Presence
               </h1>
 
-              <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-                How DigiBuddy partnered with <strong>RotiWala</strong> to communicate product quality, build customer awareness, and promote its daily roti delivery services with creative social media designs, AI video reels, and high-impact festive campaigns.
+              <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
+                How DigiBuddy partnered with <strong>RotiWala</strong> to communicate product freshness, build brand awareness, and scale its daily doorstep delivery services through creative graphic designs, AI video reels, and festive campaign funnels.
               </p>
 
-              {/* Scope & Industry Quick Summary */}
+              {/* Scope & Industry Quick Summary Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-                <div className="p-3.5 rounded-2xl bg-white border border-slate-200 shadow-xs">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block font-mono">
+                <div className="p-3.5 rounded-2xl bg-slate-800/80 border border-slate-700/80 shadow-xs">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block font-mono">
                     Client
                   </span>
-                  <span className="text-sm font-bold text-navy-950 mt-0.5 block">
+                  <span className="text-sm font-bold text-white mt-0.5 block">
                     RotiWala
                   </span>
                 </div>
-                <div className="p-3.5 rounded-2xl bg-white border border-slate-200 shadow-xs">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block font-mono">
+                <div className="p-3.5 rounded-2xl bg-slate-800/80 border border-slate-700/80 shadow-xs">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block font-mono">
                     Industry
                   </span>
-                  <span className="text-sm font-bold text-navy-950 mt-0.5 block">
-                    Food & Beverage
+                  <span className="text-sm font-bold text-white mt-0.5 block">
+                    Food & Hospitality
                   </span>
                 </div>
-                <div className="p-3.5 rounded-2xl bg-white border border-slate-200 shadow-xs">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block font-mono">
+                <div className="p-3.5 rounded-2xl bg-slate-800/80 border border-slate-700/80 shadow-xs">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block font-mono">
                     Services
                   </span>
-                  <span className="text-sm font-bold text-navy-950 mt-0.5 block">
-                    Social Media & AI Reels
+                  <span className="text-sm font-bold text-accent-yellow mt-0.5 block">
+                    AI Reels & Social Kit
                   </span>
                 </div>
-                <div className="p-3.5 rounded-2xl bg-white border border-slate-200 shadow-xs">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block font-mono">
+                <div className="p-3.5 rounded-2xl bg-slate-800/80 border border-slate-700/80 shadow-xs">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block font-mono">
                     Execution
                   </span>
-                  <span className="text-sm font-bold text-primary mt-0.5 block">
+                  <span className="text-sm font-bold text-cyan-400 mt-0.5 block">
                     By DigiBuddy4U
                   </span>
                 </div>
@@ -129,9 +138,9 @@ export default function RotiWalaCaseStudyPage() {
                   href={rotiWala.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#E1306C] via-[#FD1D1D] to-[#F77737] text-white font-bold text-sm sm:text-base hover:opacity-95 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
+                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#E1306C] via-[#FD1D1D] to-[#F77737] text-white font-bold text-sm sm:text-base hover:opacity-95 transition-all shadow-lg hover:shadow-xl hover:scale-105"
                 >
-                  <InstagramIcon className="w-5 h-5" />
+                  <InstagramIcon className="w-5 h-5 fill-current" />
                   <span>Visit Instagram (@{rotiWala.instagramHandle})</span>
                   <ExternalLink className="w-4 h-4" />
                 </a>
@@ -148,131 +157,185 @@ export default function RotiWalaCaseStudyPage() {
               </div>
             </div>
 
-            {/* Right Side: RotiWala Official Brand Profile Card */}
-            <div className="lg:col-span-5">
-              <div className="relative rounded-3xl bg-gradient-to-br from-amber-700 via-orange-800 to-amber-950 p-6 sm:p-8 text-white shadow-card-hover overflow-hidden border border-white/20">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none" />
-
-                {/* Top Instagram Identity Header */}
-                <div className="relative z-10 flex items-center justify-between pb-4 border-b border-white/15">
-                  <div className="flex items-center gap-2">
-                    <InstagramIcon className="w-5 h-5 text-accent-yellow" />
-                    <span className="text-xs font-mono font-bold tracking-wider text-amber-200">
-                      OFFICIAL INSTAGRAM
-                    </span>
+            {/* Right Side: Realistic Vertical Smartphone Reel Mockup */}
+            <div className="lg:col-span-5 flex flex-col items-center justify-center">
+              <div className="relative w-full max-w-[310px] sm:max-w-[330px] rounded-[40px] bg-[#0c121e] p-3 shadow-2xl ring-1 ring-white/20 shadow-amber-500/10">
+                {/* Screen Content */}
+                <div className="relative rounded-[32px] overflow-hidden bg-gradient-to-b from-[#2a1306] via-[#1a0a02] to-black aspect-[9/18] flex flex-col justify-between text-white border border-white/10">
+                  {/* Dynamic Island Notch */}
+                  <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-20 h-4 bg-black rounded-full z-30 flex items-center justify-center space-x-1.5">
+                    <div className="w-2 h-2 rounded-full bg-slate-800" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   </div>
-                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-white/20 text-white font-semibold backdrop-blur-sm">
-                    Verified Brand
-                  </span>
-                </div>
 
-                {/* Centerpiece: Real Official Circular Logo */}
-                <div className="relative z-10 my-6 text-center space-y-3">
-                  <div className="relative inline-block mx-auto group">
-                    <img
-                      src={rotiWala.logo}
-                      alt="RotiWala Official Brand Logo"
-                      className="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-contain mx-auto shadow-2xl ring-4 ring-white/30 p-1 bg-white/10 backdrop-blur-sm transition-transform duration-300 group-hover:scale-105"
-                    />
-                    <div className="absolute -bottom-1 -right-1 bg-emerald-500 rounded-full p-1 ring-2 ring-white">
-                      <CheckCircle2 className="w-4 h-4 text-white" />
+                  {/* Top Story Header in Phone */}
+                  <div className="relative z-20 pt-7 px-3.5 pb-2 flex items-center justify-between bg-gradient-to-b from-black/80 to-transparent">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-full p-0.5 bg-gradient-to-tr from-amber-400 to-[#E1306C]">
+                        <img
+                          src={rotiWala.logo}
+                          alt="RotiWala"
+                          className="w-full h-full rounded-full object-contain bg-white"
+                        />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-1 text-[11px] font-bold leading-tight">
+                          <span>rotiwaladelivery</span>
+                          <CheckCircle2 className="w-3 h-3 text-cyan-400 fill-cyan-400/20" />
+                        </div>
+                        <span className="text-[9px] text-amber-200/70 leading-none">Sponsored • Ahmedabad</span>
+                      </div>
                     </div>
-                  </div>
-
-                  <div>
-                    <h2 className="text-2xl sm:text-3xl font-heading font-black text-white">
-                      RotiWala
-                    </h2>
                     <a
                       href={rotiWala.instagramUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs sm:text-sm font-mono text-accent-yellow hover:underline mt-0.5"
+                      className="px-2.5 py-1 rounded-full bg-white/20 hover:bg-white/30 text-[10px] font-bold text-white transition-colors backdrop-blur-sm"
                     >
-                      <span>@{rotiWala.instagramHandle}</span>
-                      <ExternalLink className="w-3 h-3" />
+                      Follow
                     </a>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-amber-100/90 font-medium max-w-xs mx-auto leading-relaxed">
-                    Fresh, Ghar Jaisi Premium Fulka Roti delivered with love across Ahmedabad & Gandhinagar.
-                  </p>
-                </div>
+                  {/* Center Visual: Large RotiWala Emblem */}
+                  <div className="relative z-10 px-4 my-auto text-center space-y-3">
+                    <div className="relative inline-block mx-auto">
+                      <div className="absolute inset-0 rounded-full bg-amber-500/30 blur-xl animate-pulse" />
+                      <img
+                        src={rotiWala.logo}
+                        alt="RotiWala Official Logo"
+                        className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full object-contain mx-auto shadow-2xl ring-4 ring-amber-400/40 p-1.5 bg-white/10 backdrop-blur-md"
+                      />
+                      <div className="absolute bottom-1 right-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full p-1.5 shadow-lg border-2 border-black">
+                        <Flame className="w-3.5 h-3.5 text-white" />
+                      </div>
+                    </div>
 
-                {/* Live Instagram Bio Highlights */}
-                <div className="relative z-10 bg-black/30 rounded-2xl p-4 border border-white/10 text-xs space-y-2 text-amber-100">
-                  <div className="flex items-center gap-2">
-                    <span className="text-base">🍞</span>
-                    <span className="font-semibold text-white">Fresh Rotis, Delivered with Love</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-3.5 h-3.5 text-accent-yellow flex-shrink-0" />
-                    <span>Sarkhej, Ahmedabad, India 380055</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Truck className="w-3.5 h-3.5 text-accent-yellow flex-shrink-0" />
-                    <span>FREE Home Delivery (Min Order: 20+ Rotis)</span>
-                  </div>
-                </div>
+                    <div>
+                      <span className="inline-block px-3 py-1 rounded-full bg-amber-500/20 text-accent-yellow border border-amber-400/30 text-[10px] font-bold uppercase tracking-wider">
+                        100% Ghar Jaisi Fulka Roti
+                      </span>
+                      <h4 className="text-xl sm:text-2xl font-heading font-black text-white mt-1">
+                        RotiWala
+                      </h4>
+                      <p className="text-[11px] text-amber-100/80 font-medium leading-tight max-w-[200px] mx-auto mt-0.5">
+                        Fresh, soft and ghar-jaisi rotis delivered across Ahmedabad & Gandhinagar.
+                      </p>
+                    </div>
 
-                {/* Link to Instagram button */}
-                <div className="relative z-10 pt-5 mt-4 border-t border-white/15">
-                  <a
-                    href={rotiWala.instagramUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-navy-950 font-bold text-xs hover:bg-accent-yellow transition-colors shadow-sm"
-                  >
-                    <InstagramIcon className="w-4 h-4 text-[#E1306C]" />
-                    <span>Open @{rotiWala.instagramHandle} on Instagram</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </a>
+                    {/* Fake Video Reel Play Bar */}
+                    <div className="pt-1 flex items-center justify-center gap-2">
+                      <div className="w-8 h-8 rounded-full bg-white/25 hover:bg-white/40 flex items-center justify-center backdrop-blur-md cursor-pointer transition-transform hover:scale-110">
+                        <Play className="w-4 h-4 text-white fill-white ml-0.5" />
+                      </div>
+                      <div className="h-1 flex-1 bg-white/20 rounded-full overflow-hidden max-w-[120px]">
+                        <div className="h-full bg-accent-yellow w-2/3" />
+                      </div>
+                      <Volume2 className="w-3.5 h-3.5 text-white/70" />
+                    </div>
+                  </div>
+
+                  {/* Reel Engagement Rail */}
+                  <div className="absolute right-2.5 bottom-20 z-20 flex flex-col items-center gap-3 text-white/90">
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 h-8 rounded-full bg-black/40 flex items-center justify-center backdrop-blur-sm">
+                        <Heart className="w-4 h-4 text-[#FD1D1D] fill-[#FD1D1D]" />
+                      </div>
+                      <span className="text-[9px] font-bold mt-0.5">1.4K</span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 h-8 rounded-full bg-black/40 flex items-center justify-center backdrop-blur-sm">
+                        <MessageCircle className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="text-[9px] font-bold mt-0.5">86</span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 h-8 rounded-full bg-black/40 flex items-center justify-center backdrop-blur-sm">
+                        <Share2 className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="text-[9px] font-bold mt-0.5">Share</span>
+                    </div>
+                  </div>
+
+                  {/* Bottom Phone Action Bar */}
+                  <div className="relative z-20 p-3 bg-gradient-to-t from-black via-black/90 to-transparent space-y-2">
+                    <div className="text-[10px] text-white/90 font-medium leading-tight line-clamp-1 pr-10">
+                      🛵 FREE Home Delivery • Min Order: 20+ Rotis
+                    </div>
+                    <a
+                      href={rotiWala.instagramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-gradient-to-r from-[#25D366] to-[#1EBE5D] text-white font-bold text-xs hover:brightness-110 transition-all shadow-md"
+                    >
+                      <MessageCircle className="w-3.5 h-3.5 fill-current" />
+                      <span>Order on WhatsApp</span>
+                    </a>
+                  </div>
                 </div>
+              </div>
+
+              {/* Bio Pill below Phone */}
+              <div className="mt-4 text-center">
+                <a
+                  href={rotiWala.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs text-accent-yellow hover:underline font-mono"
+                >
+                  <span>@{rotiWala.instagramHandle}</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Main Case Study Breakdown */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-white">
+      {/* Main Case Study Sections */}
+      <section className="py-14 sm:py-20 lg:py-24 bg-white text-navy-950">
         <div className="site-container max-w-4xl xl:max-w-5xl space-y-12 sm:space-y-16">
           {/* Section 1: About the Brand */}
-          <div className="p-8 sm:p-10 rounded-3xl bg-surface-light border border-slate-200/90 shadow-card-soft space-y-4">
+          <div className="p-8 sm:p-10 rounded-3xl bg-slate-50 border border-slate-200/90 shadow-card-soft space-y-4">
             <div className="flex items-center gap-2">
-              <Badge variant="blue">Brand Overview</Badge>
+              <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-primary/10 text-primary font-mono">
+                Brand Overview
+              </span>
               <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider font-mono">
                 Section 01
               </span>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl font-heading font-bold text-navy-900">
+            <h2 className="text-2xl sm:text-4xl font-heading font-black text-navy-900">
               About the Brand
             </h2>
 
-            <p className="text-base sm:text-lg text-content-dark font-medium leading-relaxed">
+            <p className="text-base sm:text-lg text-slate-700 font-medium leading-relaxed">
               <strong>RotiWala</strong> provides fresh, soft and ghar-jaisi rotis for customers in Ahmedabad and Gandhinagar.
             </p>
 
-            <p className="text-sm sm:text-base text-content-muted leading-relaxed">
-              Catering to busy working professionals, university students, corporate offices, hotels, and households, RotiWala solves the daily friction of kitchen meal preparation by delivering steaming, freshly puffed, soft rotis directly to doorsteps with strict hygiene and homestyle taste.
+            <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+              Catering to busy working professionals, university students, corporate offices, hotels, and households, RotiWala solves the daily friction of kitchen meal preparation by delivering warm, freshly puffed, soft rotis directly to doorsteps with strict hygiene and homestyle taste.
             </p>
 
             {/* Target Client Categories */}
             <div className="pt-3 grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <div className="p-3 rounded-xl bg-white border border-slate-200 text-center">
+              <div className="p-3.5 rounded-2xl bg-white border border-slate-200 text-center shadow-xs">
+                <ChefHat className="w-5 h-5 text-amber-600 mx-auto mb-1" />
                 <span className="text-xs font-bold text-navy-900 block">Households & Families</span>
                 <span className="text-[11px] text-slate-500">Daily Meal Routine</span>
               </div>
-              <div className="p-3 rounded-xl bg-white border border-slate-200 text-center">
+              <div className="p-3.5 rounded-2xl bg-white border border-slate-200 text-center shadow-xs">
+                <Clock className="w-5 h-5 text-primary mx-auto mb-1" />
                 <span className="text-xs font-bold text-navy-900 block">Working Professionals</span>
                 <span className="text-[11px] text-slate-500">No Cooking Hassle</span>
               </div>
-              <div className="p-3 rounded-xl bg-white border border-slate-200 text-center">
+              <div className="p-3.5 rounded-2xl bg-white border border-slate-200 text-center shadow-xs">
+                <Utensils className="w-5 h-5 text-cyan-600 mx-auto mb-1" />
                 <span className="text-xs font-bold text-navy-900 block">Hotels & Restaurants</span>
                 <span className="text-[11px] text-slate-500">Bulk Fresh Supply</span>
               </div>
-              <div className="p-3 rounded-xl bg-white border border-slate-200 text-center">
+              <div className="p-3.5 rounded-2xl bg-white border border-slate-200 text-center shadow-xs">
+                <Flame className="w-5 h-5 text-orange-600 mx-auto mb-1" />
                 <span className="text-xs font-bold text-navy-900 block">Corporate & Events</span>
                 <span className="text-[11px] text-slate-500">Office Festive Lunches</span>
               </div>
@@ -289,14 +352,14 @@ export default function RotiWalaCaseStudyPage() {
                 <span className="text-xs font-bold uppercase tracking-wider text-primary font-mono block">
                   Problem Statement
                 </span>
-                <h3 className="text-2xl font-bold font-heading text-navy-900">
+                <h3 className="text-2xl sm:text-3xl font-bold font-heading text-navy-900">
                   The Challenge
                 </h3>
               </div>
             </div>
 
-            <div className="p-6 sm:p-8 rounded-2xl bg-amber-50/70 border border-amber-200/80 space-y-4">
-              <p className="text-base text-amber-950 font-semibold leading-relaxed">
+            <div className="p-6 sm:p-8 rounded-3xl bg-amber-50/70 border border-amber-200/80 space-y-4">
+              <p className="text-base sm:text-lg text-amber-950 font-semibold leading-relaxed">
                 The brand needed an attractive digital presence to communicate its product quality, build customer awareness and promote its roti delivery services.
               </p>
 
@@ -304,7 +367,7 @@ export default function RotiWalaCaseStudyPage() {
                 {rotiWala.challenges.map((challenge, idx) => (
                   <div
                     key={idx}
-                    className="p-4 rounded-xl bg-white border border-amber-200/70 shadow-xs space-y-1.5"
+                    className="p-4 rounded-2xl bg-white border border-amber-200/70 shadow-xs space-y-1.5"
                   >
                     <span className="text-xs font-bold text-amber-800 font-mono">
                       Challenge 0{idx + 1}
@@ -328,7 +391,7 @@ export default function RotiWalaCaseStudyPage() {
                 <span className="text-xs font-bold uppercase tracking-wider text-primary font-mono block">
                   Strategic Execution
                 </span>
-                <h3 className="text-2xl font-bold font-heading text-navy-900">
+                <h3 className="text-2xl sm:text-3xl font-bold font-heading text-navy-900">
                   Our Approach
                 </h3>
               </div>
@@ -345,7 +408,7 @@ export default function RotiWalaCaseStudyPage() {
                 return (
                   <div
                     key={idx}
-                    className="p-5 sm:p-6 rounded-2xl bg-surface-light border border-slate-200/90 flex items-start gap-4 hover:border-primary/40 transition-colors shadow-xs"
+                    className="p-5 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200/90 flex items-start gap-4 hover:border-primary/40 transition-colors shadow-xs"
                   >
                     <div className="w-9 h-9 rounded-xl bg-navy-900 text-accent-yellow font-bold text-sm flex items-center justify-center flex-shrink-0 mt-0.5">
                       <ItemIcon className="w-4 h-4 text-accent-yellow" />
@@ -375,14 +438,14 @@ export default function RotiWalaCaseStudyPage() {
                   <span className="text-xs font-bold uppercase tracking-wider text-primary font-mono block">
                     Content Formats
                   </span>
-                  <h3 className="text-2xl font-bold font-heading text-navy-900">
+                  <h3 className="text-2xl sm:text-3xl font-bold font-heading text-navy-900">
                     Creative Campaigns
                   </h3>
                 </div>
               </div>
-              <Badge variant="yellow" size="sm">
+              <span className="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800 font-mono">
                 5 Campaign Tracks
-              </Badge>
+              </span>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -438,30 +501,30 @@ export default function RotiWalaCaseStudyPage() {
           </div>
 
           {/* Section 5: Our Objective & DigiBuddy Vision */}
-          <div className="p-8 sm:p-10 rounded-3xl bg-navy-950 text-white space-y-6 relative overflow-hidden shadow-2xl">
+          <div className="p-8 sm:p-12 rounded-3xl bg-slate-950 text-white space-y-6 relative overflow-hidden shadow-2xl border border-slate-800">
             <div className="absolute top-0 right-0 w-80 h-80 bg-primary/20 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent-yellow/10 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-500/10 rounded-full blur-2xl pointer-events-none" />
 
             <div className="relative z-10 space-y-4">
               <div className="flex items-center gap-2">
-                <Badge variant="yellow" size="sm">
+                <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-500/20 text-accent-yellow font-mono">
                   Our Objective
-                </Badge>
+                </span>
                 <span className="text-xs font-mono text-cyan-300">
                   Targeted Mission
                 </span>
               </div>
 
-              <h3 className="text-2xl sm:text-3xl font-heading font-black tracking-tight text-white leading-snug">
+              <h3 className="text-2xl sm:text-4xl font-heading font-black tracking-tight text-white leading-snug">
                 To build brand awareness, create engaging social media communication and present RotiWala as a recognizable local food brand.
               </h3>
 
-              <div className="pt-4 border-t border-white/15 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="pt-6 border-t border-white/15 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="space-y-1">
                   <span className="text-xs uppercase font-mono tracking-widest text-accent-yellow font-bold">
                     Agency Promise
                   </span>
-                  <p className="text-lg sm:text-xl font-heading font-extrabold text-white">
+                  <p className="text-lg sm:text-2xl font-heading font-black text-white">
                     DigiBuddy – Creative Ideas. Digital Growth.
                   </p>
                 </div>
@@ -470,9 +533,9 @@ export default function RotiWalaCaseStudyPage() {
                   href={rotiWala.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-navy-950 font-bold text-xs sm:text-sm hover:bg-accent-yellow transition-colors shadow-md flex-shrink-0"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#E1306C] via-[#FD1D1D] to-[#F77737] text-white font-bold text-xs sm:text-sm hover:scale-105 transition-all shadow-md flex-shrink-0"
                 >
-                  <InstagramIcon className="w-4 h-4 text-[#E1306C]" />
+                  <InstagramIcon className="w-4 h-4 fill-current" />
                   <span>View RotiWala Profile</span>
                   <ArrowRight className="w-4 h-4" />
                 </a>
@@ -480,7 +543,7 @@ export default function RotiWalaCaseStudyPage() {
             </div>
           </div>
 
-          {/* Verified Integrity & Scope Notice (Strict anti-fabrication standards) */}
+          {/* Verified Scope Notice */}
           <div className="p-6 sm:p-8 rounded-3xl bg-amber-50/90 border border-amber-200/80 space-y-3">
             <div className="flex items-center gap-2.5">
               <ShieldCheck className="w-5 h-5 text-amber-700 flex-shrink-0" />
@@ -495,7 +558,7 @@ export default function RotiWalaCaseStudyPage() {
           </div>
 
           {/* Bottom Call to Action for Prospective Clients */}
-          <div className="p-8 sm:p-12 rounded-3xl bg-surface-light border border-slate-200 text-center space-y-6 shadow-card-soft">
+          <div className="p-8 sm:p-12 rounded-3xl bg-slate-50 border border-slate-200 text-center space-y-6 shadow-card-soft">
             <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mx-auto">
               <Sparkles className="w-7 h-7" />
             </div>

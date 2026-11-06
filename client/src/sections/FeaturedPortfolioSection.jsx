@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
   ArrowRight,
-  Utensils,
   Video,
   Sparkles,
   CheckCircle2,
@@ -9,8 +9,16 @@ import {
   Clock,
   Palette,
   MessageCircle,
-  FileText,
   ExternalLink,
+  Flame,
+  Play,
+  Heart,
+  Share2,
+  Bookmark,
+  Volume2,
+  MapPin,
+  Truck,
+  TrendingUp,
 } from 'lucide-react';
 import { InstagramIcon } from '../components/common/SocialIcons';
 import SectionHeader from '../components/common/SectionHeader';
@@ -62,207 +70,304 @@ export default function FeaturedPortfolioSection() {
   const rotiWala = featuredProject;
 
   return (
-    <section id="portfolio" className="py-12 sm:py-16 lg:py-20 bg-white border-y border-slate-100">
-      <div className="site-container">
-        <SectionHeader
-          badge="Featured Portfolio"
-          badgeVariant="yellow"
-          title="Real Client Showcase:"
-          titleHighlight="RotiWala"
-          description="A behind-the-scenes look at how DigiBuddy4U built the brand identity, vertical food reels, menu designs, and WhatsApp ordering flow for an authentic homestyle meals brand."
-          align="center"
-        />
+    <section id="portfolio" className="py-14 sm:py-20 lg:py-24 bg-gradient-to-b from-slate-900 via-navy-950 to-slate-950 text-white relative overflow-hidden border-y border-slate-800">
+      {/* Ambient background glows */}
+      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-0 w-96 h-96 bg-primary/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-7xl h-full bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.06),transparent_70%)] pointer-events-none" />
 
-        {/* Main Showcase Banner */}
-        <div className="rounded-3xl bg-surface-light border border-slate-200/90 overflow-hidden shadow-card-soft">
-          <div className="grid grid-cols-1 lg:grid-cols-12">
-            {/* Visual Media Showcase (5 cols on lg) */}
-            <div className="lg:col-span-5 bg-gradient-to-br from-amber-700 via-orange-800 to-amber-950 p-6 sm:p-8 xl:p-10 text-white flex flex-col justify-between relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-72 h-72 bg-white/10 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-500/10 rounded-full blur-2xl pointer-events-none" />
+      <div className="site-container relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14 space-y-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/25 text-accent-yellow text-xs font-bold uppercase tracking-widest">
+            <Flame className="w-3.5 h-3.5 text-accent-yellow animate-pulse" />
+            <span>Featured Client Spotlight</span>
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-heading font-black tracking-tight text-white">
+            Real Work. Real Brand. <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-amber-200 bg-clip-text text-transparent">RotiWala.</span>
+          </h2>
+          <p className="text-sm sm:text-base text-slate-400 leading-relaxed max-w-2xl mx-auto">
+            How DigiBuddy4U created the visual brand identity, vertical AI storytelling reels, and high-converting WhatsApp ordering funnels for Ahmedabad & Gandhinagar's favorite homestyle food service.
+          </p>
+        </div>
 
-              <div className="relative z-10 flex items-center justify-between">
-                <Badge variant="yellow" size="sm">
-                  Active Client
-                </Badge>
-                <span className="text-xs font-semibold bg-black/30 px-3 py-1 rounded-full backdrop-blur-sm border border-white/10 text-amber-200">
-                  Food & Hospitality
+        {/* Master Showcase Card */}
+        <div className="rounded-[32px] bg-slate-900/90 border border-slate-700/70 overflow-hidden shadow-2xl backdrop-blur-xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
+            {/* Left: Vertical Smartphone / Reel Mockup (5 cols on lg) */}
+            <div className="lg:col-span-5 p-6 sm:p-8 lg:p-10 flex flex-col items-center justify-center relative bg-gradient-to-br from-slate-950 via-[#140f0a] to-slate-900 border-b lg:border-b-0 lg:border-r border-slate-800">
+              {/* Backlight halo behind phone */}
+              <div className="absolute w-64 h-80 bg-amber-500/20 rounded-full blur-3xl pointer-events-none" />
+
+              {/* Status Header above mockup */}
+              <div className="w-full max-w-[310px] flex items-center justify-between mb-4 text-xs">
+                <span className="flex items-center gap-1.5 font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-3 py-1 rounded-full">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  Active Instagram Reel
+                </span>
+                <span className="font-mono text-[11px] text-amber-300/80 bg-black/40 px-2.5 py-1 rounded-full border border-white/10">
+                  9:16 Vertical Format
                 </span>
               </div>
 
-              {/* RotiWala Brand Centerpiece */}
-              <div className="relative z-10 my-6 sm:my-8 text-center space-y-3.5">
-                <div className="relative inline-block mx-auto group">
-                  <img
-                    src="/images/portfolio/rotiwala-logo.png"
-                    alt="RotiWala Official Brand Logo"
-                    className="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-contain mx-auto shadow-2xl ring-4 ring-white/30 p-1 bg-white/10 backdrop-blur-sm transition-transform duration-300 group-hover:scale-105"
-                  />
-                  <div className="absolute -bottom-1 -right-1 bg-emerald-500 rounded-full p-1 ring-2 ring-white">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+              {/* Phone Frame Device */}
+              <div className="relative w-full max-w-[300px] sm:max-w-[320px] rounded-[38px] bg-[#111827] p-3 shadow-2xl ring-1 ring-white/20 shadow-amber-500/10">
+                {/* Screen Content */}
+                <div className="relative rounded-[30px] overflow-hidden bg-gradient-to-b from-[#2a1306] via-[#1a0a02] to-black aspect-[9/18] flex flex-col justify-between text-white border border-white/10">
+                  {/* Dynamic Island Notch */}
+                  <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-20 h-4 bg-black rounded-full z-30 flex items-center justify-center space-x-1.5">
+                    <div className="w-2 h-2 rounded-full bg-slate-800" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  </div>
+
+                  {/* Top Header inside Phone */}
+                  <div className="relative z-20 pt-7 px-3.5 pb-2 flex items-center justify-between bg-gradient-to-b from-black/80 to-transparent">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-full p-0.5 bg-gradient-to-tr from-amber-400 to-[#E1306C]">
+                        <img
+                          src="/images/portfolio/rotiwala-logo.png"
+                          alt="RotiWala"
+                          className="w-full h-full rounded-full object-contain bg-white"
+                        />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-1 text-[11px] font-bold leading-tight">
+                          <span>rotiwaladelivery</span>
+                          <CheckCircle2 className="w-3 h-3 text-cyan-400 fill-cyan-400/20" />
+                        </div>
+                        <span className="text-[9px] text-amber-200/70 leading-none">Sponsored • Ahmedabad</span>
+                      </div>
+                    </div>
+                    <a
+                      href="https://www.instagram.com/rotiwaladelivery/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-2.5 py-1 rounded-full bg-white/20 hover:bg-white/30 text-[10px] font-bold text-white transition-colors backdrop-blur-sm"
+                    >
+                      Follow
+                    </a>
+                  </div>
+
+                  {/* Center Visual: High-Impact Circular Logo & Warm Food Presentation */}
+                  <div className="relative z-10 px-4 my-auto text-center space-y-3">
+                    <div className="relative inline-block mx-auto">
+                      {/* Pulsing golden aura */}
+                      <div className="absolute inset-0 rounded-full bg-amber-500/30 blur-xl animate-pulse" />
+                      <img
+                        src="/images/portfolio/rotiwala-logo.png"
+                        alt="RotiWala Official Logo"
+                        className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full object-contain mx-auto shadow-2xl ring-4 ring-amber-400/40 p-1.5 bg-white/10 backdrop-blur-md"
+                      />
+                      <div className="absolute bottom-1 right-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full p-1.5 shadow-lg border-2 border-black">
+                        <Flame className="w-3.5 h-3.5 text-white" />
+                      </div>
+                    </div>
+
+                    <div>
+                      <span className="inline-block px-3 py-1 rounded-full bg-amber-500/20 text-accent-yellow border border-amber-400/30 text-[10px] font-bold uppercase tracking-wider">
+                        100% Ghar Jaisi Fulka Roti
+                      </span>
+                      <h4 className="text-xl sm:text-2xl font-heading font-black text-white mt-1">
+                        RotiWala
+                      </h4>
+                      <p className="text-[11px] text-amber-100/80 font-medium leading-tight max-w-[200px] mx-auto mt-0.5">
+                        Fresh, soft and ghar-jaisi rotis delivered across Ahmedabad & Gandhinagar.
+                      </p>
+                    </div>
+
+                    {/* Fake Video Reel Play Bar */}
+                    <div className="pt-1 flex items-center justify-center gap-2">
+                      <div className="w-8 h-8 rounded-full bg-white/25 hover:bg-white/40 flex items-center justify-center backdrop-blur-md cursor-pointer transition-transform hover:scale-110">
+                        <Play className="w-4 h-4 text-white fill-white ml-0.5" />
+                      </div>
+                      <div className="h-1 flex-1 bg-white/20 rounded-full overflow-hidden max-w-[120px]">
+                        <div className="h-full bg-accent-yellow w-2/3" />
+                      </div>
+                      <Volume2 className="w-3.5 h-3.5 text-white/70" />
+                    </div>
+                  </div>
+
+                  {/* Reel Engagement Rail (Right side of screen) */}
+                  <div className="absolute right-2.5 bottom-20 z-20 flex flex-col items-center gap-3 text-white/90">
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 h-8 rounded-full bg-black/40 flex items-center justify-center backdrop-blur-sm">
+                        <Heart className="w-4 h-4 text-[#FD1D1D] fill-[#FD1D1D]" />
+                      </div>
+                      <span className="text-[9px] font-bold mt-0.5">1.4K</span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 h-8 rounded-full bg-black/40 flex items-center justify-center backdrop-blur-sm">
+                        <MessageCircle className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="text-[9px] font-bold mt-0.5">86</span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 h-8 rounded-full bg-black/40 flex items-center justify-center backdrop-blur-sm">
+                        <Share2 className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="text-[9px] font-bold mt-0.5">Share</span>
+                    </div>
+                  </div>
+
+                  {/* Bottom Phone Action Bar: WhatsApp Click to Order */}
+                  <div className="relative z-20 p-3 bg-gradient-to-t from-black via-black/90 to-transparent space-y-2">
+                    <div className="text-[10px] text-white/90 font-medium leading-tight line-clamp-1 pr-10">
+                      🛵 FREE Home Delivery • Min Order: 20+ Rotis
+                    </div>
+                    <a
+                      href="https://www.instagram.com/rotiwaladelivery/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-gradient-to-r from-[#25D366] to-[#1EBE5D] text-white font-bold text-xs hover:brightness-110 transition-all shadow-md"
+                    >
+                      <MessageCircle className="w-3.5 h-3.5 fill-current" />
+                      <span>Order on WhatsApp</span>
+                    </a>
                   </div>
                 </div>
-                <div>
-                  <h3 className="text-3xl sm:text-4xl font-heading font-black tracking-tight text-white">
-                    RotiWala
-                  </h3>
-                  <a
-                    href="https://www.instagram.com/rotiwaladelivery/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-mono text-accent-yellow hover:underline mt-1 bg-black/25 px-3 py-1 rounded-full border border-white/15"
-                  >
-                    <InstagramIcon className="w-3.5 h-3.5 text-accent-yellow" />
-                    <span>@rotiwaladelivery</span>
-                    <ExternalLink className="w-3 h-3 opacity-80" />
-                  </a>
-                </div>
-                <p className="text-sm text-amber-100/90 font-medium max-w-xs mx-auto leading-relaxed">
-                  Fresh, soft and ghar-jaisi rotis for customers in Ahmedabad and Gandhinagar.
-                </p>
-
-                {/* Scope Pillars Quick Chips */}
-                <div className="pt-2 flex flex-wrap items-center justify-center gap-1.5 max-w-xs mx-auto text-[11px]">
-                  <span className="px-2.5 py-1 rounded-full bg-white/10 border border-white/15 text-white">
-                    🎬 Kitchen Reels
-                  </span>
-                  <span className="px-2.5 py-1 rounded-full bg-white/10 border border-white/15 text-white">
-                    🎨 Visual Brand Kit
-                  </span>
-                  <span className="px-2.5 py-1 rounded-full bg-white/10 border border-white/15 text-white">
-                    📋 Menu Creatives
-                  </span>
-                  <span className="px-2.5 py-1 rounded-full bg-white/10 border border-white/15 text-white">
-                    💬 WhatsApp Orders
-                  </span>
-                </div>
               </div>
 
-              {/* Verified Status Footnote */}
-              <div className="relative z-10 pt-4 border-t border-white/15 flex items-center justify-between text-xs text-amber-100">
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  Ongoing Campaign Engagement
-                </span>
-                <span className="font-semibold text-accent-yellow flex items-center gap-1">
-                  <ShieldCheck className="w-3.5 h-3.5 text-accent-yellow" />
-                  Verified Scope
-                </span>
+              {/* Verified Scope Note below mockup */}
+              <div className="mt-4 flex items-center gap-1.5 text-xs text-slate-400">
+                <ShieldCheck className="w-4 h-4 text-accent-yellow" />
+                <span>Verified Client Partnership • DigiBuddy4U</span>
               </div>
             </div>
 
-            {/* Content & Scope Breakdown (7 cols on lg) */}
-            <div className="lg:col-span-7 p-6 sm:p-8 xl:p-10 space-y-6 flex flex-col justify-between bg-white">
+            {/* Right: Campaign Strategy, Deliverables & Actions (7 cols on lg) */}
+            <div className="lg:col-span-7 p-6 sm:p-8 lg:p-10 space-y-6 flex flex-col justify-between">
               <div>
-                <div className="flex flex-wrap items-center gap-2 mb-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-primary font-mono">
-                    Project Overview & Strategic Execution
+                {/* Category & Status Row */}
+                <div className="flex flex-wrap items-center gap-2 mb-3">
+                  <span className="text-xs font-bold uppercase tracking-wider text-accent-yellow font-mono bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-md">
+                    Social Media & AI Video Overhaul
+                  </span>
+                  <span className="text-xs text-slate-400 flex items-center gap-1 font-mono">
+                    <MapPin className="w-3.5 h-3.5 text-primary" />
+                    Sarkhej, Ahmedabad & Gandhinagar
                   </span>
                 </div>
 
-                <h4 className="text-2xl sm:text-3xl font-bold font-heading text-navy-950 leading-tight">
-                  {rotiWala.title}
-                </h4>
+                <h3 className="text-2xl sm:text-4xl font-heading font-black text-white leading-tight">
+                  RotiWala – Building a Strong Digital Brand Presence
+                </h3>
 
-                <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
-                  {rotiWala.overview}
+                <p className="mt-3 text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+                  RotiWala provides fresh, soft and ghar-jaisi rotis for customers across Ahmedabad and Gandhinagar. DigiBuddy4U partnered with RotiWala to communicate product freshness, build customer awareness, and promote doorstep delivery services.
                 </p>
 
-                {/* 4 Core Deliverables Grid */}
-                <div className="mt-6 pt-5 border-t border-slate-100">
-                  <h5 className="text-xs font-bold uppercase tracking-wider text-navy-950 mb-3.5 flex items-center justify-between">
-                    <span>Key Project Deliverables Produced</span>
-                    <span className="text-[11px] font-mono text-primary font-normal">Active Deliverables</span>
-                  </h5>
+                {/* 4 Strategic Pillars Produced */}
+                <div className="mt-6 pt-5 border-t border-slate-800">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3.5 flex items-center justify-between">
+                    <span>What DigiBuddy4U Executed</span>
+                    <span className="text-[11px] font-mono text-cyan-400 font-normal">Active Deliverables</span>
+                  </h4>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
-                    {/* Deliverable 1: Brand & Campaign Creatives */}
-                    <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1.5 hover:border-primary/40 transition-colors">
-                      <div className="flex items-center gap-2">
-                        <Palette className="w-4 h-4 text-amber-600" />
-                        <span className="text-xs font-bold text-navy-950">Brand & Campaign Creatives</span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {/* Card 1 */}
+                    <div className="p-3.5 rounded-2xl bg-slate-800/60 border border-slate-700/80 space-y-1 hover:border-amber-400/40 transition-colors">
+                      <div className="flex items-center gap-2 text-accent-yellow">
+                        <Palette className="w-4 h-4" />
+                        <span className="text-xs font-bold text-white">Creative Brand Designs</span>
                       </div>
-                      <p className="text-xs text-slate-500 leading-relaxed">
-                        Warm culinary color palette, hygiene-focused social templates, and typography crafted for brand consistency.
+                      <p className="text-xs text-slate-400 leading-relaxed">
+                        Warm culinary color palette, hygiene-focused social templates, and mobile-first menu cards.
                       </p>
                     </div>
 
-                    {/* Deliverable 2: Food Reels & Short-Form Videos */}
-                    <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1.5 hover:border-primary/40 transition-colors">
-                      <div className="flex items-center gap-2">
-                        <Video className="w-4 h-4 text-primary" />
-                        <span className="text-xs font-bold text-navy-950">Food Reels & Short-Form Videos</span>
+                    {/* Card 2 */}
+                    <div className="p-3.5 rounded-2xl bg-slate-800/60 border border-slate-700/80 space-y-1 hover:border-cyan-400/40 transition-colors">
+                      <div className="flex items-center gap-2 text-cyan-400">
+                        <Video className="w-4 h-4" />
+                        <span className="text-xs font-bold text-white">AI Video Reels & Stories</span>
                       </div>
-                      <p className="text-xs text-slate-500 leading-relaxed">
-                        9:16 behind-the-scenes vertical reels showing fresh dough preparation, steaming rotis, and kinetic subtitles.
+                      <p className="text-xs text-slate-400 leading-relaxed">
+                        9:16 vertical behind-the-scenes reels showing fresh tawa preparation, steam, and relatable stories.
                       </p>
                     </div>
 
-                    {/* Deliverable 3: Menu Designs & Daily Specials */}
-                    <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1.5 hover:border-primary/40 transition-colors">
-                      <div className="flex items-center gap-2">
-                        <FileText className="w-4 h-4 text-cyan-600" />
-                        <span className="text-xs font-bold text-navy-950">Menu Designs & Daily Specials</span>
+                    {/* Card 3 */}
+                    <div className="p-3.5 rounded-2xl bg-slate-800/60 border border-slate-700/80 space-y-1 hover:border-orange-400/40 transition-colors">
+                      <div className="flex items-center gap-2 text-orange-400">
+                        <Flame className="w-4 h-4" />
+                        <span className="text-xs font-bold text-white">Festive & Special Campaigns</span>
                       </div>
-                      <p className="text-xs text-slate-500 leading-relaxed">
-                        Mobile-first daily specials cards, rotating subji announcements, and combo menus formatted for social feeds.
+                      <p className="text-xs text-slate-400 leading-relaxed">
+                        Targeted campaign sprints for Diwali, hotel banquet dinners, office lunches, and bhandara drives.
                       </p>
                     </div>
 
-                    {/* Deliverable 4: WhatsApp Ordering & Enquiry Flow */}
-                    <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1.5 hover:border-primary/40 transition-colors">
-                      <div className="flex items-center gap-2">
-                        <MessageCircle className="w-4 h-4 text-[#25D366]" />
-                        <span className="text-xs font-bold text-navy-950">WhatsApp Ordering & Enquiry Flow</span>
+                    {/* Card 4 */}
+                    <div className="p-3.5 rounded-2xl bg-slate-800/60 border border-slate-700/80 space-y-1 hover:border-emerald-400/40 transition-colors">
+                      <div className="flex items-center gap-2 text-[#25D366]">
+                        <MessageCircle className="w-4 h-4" />
+                        <span className="text-xs font-bold text-white">WhatsApp Direct Ordering</span>
                       </div>
-                      <p className="text-xs text-slate-500 leading-relaxed">
-                        One-click WhatsApp order prompts embedded across social posts and stories, routing customer orders directly.
+                      <p className="text-xs text-slate-400 leading-relaxed">
+                        One-click WhatsApp order prompts routing incoming customer queries directly to kitchen delivery.
                       </p>
                     </div>
                   </div>
                 </div>
 
-                {/* Transparency Notice Regarding Performance Metrics */}
-                <div className="mt-5 p-4 rounded-2xl bg-amber-50/90 border border-amber-200/80 flex items-start gap-3">
-                  <ShieldCheck className="w-5 h-5 text-amber-700 flex-shrink-0 mt-0.5" />
-                  <div className="text-xs text-amber-950 space-y-1">
-                    <strong className="block text-amber-950 font-bold">
-                      Creative Execution & Verified Engagement
-                    </strong>
-                    <p className="text-amber-900 leading-relaxed">
-                      {rotiWala.metricsNotice || 'Authentic campaign metrics and verified reach analytics will be published following official campaign milestone sign-off. DigiBuddy4U strictly avoids fabricated data.'}
-                    </p>
+                {/* Creative Campaigns Chips */}
+                <div className="mt-5 p-4 rounded-2xl bg-slate-800/40 border border-slate-700/60 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 font-mono">
+                      Creative Campaigns Delivered
+                    </span>
+                    <span className="text-[10px] text-accent-yellow font-bold">5 Tracks</span>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5 text-[11px]">
+                    <span className="px-2.5 py-1 rounded-full bg-slate-700/60 border border-slate-600/60 text-slate-200">
+                      ✨ Why Choose RotiWala?
+                    </span>
+                    <span className="px-2.5 py-1 rounded-full bg-slate-700/60 border border-slate-600/60 text-slate-200">
+                      🪔 Office Diwali Celebration
+                    </span>
+                    <span className="px-2.5 py-1 rounded-full bg-slate-700/60 border border-slate-600/60 text-slate-200">
+                      🏨 Hotel Dinner Solution
+                    </span>
+                    <span className="px-2.5 py-1 rounded-full bg-slate-700/60 border border-slate-600/60 text-slate-200">
+                      🙏 Bhandara Special
+                    </span>
+                    <span className="px-2.5 py-1 rounded-full bg-slate-700/60 border border-slate-600/60 text-slate-200">
+                      🏡 Family Storytelling
+                    </span>
                   </div>
                 </div>
               </div>
 
-              {/* Bottom Actions */}
-              <div className="pt-6 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+              {/* Bottom Actions Row */}
+              <div className="pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3">
                 <Button
                   to="/case-studies/rotiwala"
-                  variant="primary"
+                  variant="yellow"
                   size="md"
                   icon={ArrowRight}
+                  className="font-bold shadow-lg shadow-amber-500/20"
                 >
-                  View Project Case Study
+                  View Complete Case Study
                 </Button>
+
                 <div className="flex flex-wrap items-center gap-2.5">
                   <a
                     href="https://www.instagram.com/rotiwaladelivery/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#E1306C] via-[#FD1D1D] to-[#F77737] text-white font-bold text-xs hover:opacity-95 transition-all shadow-sm"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#E1306C] via-[#FD1D1D] to-[#F77737] text-white font-bold text-xs hover:opacity-95 transition-all shadow-md hover:scale-105"
                   >
                     <InstagramIcon className="w-4 h-4 fill-current" />
-                    <span>Visit Instagram</span>
+                    <span>Visit Instagram (@rotiwaladelivery)</span>
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
+
                   <Button
                     to="/portfolio"
-                    variant="secondary"
+                    variant="outline"
                     size="md"
+                    className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white text-xs"
                   >
-                    Explore Our Work
+                    All Client Work
                   </Button>
                 </div>
               </div>
@@ -270,18 +375,18 @@ export default function FeaturedPortfolioSection() {
           </div>
         </div>
 
-        {/* Future Expansion Slots Showcase (demonstrating system scalability) */}
-        <div className="mt-12 pt-8 border-t border-slate-200/80">
-          <div className="flex items-center justify-between mb-6">
+        {/* Future Expansion Slots Showcase */}
+        <div className="mt-12 pt-8 border-t border-slate-800">
+          <div className="flex items-center justify-between mb-5">
             <div>
-              <h4 className="text-base font-bold font-heading text-navy-900">
-                Portfolio Pipeline
+              <h4 className="text-sm font-bold font-heading text-white">
+                Portfolio Pipeline & Upcoming Client Releases
               </h4>
-              <p className="text-xs text-content-muted">
-                Our portfolio architecture is built to showcase expanding client partnerships.
+              <p className="text-xs text-slate-400">
+                Our portfolio architecture is engineered to showcase expanding enterprise & local client partnerships.
               </p>
             </div>
-            <Badge variant="slate" size="sm">
+            <Badge variant="blue" size="sm">
               Scalable System
             </Badge>
           </div>
@@ -290,18 +395,18 @@ export default function FeaturedPortfolioSection() {
             {UPCOMING_PORTFOLIO_PLACEHOLDERS.map((item) => (
               <div
                 key={item.id}
-                className="p-5 rounded-2xl border border-dashed border-slate-300 bg-surface-light/50 flex items-start justify-between gap-4"
+                className="p-4 rounded-2xl border border-dashed border-slate-800 bg-slate-900/40 flex items-start justify-between gap-4"
               >
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-navy-900">{item.title}</span>
-                    <span className="text-[10px] uppercase font-semibold text-content-muted bg-slate-200 px-2 py-0.5 rounded">
+                    <span className="text-xs font-bold text-white">{item.title}</span>
+                    <span className="text-[10px] uppercase font-semibold text-slate-400 bg-slate-800 px-2 py-0.5 rounded">
                       {item.category}
                     </span>
                   </div>
-                  <p className="text-xs text-content-muted">{item.description}</p>
+                  <p className="text-xs text-slate-400">{item.description}</p>
                 </div>
-                <span className="flex items-center gap-1 text-[11px] font-medium text-amber-600 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-full whitespace-nowrap">
+                <span className="flex items-center gap-1 text-[11px] font-medium text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-full whitespace-nowrap">
                   <Clock className="w-3 h-3" />
                   {item.status}
                 </span>
