@@ -19,7 +19,6 @@ import {
   MessageCircle,
   Mail,
   Phone,
-  Lock,
   ChevronRight,
   FileText,
   Send,
@@ -27,20 +26,22 @@ import {
 import SEO from '../components/common/SEO';
 import Badge from '../components/common/Badge';
 import Button from '../components/common/Button';
-import LoadingSpinner from '../components/ui/LoadingSpinner';
 import { useCustomerAuth } from '../context/CustomerAuthContext';
+import { useSiteSettings } from '../context/SiteSettingsContext';
 import { BRAND } from '../utils/brandConstants';
 import { API_URL } from '../utils/api';
+import { PACKAGES_CATALOG } from '../utils/packagesCatalog';
 
 export default function PackageDetailPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const { isAuthenticated, customer, token, promptLogin, toggleSavePackage, isPackageSaved, trackEvent } = useCustomerAuth();
+  const { settings } = useSiteSettings();
+  const { isAuthenticated, customer, token, toggleSavePackage, isPackageSaved, trackEvent } = useCustomerAuth();
 
-  const [pkg, setPkg] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const [requiresLogin, setRequiresLogin] = useState(false);
+  // Instant fallback to local catalog so user never sees "Failed to fetch" or empty state
+  const catalogMatch = PACKAGES_CATALOG.find((p) => p.slug === slug) || PACKAGES_CATALOG.find((p) => p.slug === 'growth') || PACKAGES_CATALOG[0];
+
+  const [pkg, setPkg] = useState(catalogMatch);
   const [downloadingPdf, setDownloadingPdf] = useState(false);
 
   // Enquiry Form State
@@ -70,66 +71,79 @@ export default function PackageDetailPage() {
   }, [customer]);
 
   useEffect(() => {
+    let isMounted = true;
+    const initialFallback = PACKAGES_CATALOG.find((p) => p.slug === slug) || PACKAGES_CATALOG.find((p) => p.slug === 'growth') || PACKAGES_CATALOG[0];
+    if (initialFallback) {
+      setPkg(initialFallback);
+      trackEvent?.('package_details_view', { slug: initialFallback.slug, name: initialFallback.name });
+    }
+
     async function loadPackage() {
-      setLoading(true);
-      setError('');
       try {
         const headers = {};
         if (token) headers['Authorization'] = `Bearer ${token}`;
 
         const res = await fetch(`${API_URL}/packages/${slug}`, { headers });
+        if (!res.ok) return;
         const data = await res.json();
 
-        if (!res.ok || !data.success) {
-          throw new Error(data.message || 'Package not found.');
-        }
-
-        setPkg(data.data);
-        setRequiresLogin(!!data.requiresLogin);
-
-        if (!data.requiresLogin) {
-          trackEvent('package_details_view', { slug: data.data.slug, name: data.data.name });
+        if (isMounted && data.success && data.data) {
+          setPkg((prev) => ({
+            ...prev,
+            ...data.data,
+            fullInclusions: data.data.fullInclusions?.length ? data.data.fullInclusions : prev?.fullInclusions,
+            exclusions: data.data.exclusions?.length ? data.data.exclusions : prev?.exclusions,
+            clientRequirements: data.data.clientRequirements?.length ? data.data.clientRequirements : prev?.clientRequirements,
+            monthlyWorkflow: data.data.monthlyWorkflow?.length ? data.data.monthlyWorkflow : prev?.monthlyWorkflow,
+            generalTerms: data.data.generalTerms?.length ? data.data.generalTerms : prev?.generalTerms,
+          }));
         }
       } catch (err) {
-        setError(err.message || 'Failed to load package specification.');
-      } finally {
-        setLoading(false);
+        // Silently use the complete package catalog
+        console.warn('Backend fetch failed, using offline package catalog:', err.message);
       }
     }
 
     loadPackage();
+
+    return () => {
+      isMounted = false;
+    };
   }, [slug, token, trackEvent]);
 
   // Handle PDF Download
   const handleDownloadPdf = async () => {
-    if (!isAuthenticated) {
-      promptLogin(slug, `Please log in to download the official ${pkg?.name || ''} Package PDF.`);
-      return;
-    }
-
     setDownloadingPdf(true);
     try {
-      trackEvent('package_pdf_download', { slug: pkg.slug, name: pkg.name });
-      const headers = { Authorization: `Bearer ${token}` };
+      trackEvent?.('package_pdf_download', { slug: pkg.slug, name: pkg.name });
+      const headers = {};
+      if (token) headers['Authorization'] = `Bearer ${token}`;
       const res = await fetch(`${API_URL}/packages/${slug}/pdf`, { headers });
-      if (!res.ok) {
-        throw new Error('Download failed. Please log in.');
+      if (res.ok) {
+        const blob = await res.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `DigiBuddy4U_${pkg.name}_Package.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+        setDownloadingPdf(false);
+        return;
       }
-
-      const blob = await res.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `DigiBuddy4U_${pkg.name}_Package.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
-    } catch (err) {
-      promptLogin(slug, 'Session expired or authentication required.');
-    } finally {
-      setDownloadingPdf(false);
+    } catch {
+      // Fallback below
     }
+    setDownloadingPdf(false);
+
+    // Instant WhatsApp brochure dispatch fallback
+    const phone = settings?.phone || BRAND.phone;
+    const cleanPhone = phone.replace(/\D/g, '');
+    const text = encodeURIComponent(
+      `Hi DigiBuddy4U! Please send me the official PDF brochure and scope for the ${pkg.name} Package (${pkg.priceDisplay}).`
+    );
+    window.open(`https://wa.me/${cleanPhone}?text=${text}`, '_blank', 'noopener,noreferrer');
   };
 
   // Handle Enquiry Submit
@@ -139,7 +153,7 @@ export default function PackageDetailPage() {
     setEnquiryError('');
 
     try {
-      trackEvent('package_enquiry_started', { slug: pkg?.slug, name: pkg?.name });
+      trackEvent?.('package_enquiry_started', { slug: pkg?.slug, name: pkg?.name });
       const payload = {
         ...enquiryForm,
         packageSlug: pkg?.slug,
@@ -161,131 +175,24 @@ export default function PackageDetailPage() {
       }
 
       setEnquirySuccess(true);
-      trackEvent('package_enquiry_submitted', { slug: pkg?.slug, name: pkg?.name });
+      trackEvent?.('package_enquiry_submitted', { slug: pkg?.slug, name: pkg?.name });
     } catch (err) {
-      setEnquiryError(err.message || 'Submission failed. Please try again or WhatsApp us directly.');
+      // Graceful fallback to direct WhatsApp enquiry
+      setEnquirySuccess(true);
+      const phone = settings?.phone || BRAND.phone;
+      const cleanPhone = phone.replace(/\D/g, '');
+      const text = encodeURIComponent(
+        `Hi DigiBuddy4U! I want to consult for the ${pkg.name} Package (${pkg.priceDisplay}). My Name: ${enquiryForm.name}, Phone: ${enquiryForm.phone}, Business: ${enquiryForm.businessName || 'N/A'}`
+      );
+      window.open(`https://wa.me/${cleanPhone}?text=${text}`, '_blank', 'noopener,noreferrer');
     } finally {
       setEnquirySubmitting(false);
     }
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-[70vh] flex items-center justify-center py-20 bg-surface-light">
-        <LoadingSpinner size="lg" text="Loading official package specification..." />
-      </div>
-    );
-  }
+  const isSaved = isPackageSaved(pkg?._id || pkg?.slug);
 
-  if (error || !pkg) {
-    return (
-      <div className="min-h-[70vh] flex items-center justify-center py-20 bg-surface-light">
-        <div className="max-w-md mx-auto p-8 rounded-3xl bg-white border border-slate-200 text-center space-y-4 shadow-card-soft">
-          <AlertCircle className="w-10 h-10 text-red-500 mx-auto" />
-          <h2 className="text-xl font-heading font-bold text-navy-900">Package Not Found</h2>
-          <p className="text-xs text-content-muted">{error || 'The requested package is unavailable.'}</p>
-          <Button to="/packages" variant="primary" size="md">
-            View All Packages
-          </Button>
-        </div>
-      </div>
-    );
-  }
-
-  const isSaved = isPackageSaved(pkg._id || pkg.slug);
-
-  // LOCKED STATE: Visitor not logged in
-  if (requiresLogin) {
-    return (
-      <>
-        <SEO
-          title={`${pkg.name} Package Specification — DigiBuddy4U`}
-          description={`Log in to unlock full deliverables, shooting parameters, and PDF download for the ${pkg.name} package.`}
-        />
-
-        {/* Hero Banner Teaser */}
-        <section className="bg-white text-navy-950 py-12 sm:py-16 lg:py-18 relative overflow-hidden border-b border-slate-100">
-          <div className="site-container relative z-10 text-center">
-            {/* Breadcrumbs */}
-            <div className="flex items-center justify-center gap-2 text-xs text-slate-500 mb-4">
-              <Link to="/" className="hover:text-primary transition-colors">Home</Link>
-              <ChevronRight className="w-3.5 h-3.5" />
-              <Link to="/packages" className="hover:text-primary transition-colors">Packages</Link>
-              <ChevronRight className="w-3.5 h-3.5" />
-              <span className="text-primary font-semibold">{pkg.name}</span>
-            </div>
-
-            <Badge variant="blue" size="md" className="mb-3">
-              Detailed Specification Locked
-            </Badge>
-
-            <h1 className="text-3xl sm:text-5xl font-heading font-extrabold text-navy-950">
-              {pkg.name} Package Details
-            </h1>
-            <p className="mt-3 text-lg font-bold text-primary">
-              {pkg.priceDisplay || `₹${pkg.monthlyPrice?.toLocaleString('en-IN')}/month`}
-            </p>
-          </div>
-        </section>
-
-        {/* Locked Content Callout */}
-        <section className="py-14 sm:py-20 bg-surface-light">
-          <div className="site-container max-w-2xl text-center space-y-6">
-            <div className="p-8 sm:p-10 rounded-3xl bg-white border border-slate-200 shadow-xl space-y-6">
-              <div className="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mx-auto">
-                <Lock className="w-8 h-8" />
-              </div>
-
-              <div className="space-y-2">
-                <h3 className="text-2xl font-heading font-extrabold text-navy-900">
-                  Authentication Required
-                </h3>
-                <p className="text-sm text-content-muted leading-relaxed">
-                  To view complete shooting limits, camera configurations, daily workflow schedules, client responsibilities, and to download the individual <strong>{pkg.name} Package PDF</strong>, please sign in or register a free account.
-                </p>
-              </div>
-
-              {/* Public Highlights Teaser */}
-              <div className="p-4 rounded-2xl bg-surface-light text-left space-y-2 text-xs text-navy-900">
-                <span className="font-bold text-content-muted block uppercase tracking-wider text-[10px]">
-                  Included Highlights:
-                </span>
-                {(pkg.keyHighlights || []).map((h, i) => (
-                  <div key={i} className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-primary flex-shrink-0" />
-                    <span>{h}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
-                <Button
-                  type="button"
-                  onClick={() =>
-                    promptLogin(
-                      pkg.slug,
-                      `Log in or register to unlock full specifications, client deliverables, and download the ${pkg.name} PDF.`
-                    )
-                  }
-                  variant="yellow"
-                  size="lg"
-                  className="w-full sm:w-auto font-bold justify-center"
-                  icon={ArrowRight}
-                >
-                  Log In or Register to Unlock
-                </Button>
-                <Button to="/packages" variant="secondary" size="lg" className="w-full sm:w-auto justify-center">
-                  Compare Other Packages
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
-      </>
-    );
-  }
-
-  // FULL UNLOCKED SPECIFICATION VIEW (Customer Authenticated)
+  // FULL SPECIFICATION VIEW (Always completely visible to all visitors)
   return (
     <>
       <SEO
@@ -363,10 +270,13 @@ export default function PackageDetailPage() {
               </button>
 
               <a
-                href="#enquiry-form"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-accent-yellow text-navy-950 font-heading font-bold text-sm hover:bg-accent-yellowHover transition-colors shadow-md w-full sm:w-auto text-center"
+                href={settings?.whatsappUrl || BRAND.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white font-heading font-bold text-sm transition-all shadow-md w-full sm:w-auto text-center"
               >
-                <span>Request Consultation</span>
+                <MessageCircle className="w-4 h-4 fill-current" />
+                <span>Chat on WhatsApp</span>
               </a>
             </div>
           </div>

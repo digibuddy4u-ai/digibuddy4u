@@ -88,8 +88,8 @@ export const PACKAGES_CATALOG = [
     isPublished: true,
     showOnHome: true,
     isFeatured: false,
-    requiresLoginForDetails: true,
-    requiresLoginForPdf: true,
+    requiresLoginForDetails: false,
+    requiresLoginForPdf: false,
   },
   {
     name: 'Growth',
@@ -161,8 +161,8 @@ export const PACKAGES_CATALOG = [
     order: 2,
     isPublished: true,
     showOnHome: true,
-    requiresLoginForDetails: true,
-    requiresLoginForPdf: true,
+    requiresLoginForDetails: false,
+    requiresLoginForPdf: false,
   },
   {
     name: 'Premium',
@@ -235,7 +235,7 @@ export const PACKAGES_CATALOG = [
     isPublished: true,
     showOnHome: true,
     isFeatured: false,
-    requiresLoginForDetails: true,
-    requiresLoginForPdf: true,
+    requiresLoginForDetails: false,
+    requiresLoginForPdf: false,
   },
 ];

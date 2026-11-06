@@ -151,45 +151,38 @@ export default function PackagesPage() {
 
   const handleMoreDetails = (pkg) => {
     trackEvent?.('package_page_details_click', { slug: pkg.slug, name: pkg.name });
-    if (pkg.requiresLoginForDetails && !isAuthenticated) {
-      promptLogin(
-        pkg.slug,
-        `Create a free client account or log in to unlock full scope deliverables, shoot schedules, and official ${pkg.name} Package PDF.`
-      );
-    } else {
-      navigate(`/packages/${pkg.slug}`);
-    }
+    navigate(`/packages/${pkg.slug}`);
   };
 
   const handleDownloadPdf = async (pkg) => {
     trackEvent?.('package_page_pdf_download_click', { slug: pkg.slug, name: pkg.name });
-    if (pkg.requiresLoginForPdf && !isAuthenticated) {
-      promptLogin(
-        pkg.slug,
-        `Please log in or create an account to download the official ${pkg.name} Package PDF specification.`
-      );
-      return;
-    }
 
     try {
       const headers = {};
       if (token) headers['Authorization'] = `Bearer ${token}`;
 
       const res = await fetch(`${API_URL}/packages/${pkg.slug}/pdf`, { headers });
-      if (!res.ok) throw new Error('Failed to download PDF.');
-
-      const blob = await res.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `DigiBuddy4U_${pkg.name}_Package.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
+      if (res.ok) {
+        const blob = await res.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `DigiBuddy4U_${pkg.name}_Package.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+        return;
+      }
     } catch (err) {
-      promptLogin(pkg.slug, 'Authentication required to download this official package PDF.');
+      // Fallback to WhatsApp
     }
+
+    const cleanPhone = (BRAND.phone || '').replace(/\D/g, '');
+    const text = encodeURIComponent(
+      `Hi DigiBuddy4U! Please send me the official PDF brochure for the ${pkg.name} Package (${pkg.priceDisplay}).`
+    );
+    window.open(`https://wa.me/${cleanPhone}?text=${text}`, '_blank', 'noopener,noreferrer');
   };
 
   const displayedPackages = packages.filter((p) => p.isPublished !== false);

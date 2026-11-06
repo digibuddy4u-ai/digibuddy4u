@@ -54,44 +54,21 @@ export async function getPublicPackages(req, res) {
 export async function getPackageBySlug(req, res) {
   try {
     const { slug } = req.params;
-    const pkg = await Package.findOne({ slug, isPublished: true });
+    let pkg = await Package.findOne({ slug, isPublished: true });
 
     if (!pkg) {
-      return res.status(404).json({
-        success: false,
-        message: 'Requested package was not found or is currently unavailable.',
-      });
+      const catalogItem = PACKAGES_CATALOG.find((p) => p.slug === slug);
+      if (catalogItem) {
+        pkg = catalogItem;
+      } else {
+        return res.status(404).json({
+          success: false,
+          message: 'Requested package was not found or is currently unavailable.',
+        });
+      }
     }
 
     const isLoggedIn = !!req.customer;
-
-    // If package requires login for full details and user is not authenticated
-    if (pkg.requiresLoginForDetails && !isLoggedIn) {
-      return res.status(200).json({
-        success: true,
-        requiresLogin: true,
-        data: {
-          _id: pkg._id,
-          name: pkg.name,
-          slug: pkg.slug,
-          badge: pkg.badge,
-          monthlyPrice: pkg.monthlyPrice,
-          priceDisplay: pkg.priceDisplay,
-          alternativePriceWithoutAds: pkg.alternativePriceWithoutAds,
-          alternativePriceDisplay: pkg.alternativePriceDisplay,
-          minimumCommitment: pkg.minimumCommitment,
-          platforms: pkg.platforms,
-          reelsCount: pkg.reelsCount,
-          postsCount: pkg.postsCount,
-          storiesCount: pkg.storiesCount,
-          shootsCount: pkg.shootsCount,
-          keyHighlights: pkg.keyHighlights,
-          requiresLoginForDetails: true,
-          requiresLoginForPdf: pkg.requiresLoginForPdf,
-        },
-        message: 'Login required to inspect full inclusions, exclusions, client deliverables and shoot schedules.',
-      });
-    }
 
     // Record activity if visitorId or customer is present
     const visitorId = req.headers['x-visitor-id'] || req.query.visitorId;
@@ -134,21 +111,16 @@ export async function getPackageBySlug(req, res) {
 export async function downloadPackagePDF(req, res) {
   try {
     const { slug } = req.params;
-    const pkg = await Package.findOne({ slug, isPublished: true });
+    let pkg = await Package.findOne({ slug, isPublished: true });
+
+    if (!pkg) {
+      pkg = PACKAGES_CATALOG.find((p) => p.slug === slug);
+    }
 
     if (!pkg) {
       return res.status(404).json({
         success: false,
         message: 'Package not found for PDF generation.',
-      });
-    }
-
-    // Check login requirement
-    if (pkg.requiresLoginForPdf && !req.customer) {
-      return res.status(401).json({
-        success: false,
-        message: 'Please log in or create an account to download the official package PDF specification.',
-        requiresAuth: true,
       });
     }
 
