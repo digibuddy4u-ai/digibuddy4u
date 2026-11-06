@@ -99,13 +99,10 @@ export default function FeaturedPortfolioSection() {
               <div className="absolute w-64 h-80 bg-amber-500/20 rounded-full blur-3xl pointer-events-none" />
 
               {/* Status Header above mockup */}
-              <div className="w-full max-w-[310px] flex items-center justify-between mb-4 text-xs">
-                <span className="flex items-center gap-1.5 font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-3 py-1 rounded-full">
+              <div className="w-full max-w-[310px] flex items-center justify-center mb-4 text-xs">
+                <span className="flex items-center gap-1.5 font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-3.5 py-1 rounded-full shadow-xs">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   Active Instagram Reel
-                </span>
-                <span className="font-mono text-[11px] text-amber-300/80 bg-black/40 px-2.5 py-1 rounded-full border border-white/10">
-                  9:16 Vertical Format
                 </span>
               </div>
 
