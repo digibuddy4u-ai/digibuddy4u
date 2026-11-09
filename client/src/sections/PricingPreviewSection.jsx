@@ -16,6 +16,11 @@ import {
   Zap,
   Crown,
   Info,
+  Globe,
+  Camera,
+  CheckCircle2,
+  Calendar,
+  Compass,
 } from 'lucide-react';
 import SectionHeader from '../components/common/SectionHeader';
 import Button from '../components/common/Button';
@@ -25,18 +30,27 @@ import { useCustomerAuth } from '../context/CustomerAuthContext';
 import { API_URL } from '../utils/api';
 import { PACKAGES_CATALOG } from '../utils/packagesCatalog';
 
+// Helper icon resolver for chips
+const CHIP_ICONS = {
+  Video,
+  Layers,
+  Globe,
+  Compass,
+  Camera,
+  TrendingUp,
+  CheckCircle2,
+};
+
 export default function PricingPreviewSection() {
   const [packages, setPackages] = useState(PACKAGES_CATALOG);
-  const [loading, setLoading] = useState(false);
   const [enquiryModalPkg, setEnquiryModalPkg] = useState(null);
+  const [expandedNotice, setExpandedNotice] = useState(false);
   const navigate = useNavigate();
 
   const {
-    isAuthenticated,
     savedPackages,
     toggleSavePackage,
     isPackageSaved,
-    promptLogin,
     token,
     trackEvent,
   } = useCustomerAuth();
@@ -101,10 +115,9 @@ export default function PricingPreviewSection() {
         return;
       }
     } catch {
-      // Fallback to choice modal or details
+      // Fallback
     }
 
-    // Direct to detail/whatsapp fallback
     handleGetStarted(pkg);
   };
 
@@ -126,28 +139,31 @@ export default function PricingPreviewSection() {
         />
 
         {/* 4 Professional Packages Grid (Desktop 4-col, Tablet 2-col, Mobile 1-col) */}
-        <div className="mt-10 sm:mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-5 xl:gap-6 items-stretch mx-auto">
+        <div className="mt-10 sm:mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4 xl:gap-6 items-stretch mx-auto">
           {packages.map((pkg, idx) => {
-            const isGrowth = pkg.slug === 'growth' || pkg.badge === 'Most Popular';
-            const isPremium = pkg.slug === 'premium' || pkg.badge === 'Premium';
-            const isSetup = pkg.billingType === 'One-Time' || pkg.slug === 'startup-setup';
+            const isGrowth = pkg.slug === 'growth' || pkg.badge === 'Most Popular' || idx === 2;
+            const isPremium = pkg.slug === 'premium' || pkg.badge === 'Premium' || idx === 3;
+            const isSetup = pkg.billingType === 'One-Time' || pkg.slug === 'startup-setup' || idx === 1;
             const isSaved = isPackageSaved(pkg._id || pkg.slug);
+
+            // Chips / Khas Highlights
+            const chips = pkg.chips || [];
 
             return (
               <div
                 key={pkg.slug || idx}
-                className={`rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-5 xl:p-6 flex flex-col justify-between transition-all duration-300 relative group ${
+                className={`rounded-3xl p-5 sm:p-6 lg:p-5 xl:p-6 flex flex-col justify-between transition-all duration-300 relative group ${
                   isGrowth
-                    ? 'bg-white border-2 border-primary shadow-2xl ring-4 ring-primary/10 lg:-translate-y-2'
+                    ? 'bg-white border-2 border-primary shadow-2xl ring-4 ring-primary/10 lg:-translate-y-2.5 z-10'
                     : isPremium
-                    ? 'bg-gradient-to-b from-white via-slate-50/70 to-white border-2 border-navy-900 shadow-2xl ring-4 ring-navy-900/10 lg:-translate-y-2'
+                    ? 'bg-gradient-to-b from-white via-slate-50/70 to-white border-2 border-navy-900 shadow-2xl ring-4 ring-navy-900/10 lg:-translate-y-2.5 z-10'
                     : 'bg-white border border-slate-200/90 shadow-card-soft hover:shadow-card-hover'
                 }`}
               >
-                {/* Floating Top Badge for Prominent Packages */}
+                {/* Floating Top Badge for Prominent Packages (Only One Single Badge!) */}
                 {isGrowth && (
                   <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20">
-                    <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-accent-yellow text-navy-950 font-heading font-extrabold text-xs uppercase tracking-wider shadow-md">
+                    <span className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full bg-accent-yellow text-navy-950 font-heading font-extrabold text-xs uppercase tracking-wider shadow-md">
                       <Sparkles className="w-3.5 h-3.5 fill-current text-navy-950" />
                       Most Popular
                     </span>
@@ -156,34 +172,37 @@ export default function PricingPreviewSection() {
 
                 {isPremium && (
                   <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20">
-                    <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-navy-950 text-cyan-accent border border-cyan-accent/30 font-heading font-extrabold text-xs uppercase tracking-wider shadow-md">
+                    <span className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full bg-navy-950 text-cyan-accent border border-cyan-accent/30 font-heading font-extrabold text-xs uppercase tracking-wider shadow-md">
                       <Crown className="w-3.5 h-3.5 text-accent-yellow" />
-                      Premium
+                      Premium Campaign
                     </span>
                   </div>
                 )}
 
                 <div className="space-y-4">
-                  {/* Top Header: Badge & Save Heart */}
+                  {/* Top Bar: Category Label & Shortlist Heart */}
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-1.5">
-                      <Badge
-                        variant={
-                          isGrowth
-                            ? 'yellow'
-                            : isPremium
-                            ? 'blue'
-                            : isSetup
-                            ? 'blue'
-                            : 'slate'
-                        }
-                        size="sm"
-                      >
-                        {pkg.badge || (isSetup ? 'Business Setup' : 'Monthly Retainer')}
-                      </Badge>
-                      {isSetup && (
-                        <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
-                          One-Time
+                      {isGrowth ? (
+                        <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-primary bg-primary/10 px-2.5 py-1 rounded-lg">
+                          Social Growth Retainer
+                        </span>
+                      ) : isPremium ? (
+                        <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-navy-950 bg-slate-100 border border-slate-200 px-2.5 py-1 rounded-lg">
+                          Omnichannel Scale
+                        </span>
+                      ) : isSetup ? (
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-cyan-700 bg-cyan-50 border border-cyan-200 px-2.5 py-1 rounded-lg">
+                            Business Setup
+                          </span>
+                          <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
+                            One-Time
+                          </span>
+                        </div>
+                      ) : (
+                        <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-600 bg-slate-100 px-2.5 py-1 rounded-lg">
+                          Starter Plan
                         </span>
                       )}
                     </div>
@@ -205,12 +224,12 @@ export default function PricingPreviewSection() {
 
                   {/* Package Title & Price Box */}
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-heading font-extrabold text-navy-950 tracking-tight leading-tight min-h-[56px] flex items-center">
+                    <h3 className="text-xl sm:text-2xl font-heading font-extrabold text-navy-950 tracking-tight leading-tight min-h-[54px] flex items-center">
                       {pkg.name}
                     </h3>
 
                     {/* Price and Billing Type */}
-                    <div className="mt-2.5 pb-3 border-b border-slate-100">
+                    <div className="mt-2 pb-3 border-b border-slate-100">
                       <div className="flex items-baseline gap-1.5 flex-wrap">
                         <span className="text-2xl sm:text-3xl font-heading font-black text-navy-950 tracking-tight">
                           ₹{pkg.monthlyPrice?.toLocaleString('en-IN')}
@@ -223,42 +242,45 @@ export default function PricingPreviewSection() {
                             : '/ Month'}
                         </span>
                       </div>
-                      <span className="text-[11px] text-content-muted block mt-1 font-medium">
+                      <span className="text-[11px] text-content-muted block mt-0.5 font-medium">
                         {pkg.billingType === 'One-Time'
-                          ? 'Complete foundation setup • No recurring fee'
+                          ? 'One-time setup • No monthly subscription'
                           : pkg.billingType === 'Campaign'
-                          ? 'End-to-end campaign execution'
+                          ? 'End-to-end full campaign execution'
                           : 'Billed monthly • Guaranteed deliverables'}
                       </span>
                     </div>
 
                     {/* Short Description */}
-                    <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed min-h-[54px]">
+                    <p className="mt-2.5 text-xs text-slate-600 leading-relaxed min-h-[48px]">
                       {pkg.description}
                     </p>
                   </div>
 
-                  {/* Included Services Checklist */}
-                  <div className="pt-2 space-y-2.5">
-                    <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400 block">
-                      What's Included:
+                  {/* 🌟 KEY DELIVERABLES / KHAS HIGHLIGHTS (Visual Chips) */}
+                  <div className="pt-1">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 block mb-2">
+                      Key Highlights:
                     </span>
-
-                    <div className="space-y-2 text-xs sm:text-[13px] text-slate-700">
-                      {(pkg.keyHighlights || []).map((highlight, hIdx) => {
-                        const isNoteItem = highlight.toLowerCase().includes('note:') || highlight.toLowerCase().includes('one-time setup');
+                    <div className="grid grid-cols-1 gap-1.5">
+                      {chips.map((chip, cIdx) => {
+                        const IconComponent = CHIP_ICONS[chip.icon] || CheckCircle2;
                         return (
                           <div
-                            key={hIdx}
-                            className={`flex items-start gap-2 ${
-                              isNoteItem
-                                ? 'p-1.5 rounded-lg bg-amber-50/80 border border-amber-200/80 text-amber-900 font-semibold text-[11px]'
-                                : ''
+                            key={cIdx}
+                            className={`flex items-center justify-between p-2 rounded-xl text-xs font-semibold ${
+                              isGrowth
+                                ? 'bg-primary/5 border border-primary/20 text-navy-950'
+                                : isPremium
+                                ? 'bg-navy-950/5 border border-navy-950/15 text-navy-950'
+                                : isSetup
+                                ? 'bg-cyan-50/80 border border-cyan-200/60 text-navy-950'
+                                : 'bg-slate-50 border border-slate-200/80 text-navy-950'
                             }`}
                           >
-                            {!isNoteItem ? (
+                            <div className="flex items-center gap-2 min-w-0">
                               <div
-                                className={`w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                                className={`w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 ${
                                   isGrowth
                                     ? 'bg-primary text-white'
                                     : isPremium
@@ -266,11 +288,45 @@ export default function PricingPreviewSection() {
                                     : 'bg-primary/10 text-primary'
                                 }`}
                               >
-                                <Check className="w-2.5 h-2.5 stroke-[2.5]" />
+                                <IconComponent className="w-3.5 h-3.5" />
                               </div>
-                            ) : (
-                              <Info className="w-3.5 h-3.5 text-amber-600 flex-shrink-0 mt-0.5" />
-                            )}
+                              <span className="font-heading font-bold text-xs truncate">
+                                {chip.label}
+                              </span>
+                            </div>
+                            <span className="text-[10px] font-medium text-slate-500 flex-shrink-0">
+                              {chip.desc}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Full Included Features Checklist */}
+                  <div className="pt-2 space-y-2">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 block">
+                      Complete Scope:
+                    </span>
+
+                    <div className="space-y-1.5 text-xs text-slate-700">
+                      {(pkg.keyHighlights || []).map((highlight, hIdx) => {
+                        // Skip any note strings in highlight list
+                        if (highlight.toLowerCase().includes('note:')) return null;
+
+                        return (
+                          <div key={hIdx} className="flex items-start gap-2">
+                            <div
+                              className={`w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                                isGrowth
+                                  ? 'bg-primary text-white'
+                                  : isPremium
+                                  ? 'bg-navy-900 text-cyan-accent'
+                                  : 'bg-primary/10 text-primary'
+                              }`}
+                            >
+                              <Check className="w-2.5 h-2.5 stroke-[2.5]" />
+                            </div>
                             <span className="leading-snug">{highlight}</span>
                           </div>
                         );
@@ -278,34 +334,50 @@ export default function PricingPreviewSection() {
                     </div>
                   </div>
 
-                  {/* Special Notice for ₹80,000 Package (Mandatory Display) */}
-                  {isPremium && (
-                    <div className="mt-4 p-3 rounded-2xl bg-slate-50 border border-slate-200 text-[11px] space-y-1.5 text-slate-600">
-                      <div className="flex items-center gap-1.5 font-bold text-navy-950">
-                        <AlertCircle className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
-                        <span>Additional Expenses Notice:</span>
-                      </div>
-                      <p className="text-[10px] leading-relaxed text-slate-500">
-                        The following expenses are not included in the ₹80,000 package price and will be charged separately wherever applicable:
-                      </p>
-                      <ul className="list-disc list-inside text-[10px] text-slate-600 space-y-0.5 pl-1">
-                        <li>Influencer Collaboration Fees</li>
-                        <li>Model Fees / Booking Charges</li>
-                        <li>Meta Ads Budget / Ad Spend</li>
-                        <li>Travel & Transportation Expenses</li>
-                        <li>Location / Studio Rental Charges</li>
-                        <li>Props, Costumes & Extra Requirements</li>
-                      </ul>
+                  {/* Single Clean Note for Setup Package (No Duplicates) */}
+                  {isSetup && (
+                    <div className="mt-3 p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-[11px] text-emerald-900 flex items-center gap-2">
+                      <Zap className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
+                      <span>
+                        <strong>One-Time Setup:</strong> Ready-to-use business foundation.
+                      </span>
                     </div>
                   )}
 
-                  {/* One-Time Note for ₹15,000 Package */}
-                  {isSetup && (
-                    <div className="mt-3 p-2.5 rounded-xl bg-blue-50/70 border border-blue-200/80 text-[11px] text-blue-900 flex items-start gap-1.5">
-                      <Info className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
-                      <span>
-                        <strong>Note:</strong> This is a one-time setup package, not a monthly subscription.
-                      </span>
+                  {/* Special Notice for ₹80,000 Package */}
+                  {isPremium && (
+                    <div className="mt-3 p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-[11px] space-y-1 text-slate-600">
+                      <div
+                        onClick={() => setExpandedNotice(!expandedNotice)}
+                        className="flex items-center justify-between font-bold text-navy-950 cursor-pointer"
+                      >
+                        <div className="flex items-center gap-1.5">
+                          <AlertCircle className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
+                          <span>Additional Expenses:</span>
+                        </div>
+                        <span className="text-[10px] text-primary hover:underline">
+                          {expandedNotice ? 'Hide' : 'View (6)'}
+                        </span>
+                      </div>
+                      {expandedNotice ? (
+                        <div className="pt-1.5 border-t border-slate-200 space-y-1">
+                          <p className="text-[10px] text-slate-500 leading-tight">
+                            Charged separately wherever applicable:
+                          </p>
+                          <ul className="list-disc list-inside text-[10px] text-slate-600 space-y-0.5">
+                            <li>Influencer Collaboration Fees</li>
+                            <li>Model Fees / Booking Charges</li>
+                            <li>Meta Ads Budget / Ad Spend</li>
+                            <li>Travel & Transportation Expenses</li>
+                            <li>Location / Studio Rental Charges</li>
+                            <li>Props, Costumes & Extra Production</li>
+                          </ul>
+                        </div>
+                      ) : (
+                        <p className="text-[10px] text-slate-500 truncate">
+                          Influencer, model & ads budget charged at actuals.
+                        </p>
+                      )}
                     </div>
                   )}
                 </div>
