@@ -1,10 +1,10 @@
 /**
  * DigiBuddy4U Master Packages Catalogue
  * 4 Official Packages:
- * 1. Social Media Starter (₹10,000 / Month)
- * 2. Business Startup Setup (₹15,000 / One-Time)
- * 3. Business Growth (₹20,000 / Month - Most Popular)
- * 4. Premium Brand Scale (₹80,000 / Campaign - Premium)
+ * 1. Brand Presence Starter (₹10,000 / Month)
+ * 2. Digital Launch Kit (₹15,000 / One-Time)
+ * 3. Brand Growth Pro (₹20,000 / Month - Most Popular)
+ * 4. Ultimate Brand Domination (₹80,000 / Campaign - Premium)
  */
 
 export const MASTER_MONTHLY_WORKFLOW = [
@@ -26,10 +26,10 @@ export const MASTER_GENERAL_TERMS = [
 
 export const PACKAGES_CATALOG = [
   {
-    name: 'Social Media Starter',
+    name: 'Brand Presence Starter',
     shortName: 'Starter',
     slug: 'starter',
-    aliases: ['social-media-starter', 'basic'],
+    aliases: ['brand-presence-starter', 'social-media-starter', 'basic'],
     badge: 'Starter Plan',
     tierCategory: 'Organic Foundation',
     billingType: 'Monthly',
@@ -129,10 +129,10 @@ export const PACKAGES_CATALOG = [
     requiresLoginForPdf: false,
   },
   {
-    name: 'Business Startup Setup',
-    shortName: 'Business Setup',
+    name: 'Digital Launch Kit',
+    shortName: 'Launch Kit',
     slug: 'startup-setup',
-    aliases: ['business-startup-setup', 'setup'],
+    aliases: ['digital-launch-kit', 'business-startup-setup', 'setup'],
     badge: 'Business Setup',
     tierCategory: 'Digital Foundation',
     billingType: 'One-Time',
@@ -235,10 +235,10 @@ export const PACKAGES_CATALOG = [
     requiresLoginForPdf: false,
   },
   {
-    name: 'Business Growth',
-    shortName: 'Growth',
+    name: 'Brand Growth Pro',
+    shortName: 'Growth Pro',
     slug: 'growth',
-    aliases: ['business-growth', 'standard'],
+    aliases: ['brand-growth-pro', 'business-growth', 'standard'],
     badge: 'Social Growth Retainer',
     tierCategory: 'Scale & Inquiries',
     billingType: 'Monthly',
@@ -367,10 +367,10 @@ export const PACKAGES_CATALOG = [
     requiresLoginForPdf: false,
   },
   {
-    name: 'Premium Brand Scale',
-    shortName: 'Premium',
+    name: 'Ultimate Brand Domination',
+    shortName: 'Brand Domination',
     slug: 'premium',
-    aliases: ['premium-brand-scale', 'pro', 'elite'],
+    aliases: ['ultimate-brand-domination', 'premium-brand-scale', 'pro', 'elite'],
     badge: 'Omnichannel Campaign',
     tierCategory: 'High Production & Reach',
     billingType: 'Campaign',

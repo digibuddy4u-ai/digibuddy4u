@@ -101,10 +101,10 @@ export default function AddonCartDrawer() {
                   className="w-full text-xs font-semibold bg-white border border-blue-200 rounded-xl px-3 py-2 text-navy-950 focus:outline-none focus:ring-2 focus:ring-primary/20"
                 >
                   <option value="">No Package (Add-Ons Only / Standalone Quote)</option>
-                  <option value="Social Media Starter (₹10,000/mo)">Social Media Starter (₹10,000/mo)</option>
-                  <option value="Business Startup Setup (₹15,000 One-Time)">Business Startup Setup (₹15,000 One-Time)</option>
-                  <option value="Business Growth (₹20,000/mo) - Most Popular">Business Growth (₹20,000/mo) - Most Popular</option>
-                  <option value="Premium Brand Scale (₹80,000/campaign) - Premium">Premium Brand Scale (₹80,000/campaign) - Premium</option>
+                  <option value="Brand Presence Starter (₹10,000/mo)">Brand Presence Starter (₹10,000/mo)</option>
+                  <option value="Digital Launch Kit (₹15,000 One-Time)">Digital Launch Kit (₹15,000 One-Time)</option>
+                  <option value="Brand Growth Pro (₹20,000/mo) - Most Popular">Brand Growth Pro (₹20,000/mo) - Most Popular</option>
+                  <option value="Ultimate Brand Domination (₹80,000/campaign) - Premium">Ultimate Brand Domination (₹80,000/campaign) - Premium</option>
                 </select>
               </div>
 

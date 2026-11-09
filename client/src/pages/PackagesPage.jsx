@@ -143,7 +143,7 @@ export default function PackagesPage() {
     <>
       <SEO
         title="Packages & Pricing — DigiBuddy4U Digital Marketing & Growth"
-        description="Explore DigiBuddy4U's official packages: Social Media Starter (₹10,000/mo), Business Startup Setup (₹15,000 One-Time), Business Growth (₹20,000/mo - Most Popular), Premium Brand Scale (₹80,000/campaign), AI & Reel Editing (₹5,000/package), and WhatsApp Business Setup (₹1,000 One-Time)."
+        description="Explore DigiBuddy4U's official packages: Brand Presence Starter (₹10,000/mo), Digital Launch Kit (₹15,000 One-Time), Brand Growth Pro (₹20,000/mo - Most Popular), and Ultimate Brand Domination (₹80,000/campaign)."
       />
 
       {/* Header Banner */}

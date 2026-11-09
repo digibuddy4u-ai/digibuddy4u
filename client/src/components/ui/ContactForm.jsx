@@ -329,10 +329,10 @@ export default function ContactForm({ prefilledService = '', defaultPlan = '' })
           <option value="Brand Strategy & Branding">Brand Strategy and Branding</option>
           <option value="Social Media Strategy">Social Media Strategy Audit</option>
           <option value="All-in-One Digital Growth">All-in-One Digital Growth Package</option>
-          <option value="Package: Social Media Starter (₹10,000/mo)">Social Media Starter (₹10,000 / Month)</option>
-          <option value="Package: Business Startup Setup (₹15,000 One-Time)">Business Startup Setup (₹15,000 / One-Time)</option>
-          <option value="Package: Business Growth (₹20,000/mo)">Business Growth (₹20,000 / Month - Most Popular)</option>
-          <option value="Package: Premium Brand Scale (₹80,000/campaign)">Premium Brand Scale (₹80,000 / Campaign)</option>
+          <option value="Package: Brand Presence Starter (₹10,000/mo)">Brand Presence Starter (₹10,000 / Month)</option>
+          <option value="Package: Digital Launch Kit (₹15,000 One-Time)">Digital Launch Kit (₹15,000 / One-Time)</option>
+          <option value="Package: Brand Growth Pro (₹20,000/mo)">Brand Growth Pro (₹20,000 / Month - Most Popular)</option>
+          <option value="Package: Ultimate Brand Domination (₹80,000/campaign)">Ultimate Brand Domination (₹80,000 / Campaign)</option>
           <option value="Add-On: AI & Reel Editing (₹5,000/package)">Add-On: AI & Reel Editing (₹5,000 / Package)</option>
           <option value="Add-On: WhatsApp Business Setup (₹1,000 One-Time)">Add-On: WhatsApp Business Setup (₹1,000 / One-Time)</option>
         </select>

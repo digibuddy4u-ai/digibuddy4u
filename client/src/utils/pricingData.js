@@ -1,15 +1,15 @@
 /**
  * DigiBuddy4U Official Packages & Pricing
  * 4 Canonical Packages:
- * 1. Social Media Starter (₹10,000 / Month)
- * 2. Business Startup Setup (₹15,000 / One-Time)
- * 3. Business Growth (₹20,000 / Month - Most Popular)
- * 4. Premium Brand Scale (₹80,000 / Campaign - Premium)
+ * 1. Brand Presence Starter (₹10,000 / Month)
+ * 2. Digital Launch Kit (₹15,000 / One-Time)
+ * 3. Brand Growth Pro (₹20,000 / Month - Most Popular)
+ * 4. Ultimate Brand Domination (₹80,000 / Campaign - Premium)
  */
 export const PRICING_PACKAGES = [
   {
     id: 'starter',
-    name: 'Social Media Starter',
+    name: 'Brand Presence Starter',
     shortName: 'Starter',
     slug: 'starter',
     badge: 'Starter Plan',
@@ -68,8 +68,8 @@ export const PRICING_PACKAGES = [
   },
   {
     id: 'startup-setup',
-    name: 'Business Startup Setup',
-    shortName: 'Business Setup',
+    name: 'Digital Launch Kit',
+    shortName: 'Launch Kit',
     slug: 'startup-setup',
     badge: 'Business Setup',
     tierCategory: 'Digital Foundation',
@@ -129,8 +129,8 @@ export const PRICING_PACKAGES = [
   },
   {
     id: 'growth',
-    name: 'Business Growth',
-    shortName: 'Growth',
+    name: 'Brand Growth Pro',
+    shortName: 'Growth Pro',
     slug: 'growth',
     badge: 'Most Popular',
     tierCategory: 'Scale & Inquiries',
@@ -207,8 +207,8 @@ export const PRICING_PACKAGES = [
   },
   {
     id: 'premium',
-    name: 'Premium Brand Scale',
-    shortName: 'Premium',
+    name: 'Ultimate Brand Domination',
+    shortName: 'Brand Domination',
     slug: 'premium',
     badge: 'Premium Campaign',
     tierCategory: 'High Production & Reach',
