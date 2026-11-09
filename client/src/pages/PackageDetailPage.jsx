@@ -4,6 +4,7 @@ import {
   ArrowRight,
   Download,
   Heart,
+  Check,
   CheckCircle2,
   XCircle,
   Video,

@@ -105,6 +105,8 @@ export default function AddonCartDrawer() {
                   <option value="Business Startup Setup (₹15,000 One-Time)">Business Startup Setup (₹15,000 One-Time)</option>
                   <option value="Business Growth (₹20,000/mo) - Most Popular">Business Growth (₹20,000/mo) - Most Popular</option>
                   <option value="Premium Brand Scale (₹80,000/campaign) - Premium">Premium Brand Scale (₹80,000/campaign) - Premium</option>
+                  <option value="AI & Reel Editing (₹5,000 / Package)">AI & Reel Editing (₹5,000 / Package)</option>
+                  <option value="WhatsApp Business Setup (₹1,000 One-Time)">WhatsApp Business Setup (₹1,000 One-Time)</option>
                 </select>
               </div>
 
