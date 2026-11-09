@@ -7,10 +7,12 @@ import { ADDONS_CATALOG } from '../utils/addonsCatalog.js';
 export async function seedAddOnsIfEmpty() {
   try {
     const count = await AddOn.countDocuments();
-    if (count === 0) {
-      console.log('📦 Seeding initial 15 add-ons catalog...');
-      await AddOn.insertMany(ADDONS_CATALOG);
-      console.log('✅ 15 Add-ons seeded successfully into MongoDB Atlas.');
+    if (count < ADDONS_CATALOG.length) {
+      console.log('📦 Syncing add-ons catalog...');
+      for (const item of ADDONS_CATALOG) {
+        await AddOn.updateOne({ slug: item.slug }, { $set: item }, { upsert: true });
+      }
+      console.log('✅ Add-ons synced successfully into MongoDB Atlas.');
     }
   } catch (err) {
     console.error('Error seeding add-ons:', err.message);
@@ -24,9 +26,11 @@ export async function getPublicAddOns(req, res) {
   try {
     let addons = await AddOn.find({ isPublished: true }).sort({ order: 1, createdAt: 1 });
 
-    // Auto-seed if empty
-    if (addons.length === 0) {
-      await AddOn.insertMany(ADDONS_CATALOG);
+    // Auto-seed or sync if empty or missing new catalog items
+    if (addons.length < ADDONS_CATALOG.length) {
+      for (const item of ADDONS_CATALOG) {
+        await AddOn.updateOne({ slug: item.slug }, { $set: item }, { upsert: true });
+      }
       addons = await AddOn.find({ isPublished: true }).sort({ order: 1, createdAt: 1 });
     }
 

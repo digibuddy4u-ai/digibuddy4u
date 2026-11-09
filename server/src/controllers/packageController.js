@@ -18,7 +18,7 @@ export async function seedPackagesIfEmpty() {
     }
     const validSlugs = PACKAGES_CATALOG.map((p) => p.slug);
     await Package.deleteMany({ slug: { $nin: validSlugs } });
-    console.log('✅ 6 DigiBuddy4U packages synchronized successfully into MongoDB Atlas.');
+    console.log('✅ 4 DigiBuddy4U packages synchronized successfully into MongoDB Atlas.');
   } catch (err) {
     console.error('Error synchronizing packages:', err.message);
   }

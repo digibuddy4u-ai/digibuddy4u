@@ -22,7 +22,7 @@ import SectionHeader from '../components/common/SectionHeader';
 import Button from '../components/common/Button';
 import Badge from '../components/common/Badge';
 import FAQAccordion from '../components/ui/FAQAccordion';
-import { PRICING_PACKAGES, ADDITIONAL_PRICING_PACKAGES } from '../utils/pricingData';
+import { PRICING_PACKAGES } from '../utils/pricingData';
 import { FAQ_DATA } from '../utils/faqData';
 import { BRAND } from '../utils/brandConstants';
 
@@ -286,131 +286,6 @@ export default function PricingPage() {
                 </div>
               );
             })}
-          </div>
-
-          {/* ======================================================== */}
-          {/* 2. TWO ADDITIONAL SERVICE PACKAGES */}
-          {/* ======================================================== */}
-          <div className="mt-14 sm:mt-18 pt-12 sm:pt-16 border-t border-slate-200/80">
-            <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-2">
-                <Sparkles className="w-3.5 h-3.5 text-accent-yellow" />
-                <span>Specialized Additional Services</span>
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-navy-950 tracking-tight">
-                Targeted Service Packages
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-600 mt-1.5 leading-relaxed">
-                Need standalone video editing or professional platform setup without an ongoing monthly retainer? Choose from our specialized execution packages.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto items-stretch">
-              {ADDITIONAL_PRICING_PACKAGES.map((pkg) => {
-                const isOneTime = pkg.billingType === 'One-Time';
-                const chips = pkg.chips || [];
-
-                return (
-                  <div
-                    key={pkg.id}
-                    className="rounded-3xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 relative group bg-white border border-slate-200/90 shadow-card-soft hover:shadow-card-hover hover:border-primary/40"
-                  >
-                    <div className="space-y-4">
-                      {/* Top Label */}
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-primary bg-primary/10 px-2.5 py-1 rounded-lg">
-                          {pkg.badge}
-                        </span>
-                        {isOneTime && (
-                          <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
-                            One-Time
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Title & Price */}
-                      <div>
-                        <h3 className="text-xl sm:text-2xl font-bold font-heading text-navy-950 leading-tight">
-                          {pkg.name}
-                        </h3>
-
-                        <div className="mt-2 pb-3 border-b border-slate-100">
-                          <div className="text-2xl sm:text-3xl font-heading font-black text-navy-900">
-                            {pkg.monthlyPrice}
-                          </div>
-                          <span className="text-[11px] text-content-muted block mt-0.5 font-medium">
-                            {pkg.commitment}
-                          </span>
-                        </div>
-
-                        <p className="mt-2.5 text-xs text-content-muted leading-relaxed min-h-[44px]">
-                          {pkg.description}
-                        </p>
-                      </div>
-
-                      {/* Highlights Chips */}
-                      <div className="pt-1">
-                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 block mb-2">
-                          Key Highlights:
-                        </span>
-                        <div className="grid grid-cols-1 gap-1.5">
-                          {chips.map((chip, cIdx) => {
-                            const IconComponent = CHIP_ICONS[chip.icon] || CheckCircle2;
-                            return (
-                              <div
-                                key={cIdx}
-                                className="flex items-center justify-between p-2 rounded-xl text-xs font-semibold bg-surface-light border border-slate-200/80 text-navy-950"
-                              >
-                                <div className="flex items-center gap-2 min-w-0">
-                                  <div className="w-6 h-6 rounded-lg bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
-                                    <IconComponent className="w-3.5 h-3.5" />
-                                  </div>
-                                  <span className="font-heading font-bold text-xs truncate">
-                                    {chip.label}
-                                  </span>
-                                </div>
-                                <span className="text-[10px] font-medium text-slate-500 flex-shrink-0">
-                                  {chip.desc}
-                                </span>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-
-                      {/* What's Included List */}
-                      <div className="mt-3 pt-3 border-t border-slate-100 space-y-2">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-navy-900 block font-mono">
-                          What's Included:
-                        </span>
-                        <ul className="space-y-1.5 text-xs text-content-dark">
-                          {pkg.features.map((feature, idx) => (
-                            <li key={idx} className="flex items-start gap-2">
-                              <div className="w-4 h-4 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <Check className="w-2.5 h-2.5 stroke-[2.5]" />
-                              </div>
-                              <span className="leading-snug">{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-
-                    <div className="mt-6 pt-5 border-t border-slate-100">
-                      <Button
-                        to={pkg.ctaLink}
-                        variant="primary"
-                        size="md"
-                        className="w-full justify-center shadow-sm font-bold text-xs sm:text-sm"
-                        icon={ArrowRight}
-                      >
-                        {pkg.ctaText || 'Enquire Now'}
-                      </Button>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
           </div>
 
           {/* Custom Advisory Card */}

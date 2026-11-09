@@ -333,8 +333,8 @@ export default function ContactForm({ prefilledService = '', defaultPlan = '' })
           <option value="Package: Business Startup Setup (₹15,000 One-Time)">Business Startup Setup (₹15,000 / One-Time)</option>
           <option value="Package: Business Growth (₹20,000/mo)">Business Growth (₹20,000 / Month - Most Popular)</option>
           <option value="Package: Premium Brand Scale (₹80,000/campaign)">Premium Brand Scale (₹80,000 / Campaign)</option>
-          <option value="Package: AI & Reel Editing (₹5,000/package)">AI & Reel Editing (₹5,000 / Package)</option>
-          <option value="Package: WhatsApp Business Setup (₹1,000 One-Time)">WhatsApp Business Setup (₹1,000 / One-Time)</option>
+          <option value="Add-On: AI & Reel Editing (₹5,000/package)">Add-On: AI & Reel Editing (₹5,000 / Package)</option>
+          <option value="Add-On: WhatsApp Business Setup (₹1,000 One-Time)">Add-On: WhatsApp Business Setup (₹1,000 / One-Time)</option>
         </select>
         {errors.service && <p className="text-xs text-red-600 mt-1 font-medium">{errors.service}</p>}
       </div>

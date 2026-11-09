@@ -43,6 +43,7 @@ const ICON_MAP = {
   CreditCard,
   BookOpen,
   Sparkles,
+  MessageCircle,
 };
 
 // Fallback baseline 15 add-ons in case API is temporarily loading
@@ -181,6 +182,24 @@ const FALLBACK_ADDONS = [
     priceDisplay: 'From ₹4,500 / catalog',
     iconName: 'BookOpen',
     shortDescription: 'Structured, polished digital and printable product catalog, brochure, or restaurant menu. Features organized visual hierarchy designed to make customer ordering seamless.',
+  },
+  {
+    title: 'AI & Reel Editing',
+    slug: 'ai-reel-editing',
+    category: 'Video & Production',
+    badge: 'AI & Video Creation',
+    priceDisplay: '₹5,000 / package',
+    iconName: 'Video',
+    shortDescription: 'Professional AI-powered and raw video reel creation to help businesses create engaging social media content. Includes AI reels, raw clips editing, scriptwriting, captions, and hashtag suggestions.',
+  },
+  {
+    title: 'WhatsApp Business Setup',
+    slug: 'whatsapp-business-setup',
+    category: 'Local Growth & Maps',
+    badge: 'Channel Setup',
+    priceDisplay: '₹1,000 one-time',
+    iconName: 'MessageCircle',
+    shortDescription: 'Get your WhatsApp Business account professionally configured to communicate with customers and showcase your products or services. Includes profile branding, catalog setup, and automated messaging.',
   },
 ];
 
