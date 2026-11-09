@@ -329,9 +329,10 @@ export default function ContactForm({ prefilledService = '', defaultPlan = '' })
           <option value="Brand Strategy & Branding">Brand Strategy and Branding</option>
           <option value="Social Media Strategy">Social Media Strategy Audit</option>
           <option value="All-in-One Digital Growth">All-in-One Digital Growth Package</option>
-          <option value="Pricing Plan: Starter Growth">Starter Growth Plan</option>
-          <option value="Pricing Plan: Accelerated Growth">Accelerated Growth Plan</option>
-          <option value="Pricing Plan: Omnichannel Scale">Omnichannel Scale Plan</option>
+          <option value="Package: Social Media Starter (₹10,000/mo)">Social Media Starter (₹10,000 / Month)</option>
+          <option value="Package: Business Startup Setup (₹15,000 One-Time)">Business Startup Setup (₹15,000 / One-Time)</option>
+          <option value="Package: Business Growth (₹20,000/mo)">Business Growth (₹20,000 / Month - Most Popular)</option>
+          <option value="Package: Premium Brand Scale (₹80,000/campaign)">Premium Brand Scale (₹80,000 / Campaign)</option>
         </select>
         {errors.service && <p className="text-xs text-red-600 mt-1 font-medium">{errors.service}</p>}
       </div>

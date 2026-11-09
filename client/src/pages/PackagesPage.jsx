@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   Check,
   Sparkles,
@@ -16,6 +16,9 @@ import {
   Clock,
   HelpCircle,
   FileText,
+  AlertCircle,
+  Crown,
+  Info,
 } from 'lucide-react';
 import SEO from '../components/common/SEO';
 import Badge from '../components/common/Badge';
@@ -24,85 +27,13 @@ import LoadingSpinner from '../components/ui/LoadingSpinner';
 import { useCustomerAuth } from '../context/CustomerAuthContext';
 import { BRAND } from '../utils/brandConstants';
 import { API_URL } from '../utils/api';
+import { PACKAGES_CATALOG } from '../utils/packagesCatalog';
 import AddonsSection from '../components/addons/AddonsSection';
 import PackageEnquiryChoiceModal from '../components/packages/PackageEnquiryChoiceModal';
 
-// 3 Official Social Media Management Packages
-const FALLBACK_PACKAGES = [
-  {
-    name: 'Basic',
-    slug: 'basic',
-    badge: 'Starter SMM',
-    monthlyPrice: 5000,
-    priceDisplay: '₹5,000/month',
-    minimumCommitment: 'Monthly',
-    platforms: ['1 Social Media Platform'],
-    postsCount: '6 Posts',
-    reelsCount: '3 Reels',
-    shootsCount: 'Not included',
-    keyHighlights: [
-      '6 Posts',
-      '3 Reels',
-      '1 Social Media Platform',
-      'Caption Writing',
-      'Hashtag Research',
-      'Content Writing',
-      'Social Media Account Audit',
-    ],
-  },
-  {
-    name: 'Growth',
-    slug: 'growth',
-    badge: 'Most Popular',
-    monthlyPrice: 10000,
-    priceDisplay: '₹10,000/month',
-    minimumCommitment: 'Monthly',
-    platforms: ['Instagram', 'Facebook'],
-    postsCount: '10 Posts',
-    reelsCount: '10 Reels',
-    shootsCount: 'Not included',
-    isFeatured: true,
-    keyHighlights: [
-      '10 Posts',
-      '10 Reels',
-      '6 Carousel Posts',
-      'Instagram + Facebook Management',
-      'Profile Optimization for Both Platforms',
-      'Caption Writing',
-      'Hashtag Research',
-      'Content Writing',
-      'Monthly Content Planning',
-    ],
-  },
-  {
-    name: 'Premium',
-    slug: 'premium',
-    badge: 'Full Production',
-    monthlyPrice: 20000,
-    priceDisplay: '₹20,000/month',
-    minimumCommitment: 'Monthly',
-    platforms: ['Instagram', 'Facebook'],
-    postsCount: '15 Posts',
-    reelsCount: '10 Reels',
-    shootsCount: '1 Professional Shoot Day',
-    keyHighlights: [
-      '15 Posts',
-      '10 Reels',
-      '3 Carousel Posts',
-      '2 Meme Creatives',
-      '1 Professional Shoot Day at Client Location by Our Team',
-      'Instagram + Facebook Management',
-      'Caption Writing',
-      'Hashtag Research',
-      'Content Writing',
-      'Monthly Content Calendar',
-    ],
-  },
-];
-
 export default function PackagesPage() {
-  const [packages, setPackages] = useState(FALLBACK_PACKAGES);
-  const [loading, setLoading] = useState(true);
+  const [packages, setPackages] = useState(PACKAGES_CATALOG);
+  const [loading, setLoading] = useState(false);
   const [enquiryModalPkg, setEnquiryModalPkg] = useState(null);
   const navigate = useNavigate();
 
@@ -123,11 +54,13 @@ export default function PackagesPage() {
       try {
         const res = await fetch(`${API_URL}/packages`);
         const json = await res.json();
-        if (isMounted && json.success && Array.isArray(json.data) && json.data.length > 0) {
+        if (isMounted && json.success && Array.isArray(json.data) && json.data.length === 4) {
           setPackages(json.data);
+        } else if (isMounted) {
+          setPackages(PACKAGES_CATALOG);
         }
       } catch (err) {
-        // Fallback already in place
+        if (isMounted) setPackages(PACKAGES_CATALOG);
       } finally {
         if (isMounted) setLoading(false);
       }
@@ -175,7 +108,7 @@ export default function PackagesPage() {
         return;
       }
     } catch (err) {
-      // Fallback to WhatsApp
+      // Fallback below
     }
 
     const cleanPhone = (BRAND.phone || '').replace(/\D/g, '');
@@ -190,8 +123,8 @@ export default function PackagesPage() {
   return (
     <>
       <SEO
-        title="Social Media Management Packages — Transparent Retainers"
-        description="Choose from DigiBuddy4U's official Social Media Management Packages: Basic (₹5,000/mo), Growth (₹10,000/mo - Most Popular), and Premium (₹20,000/mo)."
+        title="Packages & Pricing — DigiBuddy4U Digital Marketing & Growth"
+        description="Explore DigiBuddy4U's official 4 packages: Social Media Starter (₹10,000/mo), Business Startup Setup (₹15,000 One-Time), Business Growth (₹20,000/mo - Most Popular), and Premium Brand Scale (₹80,000/campaign)."
       />
 
       {/* Header Banner */}
@@ -205,31 +138,31 @@ export default function PackagesPage() {
           </Badge>
 
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-heading font-black tracking-tight max-w-4xl mx-auto leading-tight text-navy-950">
-            Social Media Management{' '}
+            Digital Growth & Marketing{' '}
             <span className="bg-gradient-to-r from-primary to-cyan-500 bg-clip-text text-transparent">
               Packages
             </span>
           </h1>
 
           <p className="mt-4 sm:mt-5 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            Consistent content creation, strategic hashtag research, and dedicated community growth. Fixed monthly retainers with guaranteed deliverables and zero hidden costs.
+            From essential social consistency and one-time business foundation setup to full-scale creative production and Meta ads dominance.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 text-slate-700 text-xs font-bold">
-              <Check className="w-4 h-4 text-primary" /> Guaranteed Monthly Deliverables
+              <Check className="w-4 h-4 text-primary" /> Guaranteed Deliverables & Timelines
             </span>
             <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 text-slate-700 text-xs font-bold">
-              <Check className="w-4 h-4 text-primary" /> Professional Copywriting & Research
+              <Check className="w-4 h-4 text-primary" /> 100% Pre-Approval Policy
             </span>
             <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 text-slate-700 text-xs font-bold">
-              <Check className="w-4 h-4 text-primary" /> No Lock-in Contracts
+              <Check className="w-4 h-4 text-primary" /> Direct WhatsApp Senior Strategist Access
             </span>
           </div>
         </div>
       </section>
 
-      {/* Main Social Media Management Packages Grid */}
+      {/* Main Packages Grid (Desktop 4-col, Tablet 2-col, Mobile 1-col) */}
       <section className="py-14 sm:py-20 lg:py-24 bg-surface-light min-h-[60vh]">
         <div className="site-container">
           {loading ? (
@@ -237,109 +170,205 @@ export default function PackagesPage() {
               <LoadingSpinner size="lg" text="Loading official packages..." />
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch max-w-6xl mx-auto">
-              {displayedPackages.map((pkg) => {
-                const isFeatured = pkg.isFeatured || pkg.slug === 'growth';
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-5 xl:gap-6 items-stretch mx-auto">
+              {displayedPackages.map((pkg, idx) => {
+                const isGrowth = pkg.slug === 'growth' || pkg.badge === 'Most Popular';
+                const isPremium = pkg.slug === 'premium' || pkg.badge === 'Premium';
+                const isSetup = pkg.billingType === 'One-Time' || pkg.slug === 'startup-setup';
                 const isSaved = isPackageSaved(pkg._id || pkg.slug);
 
                 return (
                   <div
-                    key={pkg.slug}
-                    className={`rounded-2xl sm:rounded-3xl p-4 xs:p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 relative group ${
-                      isFeatured
+                    key={pkg.slug || idx}
+                    className={`rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-5 xl:p-6 flex flex-col justify-between transition-all duration-300 relative group ${
+                      isGrowth
                         ? 'bg-white border-2 border-primary shadow-2xl ring-4 ring-primary/10 lg:-translate-y-2'
+                        : isPremium
+                        ? 'bg-gradient-to-b from-white via-slate-50/70 to-white border-2 border-navy-900 shadow-2xl ring-4 ring-navy-900/10 lg:-translate-y-2'
                         : 'bg-white border border-slate-200/90 shadow-card-soft hover:shadow-card-hover'
                     }`}
                   >
-                    {/* Most Popular Badge */}
-                    {isFeatured && (
-                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                    {/* Top Floating Badge for Most Popular & Premium */}
+                    {isGrowth && (
+                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20">
                         <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-accent-yellow text-navy-950 font-heading font-extrabold text-xs uppercase tracking-wider shadow-md">
-                          <Sparkles className="w-3.5 h-3.5 fill-current" />
+                          <Sparkles className="w-3.5 h-3.5 fill-current text-navy-950" />
                           Most Popular
                         </span>
                       </div>
                     )}
 
-                    <div className="space-y-5">
+                    {isPremium && (
+                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20">
+                        <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-navy-950 text-cyan-accent border border-cyan-accent/30 font-heading font-extrabold text-xs uppercase tracking-wider shadow-md">
+                          <Crown className="w-3.5 h-3.5 text-accent-yellow" />
+                          Premium
+                        </span>
+                      </div>
+                    )}
+
+                    <div className="space-y-4">
                       {/* Top Bar: Title & Heart button */}
-                      <div className="flex items-start justify-between">
-                        <div>
-                          <Badge variant={isFeatured ? 'blue' : 'slate'} size="sm">
-                            {pkg.badge || 'Monthly'}
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex items-center gap-1.5">
+                          <Badge
+                            variant={
+                              isGrowth
+                                ? 'yellow'
+                                : isPremium
+                                ? 'blue'
+                                : isSetup
+                                ? 'blue'
+                                : 'slate'
+                            }
+                            size="sm"
+                          >
+                            {pkg.badge || (isSetup ? 'Business Setup' : 'Monthly')}
                           </Badge>
-                          <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-navy-900 mt-2 tracking-tight">
-                            {pkg.name}
-                          </h3>
+                          {isSetup && (
+                            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                              One-Time
+                            </span>
+                          )}
                         </div>
 
                         <button
                           type="button"
                           onClick={() => toggleSavePackage(pkg.slug)}
                           title={isSaved ? 'Remove from shortlist' : 'Save to shortlist'}
-                          className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${
+                          className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all ${
                             isSaved
                               ? 'bg-red-50 text-red-500 shadow-xs'
                               : 'bg-slate-100 text-slate-400 hover:text-red-500 hover:bg-red-50'
                           }`}
                         >
-                          <Heart className={`w-4 h-4 ${isSaved ? 'fill-current' : ''}`} />
+                          <Heart className={`w-3.5 h-3.5 ${isSaved ? 'fill-current' : ''}`} />
                         </button>
                       </div>
 
-                      {/* Pricing Display */}
-                      <div className="pt-1">
-                        <div className="text-3xl sm:text-4xl font-heading font-black text-navy-900 tracking-tight">
-                          {pkg.priceDisplay || `₹${pkg.monthlyPrice?.toLocaleString('en-IN')}/month`}
-                        </div>
-                        <div className="text-xs text-content-muted mt-1 font-medium">
-                          Billed monthly &bull; Minimum 1 month commitment
-                        </div>
-                      </div>
+                      {/* Package Name */}
+                      <div>
+                        <h3 className="text-xl sm:text-2xl font-heading font-extrabold text-navy-950 tracking-tight leading-tight min-h-[56px] flex items-center">
+                          {pkg.name}
+                        </h3>
 
-                      {/* Platforms Badge Strip */}
-                      <div className="pt-2 border-t border-slate-100 flex flex-wrap gap-1.5">
-                        {(pkg.platforms || ['Instagram']).map((plat, pIdx) => (
-                          <span
-                            key={pIdx}
-                            className="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-slate-100 text-navy-900"
-                          >
-                            {plat}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Bullet Highlights Checklist */}
-                      <div className="space-y-2.5 pt-3 border-t border-slate-100 text-xs sm:text-sm text-content-dark">
-                        {(pkg.keyHighlights || []).map((item, i) => (
-                          <div key={i} className="flex items-start gap-2.5">
-                            <div className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 mt-0.5">
-                              <Check className="w-3.5 h-3.5 stroke-[2.5]" />
-                            </div>
-                            <span className="leading-snug font-medium text-navy-900">{item}</span>
+                        {/* Price & Billing */}
+                        <div className="mt-2.5 pb-3 border-b border-slate-100">
+                          <div className="flex items-baseline gap-1.5 flex-wrap">
+                            <span className="text-2xl sm:text-3xl font-heading font-black text-navy-950 tracking-tight">
+                              ₹{pkg.monthlyPrice?.toLocaleString('en-IN')}
+                            </span>
+                            <span className="text-xs sm:text-sm font-bold text-slate-500">
+                              {pkg.billingType === 'One-Time'
+                                ? '/ One-Time'
+                                : pkg.billingType === 'Campaign'
+                                ? '/ Campaign'
+                                : '/ Month'}
+                            </span>
                           </div>
-                        ))}
+                          <span className="text-[11px] text-content-muted block mt-1 font-medium">
+                            {pkg.billingSubtitle || (isSetup ? 'One-time setup' : 'Billed monthly')}
+                          </span>
+                        </div>
+
+                        {/* Description */}
+                        <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed min-h-[54px]">
+                          {pkg.description}
+                        </p>
                       </div>
+
+                      {/* Features Highlights List */}
+                      <div className="pt-2 space-y-2">
+                        <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400 block">
+                          Included Services:
+                        </span>
+
+                        <div className="space-y-2 text-xs sm:text-[13px] text-slate-700">
+                          {(pkg.keyHighlights || []).map((highlight, hIdx) => {
+                            const isNote = highlight.toLowerCase().includes('note:') || highlight.toLowerCase().includes('one-time setup');
+                            return (
+                              <div
+                                key={hIdx}
+                                className={`flex items-start gap-2 ${
+                                  isNote
+                                    ? 'p-1.5 rounded-lg bg-amber-50/80 border border-amber-200/80 text-amber-900 font-semibold text-[11px]'
+                                    : ''
+                                }`}
+                              >
+                                {!isNote ? (
+                                  <div
+                                    className={`w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                                      isGrowth
+                                        ? 'bg-primary text-white'
+                                        : isPremium
+                                        ? 'bg-navy-900 text-cyan-accent'
+                                        : 'bg-primary/10 text-primary'
+                                    }`}
+                                  >
+                                    <Check className="w-2.5 h-2.5 stroke-[2.5]" />
+                                  </div>
+                                ) : (
+                                  <Info className="w-3.5 h-3.5 text-amber-600 flex-shrink-0 mt-0.5" />
+                                )}
+                                <span className="leading-snug">{highlight}</span>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      {/* Premium Package Additional Costs Notice */}
+                      {isPremium && (
+                        <div className="mt-4 p-3 rounded-2xl bg-slate-50 border border-slate-200 text-[11px] space-y-1.5 text-slate-600">
+                          <div className="flex items-center gap-1.5 font-bold text-navy-950">
+                            <AlertCircle className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
+                            <span>Additional Expenses Notice:</span>
+                          </div>
+                          <p className="text-[10px] leading-relaxed text-slate-500">
+                            The following expenses are not included in the ₹80,000 package price and will be charged separately wherever applicable:
+                          </p>
+                          <ul className="list-disc list-inside text-[10px] text-slate-600 space-y-0.5 pl-1">
+                            <li>Influencer Collaboration Fees</li>
+                            <li>Model Fees / Booking Charges</li>
+                            <li>Meta Ads Budget / Ad Spend</li>
+                            <li>Travel & Transportation Expenses</li>
+                            <li>Location / Studio Rental Charges</li>
+                            <li>Props, Costumes & Extra Requirements</li>
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* One-Time Setup Callout */}
+                      {isSetup && (
+                        <div className="mt-3 p-2.5 rounded-xl bg-blue-50/70 border border-blue-200/80 text-[11px] text-blue-900 flex items-start gap-1.5">
+                          <Info className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
+                          <span>
+                            <strong>Note:</strong> This is a one-time setup package, not a monthly subscription.
+                          </span>
+                        </div>
+                      )}
                     </div>
 
-                    {/* Bottom Action Buttons */}
-                    <div className="pt-6 mt-6 border-t border-slate-100 space-y-2.5">
+                    {/* Bottom Actions */}
+                    <div className="pt-5 mt-5 border-t border-slate-100 space-y-2">
                       <Button
                         type="button"
                         onClick={() => handleGetStarted(pkg)}
-                        variant={isFeatured ? 'yellow' : 'primary'}
-                        size="lg"
-                        className="w-full justify-center font-heading font-bold text-sm shadow-md transition-all active:scale-98"
+                        variant={isGrowth ? 'yellow' : isPremium ? 'primary' : 'primary'}
+                        size="md"
+                        className={`w-full justify-center font-heading font-bold text-xs sm:text-sm shadow-md transition-all active:scale-98 ${
+                          isPremium ? 'bg-navy-950 hover:bg-navy-900 text-white' : ''
+                        }`}
                         icon={ArrowRight}
                       >
-                        Get Started
+                        Choose Plan / Enquire
                       </Button>
 
                       <div className="grid grid-cols-2 gap-2">
                         <button
                           type="button"
                           onClick={() => handleMoreDetails(pkg)}
-                          className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-navy-900 font-heading font-bold text-xs transition-colors"
+                          className="inline-flex items-center justify-center gap-1 py-1.5 px-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-navy-950 font-heading font-bold text-[11px] transition-colors"
                         >
                           <span>Full Scope</span>
                         </button>
@@ -347,10 +376,11 @@ export default function PackagesPage() {
                         <button
                           type="button"
                           onClick={() => handleDownloadPdf(pkg)}
-                          className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-navy-900 font-heading font-bold text-xs transition-colors"
+                          className="inline-flex items-center justify-center gap-1 py-1.5 px-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-navy-950 font-heading font-bold text-[11px] transition-colors"
+                          title={`Download official ${pkg.name} PDF`}
                         >
-                          <Download className="w-3.5 h-3.5 text-primary" />
-                          <span>PDF Spec</span>
+                          <Download className="w-3 h-3 text-primary" />
+                          <span>PDF</span>
                         </button>
                       </div>
                     </div>
@@ -359,68 +389,13 @@ export default function PackagesPage() {
               })}
             </div>
           )}
-
-          {/* Standard Operating Workflow Strip */}
-          <div className="mt-14 sm:mt-20 p-6 sm:p-10 rounded-3xl bg-white text-navy-950 border border-slate-200/90 shadow-card-soft max-w-6xl mx-auto">
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 border-b border-slate-100">
-              <div>
-                <Badge variant="blue" size="sm">
-                  Monthly Rhythm
-                </Badge>
-                <h3 className="text-xl sm:text-2xl font-heading font-extrabold text-navy-950 mt-1">
-                  How Every Month Works With DigiBuddy4U
-                </h3>
-              </div>
-              <span className="text-xs text-slate-500 font-medium">
-                Structured 5-Stage Monthly Social Media Execution
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-6">
-              <div className="p-4 rounded-2xl bg-surface-light border border-slate-200 space-y-1">
-                <span className="text-[11px] font-mono text-primary font-bold uppercase">
-                  Days 1 to 3 &bull; Input
-                </span>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  You share monthly offers, goals, product details, and raw media in our shared drive.
-                </p>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-surface-light border border-slate-200 space-y-1">
-                <span className="text-[11px] font-mono text-cyan-600 font-bold uppercase">
-                  Days 3 to 7 &bull; Plan
-                </span>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  We prepare the content calendar, copy, and scripts. For Premium, shoot day takes place.
-                </p>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-surface-light border border-slate-200 space-y-1">
-                <span className="text-[11px] font-mono text-primary font-bold uppercase">
-                  Days 7 to 20 &bull; Create
-                </span>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  We edit reels, design posts & carousels, and submit for client review and revisions.
-                </p>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-surface-light border border-slate-200 space-y-1">
-                <span className="text-[11px] font-mono text-emerald-600 font-bold uppercase">
-                  Days 20 to 30+ &bull; Publish
-                </span>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Scheduled publishing at peak times, account optimization, and monthly analytics review.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* A La Carte Add-Ons & Extra Services Section */}
+      {/* On-Demand Addons Section */}
       <AddonsSection />
 
-      {/* Choice Modal: Enquire on WhatsApp vs Website */}
+      {/* Choice Modal: Enquire on WhatsApp vs Website Form */}
       <PackageEnquiryChoiceModal
         isOpen={Boolean(enquiryModalPkg)}
         onClose={() => setEnquiryModalPkg(null)}

@@ -39,7 +39,10 @@ export default function PackageDetailPage() {
   const { isAuthenticated, customer, token, toggleSavePackage, isPackageSaved, trackEvent } = useCustomerAuth();
 
   // Instant fallback to local catalog so user never sees "Failed to fetch" or empty state
-  const catalogMatch = PACKAGES_CATALOG.find((p) => p.slug === slug) || PACKAGES_CATALOG.find((p) => p.slug === 'growth') || PACKAGES_CATALOG[0];
+  const catalogMatch =
+    PACKAGES_CATALOG.find((p) => p.slug === slug || (p.aliases && p.aliases.includes(slug))) ||
+    PACKAGES_CATALOG.find((p) => p.slug === 'growth') ||
+    PACKAGES_CATALOG[0];
 
   const [pkg, setPkg] = useState(catalogMatch);
   const [downloadingPdf, setDownloadingPdf] = useState(false);
@@ -72,7 +75,10 @@ export default function PackageDetailPage() {
 
   useEffect(() => {
     let isMounted = true;
-    const initialFallback = PACKAGES_CATALOG.find((p) => p.slug === slug) || PACKAGES_CATALOG.find((p) => p.slug === 'growth') || PACKAGES_CATALOG[0];
+    const initialFallback =
+      PACKAGES_CATALOG.find((p) => p.slug === slug || (p.aliases && p.aliases.includes(slug))) ||
+      PACKAGES_CATALOG.find((p) => p.slug === 'growth') ||
+      PACKAGES_CATALOG[0];
     if (initialFallback) {
       setPkg(initialFallback);
       trackEvent?.('package_details_view', { slug: initialFallback.slug, name: initialFallback.name });
@@ -91,6 +97,8 @@ export default function PackageDetailPage() {
           setPkg((prev) => ({
             ...prev,
             ...data.data,
+            sections: data.data.sections?.length ? data.data.sections : prev?.sections,
+            additionalCostsList: data.data.additionalCostsList?.length ? data.data.additionalCostsList : prev?.additionalCostsList,
             fullInclusions: data.data.fullInclusions?.length ? data.data.fullInclusions : prev?.fullInclusions,
             exclusions: data.data.exclusions?.length ? data.data.exclusions : prev?.exclusions,
             clientRequirements: data.data.clientRequirements?.length ? data.data.clientRequirements : prev?.clientRequirements,
@@ -242,6 +250,15 @@ export default function PackageDetailPage() {
                   </span>
                 )}
               </div>
+
+              {pkg.note && (
+                <div className="mt-3 p-3 rounded-2xl bg-blue-50/80 border border-blue-200/90 text-xs sm:text-sm text-blue-900 flex items-center gap-2 max-w-xl">
+                  <AlertCircle className="w-4 h-4 text-primary flex-shrink-0" />
+                  <span>
+                    <strong>Note:</strong> {pkg.note}
+                  </span>
+                </div>
+              )}
             </div>
 
             {/* Top Action Buttons */}
@@ -383,6 +400,60 @@ export default function PackageDetailPage() {
             </div>
           </div>
         </section>
+
+        {/* SECTION 1B: Structured Module Breakdown */}
+        {pkg.sections && pkg.sections.length > 0 && (
+          <section className="space-y-4">
+            <h2 className="text-xl sm:text-2xl font-heading font-bold text-navy-900">
+              Detailed Deliverable Architecture
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              {pkg.sections.map((sec, sIdx) => (
+                <div
+                  key={sIdx}
+                  className="p-6 rounded-3xl bg-white border border-slate-200/90 shadow-card-soft space-y-3"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="w-6 h-6 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold text-xs">
+                      {sIdx + 1}
+                    </span>
+                    <h3 className="font-heading font-bold text-navy-950 text-base">{sec.title}</h3>
+                  </div>
+                  <ul className="space-y-2 text-xs sm:text-sm text-slate-700">
+                    {sec.items.map((it, itIdx) => (
+                      <li key={itIdx} className="flex items-start gap-2">
+                        <Check className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-1" />
+                        <span>{it}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Mandatory Additional Costs Notice for Premium Package */}
+        {pkg.additionalCostsList && pkg.additionalCostsList.length > 0 && (
+          <section className="p-6 sm:p-7 rounded-3xl bg-amber-50/70 border-2 border-amber-300 shadow-sm space-y-3">
+            <div className="flex items-center gap-2 text-amber-950 font-heading font-bold text-base">
+              <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0" />
+              <span>Important – Additional Costs Notice for {pkg.name}</span>
+            </div>
+            <p className="text-xs sm:text-sm text-amber-900 font-medium leading-relaxed">
+              The following expenses are not included in the ₹80,000 package price and will be charged separately wherever applicable:
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm text-amber-950 pt-1">
+              {pkg.additionalCostsList.map((item, cIdx) => (
+                <div key={cIdx} className="flex items-start gap-2">
+                  <span className="text-amber-600 font-bold">•</span>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* SECTION 2: Inclusions vs Exclusions */}
         <section className="space-y-4">

@@ -5,18 +5,22 @@ import { generatePackagePDF } from '../services/pdfGenerator.js';
 import { PACKAGES_CATALOG } from '../utils/packagesCatalog.js';
 
 /**
- * Ensure database is seeded with initial PDF packages if empty
+ * Ensure database is seeded with initial PDF packages if empty or outdated
  */
 export async function seedPackagesIfEmpty() {
   try {
-    const count = await Package.countDocuments();
-    if (count === 0) {
-      console.log('📦 Seeding initial packages from PDF catalog...');
-      await Package.insertMany(PACKAGES_CATALOG);
-      console.log('✅ 5 Packages seeded successfully into MongoDB Atlas.');
+    for (const pkgData of PACKAGES_CATALOG) {
+      await Package.findOneAndUpdate(
+        { slug: pkgData.slug },
+        { $set: pkgData },
+        { upsert: true, new: true }
+      );
     }
+    const validSlugs = PACKAGES_CATALOG.map((p) => p.slug);
+    await Package.deleteMany({ slug: { $nin: validSlugs } });
+    console.log('✅ 4 DigiBuddy4U packages synchronized successfully into MongoDB Atlas.');
   } catch (err) {
-    console.error('Error seeding packages:', err.message);
+    console.error('Error synchronizing packages:', err.message);
   }
 }
 
@@ -27,9 +31,17 @@ export async function getPublicPackages(req, res) {
   try {
     let packages = await Package.find({ isPublished: true }).sort({ order: 1, monthlyPrice: 1 });
     
-    // Auto-seed if empty
-    if (packages.length === 0) {
-      await Package.insertMany(PACKAGES_CATALOG);
+    // Auto-seed/resync if count doesn't match canonical 4 packages
+    if (packages.length !== PACKAGES_CATALOG.length) {
+      for (const pkgData of PACKAGES_CATALOG) {
+        await Package.findOneAndUpdate(
+          { slug: pkgData.slug },
+          { $set: pkgData },
+          { upsert: true, new: true }
+        );
+      }
+      const validSlugs = PACKAGES_CATALOG.map((p) => p.slug);
+      await Package.deleteMany({ slug: { $nin: validSlugs } });
       packages = await Package.find({ isPublished: true }).sort({ order: 1, monthlyPrice: 1 });
     }
 
@@ -39,10 +51,11 @@ export async function getPublicPackages(req, res) {
       data: packages,
     });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: 'Failed to retrieve packages catalogue.',
-      error: error.message,
+    // Graceful fallback to static catalog
+    res.status(200).json({
+      success: true,
+      count: PACKAGES_CATALOG.length,
+      data: PACKAGES_CATALOG,
     });
   }
 }
@@ -57,7 +70,9 @@ export async function getPackageBySlug(req, res) {
     let pkg = await Package.findOne({ slug, isPublished: true });
 
     if (!pkg) {
-      const catalogItem = PACKAGES_CATALOG.find((p) => p.slug === slug);
+      const catalogItem = PACKAGES_CATALOG.find(
+        (p) => p.slug === slug || (p.aliases && p.aliases.includes(slug))
+      );
       if (catalogItem) {
         pkg = catalogItem;
       } else {
