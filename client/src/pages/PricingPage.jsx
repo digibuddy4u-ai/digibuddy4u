@@ -18,6 +18,10 @@ import {
   ShieldCheck,
   Zap,
   MessageCircle,
+  Film,
+  Search,
+  Target,
+  MapPin,
 } from 'lucide-react';
 import SEO from '../components/common/SEO';
 import SectionHeader from '../components/common/SectionHeader';
@@ -27,9 +31,11 @@ import FAQAccordion from '../components/ui/FAQAccordion';
 import { PRICING_PACKAGES } from '../utils/pricingData';
 import { FAQ_DATA } from '../utils/faqData';
 import { BRAND } from '../utils/brandConstants';
+import { getDeliverableIcon } from '../utils/featureIconHelper';
 
 const CHIP_ICONS = {
   Video,
+  Film,
   Layers,
   Globe,
   Compass,
@@ -37,6 +43,9 @@ const CHIP_ICONS = {
   TrendingUp,
   CheckCircle2,
   Zap,
+  Search,
+  Target,
+  MapPin,
 };
 
 export default function PricingPage() {
@@ -80,7 +89,7 @@ export default function PricingPage() {
           {/* 1. HORIZONTAL FEATURED CARD: Digital Launch Kit (₹15,000 One-Time Setup) */}
           {/* ======================================================== */}
           {setupPkg && (
-            <div className="max-w-6xl mx-auto rounded-3xl bg-gradient-to-br from-white via-cyan-50/40 to-blue-50/50 border-2 border-cyan-300 shadow-xl shadow-cyan-900/5 relative p-6 sm:p-8 lg:p-10 mb-12 sm:mb-16">
+            <div className="w-full rounded-3xl bg-gradient-to-br from-white via-cyan-50/40 to-blue-50/50 border-2 border-cyan-300 shadow-xl shadow-cyan-900/5 relative p-6 sm:p-8 lg:p-10 mb-12 sm:mb-16">
               {/* Ambient Lighting */}
               <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-400/10 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute bottom-0 left-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
@@ -93,9 +102,9 @@ export default function PricingPage() {
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-10 items-stretch relative z-10">
-                {/* Left Column: Title, Price, Description & Chips (lg:col-span-4) */}
-                <div className="lg:col-span-4 flex flex-col justify-between pr-0 lg:pr-6 border-b lg:border-b-0 lg:border-r border-slate-200/80 pb-6 lg:pb-0">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-10 items-stretch relative z-10">
+                {/* Left Column: Title, Price, Description & Chips */}
+                <div className="lg:col-span-4 xl:col-span-3 flex flex-col justify-between pr-0 lg:pr-6 border-b lg:border-b-0 lg:border-r border-slate-200/80 pb-6 lg:pb-0">
                   <div className="space-y-4">
                     {/* Top Bar Badges */}
                     <div className="flex items-center gap-1.5 flex-wrap">
@@ -161,8 +170,8 @@ export default function PricingPage() {
                   </div>
                 </div>
 
-                {/* Middle Column: Included Scope Checklist (lg:col-span-5) */}
-                <div className="lg:col-span-5 flex flex-col justify-between py-2 lg:py-0">
+                {/* Middle Column: Included Scope Checklist */}
+                <div className="lg:col-span-5 xl:col-span-6 flex flex-col justify-between py-2 lg:py-0">
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-mono font-bold uppercase tracking-wider text-navy-950 block">
@@ -173,16 +182,17 @@ export default function PricingPage() {
                       </span>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-2 text-xs text-slate-700">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-2.5 text-xs text-slate-700">
                       {(setupPkg.features || []).map((highlight, hIdx) => {
                         if (highlight.toLowerCase().includes('note:')) return null;
+                        const { icon: ItemIcon, badgeClass } = getDeliverableIcon(highlight);
 
                         return (
-                          <div key={hIdx} className="flex items-start gap-2 bg-white/80 p-2.5 rounded-xl border border-slate-200/70 shadow-xs">
-                            <div className="w-4 h-4 rounded-full bg-emerald-500 text-white flex items-center justify-center flex-shrink-0 mt-0.5">
-                              <Check className="w-2.5 h-2.5 stroke-[2.5]" />
+                          <div key={hIdx} className="flex items-center gap-2.5 bg-white/90 p-2.5 rounded-xl border border-slate-200/80 shadow-xs hover:border-cyan-300 transition-colors">
+                            <div className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${badgeClass}`}>
+                              <ItemIcon className="w-3.5 h-3.5" />
                             </div>
-                            <span className="leading-snug font-medium text-slate-800">{highlight}</span>
+                            <span className="leading-snug font-semibold text-slate-800">{highlight}</span>
                           </div>
                         );
                       })}
@@ -193,22 +203,22 @@ export default function PricingPage() {
                   <div className="mt-4 p-3 rounded-2xl bg-cyan-100/60 border border-cyan-200 text-xs text-cyan-950 flex items-center gap-2.5">
                     <Zap className="w-4 h-4 text-cyan-700 flex-shrink-0" />
                     <span>
-                      <strong>Ready-to-Use Business Foundation:</strong> Complete website, verified Google Business Profile, WhatsApp setup, and directed ad shoot.
+                      <strong>Ready-to-Use Business Foundation:</strong> Complete website, Google Business Profile, WhatsApp setup, Instagram & Facebook setup, and directed model ad shoot.
                     </span>
                   </div>
                 </div>
 
-                {/* Right Column: Pricing & Action Buttons (lg:col-span-3) */}
-                <div className="lg:col-span-3 flex flex-col justify-center gap-3 pl-0 lg:pl-6 border-t lg:border-t-0 lg:border-l border-slate-200/80 pt-6 lg:pt-0">
+                {/* Right Column: Pricing & Action Buttons */}
+                <div className="lg:col-span-3 xl:col-span-3 flex flex-col justify-center gap-3 pl-0 lg:pl-6 border-t lg:border-t-0 lg:border-l border-slate-200/80 pt-6 lg:pt-0">
                   <div className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm space-y-3.5 text-center">
                     <div className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200/60">
                       <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
                       <span>One-Time Investment</span>
                     </div>
 
-                    <div>
-                      <span className="text-xs text-slate-500 block font-medium">All-Inclusive Price</span>
+                    <div className="pt-1">
                       <span className="text-3xl sm:text-4xl font-heading font-black text-navy-950">₹15,000</span>
+                      <span className="text-xs font-bold text-slate-500 block mt-0.5">/ One-Time Setup</span>
                     </div>
 
                     <Button
@@ -257,7 +267,7 @@ export default function PricingPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-6 xl:gap-8 max-w-6xl mx-auto items-stretch">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7 xl:gap-8 w-full items-stretch">
               {retainerPackages.map((pkg, idx) => {
                 const isGrowth = pkg.recommended || pkg.badge === 'Most Popular';
                 const isPremium = pkg.isPremium || pkg.badge === 'Premium';
@@ -378,24 +388,17 @@ export default function PricingPage() {
                         <span className="text-[10px] font-bold uppercase tracking-wider text-navy-900 block font-mono">
                           Included in this Package:
                         </span>
-                        <ul className="space-y-1.5 text-xs text-content-dark">
+                        <ul className="space-y-2 text-xs text-content-dark">
                           {pkg.features.map((feature, fIdx) => {
                             if (feature.toLowerCase().includes('note:')) return null;
+                            const { icon: ItemIcon, badgeClass } = getDeliverableIcon(feature);
 
                             return (
-                              <li key={fIdx} className="flex items-start gap-2">
-                                <div
-                                  className={`w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
-                                    isGrowth
-                                      ? 'bg-primary text-white'
-                                      : isPremium
-                                      ? 'bg-navy-900 text-cyan-accent'
-                                      : 'bg-primary/10 text-primary'
-                                  }`}
-                                >
-                                  <Check className="w-2.5 h-2.5 stroke-[2.5]" />
+                              <li key={fIdx} className="flex items-center gap-2.5">
+                                <div className={`w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 ${badgeClass}`}>
+                                  <ItemIcon className="w-3.5 h-3.5" />
                                 </div>
-                                <span className="leading-snug">{feature}</span>
+                                <span className="leading-snug font-medium text-slate-700">{feature}</span>
                               </li>
                             );
                           })}

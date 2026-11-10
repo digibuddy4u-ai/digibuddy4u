@@ -32,6 +32,7 @@ import { useSiteSettings } from '../context/SiteSettingsContext';
 import { BRAND } from '../utils/brandConstants';
 import { API_URL } from '../utils/api';
 import { PACKAGES_CATALOG } from '../utils/packagesCatalog';
+import { getDeliverableIcon } from '../utils/featureIconHelper';
 
 export default function PackageDetailPage() {
   const { slug } = useParams();
@@ -96,15 +97,9 @@ export default function PackageDetailPage() {
 
         if (isMounted && data.success && data.data) {
           setPkg((prev) => ({
-            ...prev,
             ...data.data,
-            sections: data.data.sections?.length ? data.data.sections : prev?.sections,
-            additionalCostsList: data.data.additionalCostsList?.length ? data.data.additionalCostsList : prev?.additionalCostsList,
-            fullInclusions: data.data.fullInclusions?.length ? data.data.fullInclusions : prev?.fullInclusions,
-            exclusions: data.data.exclusions?.length ? data.data.exclusions : prev?.exclusions,
-            clientRequirements: data.data.clientRequirements?.length ? data.data.clientRequirements : prev?.clientRequirements,
-            monthlyWorkflow: data.data.monthlyWorkflow?.length ? data.data.monthlyWorkflow : prev?.monthlyWorkflow,
-            generalTerms: data.data.generalTerms?.length ? data.data.generalTerms : prev?.generalTerms,
+            ...prev,
+            _id: data.data._id || prev?._id,
           }));
         }
       } catch (err) {
@@ -421,13 +416,18 @@ export default function PackageDetailPage() {
                     </span>
                     <h3 className="font-heading font-bold text-navy-950 text-base">{sec.title}</h3>
                   </div>
-                  <ul className="space-y-2 text-xs sm:text-sm text-slate-700">
-                    {sec.items.map((it, itIdx) => (
-                      <li key={itIdx} className="flex items-start gap-2">
-                        <Check className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-1" />
-                        <span>{it}</span>
-                      </li>
-                    ))}
+                  <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700">
+                    {sec.items.map((it, itIdx) => {
+                      const { icon: ItemIcon, badgeClass } = getDeliverableIcon(it);
+                      return (
+                        <li key={itIdx} className="flex items-center gap-2.5">
+                          <div className={`w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 ${badgeClass}`}>
+                            <ItemIcon className="w-3.5 h-3.5" />
+                          </div>
+                          <span className="font-medium text-slate-800">{it}</span>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               ))}
@@ -470,12 +470,17 @@ export default function PackageDetailPage() {
                 <span>Everything Included in {pkg.name}</span>
               </div>
               <ul className="space-y-2.5 text-xs sm:text-sm text-content-dark">
-                {(pkg.fullInclusions || pkg.keyHighlights || []).map((inc, i) => (
-                  <li key={i} className="flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
-                    <span>{inc}</span>
-                  </li>
-                ))}
+                {(pkg.fullInclusions || pkg.keyHighlights || []).map((inc, i) => {
+                  const { icon: ItemIcon, badgeClass } = getDeliverableIcon(inc);
+                  return (
+                    <li key={i} className="flex items-center gap-2.5">
+                      <div className={`w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 ${badgeClass}`}>
+                        <ItemIcon className="w-3.5 h-3.5" />
+                      </div>
+                      <span className="font-medium text-slate-800">{inc}</span>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
 
