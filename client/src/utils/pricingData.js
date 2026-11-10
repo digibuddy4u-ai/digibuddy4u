@@ -158,7 +158,8 @@ export const PRICING_PACKAGES = [
     ],
     features: [
       '3 Model-Based Reels',
-      '2 Founder-Face Advertisement Reels',
+      '2 Reels (Founder Face & Build Trust)',
+      '2 Meta Ads Campaigns (Targeting & Reporting)',
       '10 Regular + 3 Carousel + 2 Meme Posts',
       'Creative Concept & Shoot Planning',
       'Script Writing for All Reels',
@@ -168,14 +169,13 @@ export const PRICING_PACKAGES = [
       'Engaging Captions & Hashtag Research',
       'Monthly Content Calendar & Scheduling',
       'Instagram & Facebook Full Management',
-      '2 Meta Ads Campaigns (Targeting & Reporting)',
     ],
     sections: [
       {
         title: 'Reels Production – 5 Reels',
         items: [
           '3 Model-Based Reels',
-          '2 Founder-Face / Founder-Led Advertisement Reels',
+          '2 Reels (Founder Face & Build Trust)',
         ],
       },
       {

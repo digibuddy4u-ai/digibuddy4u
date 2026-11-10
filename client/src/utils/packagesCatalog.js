@@ -281,7 +281,8 @@ export const PACKAGES_CATALOG = [
     ],
     keyHighlights: [
       '3 Model-Based Reels',
-      '2 Founder-Face Advertisement Reels',
+      '2 Reels (Founder Face & Build Trust)',
+      '2 Meta Ads Campaigns (Targeting & Reporting)',
       '10 Regular + 3 Carousel + 2 Meme Posts',
       'Creative Concept & Shoot Planning',
       'Script Writing for All Reels',
@@ -291,14 +292,13 @@ export const PACKAGES_CATALOG = [
       'Engaging Captions & Hashtag Research',
       'Monthly Content Calendar & Scheduling',
       'Instagram & Facebook Full Management',
-      '2 Meta Ads Campaigns (Targeting & Reporting)',
     ],
     sections: [
       {
         title: 'Reels Production – 5 Reels',
         items: [
           '3 Model-Based Reels',
-          '2 Founder-Face / Founder-Led Advertisement Reels',
+          '2 Reels (Founder Face & Build Trust)',
         ],
       },
       {
@@ -342,7 +342,7 @@ export const PACKAGES_CATALOG = [
     ],
     fullInclusions: [
       '3 Model-Based Reels Designed for High Engagement',
-      '2 Founder-Face / Founder-Led Advertisement Reels (5 Reels Total)',
+      '2 Reels (Founder Face & Build Trust — 5 Reels Total)',
       '10 Regular Social Media Posts with Brand Aesthetics',
       '3 High-Value Carousel Posts (Educational / Product Deep Dive)',
       '2 Meme / Trending Posts Tailored to Your Niche (15 Posts Total)',
