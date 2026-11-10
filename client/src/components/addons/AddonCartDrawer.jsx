@@ -102,7 +102,7 @@ export default function AddonCartDrawer() {
                 >
                   <option value="">No Package (Add-Ons Only / Standalone Quote)</option>
                   <option value="Brand Presence Starter (₹10,000/mo)">Brand Presence Starter (₹10,000/mo)</option>
-                  <option value="Digital Launch Kit (₹15,000 One-Time)">Digital Launch Kit (₹15,000 One-Time)</option>
+                  <option value="Brand Debut (₹15,000 One-Time)">Brand Debut (₹15,000 One-Time)</option>
                   <option value="Brand Growth Pro (₹20,000/mo) - Most Popular">Brand Growth Pro (₹20,000/mo) - Most Popular</option>
                   <option value="Ultimate Brand Domination (₹80,000/campaign) - Premium">Ultimate Brand Domination (₹80,000/campaign) - Premium</option>
                 </select>

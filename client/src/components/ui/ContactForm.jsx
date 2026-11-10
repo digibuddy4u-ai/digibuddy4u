@@ -330,7 +330,7 @@ export default function ContactForm({ prefilledService = '', defaultPlan = '' })
           <option value="Social Media Strategy">Social Media Strategy Audit</option>
           <option value="All-in-One Digital Growth">All-in-One Digital Growth Package</option>
           <option value="Package: Brand Presence Starter (₹10,000/mo)">Brand Presence Starter (₹10,000 / Month)</option>
-          <option value="Package: Digital Launch Kit (₹15,000 One-Time)">Digital Launch Kit (₹15,000 / One-Time)</option>
+          <option value="Package: Brand Debut (₹15,000 One-Time)">Brand Debut (₹15,000 / One-Time)</option>
           <option value="Package: Brand Growth Pro (₹20,000/mo)">Brand Growth Pro (₹20,000 / Month - Most Popular)</option>
           <option value="Package: Ultimate Brand Domination (₹80,000/campaign)">Ultimate Brand Domination (₹80,000 / Campaign)</option>
           <option value="Add-On: AI & Reel Editing (₹5,000/package)">Add-On: AI & Reel Editing (₹5,000 / Package)</option>

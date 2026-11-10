@@ -2,7 +2,7 @@
  * DigiBuddy4U Official Packages & Pricing
  * 4 Canonical Packages:
  * 1. Brand Presence Starter (₹10,000 / Month)
- * 2. Digital Launch Kit (₹15,000 / One-Time)
+ * 2. Brand Debut (₹15,000 / One-Time)
  * 3. Brand Growth Pro (₹20,000 / Month - Most Popular)
  * 4. Ultimate Brand Domination (₹80,000 / Campaign - Premium)
  */
@@ -71,8 +71,8 @@ export const PRICING_PACKAGES = [
   },
   {
     id: 'startup-setup',
-    name: 'Digital Launch Kit',
-    shortName: 'Launch Kit',
+    name: 'Brand Debut',
+    shortName: 'Brand Debut',
     slug: 'startup-setup',
     badge: 'Business Setup',
     tierCategory: 'Digital Foundation',

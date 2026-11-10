@@ -2,7 +2,7 @@
  * DigiBuddy4U Master Packages Catalogue (Backend Master)
  * 4 Official Packages:
  * 1. Brand Presence Starter (₹10,000 / Month)
- * 2. Digital Launch Kit (₹15,000 / One-Time)
+ * 2. Brand Debut (₹15,000 / One-Time)
  * 3. Brand Growth Pro (₹20,000 / Month - Most Popular)
  * 4. Ultimate Brand Domination (₹80,000 / Campaign - Premium)
  */
@@ -132,10 +132,10 @@ export const PACKAGES_CATALOG = [
     requiresLoginForPdf: false,
   },
   {
-    name: 'Digital Launch Kit',
-    shortName: 'Launch Kit',
+    name: 'Brand Debut',
+    shortName: 'Brand Debut',
     slug: 'startup-setup',
-    aliases: ['digital-launch-kit', 'business-startup-setup', 'setup'],
+    aliases: ['brand-debut', 'digital-launch-kit', 'business-startup-setup', 'setup'],
     badge: 'Business Setup',
     tierCategory: 'Digital Foundation',
     billingType: 'One-Time',
