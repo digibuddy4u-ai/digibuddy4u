@@ -471,11 +471,19 @@ export default function PricingPreviewSection() {
                             {pkg.billingType === 'Campaign' ? '/ Campaign' : '/ Month'}
                           </span>
                         </div>
-                        <span className="text-[11px] text-content-muted block mt-0.5 font-medium">
-                          {pkg.billingType === 'Campaign'
-                            ? 'End-to-end full campaign execution'
-                            : 'Billed monthly • Guaranteed deliverables'}
-                        </span>
+                        <div className="flex items-center gap-2 flex-wrap mt-1">
+                          <span className="text-[11px] text-content-muted font-medium">
+                            {pkg.billingType === 'Campaign'
+                              ? 'End-to-end full campaign execution'
+                              : 'Billed monthly'}
+                          </span>
+                          {pkg.billingType === 'Monthly' && (
+                            <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200/80">
+                              <Clock className="w-3 h-3 text-amber-600" />
+                              {pkg.minimumCommitment || 'Minimum 3 Months'}
+                            </span>
+                          )}
+                        </div>
                       </div>
 
                       {/* Short Description */}

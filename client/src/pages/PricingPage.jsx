@@ -22,6 +22,7 @@ import {
   Search,
   Target,
   MapPin,
+  Clock,
 } from 'lucide-react';
 import SEO from '../components/common/SEO';
 import SectionHeader from '../components/common/SectionHeader';
@@ -330,9 +331,19 @@ export default function PricingPage() {
                         <div className="text-2xl sm:text-3xl font-heading font-black text-navy-900">
                           {pkg.monthlyPrice}
                         </div>
-                        <span className="text-[11px] text-content-muted block mt-0.5 font-medium">
-                          {pkg.commitment}
-                        </span>
+                        <div className="flex items-center gap-2 flex-wrap mt-1">
+                          <span className="text-[11px] text-content-muted font-medium">
+                            {pkg.billingType === 'Campaign'
+                              ? pkg.commitment
+                              : 'Billed monthly'}
+                          </span>
+                          {pkg.billingType === 'Monthly' && (
+                            <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200/80">
+                              <Clock className="w-3 h-3 text-amber-600" />
+                              {pkg.minimumCommitment || 'Minimum 3 Months'}
+                            </span>
+                          )}
+                        </div>
                       </div>
 
                       <p className="mt-2.5 text-xs text-content-muted leading-relaxed min-h-[48px]">
