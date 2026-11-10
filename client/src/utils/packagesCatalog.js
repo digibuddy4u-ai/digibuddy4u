@@ -1,10 +1,10 @@
 /**
  * DigiBuddy4U Master Packages Catalogue
  * 4 Official Packages:
- * 1. Brand Presence Starter (₹10,000 / Month)
- * 2. Brand Debut (₹15,000 / One-Time)
- * 3. Brand Growth Pro (₹20,000 / Month - Most Popular)
- * 4. Ultimate Brand Domination (₹80,000 / Campaign - Premium)
+ * 1. Foundation (₹10,000 / Month)
+ * 2. Digital Foundation (₹15,000 / One-Time)
+ * 3. Expansion (₹20,000 / Month - Most Popular)
+ * 4. Ultimate (Build Your Business from Scratch) (₹80,000 / Campaign - Premium)
  */
 
 export const MASTER_MONTHLY_WORKFLOW = [
@@ -26,10 +26,10 @@ export const MASTER_GENERAL_TERMS = [
 
 export const PACKAGES_CATALOG = [
   {
-    name: 'Brand Presence Starter',
-    shortName: 'Starter',
+    name: 'Foundation',
+    shortName: 'Foundation',
     slug: 'starter',
-    aliases: ['brand-presence-starter', 'social-media-starter', 'basic'],
+    aliases: ['foundation', 'brand-presence-starter', 'social-media-starter', 'basic'],
     badge: 'Starter Plan',
     tierCategory: 'Organic Foundation',
     billingType: 'Monthly',
@@ -132,10 +132,10 @@ export const PACKAGES_CATALOG = [
     requiresLoginForPdf: false,
   },
   {
-    name: 'Brand Debut',
-    shortName: 'Brand Debut',
+    name: 'Digital Foundation',
+    shortName: 'Digital Foundation',
     slug: 'startup-setup',
-    aliases: ['brand-debut', 'digital-launch-kit', 'business-startup-setup', 'setup'],
+    aliases: ['digital-foundation', 'brand-debut', 'digital-launch-kit', 'business-startup-setup', 'setup'],
     badge: 'Business Setup',
     tierCategory: 'Digital Foundation',
     billingType: 'One-Time',
@@ -245,10 +245,10 @@ export const PACKAGES_CATALOG = [
     requiresLoginForPdf: false,
   },
   {
-    name: 'Brand Growth Pro',
-    shortName: 'Growth Pro',
+    name: 'Expansion',
+    shortName: 'Expansion',
     slug: 'growth',
-    aliases: ['brand-growth-pro', 'business-growth', 'standard'],
+    aliases: ['expansion', 'brand-growth-pro', 'business-growth', 'standard'],
     badge: 'Social Growth Retainer',
     tierCategory: 'Scale & Inquiries',
     billingType: 'Monthly',
@@ -382,10 +382,10 @@ export const PACKAGES_CATALOG = [
     requiresLoginForPdf: false,
   },
   {
-    name: 'Ultimate Brand Domination',
-    shortName: 'Brand Domination',
+    name: 'Ultimate (Build Your Business from Scratch)',
+    shortName: 'Ultimate',
     slug: 'premium',
-    aliases: ['ultimate-brand-domination', 'premium-brand-scale', 'pro', 'elite'],
+    aliases: ['ultimate', 'ultimate-brand-domination', 'premium-brand-scale', 'pro', 'elite'],
     badge: 'Omnichannel Campaign',
     tierCategory: 'High Production & Reach',
     billingType: 'Campaign',
@@ -395,8 +395,8 @@ export const PACKAGES_CATALOG = [
     description: 'A complete premium brand growth solution combining professional video production, influencer collaborations, social media management, and Meta advertising.',
     minimumCommitment: 'Per Campaign',
     platforms: ['Instagram', 'Facebook', 'Omnichannel'],
-    reelsCount: '10 Reels (4 Model + 2 Founder + 4 Influencer)',
-    reelsDetails: '4 Model-Based Reels + 2 Founder-Face Reels + 4 Influencer-Based Reels (Total: 10 Professionally Produced Reels)',
+    reelsCount: '10 Reels (6 Model + 4 Influencer)',
+    reelsDetails: '6 Model-Based Reels + 4 Influencer-Based Reels (Total: 10 Professionally Produced Reels)',
     postsCount: 'Full Omni-Channel Suite',
     postsDetails: 'Complete social media strategy, monthly calendar, and creative brand communication guidance',
     shootsCount: 'Professional Shoot Planning, Storyboarding & Video Direction',
@@ -411,7 +411,7 @@ export const PACKAGES_CATALOG = [
     revisions: 'Unlimited revisions during review window',
     reporting: 'Comprehensive monthly / campaign performance reporting with executive insights.',
     chips: [
-      { label: '10 Reels', desc: '4 Model + 2 Founder + 4 Influencer', icon: 'Film' },
+      { label: '10 Reels', desc: '6 Model + 4 Influencer', icon: 'Film' },
       { label: 'Full Shoot & Edit', desc: 'Planning, Script & Cut', icon: 'Camera' },
       { label: 'Meta Ads Dominance', desc: 'Facebook & Instagram Ads', icon: 'Target' },
     ],
@@ -426,15 +426,15 @@ export const PACKAGES_CATALOG = [
       'Any Additional Services Outside the Defined Package Scope',
     ],
     keyHighlights: [
-      '4 Model-Based Reels',
-      '2 Founder-Face Authority Reels',
+      '6 Model-Based Reels',
       '4 Influencer-Based Reels',
       'Shoot Planning & Storyboarding',
       'Script Writing for All 10 Reels',
       'Full Video Shoot & Creative Direction',
       'Premium Video Editing & Color Grading',
       'Professional Content Writing & Captions',
-      'Monthly Content Calendar & Hashtag Vault',
+      'Targeted Hashtag Research',
+      'Monthly Content Calendar & Scheduling',
       'Instagram & Facebook Complete Management',
       'End-to-End Meta Ads Strategy & Targeting',
       'Brand Positioning & Growth Consultation',
@@ -443,8 +443,7 @@ export const PACKAGES_CATALOG = [
       {
         title: 'A. Professional Video Production – 10 Reels',
         items: [
-          '4 Model-Based Reels',
-          '2 Founder-Face / Founder-Led Reels',
+          '6 Model-Based Reels',
           '4 Influencer-Based Reels',
           'Professional Shoot Planning',
           'Creative Concepts & Storyboarding',
@@ -491,8 +490,7 @@ export const PACKAGES_CATALOG = [
       },
     ],
     fullInclusions: [
-      '4 Model-Based High-Conversion Reels',
-      '2 Founder-Face / Founder-Led Authority Reels',
+      '6 Model-Based High-Conversion Reels',
       '4 Influencer-Based Collaboration Reels',
       'Total: 10 Professionally Produced Reels (Full Shoot Planning & Direction)',
       'Creative Concepts & Storyboarding for Every Single Reel',
@@ -526,8 +524,7 @@ export const PACKAGES_CATALOG = [
     ],
     clientRequirements: [
       'Participate in shoot pre-production briefing and concept approvals',
-      'Provide dedicated founder availability for founder-led reels',
-      'Approve influencer selection and script drafts',
+      'Approve model selection, influencer lineup, and script drafts',
       'Provide designated Meta Business Suite ad account access',
     ],
     monthlyWorkflow: MASTER_MONTHLY_WORKFLOW,

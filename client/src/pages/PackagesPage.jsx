@@ -167,7 +167,7 @@ export default function PackagesPage() {
     <>
       <SEO
         title="Packages & Pricing — DigiBuddy4U Digital Marketing & Growth"
-        description="Explore DigiBuddy4U's official packages: Brand Presence Starter (₹10,000/mo), Brand Debut (₹15,000 One-Time), Brand Growth Pro (₹20,000/mo - Most Popular), and Ultimate Brand Domination (₹80,000/campaign)."
+        description="Explore DigiBuddy4U's official packages: Foundation (₹10,000/mo), Digital Foundation (₹15,000 One-Time), Expansion (₹20,000/mo - Most Popular), and Ultimate (Build Your Business from Scratch) (₹80,000/campaign)."
       />
 
       {/* Header Banner */}
@@ -215,7 +215,7 @@ export default function PackagesPage() {
           ) : (
             <>
               {/* ======================================================== */}
-              {/* 1. HORIZONTAL FEATURED CARD: Brand Debut (₹15,000 One-Time Setup) */}
+              {/* 1. HORIZONTAL FEATURED CARD: Digital Foundation (₹15,000 One-Time Setup) */}
               {/* ======================================================== */}
               {setupPkg && (
                 <div className="w-full rounded-3xl bg-gradient-to-br from-white via-cyan-50/40 to-blue-50/50 border-2 border-cyan-300 shadow-xl shadow-cyan-900/5 relative p-6 sm:p-8 lg:p-10 mb-12 sm:mb-16">
@@ -500,7 +500,7 @@ export default function PackagesPage() {
 
                           {/* Package Title & Price Box */}
                           <div>
-                            <h3 className="text-xl sm:text-2xl font-heading font-extrabold text-navy-950 tracking-tight leading-tight min-h-[54px] flex items-center">
+                            <h3 className={`font-heading font-extrabold text-navy-950 tracking-tight leading-snug min-h-[56px] flex items-center ${isPremium ? 'text-lg sm:text-xl' : 'text-xl sm:text-2xl'}`}>
                               {pkg.name}
                             </h3>
 

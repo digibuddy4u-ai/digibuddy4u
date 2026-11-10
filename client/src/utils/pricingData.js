@@ -1,16 +1,16 @@
 /**
  * DigiBuddy4U Official Packages & Pricing
  * 4 Canonical Packages:
- * 1. Brand Presence Starter (₹10,000 / Month)
- * 2. Brand Debut (₹15,000 / One-Time)
- * 3. Brand Growth Pro (₹20,000 / Month - Most Popular)
- * 4. Ultimate Brand Domination (₹80,000 / Campaign - Premium)
+ * 1. Foundation (₹10,000 / Month)
+ * 2. Digital Foundation (₹15,000 / One-Time)
+ * 3. Expansion (₹20,000 / Month - Most Popular)
+ * 4. Ultimate (Build Your Business from Scratch) (₹80,000 / Campaign - Premium)
  */
 export const PRICING_PACKAGES = [
   {
     id: 'starter',
-    name: 'Brand Presence Starter',
-    shortName: 'Starter',
+    name: 'Foundation',
+    shortName: 'Foundation',
     slug: 'starter',
     badge: 'Starter Plan',
     tierCategory: 'Organic Foundation',
@@ -71,8 +71,8 @@ export const PRICING_PACKAGES = [
   },
   {
     id: 'startup-setup',
-    name: 'Brand Debut',
-    shortName: 'Brand Debut',
+    name: 'Digital Foundation',
+    shortName: 'Digital Foundation',
     slug: 'startup-setup',
     badge: 'Business Setup',
     tierCategory: 'Digital Foundation',
@@ -139,8 +139,8 @@ export const PRICING_PACKAGES = [
   },
   {
     id: 'growth',
-    name: 'Brand Growth Pro',
-    shortName: 'Growth Pro',
+    name: 'Expansion',
+    shortName: 'Expansion',
     slug: 'growth',
     badge: 'Most Popular',
     tierCategory: 'Scale & Inquiries',
@@ -222,8 +222,8 @@ export const PRICING_PACKAGES = [
   },
   {
     id: 'premium',
-    name: 'Ultimate Brand Domination',
-    shortName: 'Brand Domination',
+    name: 'Ultimate (Build Your Business from Scratch)',
+    shortName: 'Ultimate',
     slug: 'premium',
     badge: 'Premium Campaign',
     tierCategory: 'High Production & Reach',
@@ -236,20 +236,20 @@ export const PRICING_PACKAGES = [
     description: 'A complete premium brand growth solution combining professional video production, influencer collaborations, social media management, and Meta advertising.',
     platforms: ['Instagram', 'Facebook', 'Omnichannel'],
     chips: [
-      { label: '10 Reels', desc: '4 Model + 2 Founder + 4 Influencer', icon: 'Film' },
+      { label: '10 Reels', desc: '6 Model + 4 Influencer', icon: 'Film' },
       { label: 'Full Shoot & Edit', desc: 'Planning, Script & Cut', icon: 'Camera' },
       { label: 'Meta Ads Dominance', desc: 'Facebook & Instagram Ads', icon: 'Target' },
     ],
     features: [
-      '4 Model-Based Reels',
-      '2 Founder-Face Authority Reels',
+      '6 Model-Based Reels',
       '4 Influencer-Based Reels',
       'Shoot Planning & Storyboarding',
       'Script Writing for All 10 Reels',
       'Full Video Shoot & Creative Direction',
       'Premium Video Editing & Color Grading',
       'Professional Content Writing & Captions',
-      'Monthly Content Calendar & Hashtag Vault',
+      'Targeted Hashtag Research',
+      'Monthly Content Calendar & Scheduling',
       'Instagram & Facebook Complete Management',
       'End-to-End Meta Ads Strategy & Targeting',
       'Brand Positioning & Growth Consultation',
@@ -258,8 +258,7 @@ export const PRICING_PACKAGES = [
       {
         title: 'A. Professional Video Production – 10 Reels',
         items: [
-          '4 Model-Based Reels',
-          '2 Founder-Face / Founder-Led Reels',
+          '6 Model-Based Reels',
           '4 Influencer-Based Reels',
           'Professional Shoot Planning',
           'Creative Concepts & Storyboarding',

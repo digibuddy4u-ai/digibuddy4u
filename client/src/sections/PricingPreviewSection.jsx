@@ -172,7 +172,7 @@ export default function PricingPreviewSection() {
         />
 
         {/* ======================================================== */}
-        {/* 1. HORIZONTAL FEATURED CARD: Brand Debut (₹15,000 One-Time) */}
+        {/* 1. HORIZONTAL FEATURED CARD: Digital Foundation (₹15,000 One-Time) */}
         {/* ======================================================== */}
         {setupPkg && (
           <div className="mt-10 sm:mt-14 w-full rounded-3xl bg-gradient-to-br from-white via-cyan-50/40 to-blue-50/50 border-2 border-cyan-300 shadow-xl shadow-cyan-900/5 relative p-6 sm:p-8 lg:p-10 mb-12 sm:mb-16">
@@ -457,7 +457,7 @@ export default function PricingPreviewSection() {
 
                     {/* Package Title & Price Box */}
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-heading font-extrabold text-navy-950 tracking-tight leading-tight min-h-[54px] flex items-center">
+                      <h3 className={`font-heading font-extrabold text-navy-950 tracking-tight leading-snug min-h-[56px] flex items-center ${isPremium ? 'text-lg sm:text-xl' : 'text-xl sm:text-2xl'}`}>
                         {pkg.name}
                       </h3>
 
