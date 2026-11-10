@@ -243,6 +243,7 @@ export const PRICING_PACKAGES = [
     features: [
       '6 Model Based Reels',
       '4 Influencer Collaboration Reels',
+      '6 Meta Ads Run (Strategy & Targeting)',
       'Shoot Planning & Storyboarding',
       'Script Writing for All 10 Reels',
       'Full Video Shoot & Creative Direction',
@@ -251,7 +252,6 @@ export const PRICING_PACKAGES = [
       'Targeted Hashtag Research',
       'Monthly Content Calendar & Scheduling',
       'Instagram & Facebook Complete Management',
-      '6 Meta Ads Run (Strategy & Targeting)',
       'Brand Positioning & Growth Consultation',
     ],
     sections: [
