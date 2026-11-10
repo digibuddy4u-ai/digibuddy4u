@@ -435,21 +435,21 @@ export default function PackageDetailPage() {
           </section>
         )}
 
-        {/* Mandatory Additional Costs Notice for Premium Package */}
+        {/* Included Expenses Notice for Ultimate Package */}
         {pkg.additionalCostsList && pkg.additionalCostsList.length > 0 && (
-          <section className="p-6 sm:p-7 rounded-3xl bg-amber-50/70 border-2 border-amber-300 shadow-sm space-y-3">
-            <div className="flex items-center gap-2 text-amber-950 font-heading font-bold text-base">
-              <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0" />
-              <span>Important – Additional Costs Notice for {pkg.name}</span>
+          <section className="p-6 sm:p-7 rounded-3xl bg-emerald-50/70 border-2 border-emerald-300 shadow-sm space-y-3">
+            <div className="flex items-center gap-2 text-emerald-950 font-heading font-bold text-base">
+              <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0" />
+              <span>All Production & Advertising Expenses Included in {pkg.name}</span>
             </div>
-            <p className="text-xs sm:text-sm text-amber-900 font-medium leading-relaxed">
-              The following expenses are not included in the ₹80,000 package price and will be charged separately wherever applicable:
+            <p className="text-xs sm:text-sm text-emerald-900 font-medium leading-relaxed">
+              No extra surprises — all of the following campaign expenses are already included inside the ₹80,000 package price:
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm text-amber-950 pt-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs sm:text-sm text-emerald-950 pt-1">
               {pkg.additionalCostsList.map((item, cIdx) => (
-                <div key={cIdx} className="flex items-start gap-2">
-                  <span className="text-amber-600 font-bold">•</span>
-                  <span>{item}</span>
+                <div key={cIdx} className="flex items-center gap-2 bg-white/80 px-3 py-2 rounded-xl border border-emerald-200/80">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                  <span className="font-medium">{item} (Included)</span>
                 </div>
               ))}
             </div>

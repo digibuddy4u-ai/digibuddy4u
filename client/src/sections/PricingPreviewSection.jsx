@@ -551,38 +551,38 @@ export default function PricingPreviewSection() {
                       </div>
                     </div>
 
-                    {/* Special Notice for ₹80,000 Package */}
+                    {/* Included Expenses Notice for ₹80,000 Package */}
                     {isPremium && (
-                      <div className="mt-3 p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-[11px] space-y-1 text-slate-600">
+                      <div className="mt-3 p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-200 text-[11px] space-y-1 text-emerald-950">
                         <div
                           onClick={() => setExpandedNotice(!expandedNotice)}
-                          className="flex items-center justify-between font-bold text-navy-950 cursor-pointer"
+                          className="flex items-center justify-between font-bold text-emerald-900 cursor-pointer"
                         >
                           <div className="flex items-center gap-1.5">
-                            <AlertCircle className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
-                            <span>Additional Expenses:</span>
+                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
+                            <span>Expenses Included in Package:</span>
                           </div>
-                          <span className="text-[10px] text-primary hover:underline">
+                          <span className="text-[10px] text-emerald-700 font-bold hover:underline">
                             {expandedNotice ? 'Hide' : 'View (6)'}
                           </span>
                         </div>
                         {expandedNotice ? (
-                          <div className="pt-1.5 border-t border-slate-200 space-y-1">
-                            <p className="text-[10px] text-slate-500 leading-tight">
-                              Charged separately wherever applicable:
+                          <div className="pt-1.5 border-t border-emerald-200/80 space-y-1">
+                            <p className="text-[10px] text-emerald-800 font-medium leading-tight">
+                              Included inside the ₹80,000 package price:
                             </p>
-                            <ul className="list-disc list-inside text-[10px] text-slate-600 space-y-0.5">
-                              <li>Influencer Collaboration Fees</li>
-                              <li>Model Fees / Booking Charges</li>
-                              <li>Meta Ads Budget / Ad Spend</li>
-                              <li>Travel & Transportation Expenses</li>
-                              <li>Location / Studio Rental Charges</li>
-                              <li>Props, Costumes & Extra Production</li>
+                            <ul className="list-disc list-inside text-[10px] text-emerald-900 space-y-0.5">
+                              <li>Influencer Collaboration Fees (Included)</li>
+                              <li>Model Fees / Booking Charges (Included)</li>
+                              <li>Meta Ads Budget / Ad Spend (Included)</li>
+                              <li>Travel & Transportation Expenses (Included)</li>
+                              <li>Location / Studio Rental Charges (Included)</li>
+                              <li>Props, Costumes & Production Setup (Included)</li>
                             </ul>
                           </div>
                         ) : (
-                          <p className="text-[10px] text-slate-500 truncate">
-                            Influencer, model & ads budget charged at actuals.
+                          <p className="text-[10px] text-emerald-800 truncate">
+                            Influencer, model, ads budget & shoot expenses included.
                           </p>
                         )}
                       </div>
