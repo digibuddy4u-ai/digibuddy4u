@@ -238,28 +238,28 @@ export const PRICING_PACKAGES = [
     chips: [
       { label: '10 Reels', desc: '6 Model + 4 Influencer', icon: 'Film' },
       { label: 'Full Shoot & Edit', desc: 'Planning, Script & Cut', icon: 'Camera' },
-      { label: 'Meta Ads Dominance', desc: 'Facebook & Instagram Ads', icon: 'Target' },
+      { label: '6 Meta Ads Run', desc: 'Facebook & Instagram Ads', icon: 'Target' },
     ],
     features: [
-      '6 Model-Based Reels',
-      '4 Influencer-Based Reels',
+      '6 Model Based Reels',
+      '4 Influencer Collaboration Reels',
       'Shoot Planning & Storyboarding',
       'Script Writing for All 10 Reels',
       'Full Video Shoot & Creative Direction',
-      'Premium Video Editing & Color Grading',
+      'Premium Video Editing',
       'Professional Content Writing & Captions',
       'Targeted Hashtag Research',
       'Monthly Content Calendar & Scheduling',
       'Instagram & Facebook Complete Management',
-      'End-to-End Meta Ads Strategy & Targeting',
+      '6 Meta Ads Run (Strategy & Targeting)',
       'Brand Positioning & Growth Consultation',
     ],
     sections: [
       {
         title: 'A. Professional Video Production – 10 Reels',
         items: [
-          '6 Model-Based Reels',
-          '4 Influencer-Based Reels',
+          '6 Model Based Reels',
+          '4 Influencer Collaboration Reels',
           'Professional Shoot Planning',
           'Creative Concepts & Storyboarding',
           'Script Writing for All Reels',
@@ -284,6 +284,7 @@ export const PRICING_PACKAGES = [
       {
         title: 'C. Meta Advertising',
         items: [
+          '6 Meta Ads Campaigns Run',
           'Meta Ads Campaign Strategy',
           'Facebook & Instagram Ads Setup',
           'Meta Ads Campaign Management',
