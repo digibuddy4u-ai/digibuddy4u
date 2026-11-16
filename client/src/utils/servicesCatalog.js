@@ -30,6 +30,11 @@ export const FALLBACK_SERVICES = [
       'Strategic organic audience building, content planning, and community engagement across Instagram, Facebook, and LinkedIn.',
     highlight: 'Turn passive social scrollers into active brand advocates and warm business inquiries.',
     order: 1,
+    seo: {
+      title: 'Social Media Marketing Agency Ahmedabad | DigiBuddy4U',
+      metaDescription: 'Results-driven Social Media Marketing Agency in Ahmedabad. Instagram marketing services, content calendars, viral reels editing & social media management.',
+      keywords: 'Social Media Marketing Agency Ahmedabad, Instagram Marketing Services, Social Media Management, Reels Strategy Ahmedabad',
+    },
     subServices: [
       { name: 'Instagram Management', slug: 'instagram-management', shortDescription: 'Complete Instagram presence: aesthetic feed layout, stories, reel optimization, and DM handling.' },
       { name: 'Facebook Management', slug: 'facebook-management', shortDescription: 'Business page management, community group engagement, and local audience growth.' },
@@ -52,6 +57,11 @@ export const FALLBACK_SERVICES = [
       'Data-backed advertising campaigns across Meta (Facebook & Instagram), Google Search, and YouTube engineered for high ROAS.',
     highlight: 'Turn targeted advertising spend into predictable, measurable revenue.',
     order: 2,
+    seo: {
+      title: 'Meta Ads Agency Ahmedabad & Facebook Ads | DigiBuddy4U',
+      metaDescription: 'Trusted Meta Ads Agency in Ahmedabad offering Facebook ads management, Instagram campaigns, Google Ads, and qualified lead generation services for brands.',
+      keywords: 'Meta Ads Agency Ahmedabad, Facebook Ads Management, Lead Generation Services, Performance Marketing Ahmedabad',
+    },
     subServices: [
       { name: 'Facebook & Instagram Ads (Meta Ads)', slug: 'meta-ads', shortDescription: 'High-converting visual and video ads targeting specific interests, lookalikes, and behaviors on Instagram and Facebook.' },
       { name: 'Google Ads', slug: 'google-ads', shortDescription: 'Intent-driven Google Search, Display, and Performance Max campaigns capturing active shoppers.' },
@@ -73,6 +83,11 @@ export const FALLBACK_SERVICES = [
       'Distinctive visual identities, logo marks, brand guidelines, and high-impact marketing collateral that command respect.',
     highlight: 'Build an unmistakable identity that stands out in any crowd.',
     order: 3,
+    seo: {
+      title: 'Branding Agency Ahmedabad & Graphic Design | DigiBuddy4U',
+      metaDescription: 'Creative branding agency in Ahmedabad offering logo design, cohesive brand guidelines, company profiles, and graphic design services for growing businesses.',
+      keywords: 'Branding Agency Ahmedabad, Graphic Design Services, Logo Design Ahmedabad, Visual Identity Design',
+    },
     subServices: [
       { name: 'Logo Design', slug: 'logo-design', shortDescription: 'Iconic, memorable vector logo marks crafted for digital screens, print stationery, and outdoor signs.' },
       { name: 'Brand Identity Design', slug: 'brand-identity-design', shortDescription: 'Cohesive visual identity systems harmonizing color palettes, typography, imagery style, and textures.' },
@@ -95,6 +110,11 @@ export const FALLBACK_SERVICES = [
       'High-retention vertical video, reels, corporate showcases, product demonstrations, and AI-assisted video workflows.',
     highlight: 'Engage, entertain, and educate your market with cinematic video storytelling.',
     order: 4,
+    seo: {
+      title: 'Video Production Agency Ahmedabad & AI Reels | DigiBuddy4U',
+      metaDescription: 'Video production agency in Ahmedabad specializing in commercial ad shoots, 4K corporate videos, Instagram Reels & AI video production for high brand recall.',
+      keywords: 'Video Production Agency Ahmedabad, AI Video Production, Instagram Reels Production Ahmedabad, Ad Film Shoots',
+    },
     subServices: [
       { name: 'Promotional Videos', slug: 'promotional-videos', shortDescription: 'High-energy commercials announcing sales, service launches, and brand milestones.' },
       { name: 'Product Videos', slug: 'product-videos', shortDescription: 'Detail-oriented product showcases highlighting features, materials, and real-world usage.' },
@@ -117,6 +137,11 @@ export const FALLBACK_SERVICES = [
       'Technical SEO audits, on-page keyword optimization, Google Business Profile ranking, and sustainable organic search traffic.',
     highlight: 'Claim prime real estate at the top of Google search results.',
     order: 5,
+    seo: {
+      title: 'SEO Services in Ahmedabad & Local SEO | DigiBuddy4U',
+      metaDescription: 'Technical & Local SEO services in Ahmedabad to grow organic Google visibility, website SEO health, and Google Business Profile management across Gujarat.',
+      keywords: 'SEO Services in Ahmedabad, Local SEO Services, Google Business Profile Management, Technical SEO Ahmedabad',
+    },
     subServices: [
       { name: 'Website SEO', slug: 'website-seo', shortDescription: 'Full-site search engine optimization improving domain health, indexability, and ranking.' },
       { name: 'On-Page SEO', slug: 'on-page-seo', shortDescription: 'Meta title tags, descriptions, heading structure, content keywords, and schema markup.' },
@@ -138,6 +163,11 @@ export const FALLBACK_SERVICES = [
       'Persuasive ad copy, engaging website messaging, conversion-focused landing pages, and informative blog content.',
     highlight: 'Words that inform, persuade, and turn passive readers into loyal buyers.',
     order: 6,
+    seo: {
+      title: 'Content Writing & Ad Copywriting Ahmedabad | DigiBuddy4U',
+      metaDescription: 'Conversion-focused website content, engaging social captions, video scripts & SEO blog writing services in Ahmedabad crafted to drive customer inquiries.',
+      keywords: 'Content Writing Services Ahmedabad, Ad Copywriting, Website Content Writing, Promotional Scripts',
+    },
     subServices: [
       { name: 'Social Media Captions', slug: 'social-media-captions', shortDescription: 'Attention-grabbing caption hooks and persuasive calls-to-action engineered for comments and shares.' },
       { name: 'Ad Copywriting', slug: 'ad-copywriting', shortDescription: 'Direct-response ad copy for Meta, Google Search, and YouTube that maximizes click-through rates.' },
@@ -158,6 +188,11 @@ export const FALLBACK_SERVICES = [
       'Smart marketing workflows, CRM integrations, lead auto-responders, and AI-assisted content production engines.',
     highlight: 'Automate manual marketing routines and multiply team productivity.',
     order: 7,
+    seo: {
+      title: 'AI Workflows & Marketing Automation Ahmedabad | DigiBuddy4U',
+      metaDescription: 'Smart AI content workflows, CRM integrations, WhatsApp lead routing & business automation systems engineered for fast-growing companies in Ahmedabad.',
+      keywords: 'Marketing Automation Ahmedabad, AI Content Workflows, CRM Integration, Lead Generation Automation',
+    },
     subServices: [
       { name: 'AI Content Workflows', slug: 'ai-content-workflows', shortDescription: 'Automated systems turning single ideas into multi-format blogs, captions, and outlines.' },
       { name: 'Marketing Automation', slug: 'marketing-automation', shortDescription: 'Trigger-based email and message sequences triggered by customer actions and lifecycle stages.' },
@@ -179,6 +214,11 @@ export const FALLBACK_SERVICES = [
       'High-performance business websites, corporate portals, responsive landing pages, and custom web experiences built for conversion.',
     highlight: 'Build a high-performance website that elevates your brand and drives customer action.',
     order: 8,
+    seo: {
+      title: 'Website Development Company Ahmedabad | DigiBuddy4U',
+      metaDescription: 'Leading Website Development Company in Ahmedabad offering business website development, high-converting landing pages, website redesign & responsive UX.',
+      keywords: 'Website Development Company Ahmedabad, Business Website Development, Custom Web Design Ahmedabad, Landing Page Design',
+    },
     subServices: [
       { name: 'Business Websites', slug: 'business-websites', shortDescription: 'Professional websites establishing authority and showcasing core services for growing companies.' },
       { name: 'Corporate Websites', slug: 'corporate-websites', shortDescription: 'Enterprise portals with investor relations, career hubs, leadership profiles, and multi-department sections.' },
@@ -201,6 +241,11 @@ export const FALLBACK_SERVICES = [
       'Bespoke web applications, client portals, admin dashboards, and cloud software engineered with robust MERN/modern stacks.',
     highlight: 'Power your business operations with custom-built cloud web applications.',
     order: 9,
+    seo: {
+      title: 'Web Application Development Company Ahmedabad | DigiBuddy4U',
+      metaDescription: 'Custom web application development in Ahmedabad: React & MERN client portals, admin dashboards, CRM web applications & REST/GraphQL API integrations.',
+      keywords: 'Web Application Development Ahmedabad, Custom Web Apps, Client Portals, CRM Web Application Development',
+    },
     subServices: [
       { name: 'Custom Web Applications', slug: 'custom-web-applications', shortDescription: 'Tailored software solutions built to execute unique business logic without limitations.' },
       { name: 'Customer Portals', slug: 'customer-portals', shortDescription: 'Self-service client hubs for viewing invoices, project status, support tickets, and files.' },
@@ -221,6 +266,11 @@ export const FALLBACK_SERVICES = [
       'Native Android and cross-platform Flutter/React Native mobile applications built for high performance and smooth user experience.',
     highlight: 'Connect with your customers on the devices they check 100+ times a day.',
     order: 10,
+    seo: {
+      title: 'Mobile App Development Company Ahmedabad | DigiBuddy4U',
+      metaDescription: 'Android & cross-platform Flutter mobile app development in Ahmedabad built for smooth UX, real-time cloud synchronization & reliable API integrations.',
+      keywords: 'Mobile App Development Ahmedabad, Flutter App Development, Android App Development, Cross Platform Mobile Apps',
+    },
     subServices: [
       { name: 'Android App Development', slug: 'android-app-development', shortDescription: 'Custom Android applications engineered for speed, low battery consumption, and Play Store standards.' },
       { name: 'Cross-Platform App Development', slug: 'cross-platform-app-development', shortDescription: 'One codebase that runs natively on both Android and iOS, cutting development costs in half.' },
@@ -240,6 +290,11 @@ export const FALLBACK_SERVICES = [
       'Tailored business management software, billing and invoicing systems, ERP platforms, and institutional management solutions.',
     highlight: 'Digitize and automate your enterprise operations with tailor-made software.',
     order: 11,
+    seo: {
+      title: 'Custom Software & ERP Development Ahmedabad | DigiBuddy4U',
+      metaDescription: 'Tailored business management software, GST billing systems, CRM, HRMS & enterprise ERP development solutions built for companies in Ahmedabad & Gujarat.',
+      keywords: 'Custom Software Development Ahmedabad, ERP Software Development, CRM Software, Billing Invoicing Software',
+    },
     subServices: [
       { name: 'Business Management Software', slug: 'business-management-software', shortDescription: 'All-in-one software unifying operations, daily tasks, client files, and executive reporting.' },
       { name: 'CRM Software', slug: 'custom-crm-software', shortDescription: 'Custom lead pipelines, customer interaction logs, and automated follow-up workflows.' },
@@ -261,6 +316,11 @@ export const FALLBACK_SERVICES = [
       'Intuitive user experience design, wireframing, high-fidelity Figma prototypes, and design systems for web and mobile products.',
     highlight: 'Turn complex software concepts into clean, intuitive, and delightful interfaces.',
     order: 12,
+    seo: {
+      title: 'UI/UX & Product Design Agency Ahmedabad | DigiBuddy4U',
+      metaDescription: 'User-centric website UI/UX design, mobile app wireframes, clickable Figma prototypes & analytics dashboard design services in Ahmedabad by DigiBuddy4U.',
+      keywords: 'UI UX Design Agency Ahmedabad, Figma Prototypes, Website UI Design, Product Design Ahmedabad',
+    },
     subServices: [
       { name: 'Website UI/UX Design', slug: 'website-ui-ux-design', shortDescription: 'Modern, conversion-focused desktop and mobile website screen designs.' },
       { name: 'Mobile App UI/UX Design', slug: 'mobile-app-ui-ux-design', shortDescription: 'iOS and Android app screens structured for natural thumb zone reach and swift interaction.' },
@@ -281,6 +341,11 @@ export const FALLBACK_SERVICES = [
       'High-converting online stores, product catalogs, shopping cart flows, payment gateway integrations, and order management.',
     highlight: 'Build an online storefront engineered to convert browsers into repeat buyers.',
     order: 13,
+    seo: {
+      title: 'E-commerce Website Development Ahmedabad | DigiBuddy4U',
+      metaDescription: 'Complete e-commerce website development in Ahmedabad: custom online storefronts, product catalog setup, Razorpay/UPI checkout & automated order management.',
+      keywords: 'E-commerce Website Development Ahmedabad, Online Store Development, Payment Gateway Integration India',
+    },
     subServices: [
       { name: 'Online Store Development', slug: 'online-store-development', shortDescription: 'Full custom online store development tailored for high sales volume and brand identity.' },
       { name: 'Product Catalog Setup', slug: 'product-catalog-setup', shortDescription: 'Structured organization of product categories, SKUs, variants, prices, and high-res imagery.' },
@@ -300,6 +365,11 @@ export const FALLBACK_SERVICES = [
       'Proactive bug fixes, core updates, speed optimization, security hardening, cloud hosting support, and emergency repairs.',
     highlight: 'Keep your web properties secure, fast, and always open for business.',
     order: 14,
+    seo: {
+      title: 'Website Maintenance & Tech Support Ahmedabad | DigiBuddy4U',
+      metaDescription: 'Reliable website maintenance in Ahmedabad: bug fixes, speed optimization, Core Web Vitals tuning, security patches & cloud hosting support by DigiBuddy4U.',
+      keywords: 'Website Maintenance Ahmedabad, Technical Support, Website Speed Optimization, Security Updates',
+    },
     subServices: [
       { name: 'Bug Fixes', slug: 'bug-fixes', shortDescription: 'Rapid diagnosis and resolution of layout glitches, broken forms, and script errors.' },
       { name: 'Website Updates', slug: 'website-updates', shortDescription: 'Updating text content, banners, pricing, team members, and new product offerings.' },

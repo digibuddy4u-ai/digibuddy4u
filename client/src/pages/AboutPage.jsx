@@ -40,6 +40,11 @@ import Badge from '../components/common/Badge';
 import { InstagramIcon } from '../components/common/SocialIcons';
 import { useSiteSettings } from '../context/SiteSettingsContext';
 import { BRAND } from '../utils/brandConstants';
+import {
+  getOrganizationSchema,
+  getProfessionalServiceSchema,
+  getBreadcrumbSchema,
+} from '../utils/seoConfig';
 
 export default function AboutPage() {
   const { settings } = useSiteSettings();
@@ -130,8 +135,18 @@ export default function AboutPage() {
   return (
     <>
       <SEO
-        title="About Us — Why DigiBuddy4U is Your True Digital Growth Partner"
-        description="Discover how DigiBuddy4U replaces bloated agency bureaucracy with dedicated partner agility, 4K reel storytelling, 100% pre-approved deliverables, and honest growth."
+        title="About DigiBuddy4U | Digital Marketing Agency Ahmedabad"
+        description="Meet DigiBuddy4U, your digital growth partner in Ahmedabad, Gujarat. Direct senior creative strategy, 4K video shoots, pre-approved social media & IT builds."
+        keywords="Digital Marketing Agency in Ahmedabad, Branding Agency Ahmedabad, Video Production Agency Ahmedabad, DigiBuddy4U"
+        canonical="/about"
+        schema={[
+          getOrganizationSchema(),
+          getProfessionalServiceSchema(),
+          getBreadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'About Us', path: '/about' },
+          ]),
+        ]}
       />
 
       {/* 1. Top Breadcrumb & Live Availability Pill */}
@@ -644,12 +659,13 @@ export default function AboutPage() {
                   <div className="absolute top-0 right-0 w-32 h-32 bg-primary/30 rounded-full blur-2xl pointer-events-none" />
                   <div className="flex items-center gap-3">
                     <img
-                      src="/rotiwala-logo.jpg"
-                      alt="RotiWala Logo"
-                      className="w-12 h-12 rounded-2xl object-cover border-2 border-white/20 shadow-md"
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                      }}
+                      src="/images/portfolio/rotiwala-logo.png"
+                      alt="RotiWala official logo — Ahmedabad food brand client"
+                      width={48}
+                      height={48}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-12 h-12 rounded-2xl object-contain bg-white border-2 border-white/20 shadow-md p-0.5"
                     />
                     <div>
                       <h4 className="text-base sm:text-lg font-bold font-heading text-white">RotiWala Case Study</h4>

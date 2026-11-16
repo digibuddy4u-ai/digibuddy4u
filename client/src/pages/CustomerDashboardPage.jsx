@@ -94,6 +94,7 @@ export default function CustomerDashboardPage() {
       <SEO
         title="Customer Dashboard — DigiBuddy4U"
         description="View your saved DigiBuddy4U marketing packages, downloaded PDF specifications, and consultation inquiries."
+        noindex={true}
       />
 
       {/* Header Banner */}

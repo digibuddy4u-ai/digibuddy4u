@@ -43,6 +43,11 @@ import {
 import { getDeliverableIcon } from '../utils/featureIconHelper';
 import AddonsSection from '../components/addons/AddonsSection';
 import PackageEnquiryChoiceModal from '../components/packages/PackageEnquiryChoiceModal';
+import {
+  getOrganizationSchema,
+  getBreadcrumbSchema,
+  getPackageSchema,
+} from '../utils/seoConfig';
 
 const CHIP_ICONS = {
   Video,
@@ -166,8 +171,18 @@ export default function PackagesPage() {
   return (
     <>
       <SEO
-        title="Packages & Pricing — DigiBuddy4U Digital Marketing & Growth"
-        description="Explore DigiBuddy4U's official packages: Foundation (₹10,000/mo), Digital Foundation (₹15,000 One-Time), Expansion (₹20,000/mo - Most Popular), and Ultimate (Build Your Business from Scratch) (₹80,000/campaign)."
+        title="Digital Marketing Packages & Pricing Ahmedabad | DigiBuddy4U"
+        description="Transparent digital marketing packages in Ahmedabad: Digital Foundation (₹15,000 One-Time), Foundation (₹10,000/mo), Expansion (₹20,000/mo) & Ultimate (₹80,000)."
+        keywords="Social Media Marketing Packages Ahmedabad, Digital Marketing Pricing Gujarat, Meta Ads Agency Ahmedabad, Business Website Development"
+        canonical="/packages"
+        schema={[
+          getOrganizationSchema(),
+          getBreadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Packages', path: '/packages' },
+          ]),
+          ...allMainPackages.map(getPackageSchema).filter(Boolean),
+        ]}
       />
 
       {/* Header Banner */}
@@ -263,9 +278,9 @@ export default function PackagesPage() {
 
                         {/* Title & Price */}
                         <div>
-                          <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-navy-950 tracking-tight leading-tight">
+                          <h2 className="text-2xl sm:text-3xl font-heading font-extrabold text-navy-950 tracking-tight leading-tight">
                             {setupPkg.name}
-                          </h3>
+                          </h2>
 
                           <div className="mt-2.5 pb-3 border-b border-slate-200/80">
                             <div className="flex items-baseline gap-2 flex-wrap">
@@ -419,9 +434,9 @@ export default function PackagesPage() {
                     <Sparkles className="w-3.5 h-3.5 text-accent-yellow" />
                     <span>Ongoing Marketing & Growth Retainers</span>
                   </div>
-                  <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-navy-950 tracking-tight">
+                  <h2 className="text-2xl sm:text-3xl font-heading font-extrabold text-navy-950 tracking-tight">
                     Monthly Retainers & Brand Campaigns
-                  </h3>
+                  </h2>
                   <p className="text-xs sm:text-sm text-slate-600 mt-1.5 leading-relaxed">
                     Build lasting organic presence, viral reels consistency, and high-ROAS Meta advertising campaigns with our dedicated growth tiers.
                   </p>

@@ -34,7 +34,10 @@ export default function Logo({
       >
         <img
           src="/logo.jpg"
-          alt="DigiBuddy4U - Your Digital Growth Partner"
+          alt="DigiBuddy4U — Digital Marketing Agency in Ahmedabad"
+          width={960}
+          height={520}
+          decoding="async"
           className="h-10 md:h-12 w-auto object-contain rounded-lg shadow-xs"
         />
       </Component>
@@ -48,7 +51,7 @@ export default function Logo({
       aria-label="DigiBuddy4U - Home"
     >
       {/* Official Brand Icon: Speech Bubble + Golden Trend Arrow + Star Sparkle */}
-      <div className={`relative flex items-center justify-center rounded-xl overflow-hidden shadow-sm flex-shrink-0 ${iconSizes[size]}`}>
+      <div className={`relative flex items-center justify-center rounded-xl overflow-hidden shadow-sm flex-shrink-0 ${iconSizes[size]}`} aria-hidden="true">
         <svg
           viewBox="0 0 100 100"
           className="w-full h-full"

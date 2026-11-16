@@ -10,7 +10,53 @@ export default function AboutIntroSection() {
     <section className="py-12 sm:py-16 lg:py-20 bg-white border-y border-slate-100">
       <div className="site-container">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center">
-          {/* Left Column: Visual Brand Card */}
+          {/* Primary Column (Text Story & Section H2 — placed first in DOM for clean heading hierarchy) */}
+          <div className="lg:col-span-7 order-1 lg:order-2 space-y-6">
+            <Badge variant="blue">About DigiBuddy4U</Badge>
+
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-heading font-bold text-navy-900 tracking-tight leading-tight">
+              We Help Modern Businesses Turn Online Visibility into{' '}
+              <span className="text-primary">Measurable Growth.</span>
+            </h2>
+
+            <p className="text-base sm:text-lg text-content-muted leading-relaxed">
+              In today's hyper-competitive digital landscape, merely having a social media profile is not enough. You need consistent storytelling, magnetic video formats, and data-backed positioning that resonates with your ideal buyer.
+            </p>
+
+            <p className="text-sm sm:text-base text-content-muted leading-relaxed">
+              Serving brands across <strong>Ahmedabad, Gujarat &amp; Pan-India</strong>—from emerging local food ventures like <strong>RotiWala</strong> to direct-to-consumer companies—we eliminate the guesswork from digital marketing, SEO services, and website development. From setting up cohesive brand visuals to managing daily publishing schedules, we ensure your brand remains top-of-mind.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+              <div className="flex items-center gap-2.5 text-sm font-medium text-navy-900">
+                <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
+                <span>Custom Content Calendars</span>
+              </div>
+              <div className="flex items-center gap-2.5 text-sm font-medium text-navy-900">
+                <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
+                <span>Professional Reel Editing</span>
+              </div>
+              <div className="flex items-center gap-2.5 text-sm font-medium text-navy-900">
+                <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
+                <span>Pre-Approval Workflow</span>
+              </div>
+              <div className="flex items-center gap-2.5 text-sm font-medium text-navy-900">
+                <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
+                <span>Targeted Ad Campaigns</span>
+              </div>
+            </div>
+
+            <div className="pt-4 flex flex-wrap items-center gap-4">
+              <Button to="/about" variant="primary" size="md" icon={ArrowRight}>
+                Discover Our Story & Values
+              </Button>
+              <Button to="/contact" variant="secondary" size="md">
+                Get In Touch
+              </Button>
+            </div>
+          </div>
+
+          {/* Visual Brand Card (Placed left on desktop via lg:order-1) */}
           <div className="lg:col-span-5 order-2 lg:order-1">
             <div className="relative">
               {/* Outer Decorative Glow */}
@@ -21,7 +67,11 @@ export default function AboutIntroSection() {
                   <div className="flex items-center gap-3">
                     <img
                       src="/logo.jpg"
-                      alt="DigiBuddy4U"
+                      alt="DigiBuddy4U — Digital Marketing Agency in Ahmedabad"
+                      width={40}
+                      height={40}
+                      loading="lazy"
+                      decoding="async"
                       className="w-10 h-10 rounded-xl object-contain bg-white border border-slate-200 p-0.5 shadow-xs"
                     />
                     <div>
@@ -86,52 +136,6 @@ export default function AboutIntroSection() {
                   <span className="text-primary font-bold">Zero Fake Metrics</span>
                 </div>
               </div>
-            </div>
-          </div>
-
-          {/* Right Column: Text Story and Capabilities */}
-          <div className="lg:col-span-7 order-1 lg:order-2 space-y-6">
-            <Badge variant="blue">About DigiBuddy4U</Badge>
-
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-heading font-bold text-navy-900 tracking-tight leading-tight">
-              We Help Modern Businesses Turn Online Visibility into{' '}
-              <span className="text-primary">Measurable Growth.</span>
-            </h2>
-
-            <p className="text-base sm:text-lg text-content-muted leading-relaxed">
-              In today's hyper-competitive digital landscape, merely having a social media profile is not enough. You need consistent storytelling, magnetic video formats, and data-backed positioning that resonates with your ideal buyer.
-            </p>
-
-            <p className="text-sm sm:text-base text-content-muted leading-relaxed">
-              Whether you are an emerging local food venture like <strong>RotiWala</strong> or a growing direct-to-consumer brand, we eliminate the guesswork from digital marketing. From setting up cohesive brand visuals to managing daily publishing schedules, we ensure your brand remains top-of-mind.
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-              <div className="flex items-center gap-2.5 text-sm font-medium text-navy-900">
-                <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
-                <span>Custom Content Calendars</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-sm font-medium text-navy-900">
-                <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
-                <span>Professional Reel Editing</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-sm font-medium text-navy-900">
-                <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
-                <span>Pre-Approval Workflow</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-sm font-medium text-navy-900">
-                <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
-                <span>Targeted Ad Campaigns</span>
-              </div>
-            </div>
-
-            <div className="pt-4 flex flex-wrap items-center gap-4">
-              <Button to="/about" variant="primary" size="md" icon={ArrowRight}>
-                Discover Our Story & Values
-              </Button>
-              <Button to="/contact" variant="secondary" size="md">
-                Get In Touch
-              </Button>
             </div>
           </div>
         </div>

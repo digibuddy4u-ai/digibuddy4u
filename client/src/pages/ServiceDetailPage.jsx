@@ -39,6 +39,11 @@ import LoadingSpinner from '../components/ui/LoadingSpinner';
 import { BRAND } from '../utils/brandConstants';
 import { FALLBACK_SERVICES } from '../utils/servicesCatalog';
 import { api } from '../utils/api';
+import {
+  getOrganizationSchema,
+  getServiceSchema,
+  getBreadcrumbSchema,
+} from '../utils/seoConfig';
 
 const ICON_MAP = {
   Share2,
@@ -66,8 +71,9 @@ export default function ServiceDetailPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
 
-  const [service, setService] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const initialCatalogMatch = FALLBACK_SERVICES.find((s) => s.slug === slug) || null;
+  const [service, setService] = useState(initialCatalogMatch);
+  const [loading, setLoading] = useState(!initialCatalogMatch);
   const [error, setError] = useState('');
   const [openFaq, setOpenFaq] = useState(0);
   const [activeSubServiceIndex, setActiveSubServiceIndex] = useState(0);
@@ -78,46 +84,43 @@ export default function ServiceDetailPage() {
     email: '',
     phone: '',
     company: '',
-    service: '',
+    service: initialCatalogMatch?.title || '',
     message: '',
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [formError, setFormError] = useState('');
 
-  // Fetch service data by slug from backend
+  // Fetch service data by slug from backend with synchronous catalog pre-render
   useEffect(() => {
     let isMounted = true;
+    const localMatch = FALLBACK_SERVICES.find((s) => s.slug === slug) || null;
+    if (localMatch) {
+      setService(localMatch);
+      setLoading(false);
+      setError('');
+      setFormData((prev) => ({ ...prev, service: localMatch.title }));
+    }
+
     async function loadService() {
       try {
-        setLoading(true);
+        if (!localMatch) setLoading(true);
         setError('');
         const res = await api.get(`/services/${slug}`);
         if (isMounted) {
           if (res.success && res.data) {
-            setService(res.data);
+            setService((prev) => ({
+              ...res.data,
+              seo: prev?.seo || res.data.seo,
+            }));
             setFormData((prev) => ({ ...prev, service: res.data.title }));
-          } else {
-            // Check fallback catalogue
-            const fallback = FALLBACK_SERVICES.find((s) => s.slug === slug);
-            if (fallback) {
-              setService(fallback);
-              setFormData((prev) => ({ ...prev, service: fallback.title }));
-            } else {
-              setError('Service not found.');
-            }
+          } else if (!localMatch) {
+            setError('Service not found.');
           }
         }
       } catch (err) {
-        // Fallback
-        const fallback = FALLBACK_SERVICES.find((s) => s.slug === slug);
-        if (isMounted) {
-          if (fallback) {
-            setService(fallback);
-            setFormData((prev) => ({ ...prev, service: fallback.title }));
-          } else {
-            setError('Unable to load service details. Please try again.');
-          }
+        if (isMounted && !localMatch) {
+          setError('Unable to load service details. Please try again.');
         }
       } finally {
         if (isMounted) setLoading(false);
@@ -185,12 +188,17 @@ export default function ServiceDetailPage() {
   if (error || !service) {
     return (
       <div className="max-w-3xl mx-auto px-4 py-24 text-center space-y-6">
+        <SEO
+          title="Service Not Found"
+          description="The requested service could not be found."
+          noindex={true}
+        />
         <div className="w-16 h-16 rounded-2xl bg-amber-100 text-amber-600 mx-auto flex items-center justify-center">
           <AlertCircle className="w-8 h-8" />
         </div>
-        <h2 className="text-2xl sm:text-3xl font-heading font-bold text-navy-900">
+        <h1 className="text-2xl sm:text-3xl font-heading font-bold text-navy-900">
           Service Not Found
-        </h2>
+        </h1>
         <p className="text-content-muted">
           We couldn't find the requested service under <code className="text-primary font-mono font-bold">/services/{slug}</code>.
         </p>
@@ -219,9 +227,19 @@ export default function ServiceDetailPage() {
   return (
     <>
       <SEO
-        title={service.seo?.title || `${service.title} | DigiBuddy4U`}
+        title={service.seo?.title || `${service.title} in Ahmedabad | DigiBuddy4U`}
         description={service.seo?.metaDescription || service.shortDescription}
-        canonicalUrl={`/services/${service.slug}`}
+        keywords={service.seo?.keywords}
+        canonical={`/services/${service.slug}`}
+        schema={[
+          getOrganizationSchema(),
+          getServiceSchema(service),
+          getBreadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Services', path: '/services' },
+            { name: service.title, path: `/services/${service.slug}` },
+          ]),
+        ]}
       />
 
       {/* HERO SECTION */}
@@ -878,13 +896,18 @@ export default function ServiceDetailPage() {
       {Array.isArray(service.relatedServices) && service.relatedServices.length > 0 && (
         <section className="py-12 sm:py-16 bg-surface-light border-t border-slate-100">
           <div className="site-container">
-            <div className="flex items-center justify-between mb-8 pb-3 border-b border-slate-200">
-              <h3 className="text-xl sm:text-2xl font-heading font-bold text-navy-900">
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-8 pb-3 border-b border-slate-200">
+              <h2 className="text-xl sm:text-2xl font-heading font-bold text-navy-900">
                 Complementary Services
-              </h3>
-              <Link to="/services" className="text-xs font-bold text-primary hover:underline">
-                View All Services →
-              </Link>
+              </h2>
+              <div className="flex items-center gap-4">
+                <Link to="/packages" className="text-xs font-bold text-slate-600 hover:text-primary transition-colors">
+                  Explore Packages
+                </Link>
+                <Link to="/services" className="text-xs font-bold text-primary hover:underline">
+                  View All Services →
+                </Link>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -900,15 +923,15 @@ export default function ServiceDetailPage() {
                       <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
                         <RelIcon className="w-5 h-5" />
                       </div>
-                      <h4 className="font-heading font-bold text-base text-navy-900 group-hover:text-primary transition-colors">
+                      <h3 className="font-heading font-bold text-base text-navy-900 group-hover:text-primary transition-colors">
                         {rel.title}
-                      </h4>
+                      </h3>
                       <p className="text-xs text-content-muted line-clamp-2 leading-relaxed">
                         {rel.shortDescription}
                       </p>
                     </div>
                     <div className="pt-4 mt-3 border-t border-slate-100 flex items-center gap-1 text-xs font-bold text-primary">
-                      <span>Explore</span>
+                      <span>Explore {rel.title}</span>
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </Link>

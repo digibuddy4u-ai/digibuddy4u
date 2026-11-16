@@ -65,8 +65,9 @@ export default function PricingPage() {
   return (
     <>
       <SEO
-        title="Pricing & Packages — DigiBuddy4U Digital Marketing & Growth"
-        description="Transparent digital marketing and social media packages tailored for startups, expanding brands, and omnichannel growth."
+        title="Digital Marketing Packages & Pricing Ahmedabad | DigiBuddy4U"
+        description="Transparent digital marketing packages in Ahmedabad: Digital Foundation (₹15,000 One-Time), Foundation (₹10,000/mo), Expansion (₹20,000/mo) & Ultimate (₹80,000)."
+        canonical="/packages"
       />
 
       {/* Header Banner */}

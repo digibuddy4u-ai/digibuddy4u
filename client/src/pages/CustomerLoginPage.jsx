@@ -43,6 +43,7 @@ export default function CustomerLoginPage() {
       <SEO
         title="Sign In — DigiBuddy4U"
         description="Sign in to your DigiBuddy4U customer portal to access real-time marketing analytics, custom software milestones, and project deliverables."
+        noindex={true}
       />
 
       <div

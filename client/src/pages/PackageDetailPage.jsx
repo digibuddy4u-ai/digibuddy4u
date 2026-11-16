@@ -33,6 +33,11 @@ import { BRAND } from '../utils/brandConstants';
 import { API_URL } from '../utils/api';
 import { PACKAGES_CATALOG } from '../utils/packagesCatalog';
 import { getDeliverableIcon } from '../utils/featureIconHelper';
+import {
+  getOrganizationSchema,
+  getPackageSchema,
+  getBreadcrumbSchema,
+} from '../utils/seoConfig';
 
 export default function PackageDetailPage() {
   const { slug } = useParams();
@@ -200,8 +205,19 @@ export default function PackageDetailPage() {
   return (
     <>
       <SEO
-        title={`${pkg.name} Package Specification — DigiBuddy4U`}
-        description={`Complete specification for DigiBuddy4U ${pkg.name} Package. Monthly reels, static posts, camera shoots, Meta ads terms, and client responsibilities.`}
+        title={`${pkg.name} Package (${pkg.priceDisplay}) | DigiBuddy4U`}
+        description={`Explore ${pkg.name} (${pkg.priceDisplay}) by DigiBuddy4U in Ahmedabad: ${pkg.description}`}
+        keywords={`${pkg.name} Package, Digital Marketing Packages Ahmedabad, Social Media Marketing Agency Ahmedabad, DigiBuddy4U`}
+        canonical={`/packages/${pkg.slug}`}
+        schema={[
+          getOrganizationSchema(),
+          getPackageSchema(pkg),
+          getBreadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Packages', path: '/packages' },
+            { name: `${pkg.name} Package`, path: `/packages/${pkg.slug}` },
+          ]),
+        ]}
       />
 
       {/* Hero Header */}

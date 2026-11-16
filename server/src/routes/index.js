@@ -16,6 +16,8 @@ import customerAuthRoutes from './customerAuthRoutes.js';
 import leadAnalyticsRoutes from './leadAnalyticsRoutes.js';
 import staffRoutes from './staffRoutes.js';
 
+import { isDbConnected } from '../config/db.js';
+
 const router = express.Router();
 
 router.use('/auth', authRoutes);
@@ -36,11 +38,15 @@ router.use('/faqs', faqRoutes);
 router.use('/settings', settingRoutes);
 router.use('/dashboard', dashboardRoutes);
 
-// Health check endpoint
+// Health check endpoint (for Hostinger, LiteSpeed, Uptime monitors)
 router.get('/health', (req, res) => {
   res.status(200).json({
     success: true,
+    status: 'ok',
     message: 'DigiBuddy4U API is live and operational.',
+    environment: process.env.NODE_ENV || 'production',
+    database: isDbConnected() ? 'connected' : 'disconnected',
+    uptimeSeconds: Math.round(process.uptime()),
     timestamp: new Date().toISOString(),
   });
 });

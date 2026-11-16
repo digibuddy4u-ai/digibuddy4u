@@ -61,6 +61,7 @@ export default function CustomerRegisterPage() {
       <SEO
         title="Create Client Account — DigiBuddy4U"
         description="Register your DigiBuddy4U client account to access customized digital marketing strategies, custom software deliverables, and campaign tracking."
+        noindex={true}
       />
 
       <div className="min-h-screen bg-surface-light flex items-stretch">

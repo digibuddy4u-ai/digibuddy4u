@@ -122,7 +122,11 @@ export default function FeaturedPortfolioSection() {
                       <div className="w-7 h-7 rounded-full p-0.5 bg-gradient-to-tr from-amber-400 to-[#E1306C]">
                         <img
                           src="/images/portfolio/rotiwala-logo.png"
-                          alt="RotiWala"
+                          alt="RotiWala food brand logo"
+                          width={28}
+                          height={28}
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full rounded-full object-contain bg-white"
                         />
                       </div>
@@ -151,7 +155,11 @@ export default function FeaturedPortfolioSection() {
                       <div className="absolute inset-0 rounded-full bg-amber-500/30 blur-xl animate-pulse" />
                       <img
                         src="/images/portfolio/rotiwala-logo.png"
-                        alt="RotiWala Official Logo"
+                        alt="RotiWala official logo — Ahmedabad homestyle roti delivery client"
+                        width={144}
+                        height={144}
+                        loading="lazy"
+                        decoding="async"
                         className="relative w-28 h-28 xs:w-32 xs:h-32 sm:w-36 sm:h-36 rounded-full object-contain mx-auto shadow-2xl ring-4 ring-amber-400/40 p-1.5 bg-white/10 backdrop-blur-md"
                       />
                       <div className="absolute bottom-1 right-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full p-1.5 shadow-lg border-2 border-black">
@@ -163,9 +171,9 @@ export default function FeaturedPortfolioSection() {
                       <span className="inline-block px-3 py-1 rounded-full bg-amber-500/20 text-accent-yellow border border-amber-400/30 text-[10px] font-bold uppercase tracking-wider">
                         100% Ghar Jaisi Fulka Roti
                       </span>
-                      <h4 className="text-xl sm:text-2xl font-heading font-black text-white mt-1">
+                      <div className="text-xl sm:text-2xl font-heading font-black text-white mt-1">
                         RotiWala
-                      </h4>
+                      </div>
                       <p className="text-[11px] text-amber-100/80 font-medium leading-tight max-w-[200px] mx-auto mt-0.5">
                         Fresh, soft and ghar-jaisi rotis delivered across Ahmedabad & Gandhinagar.
                       </p>

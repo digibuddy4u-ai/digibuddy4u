@@ -440,9 +440,9 @@ export default function HeroSection() {
                         </div>
 
                         {/* Service Title */}
-                        <h3 className="font-heading font-black text-lg leading-tight mb-1 text-white">
+                        <div className="font-heading font-black text-lg leading-tight mb-1 text-white">
                           {srv.title}
-                        </h3>
+                        </div>
 
                         {/* Service Description */}
                         <p className="text-[11px] text-slate-300 line-clamp-2 leading-relaxed mb-3">
@@ -454,7 +454,7 @@ export default function HeroSection() {
                           to={srv.link}
                           className="inline-flex items-center gap-1 text-xs font-bold text-white bg-primary hover:bg-primary-hover px-4 py-1.5 rounded-full transition-colors shadow-md shadow-primary/25"
                         >
-                          <span>Explore Service</span>
+                          <span>Explore Service<span className="sr-only"> — {srv.title}</span></span>
                           <ChevronRight className="w-3.5 h-3.5" />
                         </Link>
                       </div>
@@ -517,7 +517,7 @@ export default function HeroSection() {
 
                 {/* Accessible screen-reader text */}
                 <span className="sr-only">
-                  We Deliver Real Results, Build Powerful Brands, Turn Clicks Into Customers, Create Digital Experiences, Drive Business Growth, Make Brands Stand Out, Turn Ideas Into Reality, and Grow Your Business.
+                  DigiBuddy4U Digital Marketing Agency and Website Development Company in Ahmedabad: We Deliver Real Results, Build Powerful Brands, Turn Clicks Into Customers, Create Digital Experiences, Drive Business Growth, Make Brands Stand Out, Turn Ideas Into Reality, and Grow Your Business.
                 </span>
               </h1>
 
@@ -526,7 +526,7 @@ export default function HeroSection() {
 
               {/* Subtitle Description */}
               <p className="text-sm xs:text-base sm:text-lg text-slate-600 max-w-lg my-4 sm:my-6 font-normal leading-relaxed">
-                We help brands stand out with strategic marketing, creative content, high-performing websites, and innovative IT solutions that turn ideas into measurable growth.
+                As a dedicated digital marketing agency in Ahmedabad, we help brands stand out with strategic social media marketing, Meta ads, creative reels, high-performing websites, and innovative IT solutions.
               </p>
 
               {/* CTA Action Buttons */}
@@ -543,7 +543,7 @@ export default function HeroSection() {
                   to="/services"
                   className="w-full sm:w-auto inline-flex items-center justify-center bg-transparent text-primary hover:bg-primary/5 px-7 py-3.5 rounded-full font-semibold text-sm sm:text-base border-2 border-primary transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 text-center"
                 >
-                  See our work
+                  Explore Services
                 </Link>
               </div>
             </div>

@@ -2,11 +2,12 @@
   "name": "digibuddy4u-server",
   "version": "1.0.0",
   "description": "Backend API for DigiBuddy4U Agency Website & Admin Panel",
-  "main": "src/server.js",
+  "main": "index.cjs",
   "type": "module",
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
+    "start": "node index.cjs",
+    "start:esm": "node src/server.js",
+    "dev": "nodemon index.cjs",
     "seed": "node src/utils/seed.js"
   },
   "keywords": [

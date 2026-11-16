@@ -117,9 +117,12 @@ export default function WhyAgencySection() {
               <div className="relative rounded-[28px] overflow-hidden shadow-[0_25px_60px_-15px_rgba(7,26,56,0.35)] border-2 border-slate-900/10 bg-[#071A38]">
                 <img
                   src="/images/why-creative-agency-banner.png"
-                  alt="Why Every Business Needs A Creative Advertising Agency - DigiBuddy4U"
+                  alt="Why businesses in Ahmedabad need a creative digital marketing and IT agency — DigiBuddy4U"
+                  width={422}
+                  height={225}
                   className="w-full h-auto object-cover block select-none transform transition-transform duration-500 group-hover:scale-[1.02]"
                   loading="lazy"
+                  decoding="async"
                 />
 
                 {/* Bottom subtle brand trust strip */}

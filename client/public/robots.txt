@@ -1,0 +1,9 @@
+# robots.txt for DigiBuddy4U
+User-agent: *
+Allow: /
+Disallow: /customer/
+Disallow: /login
+Disallow: /register
+Disallow: /api/
+
+Sitemap: https://digibuddy4u.vercel.app/sitemap.xml

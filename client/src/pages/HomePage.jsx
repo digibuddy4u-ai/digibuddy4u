@@ -11,14 +11,25 @@ import AddonsSection from '../components/addons/AddonsSection';
 import WorkProcessSection from '../sections/WorkProcessSection';
 import FAQSection from '../sections/FAQSection';
 import FinalCTASection from '../sections/FinalCTASection';
-import { BRAND } from '../utils/brandConstants';
+import {
+  getOrganizationSchema,
+  getProfessionalServiceSchema,
+  getWebSiteSchema,
+} from '../utils/seoConfig';
 
 export default function HomePage() {
   return (
     <>
       <SEO
-        title="We Build Brands. We Create Digital Experiences. We Drive Growth."
-        description="From social media and performance marketing to websites, mobile apps, and custom software — DigiBuddy4U helps businesses build a stronger digital presence."
+        title="DigiBuddy4U | Digital Marketing Agency in Ahmedabad"
+        description="DigiBuddy4U is a digital marketing agency in Ahmedabad offering social media management, Meta ads, video reels production, SEO services & website development."
+        keywords="Digital Marketing Agency in Ahmedabad, Digital Marketing Services in Ahmedabad, Social Media Marketing Agency Ahmedabad, Website Development Company Ahmedabad, SEO Services in Ahmedabad, Meta Ads Agency Ahmedabad"
+        canonical="/"
+        schema={[
+          getOrganizationSchema(),
+          getProfessionalServiceSchema(),
+          getWebSiteSchema(),
+        ]}
       />
 
       {/* 1. Hero Section (with Vector Reel Card, Typewriter Headline & Tilted Ribbon) */}

@@ -80,9 +80,9 @@ export default function FAQSection() {
 
         {/* Direct Help Card */}
         <div className="mt-10 sm:mt-12 max-w-3xl xl:max-w-4xl mx-auto p-6 sm:p-7 rounded-2xl bg-surface-light border border-slate-200/80 text-center space-y-4">
-          <h4 className="font-heading font-bold text-navy-900 text-lg">
+          <h3 className="font-heading font-bold text-navy-900 text-lg">
             Have a question that is not covered here?
-          </h4>
+          </h3>
           <p className="text-sm text-content-muted">
             Our team is always reachable directly. Send us a message on WhatsApp or send an email and we'll reply promptly.
           </p>

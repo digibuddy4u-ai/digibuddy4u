@@ -29,6 +29,7 @@ import LoadingSpinner from '../components/ui/LoadingSpinner';
 import { FALLBACK_SERVICES, FALLBACK_CATEGORIES } from '../utils/servicesCatalog';
 import { BRAND } from '../utils/brandConstants';
 import { api } from '../utils/api';
+import { getOrganizationSchema, getBreadcrumbSchema } from '../utils/seoConfig';
 
 const ICON_MAP = {
   Share2,
@@ -147,9 +148,17 @@ export default function ServicesPage() {
   return (
     <>
       <SEO
-        title="Services — Complete Digital Marketing & IT Catalogue | DigiBuddy4U"
-        description="Explore DigiBuddy4U's complete catalogue of 14 dynamic services across Digital Marketing and IT Solutions: SMM, Meta Ads, Video Reels, Custom Web Apps, Mobile Apps, and ERP Systems."
-        canonicalUrl="/services"
+        title="Digital Marketing Services in Ahmedabad & IT | DigiBuddy4U"
+        description="Explore 14 digital marketing services in Ahmedabad and IT solutions: social media marketing, Meta ads, SEO services, branding, video production & websites."
+        keywords="Digital Marketing Services in Ahmedabad, Website Development Company Ahmedabad, SEO Services in Ahmedabad, Social Media Marketing Agency Ahmedabad, Meta Ads Agency Ahmedabad"
+        canonical="/services"
+        schema={[
+          getOrganizationSchema(),
+          getBreadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Services', path: '/services' },
+          ]),
+        ]}
       />
 
       {/* Header Banner */}
@@ -245,9 +254,9 @@ export default function ServicesPage() {
                 <span className="text-xs font-bold uppercase tracking-wider text-primary">
                   Showing Category:
                 </span>
-                <h3 className="text-lg font-heading font-bold text-navy-900">
+                <h2 className="text-lg font-heading font-bold text-navy-900">
                   {activeCategoryObj.name || activeCategory}
-                </h3>
+                </h2>
                 {activeCategoryObj.description && (
                   <p className="text-xs text-content-muted mt-0.5">
                     {activeCategoryObj.description}
@@ -320,9 +329,9 @@ export default function ServicesPage() {
 
                       {/* Title & Short Description */}
                       <div>
-                        <h3 className="text-xl font-heading font-extrabold text-navy-900 group-hover:text-primary transition-colors">
+                        <h2 className="text-xl font-heading font-extrabold text-navy-900 group-hover:text-primary transition-colors">
                           <Link to={`/services/${service.slug}`}>{service.title}</Link>
-                        </h3>
+                        </h2>
                         <p className="mt-2 text-xs sm:text-sm text-content-muted leading-relaxed line-clamp-3">
                           {service.shortDescription}
                         </p>
@@ -366,7 +375,7 @@ export default function ServicesPage() {
                         to={`/services/${service.slug}`}
                         className="inline-flex items-center gap-1.5 text-xs font-bold text-primary group-hover:translate-x-0.5 transition-transform"
                       >
-                        <span>View Full Service Details</span>
+                        <span>View Full Service Details<span className="sr-only"> — {service.title}</span></span>
                         <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
                       <span className="text-[11px] text-content-muted font-mono">
@@ -385,11 +394,11 @@ export default function ServicesPage() {
               <Badge variant="blue" size="sm">
                 Custom Multi-Service Engagements
               </Badge>
-              <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-navy-950">
+              <h2 className="text-2xl sm:text-3xl font-heading font-extrabold text-navy-950">
                 Need a Blended Marketing + Tech Scope?
-              </h3>
+              </h2>
               <p className="text-sm text-slate-600 leading-relaxed">
-                Many growing brands combine website development with performance ad funnels and reels production. We create bundled retainers with dedicated creative and technical leads.
+                Many growing brands combine website development with performance ad funnels and reels production. Explore our transparent <Link to="/packages" className="text-primary font-semibold hover:underline">growth &amp; foundation packages</Link> or request a custom scope for your business in Ahmedabad and across India.
               </p>
             </div>
 

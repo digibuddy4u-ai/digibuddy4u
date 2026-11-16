@@ -49,13 +49,13 @@ if (ENV.NODE_ENV === 'development') {
 // Mount all API routes under /api
 app.use('/api', apiRoutes);
 
-// Root route
-app.get('/', (req, res) => {
+// Root route & Health check for LiteSpeed / host monitors
+app.get(['/', '/health'], (req, res) => {
   res.status(200).json({
     name: 'DigiBuddy4U API',
     status: 'online',
     version: '1.0.0',
-    documentation: '/api/health',
+    health: '/api/health',
   });
 });
 

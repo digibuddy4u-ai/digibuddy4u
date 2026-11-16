@@ -7,6 +7,7 @@ import Button from '../components/common/Button';
 import Badge from '../components/common/Badge';
 import { PORTFOLIO_PROJECTS, UPCOMING_PORTFOLIO_PLACEHOLDERS } from '../utils/portfolioData';
 import { api } from '../utils/api';
+import { getOrganizationSchema, getBreadcrumbSchema } from '../utils/seoConfig';
 
 const CATEGORIES = ['All', 'Food & Hospitality', 'E-Commerce', 'B2B & Corporate'];
 
@@ -56,8 +57,17 @@ export default function PortfolioPage() {
   return (
     <>
       <SEO
-        title="Portfolio — Client Work & Brand Case Studies"
-        description="Explore DigiBuddy4U's client projects, including our featured food brand campaign for RotiWala. Genuine creative work with zero fabricated metrics."
+        title="Portfolio & Client Campaigns Ahmedabad | DigiBuddy4U"
+        description="Explore DigiBuddy4U client portfolio in Ahmedabad and Gujarat, showcasing our social media marketing, AI video reels & brand identity work for RotiWala."
+        keywords="Digital Marketing Portfolio Ahmedabad, Social Media Case Studies Gujarat, RotiWala Case Study, Branding Agency Ahmedabad"
+        canonical="/portfolio"
+        schema={[
+          getOrganizationSchema(),
+          getBreadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Portfolio', path: '/portfolio' },
+          ]),
+        ]}
       />
 
       {/* Hero Banner */}
@@ -108,9 +118,9 @@ export default function PortfolioPage() {
                 <span className="text-xs font-bold uppercase tracking-wider text-primary">
                   Agency Expansion
                 </span>
-                <h3 className="text-xl sm:text-2xl font-bold font-heading text-navy-900 mt-1">
+                <h2 className="text-xl sm:text-2xl font-bold font-heading text-navy-900 mt-1">
                   Upcoming Client Showcases in Pipeline
-                </h3>
+                </h2>
               </div>
               <Badge variant="yellow" size="sm">
                 In Onboarding

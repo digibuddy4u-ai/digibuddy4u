@@ -7,14 +7,29 @@ import ContactForm from '../components/ui/ContactForm';
 import Badge from '../components/common/Badge';
 import { BRAND } from '../utils/brandConstants';
 import { useSiteSettings } from '../context/SiteSettingsContext';
+import {
+  getOrganizationSchema,
+  getProfessionalServiceSchema,
+  getBreadcrumbSchema,
+} from '../utils/seoConfig';
 
 export default function ContactPage() {
   const { settings } = useSiteSettings();
   return (
     <>
       <SEO
-        title="Contact Us — Start Growing Your Brand"
-        description={`Get in touch with DigiBuddy4U. Connect directly via WhatsApp (${settings.phone}) or email ${settings.email} for your custom digital growth roadmap.`}
+        title="Contact DigiBuddy4U | Digital Marketing Agency Ahmedabad"
+        description={`Contact DigiBuddy4U in Ahmedabad, Gujarat for social media marketing, Meta ads, SEO, and website development. Call or WhatsApp ${settings.phone} or email ${settings.email}.`}
+        keywords="Contact Digital Marketing Agency Ahmedabad, Website Development Quote Ahmedabad, Meta Ads Consultation Gujarat, DigiBuddy4U Contact"
+        canonical="/contact"
+        schema={[
+          getOrganizationSchema(),
+          getProfessionalServiceSchema(),
+          getBreadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Contact Us', path: '/contact' },
+          ]),
+        ]}
       />
 
       {/* Header Banner */}
@@ -45,7 +60,7 @@ export default function ContactPage() {
                   <span className="text-primary">Zero Corporate Runaround.</span>
                 </h2>
                 <p className="mt-3 text-sm sm:text-base text-content-muted leading-relaxed">
-                  We value your time. Choose your preferred channel below or complete the inquiry form and we will review your brand details.
+                  We value your time. Serving startups and established brands across <strong>Ahmedabad, Gandhinagar, Gujarat &amp; Pan-India</strong>—choose your preferred channel below or complete the inquiry form.
                 </p>
               </div>
 

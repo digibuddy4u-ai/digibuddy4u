@@ -7,6 +7,7 @@ import {
   ArrowUpRight,
   Heart,
   ShieldCheck,
+  MapPin,
 } from 'lucide-react';
 import { InstagramIcon, FacebookIcon, LinkedInIcon } from '../common/SocialIcons';
 import Logo from '../common/Logo';
@@ -63,6 +64,13 @@ export default function Footer() {
                 </div>
                 <span>Chat on WhatsApp ({settings.phone})</span>
               </a>
+
+              <div className="inline-flex items-center gap-2.5 text-slate-600 font-medium">
+                <div className="w-8 h-8 rounded-lg bg-white border border-slate-200 shadow-xs flex items-center justify-center text-primary">
+                  <MapPin className="w-4 h-4" />
+                </div>
+                <span>Ahmedabad, Gujarat &bull; Serving Pan-India</span>
+              </div>
             </div>
 
             {/* Social Media Channels */}
@@ -120,9 +128,9 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h3 className="font-heading font-bold text-navy-950 text-xs tracking-wider uppercase">
+            <h2 className="font-heading font-bold text-navy-950 text-xs tracking-wider uppercase">
               Navigation
-            </h3>
+            </h2>
             <ul className="space-y-2.5 text-sm">
               <li>
                 <Link to="/" className="text-slate-600 hover:text-primary transition-colors font-medium">
@@ -150,8 +158,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/case-studies" className="text-slate-600 hover:text-primary transition-colors font-medium">
-                  Case Studies
+                <Link to="/case-studies/rotiwala" className="text-slate-600 hover:text-primary transition-colors font-medium">
+                  RotiWala Case Study
                 </Link>
               </li>
               <li>
@@ -169,9 +177,9 @@ export default function Footer() {
 
           {/* Core Services */}
           <div className="space-y-4">
-            <h3 className="font-heading font-bold text-navy-950 text-xs tracking-wider uppercase">
+            <h2 className="font-heading font-bold text-navy-950 text-xs tracking-wider uppercase">
               Core Divisions
-            </h3>
+            </h2>
             <div className="space-y-3 text-sm">
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-primary block mb-1.5">
@@ -233,9 +241,9 @@ export default function Footer() {
 
           {/* Client Spotlight & Trust Badge */}
           <div className="space-y-4">
-            <h3 className="font-heading font-bold text-navy-950 text-xs tracking-wider uppercase">
+            <h2 className="font-heading font-bold text-navy-950 text-xs tracking-wider uppercase">
               Client Showcase
-            </h3>
+            </h2>
             <div className="p-4 rounded-xl bg-white border border-slate-200/90 shadow-card-soft space-y-2.5">
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-bold uppercase tracking-wider text-primary block">
@@ -246,11 +254,15 @@ export default function Footer() {
               <div className="flex items-center gap-2.5">
                 <img
                   src="/images/portfolio/rotiwala-logo.png"
-                  alt="RotiWala Logo"
+                  alt="RotiWala official logo — Ahmedabad food brand client"
+                  width={32}
+                  height={32}
+                  loading="lazy"
+                  decoding="async"
                   className="w-8 h-8 rounded-full object-contain ring-1 ring-slate-200"
                 />
                 <div>
-                  <h4 className="text-sm font-bold text-navy-950 leading-tight">RotiWala</h4>
+                  <div className="text-sm font-bold text-navy-950 leading-tight">RotiWala</div>
                   <a
                     href="https://www.instagram.com/rotiwaladelivery/"
                     target="_blank"

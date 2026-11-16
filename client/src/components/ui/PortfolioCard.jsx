@@ -32,16 +32,20 @@ export default function PortfolioCard({ project }) {
             {isRotiWala || project.logo ? (
               <img
                 src={project.logo || '/images/portfolio/rotiwala-logo.png'}
-                alt={project.client}
+                alt={`${project.client} brand logo`}
+                width={80}
+                height={80}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full rounded-full object-contain"
               />
             ) : (
               <Utensils className="w-8 h-8" />
             )}
           </div>
-          <h4 className="text-2xl sm:text-3xl font-heading font-extrabold tracking-tight drop-shadow-sm">
+          <div className="text-2xl sm:text-3xl font-heading font-extrabold tracking-tight drop-shadow-sm">
             {project.client}
-          </h4>
+          </div>
           <p className="text-xs sm:text-sm text-white/90 font-medium max-w-sm mx-auto mt-1 line-clamp-1">
             {project.tagline}
           </p>
@@ -69,9 +73,9 @@ export default function PortfolioCard({ project }) {
       {/* Body Content */}
       <div className="p-6 sm:p-8 space-y-5">
         <div>
-          <h3 className="text-xl sm:text-2xl font-heading font-bold text-navy-900 group-hover:text-primary transition-colors">
+          <h2 className="text-xl sm:text-2xl font-heading font-bold text-navy-900 group-hover:text-primary transition-colors">
             {project.title}
-          </h3>
+          </h2>
           <p className="mt-3 text-sm text-content-muted leading-relaxed">
             {project.overview}
           </p>
@@ -108,10 +112,10 @@ export default function PortfolioCard({ project }) {
         {/* Action Link */}
         <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
           <Link
-            to={isRotiWala ? '/case-studies/rotiwala' : '/case-studies'}
+            to="/case-studies/rotiwala"
             className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary-hover group-hover:translate-x-1 transition-all"
           >
-            <span>View Full Case Study</span>
+            <span>View Full Case Study<span className="sr-only"> — {project.client}</span></span>
             <ArrowRight className="w-4 h-4" />
           </Link>
 

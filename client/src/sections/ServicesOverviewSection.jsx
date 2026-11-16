@@ -330,12 +330,12 @@ export default function ServicesOverviewSection() {
         {/* Mobile Header: Visible only on small devices */}
         <div className="mb-8 lg:hidden flex items-end justify-between border-b border-white/10 pb-4">
           <div>
-            <h2 className="text-2xl sm:text-4xl font-heading font-extrabold text-white leading-tight">
+            <div className="text-2xl sm:text-4xl font-heading font-extrabold text-white leading-tight" aria-hidden="true">
               Our Core Services & <br />
               <span className="text-primary">
                 Practical Benefits.
               </span>
-            </h2>
+            </div>
             <p className="text-xs sm:text-sm text-slate-400 mt-2 max-w-sm">
               Scroll down to stack services and explore commercial deliverables.
             </p>

@@ -3,13 +3,22 @@ import SEO from '../components/common/SEO';
 import SectionHeader from '../components/common/SectionHeader';
 import Badge from '../components/common/Badge';
 import { BRAND } from '../utils/brandConstants';
+import { getOrganizationSchema, getBreadcrumbSchema } from '../utils/seoConfig';
 
 export default function PrivacyPolicyPage() {
   return (
     <>
       <SEO
-        title="Privacy Policy"
-        description="DigiBuddy4U's Privacy Policy explaining our data handling, client confidentiality, and communication practices."
+        title="Privacy Policy | DigiBuddy4U"
+        description="Read the official DigiBuddy4U Privacy Policy covering inquiry data handling, client confidentiality, and digital marketing communication practices."
+        canonical="/privacy-policy"
+        schema={[
+          getOrganizationSchema(),
+          getBreadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Privacy Policy', path: '/privacy-policy' },
+          ]),
+        ]}
       />
 
       {/* Header Banner */}

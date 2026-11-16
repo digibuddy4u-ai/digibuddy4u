@@ -77,6 +77,7 @@ function PlatformBubble({ item, isAriaHidden = false }) {
             height={44}
             className="w-7 h-7 sm:w-9 sm:h-9 object-contain filter contrast-125 transition-transform duration-200 group-hover:scale-105 pointer-events-none motion-reduce:transition-none motion-reduce:transform-none"
             loading="lazy"
+            decoding="async"
             draggable="false"
             onError={(e) => {
               // Graceful fallback to initial text if offline

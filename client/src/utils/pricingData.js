@@ -159,7 +159,7 @@ export const PRICING_PACKAGES = [
       { label: '2 Meta Ads', desc: 'Facebook & Instagram Ads', icon: 'Target' },
     ],
     features: [
-      '3 Model-Based Reels',
+      '3 Model Based Reels',
       '2 Reels (Founder Face & Build Trust)',
       '2 Meta Ads Campaigns (Targeting & Reporting)',
       '10 Regular + 3 Carousel + 2 Meme Posts',
@@ -176,7 +176,7 @@ export const PRICING_PACKAGES = [
       {
         title: 'Reels Production – 5 Reels',
         items: [
-          '3 Model-Based Reels',
+          '3 Model Based Reels',
           '2 Reels (Founder Face & Build Trust)',
         ],
       },

@@ -259,7 +259,7 @@ export const PACKAGES_CATALOG = [
     minimumCommitment: 'Minimum 3 Months',
     platforms: ['Instagram', 'Facebook'],
     reelsCount: '5 Reels (3 Model + 2 Founder)',
-    reelsDetails: '3 Model-Based Reels + 2 Founder-Face / Founder-Led Advertisement Reels',
+    reelsDetails: '3 Model Based Reels + 2 Founder-Face / Founder-Led Advertisement Reels',
     postsCount: '15 Posts (10 Regular + 3 Carousels + 2 Memes)',
     postsDetails: '10 Regular Posts + 3 Carousel Posts + 2 Meme / Trending Posts',
     shootsCount: 'Model Shoot & Founder Video Direction Included',
@@ -280,7 +280,7 @@ export const PACKAGES_CATALOG = [
       { label: '2 Meta Ads', desc: 'Facebook & Instagram Ads', icon: 'Target' },
     ],
     keyHighlights: [
-      '3 Model-Based Reels',
+      '3 Model Based Reels',
       '2 Reels (Founder Face & Build Trust)',
       '2 Meta Ads Campaigns (Targeting & Reporting)',
       '10 Regular + 3 Carousel + 2 Meme Posts',
@@ -297,7 +297,7 @@ export const PACKAGES_CATALOG = [
       {
         title: 'Reels Production – 5 Reels',
         items: [
-          '3 Model-Based Reels',
+          '3 Model Based Reels',
           '2 Reels (Founder Face & Build Trust)',
         ],
       },
@@ -341,7 +341,7 @@ export const PACKAGES_CATALOG = [
       },
     ],
     fullInclusions: [
-      '3 Model-Based Reels Designed for High Engagement',
+      '3 Model Based Reels Designed for High Engagement',
       '2 Reels (Founder Face & Build Trust — 5 Reels Total)',
       '10 Regular Social Media Posts with Brand Aesthetics',
       '3 High-Value Carousel Posts (Educational / Product Deep Dive)',

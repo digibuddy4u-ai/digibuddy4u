@@ -8,8 +8,9 @@ export default function NotFoundPage() {
   return (
     <>
       <SEO
-        title="404 — Page Not Found"
+        title="404 — Page Not Found | DigiBuddy4U"
         description="The page you are looking for does not exist or has been relocated."
+        noindex={true}
       />
 
       <section className="min-h-[70vh] flex items-center justify-center py-20 px-4 bg-surface-light">
