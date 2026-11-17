@@ -25,7 +25,8 @@ app.use(
       if (
         allowedOrigins.indexOf(origin) !== -1 ||
         allowedOrigins.includes('*') ||
-        origin.endsWith('.vercel.app')
+        origin.endsWith('.vercel.app') ||
+        origin.endsWith('digibuddy4u.com')
       ) {
         return callback(null, true);
       }

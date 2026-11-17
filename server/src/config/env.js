@@ -6,6 +6,10 @@ const defaultOrigins = [
   'http://localhost:3001',
   'http://localhost:5173',
   'http://localhost:5174',
+  'https://digibuddy4u.com',
+  'https://www.digibuddy4u.com',
+  'https://admin.digibuddy4u.com',
+  'https://digibuddy4u.vercel.app',
   process.env.CLIENT_URL,
   process.env.ADMIN_URL,
 ].filter(Boolean);
