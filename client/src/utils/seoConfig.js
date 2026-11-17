@@ -299,11 +299,11 @@ export const STATIC_ROUTES_SEO = [
   },
   {
     path: '/portfolio',
-    title: 'Portfolio & Client Campaigns Ahmedabad | DigiBuddy4U',
+    title: 'Client Portfolio & Creative Campaigns | DigiBuddy4U',
     description:
-      'Explore DigiBuddy4U client portfolio in Ahmedabad and Gujarat, showcasing our social media marketing, AI video reels & brand identity work for RotiWala.',
+      'Explore DigiBuddy4U verified client portfolio, showcasing our social media management, video reels editing, graphic design, and marketing campaigns for leading brands in India and UAE.',
     keywords:
-      'Digital Marketing Portfolio Ahmedabad, Social Media Case Studies Gujarat, RotiWala Case Study, Branding Agency Ahmedabad',
+      'Digital Marketing Portfolio, Social Media Marketing Agency, Video Reels Production, Branding Agency Portfolio, DigiBuddy4U Clients',
     canonical: '/portfolio',
     ogType: 'website',
     robots: 'index, follow',
@@ -314,27 +314,6 @@ export const STATIC_ROUTES_SEO = [
       getBreadcrumbSchema([
         { name: 'Home', path: '/' },
         { name: 'Portfolio', path: '/portfolio' },
-      ]),
-    ],
-  },
-  {
-    path: '/case-studies/rotiwala',
-    title: 'RotiWala Case Study — Food Brand Social Growth | DigiBuddy4U',
-    description:
-      'How DigiBuddy4U built RotiWala brand identity, AI food reels, festival campaigns & WhatsApp ordering flow across Ahmedabad and Gandhinagar.',
-    keywords:
-      'RotiWala Case Study, Food Brand Marketing Ahmedabad, Instagram Marketing Services, AI Video Production',
-    canonical: '/case-studies/rotiwala',
-    ogType: 'website',
-    robots: 'index, follow',
-    changefreq: 'monthly',
-    priority: '0.8',
-    schema: [
-      getOrganizationSchema(),
-      getBreadcrumbSchema([
-        { name: 'Home', path: '/' },
-        { name: 'Portfolio', path: '/portfolio' },
-        { name: 'RotiWala Case Study', path: '/case-studies/rotiwala' },
       ]),
     ],
   },

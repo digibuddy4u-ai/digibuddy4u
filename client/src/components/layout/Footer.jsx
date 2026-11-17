@@ -13,6 +13,7 @@ import { InstagramIcon, FacebookIcon, LinkedInIcon } from '../common/SocialIcons
 import Logo from '../common/Logo';
 import { BRAND, NAV_LINKS } from '../../utils/brandConstants';
 import { SERVICES_DATA } from '../../utils/servicesData';
+import { CLIENT_BRANDS } from '../../utils/clientsData';
 import { useSiteSettings } from '../../context/SiteSettingsContext';
 
 export default function Footer() {
@@ -154,12 +155,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link to="/portfolio" className="text-slate-600 hover:text-primary transition-colors font-medium">
-                  Our Work (Portfolio)
-                </Link>
-              </li>
-              <li>
-                <Link to="/case-studies/rotiwala" className="text-slate-600 hover:text-primary transition-colors font-medium">
-                  RotiWala Case Study
+                  Client Portfolio
                 </Link>
               </li>
               <li>
@@ -239,48 +235,43 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Client Spotlight & Trust Badge */}
+          {/* Client Showcase & Trust Badge */}
           <div className="space-y-4">
             <h2 className="font-heading font-bold text-navy-950 text-xs tracking-wider uppercase">
               Client Showcase
             </h2>
-            <div className="p-4 rounded-xl bg-white border border-slate-200/90 shadow-card-soft space-y-2.5">
+            <div className="p-4 rounded-xl bg-white border border-slate-200/90 shadow-card-soft space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-bold uppercase tracking-wider text-primary block">
-                  Featured Brand
+                  Verified Brands
                 </span>
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               </div>
-              <div className="flex items-center gap-2.5">
-                <img
-                  src="/images/portfolio/rotiwala-logo.png"
-                  alt="RotiWala official logo — Ahmedabad food brand client"
-                  width={32}
-                  height={32}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-8 h-8 rounded-full object-contain ring-1 ring-slate-200"
-                />
-                <div>
-                  <div className="text-sm font-bold text-navy-950 leading-tight">RotiWala</div>
-                  <a
-                    href="https://www.instagram.com/rotiwaladelivery/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[11px] font-mono text-[#E1306C] hover:underline flex items-center gap-1"
-                  >
-                    <span>@rotiwaladelivery</span>
-                  </a>
-                </div>
-              </div>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Brand positioning, video reels, and social media management for homestyle daily meals.
+                Strategic video editing, content writing, social media management & brand growth for UAE & India businesses.
               </p>
+              <div className="flex items-center gap-1.5 pt-0.5">
+                {CLIENT_BRANDS.map((client) => (
+                  <div
+                    key={client.id}
+                    title={client.name}
+                    className="w-8 h-8 rounded-full bg-surface-light p-1 border border-slate-200 flex items-center justify-center flex-shrink-0 shadow-2xs"
+                  >
+                    <img
+                      src={client.logo}
+                      alt={client.name}
+                      width={24}
+                      height={24}
+                      className="w-full h-full object-contain rounded-full"
+                    />
+                  </div>
+                ))}
+              </div>
               <Link
-                to="/case-studies/rotiwala"
+                to="/portfolio"
                 className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline pt-1"
               >
-                <span>Read Case Study</span>
+                <span>Explore Client Portfolio</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </Link>
             </div>

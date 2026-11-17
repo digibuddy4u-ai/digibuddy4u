@@ -10,7 +10,7 @@ import { PORTFOLIO_PROJECTS, UPCOMING_PORTFOLIO_PLACEHOLDERS } from '../utils/po
 import { api } from '../utils/api';
 import { getOrganizationSchema, getBreadcrumbSchema } from '../utils/seoConfig';
 
-const CATEGORIES = ['All', 'Food & Hospitality', 'E-Commerce', 'B2B & Corporate'];
+const CATEGORIES = ['All', 'Outdoor & Landscaping', 'Automotive', 'Corporate & B2B', 'Food & Beverage'];
 
 export default function PortfolioPage() {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -58,9 +58,9 @@ export default function PortfolioPage() {
   return (
     <>
       <SEO
-        title="Portfolio & Client Campaigns Ahmedabad | DigiBuddy4U"
-        description="Explore DigiBuddy4U client portfolio in Ahmedabad and Gujarat, showcasing our social media marketing, AI video reels & brand identity work for RotiWala."
-        keywords="Digital Marketing Portfolio Ahmedabad, Social Media Case Studies Gujarat, RotiWala Case Study, Branding Agency Ahmedabad"
+        title="Client Portfolio & Creative Campaigns | DigiBuddy4U"
+        description="Explore DigiBuddy4U verified client portfolio, showcasing our social media management, video reels editing, graphic design, and marketing campaigns for leading brands."
+        keywords="Digital Marketing Portfolio, Social Media Marketing Ahmedabad, Video Reels Production, Branding Portfolio, DigiBuddy4U Clients"
         canonical="/portfolio"
         schema={[
           getOrganizationSchema(),

@@ -644,10 +644,10 @@ export default function AboutPage() {
                   </a>
 
                   <Link
-                    to="/case-studies/rotiwala"
+                    to="/portfolio"
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-navy-900 font-bold text-xs sm:text-sm transition-colors"
                   >
-                    <span>Read Full Case Study</span>
+                    <span>View All Client Work</span>
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
@@ -668,7 +668,7 @@ export default function AboutPage() {
                       className="w-12 h-12 rounded-2xl object-contain bg-white border-2 border-white/20 shadow-md p-0.5"
                     />
                     <div>
-                      <h4 className="text-base sm:text-lg font-bold font-heading text-white">RotiWala Case Study</h4>
+                      <h4 className="text-base sm:text-lg font-bold font-heading text-white">RotiWala Client Campaign</h4>
                       <p className="text-xs text-cyan-300">Fresh Rotis • Ahmedabad & Gandhinagar</p>
                     </div>
                   </div>

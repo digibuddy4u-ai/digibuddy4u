@@ -47,10 +47,10 @@ export default function AppRoutes() {
             {/* Canonical Redirects to prevent duplicate content indexing */}
             <Route path="pricing" element={<Navigate to="/packages" replace />} />
             <Route path="portfolio" element={<PortfolioPage />} />
-            <Route path="case-studies/rotiwala" element={<RotiWalaCaseStudyPage />} />
-            <Route path="case-studies" element={<Navigate to="/case-studies/rotiwala" replace />} />
-            <Route path="case-study/rotiwala" element={<Navigate to="/case-studies/rotiwala" replace />} />
-            <Route path="case-study" element={<Navigate to="/case-studies/rotiwala" replace />} />
+            <Route path="case-studies/rotiwala" element={<Navigate to="/portfolio" replace />} />
+            <Route path="case-studies" element={<Navigate to="/portfolio" replace />} />
+            <Route path="case-study/rotiwala" element={<Navigate to="/portfolio" replace />} />
+            <Route path="case-study" element={<Navigate to="/portfolio" replace />} />
 
             <Route path="contact" element={<ContactPage />} />
             <Route path="contact-us" element={<Navigate to="/contact" replace />} />

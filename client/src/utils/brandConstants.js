@@ -28,24 +28,6 @@ export const NAV_LINKS = [
   { name: 'About Us', path: '/about' },
   { name: 'Services', path: '/services', dropdownType: 'services' },
   { name: 'Packages', path: '/packages' },
-  {
-    name: 'Our Work',
-    path: '/portfolio',
-    dropdownType: 'work',
-    children: [
-      {
-        name: 'Portfolio',
-        path: '/portfolio',
-        description: 'Explore our client projects, visual campaigns & creative deliverables.',
-        icon: 'Layers',
-      },
-      {
-        name: 'Case Studies',
-        path: '/case-studies',
-        description: 'In-depth analysis of marketing & execution strategy (Featuring RotiWala).',
-        icon: 'FileText',
-      },
-    ],
-  },
+  { name: 'Portfolio', path: '/portfolio' },
   { name: 'Contact Us', path: '/contact' },
 ];

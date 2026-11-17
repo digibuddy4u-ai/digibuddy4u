@@ -208,7 +208,7 @@ export default function Navbar() {
     if (name === 'Home') return <Home className={`w-3.5 h-3.5 ${isActive ? 'fill-current' : ''}`} />;
     if (dropdownType === 'services') return <Target className="w-3.5 h-3.5" />;
     if (name === 'Packages') return <Calendar className="w-3.5 h-3.5" />;
-    if (dropdownType === 'work') return <CheckCircle2 className="w-3.5 h-3.5" />;
+    if (name === 'Portfolio' || dropdownType === 'work') return <Layers className="w-3.5 h-3.5" />;
     if (name === 'About Us') return <Sparkles className="w-3.5 h-3.5" />;
     if (name === 'Contact Us') return <Phone className="w-3.5 h-3.5" />;
     return null;
