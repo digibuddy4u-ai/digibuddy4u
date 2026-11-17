@@ -5,6 +5,7 @@ import SectionHeader from '../components/common/SectionHeader';
 import PortfolioCard from '../components/ui/PortfolioCard';
 import Button from '../components/common/Button';
 import Badge from '../components/common/Badge';
+import ClientsSection from '../sections/ClientsSection';
 import { PORTFOLIO_PROJECTS, UPCOMING_PORTFOLIO_PLACEHOLDERS } from '../utils/portfolioData';
 import { api } from '../utils/api';
 import { getOrganizationSchema, getBreadcrumbSchema } from '../utils/seoConfig';
@@ -109,6 +110,11 @@ export default function PortfolioPage() {
             {filteredProjects.map((project) => (
               <PortfolioCard key={project.id} project={project} />
             ))}
+          </div>
+
+          {/* Brands We've Worked With Section */}
+          <div className="rounded-3xl overflow-hidden shadow-2xl border border-navy-900">
+            <ClientsSection />
           </div>
 
           {/* Scalable Pipeline / Upcoming Projects Section */}

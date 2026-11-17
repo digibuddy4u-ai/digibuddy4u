@@ -2,6 +2,7 @@ import React from 'react';
 import SEO from '../components/common/SEO';
 import HeroSection from '../sections/HeroSection';
 import PlatformsTechnologiesSection from '../sections/PlatformsTechnologiesSection';
+import ClientsSection from '../sections/ClientsSection';
 import ServicesOverviewSection from '../sections/ServicesOverviewSection';
 import WhyAgencySection from '../sections/WhyAgencySection';
 import WhyChooseUsSection from '../sections/WhyChooseUsSection';
@@ -41,7 +42,10 @@ export default function HomePage() {
       {/* 3. Platforms & Technologies Marquee Showcase (Digital Marketing & IT) */}
       <PlatformsTechnologiesSection />
 
-      {/* 4. Why Every Business Needs A Creative & Digital Agency (Strategic Perspective) */}
+      {/* 4. Brands We've Worked With — Trusted Client Showcase */}
+      <ClientsSection />
+
+      {/* 5. Why Every Business Needs A Creative & Digital Agency (Strategic Perspective) */}
       <WhyAgencySection />
 
       {/* 5. Why DigiBuddy4U — Genuine service benefits without fabricated statistics */}
