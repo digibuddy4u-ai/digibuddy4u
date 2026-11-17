@@ -18,16 +18,28 @@ export default function PortfolioCard({ project }) {
   return (
     <div className="group relative bg-white rounded-2xl border border-[#E2E8F0] overflow-hidden shadow-sm hover:shadow-xl hover:shadow-[#0866F5]/10 hover:border-[#0866F5]/50 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
       {/* Top Thin Electric-Blue Accent Line */}
-      <div className="h-1 w-full bg-[#0866F5] opacity-90 group-hover:opacity-100 transition-opacity" />
+      <div className="h-1 w-full bg-[#0866F5] opacity-90 group-hover:opacity-100 transition-opacity relative z-20" />
+
+      {/* Client Logo Watermark in Background (30% to 40% Opacity) */}
+      {project.logo && (
+        <div className="absolute inset-0 flex items-center justify-center p-4 pointer-events-none select-none overflow-hidden z-0">
+          <img
+            src={project.logo}
+            alt=""
+            aria-hidden="true"
+            className="w-48 h-48 sm:w-56 sm:h-56 object-contain opacity-[0.32] group-hover:opacity-[0.40] group-hover:scale-105 transition-all duration-300 filter"
+          />
+        </div>
+      )}
 
       {/* Corporate Minimal Header */}
-      <div className="p-5 sm:p-6 pb-4 border-b border-[#E2E8F0] bg-white">
+      <div className="p-5 sm:p-6 pb-4 border-b border-[#E2E8F0] bg-white/85 backdrop-blur-xs relative z-10">
         {/* Top Meta: Category & Green Active Indicator */}
         <div className="flex items-center justify-between gap-2 mb-3.5">
-          <span className="inline-flex items-center text-[11px] font-semibold tracking-wide px-2.5 py-0.5 rounded-full bg-[#F5F8FC] text-[#071A38] border border-[#E2E8F0]">
+          <span className="inline-flex items-center text-[11px] font-semibold tracking-wide px-2.5 py-0.5 rounded-full bg-[#F5F8FC]/90 text-[#071A38] border border-[#E2E8F0]">
             {project.category}
           </span>
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-50/90 text-emerald-700 border border-emerald-200">
             <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
             <span>Active</span>
           </span>
@@ -68,7 +80,7 @@ export default function PortfolioCard({ project }) {
       </div>
 
       {/* Card Body */}
-      <div className="p-5 sm:p-6 pt-4 flex-1 flex flex-col justify-between space-y-4 bg-white">
+      <div className="p-5 sm:p-6 pt-4 flex-1 flex flex-col justify-between space-y-4 bg-white/75 backdrop-blur-2xs relative z-10">
         <div className="space-y-3.5">
           <p className="text-xs sm:text-[13px] text-[#64748B] leading-relaxed line-clamp-2">
             {project.overview}
@@ -84,13 +96,13 @@ export default function PortfolioCard({ project }) {
                 {project.scope.slice(0, 4).map((item, idx) => (
                   <span
                     key={idx}
-                    className="text-[11px] px-2.5 py-1 rounded-md bg-[#F5F8FC] border border-[#E2E8F0] text-[#071A38] font-medium"
+                    className="text-[11px] px-2.5 py-1 rounded-md bg-[#F5F8FC]/90 border border-[#E2E8F0] text-[#071A38] font-medium shadow-2xs"
                   >
                     {item}
                   </span>
                 ))}
                 {project.scope.length > 4 && (
-                  <span className="text-[10px] px-2 py-1 rounded-md bg-[#F5F8FC] text-[#64748B] font-medium border border-[#E2E8F0]">
+                  <span className="text-[10px] px-2 py-1 rounded-md bg-[#F5F8FC]/90 text-[#64748B] font-medium border border-[#E2E8F0]">
                     +{project.scope.length - 4} more
                   </span>
                 )}
@@ -100,7 +112,7 @@ export default function PortfolioCard({ project }) {
 
           {/* Key Deliverables Snapshot Box */}
           {project.deliverables && project.deliverables.length > 0 && (
-            <div className="p-3 rounded-xl bg-[#F5F8FC] border border-[#E2E8F0] space-y-1.5">
+            <div className="p-3 rounded-xl bg-[#F5F8FC]/90 border border-[#E2E8F0] space-y-1.5 shadow-2xs">
               <span className="text-[10px] font-bold uppercase tracking-wider text-[#0866F5] flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Deliverables Snapshot</span>
