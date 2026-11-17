@@ -5,10 +5,6 @@ import {
   Sparkles,
   ArrowRight,
   ShieldCheck,
-  ChevronLeft,
-  ChevronRight,
-  Pause,
-  Play,
 } from 'lucide-react';
 import { InstagramIcon } from '../components/common/SocialIcons';
 import { CLIENT_BRANDS } from '../utils/clientsData';
@@ -112,18 +108,6 @@ export default function ClientsSection() {
     return () => observer.disconnect();
   }, []);
 
-  // Manual arrow navigation controls
-  const handleScroll = (direction) => {
-    if (!scrollContainerRef.current) return;
-    const cardWidth = 340;
-    const scrollAmount = direction === 'left' ? -cardWidth : cardWidth;
-    scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-
-    // Temporarily pause auto-marquee on user manual click
-    setIsPaused(true);
-    setTimeout(() => setIsPaused(false), 5000);
-  };
-
   // Drag-to-scroll support for mouse/trackpad
   const handleMouseDown = (e) => {
     if (!scrollContainerRef.current) return;
@@ -195,46 +179,7 @@ export default function ClientsSection() {
             </p>
           </div>
 
-          {/* Interactive Navigation & Pause Controls */}
-          <div className="flex items-center gap-2 self-start md:self-end">
-            <button
-              type="button"
-              onClick={() => setIsPaused(!isPaused)}
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono font-semibold text-slate-300 hover:text-white transition-colors"
-              title={isPaused ? 'Resume auto-scroll' : 'Pause auto-scroll'}
-              aria-label={isPaused ? 'Resume auto-scroll' : 'Pause auto-scroll'}
-            >
-              {isPaused ? (
-                <>
-                  <Play className="w-3.5 h-3.5 text-accent-yellow fill-current" />
-                  <span className="hidden sm:inline">Play</span>
-                </>
-              ) : (
-                <>
-                  <Pause className="w-3.5 h-3.5 text-cyan-accent fill-current" />
-                  <span className="hidden sm:inline">Pause</span>
-                </>
-              )}
-            </button>
 
-            <button
-              type="button"
-              onClick={() => handleScroll('left')}
-              className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/15 border border-white/15 text-white flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-sm"
-              aria-label="Scroll clients left"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleScroll('right')}
-              className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/15 border border-white/15 text-white flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-sm"
-              aria-label="Scroll clients right"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
         </div>
       </div>
 
@@ -276,7 +221,7 @@ export default function ClientsSection() {
         <div className="inline-flex items-center gap-2 px-5 py-2 rounded-2xl bg-white/[0.04] border border-white/10 text-xs text-slate-300 max-w-xl mx-auto backdrop-blur-sm">
           <ShieldCheck className="w-4 h-4 text-emerald-400 flex-shrink-0" />
           <span>
-            Hover over any client card to pause auto-scroll. Drag or use arrows to navigate.
+            Hover over any client card to pause auto-scroll. Drag horizontally to browse.
           </span>
         </div>
       </div>
