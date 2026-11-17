@@ -10,12 +10,17 @@
   RewriteCond %{HTTPS} off
   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-  # 2. Never rewrite real files or directories (assets, css, js, svg, png, webp, jpg, xml, txt)
+  # 2. Never rewrite real physical files or directories (assets, css, js, svg, png, webp, jpg, xml, txt)
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # 3. Fallback all React SPA routes (/portfolio, /services, /about, /packages, etc.) to /index.html
+  # 3. Serve prerendered HTML route snapshot if present (e.g. /portfolio -> portfolio.html, /about -> about.html)
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f [OR]
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.*)$ $1.html [L]
+
+  # 4. Fallback all remaining frontend routes to /index.html for React SPA Router
   RewriteRule ^ index.html [L]
 </IfModule>
 

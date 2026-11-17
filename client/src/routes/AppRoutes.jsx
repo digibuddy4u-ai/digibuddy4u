@@ -38,6 +38,7 @@ export default function AppRoutes() {
           <Route path="/" element={<RootLayout />}>
             <Route index element={<HomePage />} />
             <Route path="about" element={<AboutPage />} />
+            <Route path="about-us" element={<Navigate to="/about" replace />} />
             <Route path="services" element={<ServicesPage />} />
             <Route path="services/:slug" element={<ServiceDetailPage />} />
             <Route path="packages" element={<PackagesPage />} />
@@ -52,6 +53,7 @@ export default function AppRoutes() {
             <Route path="case-study" element={<Navigate to="/case-studies/rotiwala" replace />} />
 
             <Route path="contact" element={<ContactPage />} />
+            <Route path="contact-us" element={<Navigate to="/contact" replace />} />
             <Route path="customer/dashboard" element={<CustomerDashboardPage />} />
             <Route path="login" element={<CustomerLoginPage />} />
             <Route path="register" element={<CustomerRegisterPage />} />
