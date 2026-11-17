@@ -214,10 +214,35 @@
   animation-play-state: paused;
 }
 
+/* ========================================================= */
+/* Brands We've Worked With Smooth Continuous Carousel       */
+/* ========================================================= */
+@keyframes clients-marquee-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-clients-marquee {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: clients-marquee-scroll 36s linear infinite;
+}
+
+.animate-clients-marquee:hover,
+.clients-marquee-paused {
+  animation-play-state: paused !important;
+}
+
 /* Accessible Reduced-Motion Alternatives */
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee-left,
-  .animate-marquee-right {
+  .animate-marquee-right,
+  .animate-clients-marquee {
     animation: none !important;
     transform: none !important;
   }

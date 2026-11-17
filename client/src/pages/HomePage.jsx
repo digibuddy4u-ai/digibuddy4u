@@ -42,10 +42,7 @@ export default function HomePage() {
       {/* 3. Platforms & Technologies Marquee Showcase (Digital Marketing & IT) */}
       <PlatformsTechnologiesSection />
 
-      {/* 4. Brands We've Worked With — Trusted Client Showcase */}
-      <ClientsSection />
-
-      {/* 5. Why Every Business Needs A Creative & Digital Agency (Strategic Perspective) */}
+      {/* 4. Why Every Business Needs A Creative & Digital Agency (Strategic Perspective) */}
       <WhyAgencySection />
 
       {/* 5. Why DigiBuddy4U — Genuine service benefits without fabricated statistics */}
@@ -54,7 +51,10 @@ export default function HomePage() {
       {/* 6. Featured Work — Real client showcase (RotiWala) */}
       <FeaturedPortfolioSection />
 
-      {/* 7. Social Media Management Packages — Basic, Growth, Premium */}
+      {/* 7. Brands We've Worked With — Animated Horizontal Scrolling Carousel */}
+      <ClientsSection />
+
+      {/* 8. Social Media Management Packages — Basic, Growth, Premium */}
       <PricingPreviewSection />
 
       {/* 7b. Add-Ons & Extra Services — A La Carte On-Demand Capabilities */}

@@ -37,11 +37,11 @@ export const CLIENT_BRANDS = [
   {
     id: 'chapa-kazi',
     name: 'Chapa Kazi Business Services',
-    industry: 'UAE Business Services, Bookkeeping & Business Consulting',
+    industry: 'UAE Business Services & Business Consulting',
     instagramHandle: 'chapakazi.in',
     instagramUrl: 'https://www.instagram.com/chapakazi.in/',
     logo: '/images/clients/chapa-kazi.png',
-    badge: 'Corporate Consulting',
+    badge: 'Business Consulting',
     focus: 'Business setup advisory, accounting & professional consulting presence',
   },
   {

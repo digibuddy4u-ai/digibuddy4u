@@ -111,12 +111,15 @@ export default function PortfolioPage() {
               <PortfolioCard key={project.id} project={project} />
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Brands We've Worked With Section */}
-          <div className="rounded-3xl overflow-hidden shadow-2xl border border-navy-900">
-            <ClientsSection />
-          </div>
+      {/* Brands We've Worked With Animated Slider */}
+      <ClientsSection />
 
+      {/* Upcoming Pipeline & Transparency */}
+      <section className="py-12 sm:py-16 bg-surface-light border-t border-slate-200/80">
+        <div className="site-container space-y-12">
           {/* Scalable Pipeline / Upcoming Projects Section */}
           <div className="p-8 sm:p-10 rounded-3xl bg-white border border-slate-200/90 shadow-card-soft space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
