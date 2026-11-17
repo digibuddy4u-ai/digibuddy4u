@@ -6,7 +6,6 @@ import ClientsSection from '../sections/ClientsSection';
 import ServicesOverviewSection from '../sections/ServicesOverviewSection';
 import WhyAgencySection from '../sections/WhyAgencySection';
 import WhyChooseUsSection from '../sections/WhyChooseUsSection';
-import FeaturedPortfolioSection from '../sections/FeaturedPortfolioSection';
 import PricingPreviewSection from '../sections/PricingPreviewSection';
 import AddonsSection from '../components/addons/AddonsSection';
 import WorkProcessSection from '../sections/WorkProcessSection';
@@ -48,13 +47,10 @@ export default function HomePage() {
       {/* 5. Why DigiBuddy4U — Genuine service benefits without fabricated statistics */}
       <WhyChooseUsSection />
 
-      {/* 6. Featured Work — Real client showcase (RotiWala) */}
-      <FeaturedPortfolioSection />
-
-      {/* 7. Brands We've Worked With — Animated Horizontal Scrolling Carousel */}
+      {/* 6. Brands We've Worked With — Animated Horizontal Scrolling Carousel */}
       <ClientsSection />
 
-      {/* 8. Social Media Management Packages — Basic, Growth, Premium */}
+      {/* 7. Social Media Management Packages — Basic, Growth, Premium */}
       <PricingPreviewSection />
 
       {/* 7b. Add-Ons & Extra Services — A La Carte On-Demand Capabilities */}
