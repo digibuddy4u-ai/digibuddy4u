@@ -16,47 +16,26 @@ export default function PortfolioCard({ project }) {
   )}`;
 
   return (
-    <div className="group relative bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-card-soft hover:shadow-card-hover transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
-      {/* Executive Luxury Header with Brand-Specific Accent Strip */}
-      <div
-        className={`relative bg-gradient-to-br ${
-          project.bannerGradient || 'from-[#0A1628] via-[#122238] to-[#070E1B]'
-        } p-4 sm:p-5 text-white overflow-hidden`}
-      >
-        {/* Top Accent Strip tuned to client's official brand color */}
-        <div
-          className="absolute top-0 left-0 right-0 h-1 opacity-80"
-          style={{
-            background: `linear-gradient(90deg, transparent 0%, ${
-              project.accentColor || '#38BDF8'
-            } 50%, transparent 100%)`,
-          }}
-        />
+    <div className="group relative bg-white rounded-2xl border border-[#E2E8F0] overflow-hidden shadow-sm hover:shadow-xl hover:shadow-[#0866F5]/10 hover:border-[#0866F5]/50 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
+      {/* Top Thin Electric-Blue Accent Line */}
+      <div className="h-1 w-full bg-[#0866F5] opacity-90 group-hover:opacity-100 transition-opacity" />
 
-        {/* Ambient Subtle Radial Light */}
-        <div
-          className="absolute -top-12 -right-12 w-36 h-36 rounded-full blur-2xl pointer-events-none opacity-20"
-          style={{ backgroundColor: project.accentColor || '#38BDF8' }}
-        />
-
-        {/* Top Meta: Styled Category Badge & Active Indicator */}
-        <div className="relative z-10 flex items-center justify-between gap-2 mb-3.5">
-          <span
-            className={`inline-flex items-center text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${
-              project.badgeBg || 'bg-white/10 text-slate-200 border-white/15'
-            }`}
-          >
+      {/* Corporate Minimal Header */}
+      <div className="p-5 sm:p-6 pb-4 border-b border-[#E2E8F0] bg-white">
+        {/* Top Meta: Category & Green Active Indicator */}
+        <div className="flex items-center justify-between gap-2 mb-3.5">
+          <span className="inline-flex items-center text-[11px] font-semibold tracking-wide px-2.5 py-0.5 rounded-full bg-[#F5F8FC] text-[#071A38] border border-[#E2E8F0]">
             {project.category}
           </span>
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-black/40 backdrop-blur-md text-slate-300 border border-white/10">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
             <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
-            <span>Active Client</span>
+            <span>Active</span>
           </span>
         </div>
 
-        {/* Brand Emblem & Name */}
-        <div className="relative z-10 flex items-center gap-3">
-          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white p-1.5 shadow-md flex-shrink-0 flex items-center justify-center border border-white/20">
+        {/* Client Identity: Consistent White Logo Container & Bold Navy Typography */}
+        <div className="flex items-center gap-3.5">
+          <div className="w-14 h-14 rounded-xl bg-white border border-[#E2E8F0] p-2 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:border-[#0866F5]/40 transition-colors">
             {project.logo ? (
               <img
                 src={project.logo}
@@ -68,19 +47,19 @@ export default function PortfolioCard({ project }) {
                 className="w-full h-full object-contain"
               />
             ) : (
-              <Layers className="w-6 h-6 text-primary" />
+              <Layers className="w-6 h-6 text-[#0866F5]" />
             )}
           </div>
           <div className="min-w-0 flex-1">
-            <h3 className="text-base sm:text-lg font-heading font-extrabold tracking-tight text-white drop-shadow-xs truncate group-hover:text-cyan-300 transition-colors">
+            <h3 className="text-base sm:text-lg font-heading font-bold text-[#071A38] tracking-tight group-hover:text-[#0866F5] transition-colors truncate">
               {project.client}
             </h3>
-            <p className="text-xs text-slate-300 line-clamp-1">
+            <p className="text-xs text-[#64748B] font-medium line-clamp-1 mt-0.5">
               {project.industry}
             </p>
             {project.location && (
-              <div className="flex items-center gap-1 text-[11px] text-slate-400 mt-0.5 font-medium truncate">
-                <MapPin className="w-3 h-3 text-cyan-400 flex-shrink-0" />
+              <div className="flex items-center gap-1 text-[11px] text-[#64748B] mt-0.5 font-medium truncate">
+                <MapPin className="w-3 h-3 text-[#0866F5] flex-shrink-0" />
                 <span className="truncate">{project.location}</span>
               </div>
             )}
@@ -89,29 +68,29 @@ export default function PortfolioCard({ project }) {
       </div>
 
       {/* Card Body */}
-      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3.5 bg-white">
-        <div className="space-y-3">
-          <p className="text-xs text-content-muted leading-relaxed line-clamp-2">
+      <div className="p-5 sm:p-6 pt-4 flex-1 flex flex-col justify-between space-y-4 bg-white">
+        <div className="space-y-3.5">
+          <p className="text-xs sm:text-[13px] text-[#64748B] leading-relaxed line-clamp-2">
             {project.overview}
           </p>
 
           {/* Scope of Work Pills */}
           {project.scope && project.scope.length > 0 && (
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5 block">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#071A38]/70 mb-1.5 block">
                 Scope & Capabilities
               </span>
-              <div className="flex flex-wrap gap-1">
+              <div className="flex flex-wrap gap-1.5">
                 {project.scope.slice(0, 4).map((item, idx) => (
                   <span
                     key={idx}
-                    className="text-[10px] px-2 py-0.5 rounded-md bg-slate-50 border border-slate-200/90 text-navy-900 font-medium"
+                    className="text-[11px] px-2.5 py-1 rounded-md bg-[#F5F8FC] border border-[#E2E8F0] text-[#071A38] font-medium"
                   >
                     {item}
                   </span>
                 ))}
                 {project.scope.length > 4 && (
-                  <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-slate-100 text-slate-500 font-medium">
+                  <span className="text-[10px] px-2 py-1 rounded-md bg-[#F5F8FC] text-[#64748B] font-medium border border-[#E2E8F0]">
                     +{project.scope.length - 4} more
                   </span>
                 )}
@@ -119,17 +98,17 @@ export default function PortfolioCard({ project }) {
             </div>
           )}
 
-          {/* Key Deliverables Highlights */}
+          {/* Key Deliverables Snapshot Box */}
           {project.deliverables && project.deliverables.length > 0 && (
-            <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1.5">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-primary flex items-center gap-1">
-                <Sparkles className="w-3 h-3" />
+            <div className="p-3 rounded-xl bg-[#F5F8FC] border border-[#E2E8F0] space-y-1.5">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#0866F5] flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5" />
                 <span>Deliverables Snapshot</span>
               </span>
-              <ul className="space-y-1">
+              <ul className="space-y-1.5">
                 {project.deliverables.slice(0, 2).map((d, i) => (
-                  <li key={i} className="text-[11px] text-slate-700 flex items-start gap-1.5 leading-snug line-clamp-1">
-                    <CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />
+                  <li key={i} className="text-xs text-[#64748B] flex items-start gap-2 leading-snug line-clamp-1">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#0866F5] flex-shrink-0 mt-0.5" />
                     <span className="truncate">{d}</span>
                   </li>
                 ))}
@@ -139,17 +118,17 @@ export default function PortfolioCard({ project }) {
         </div>
 
         {/* Action Link & Socials */}
-        <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+        <div className="pt-3.5 border-t border-[#E2E8F0] flex items-center justify-between gap-2">
           {project.instagramUrl ? (
             <a
               href={project.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-pink-50 hover:bg-pink-100 text-[#E1306C] text-xs font-bold transition-colors shadow-2xs"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#E2E8F0] bg-white hover:bg-[#F5F8FC] text-[#071A38] hover:text-[#0866F5] text-xs font-semibold transition-colors shadow-2xs"
             >
-              <InstagramIcon className="w-3.5 h-3.5" />
+              <InstagramIcon className="w-3.5 h-3.5 text-[#E1306C]" />
               <span>Instagram</span>
-              <ExternalLink className="w-2.5 h-2.5 opacity-80" />
+              <ExternalLink className="w-2.5 h-2.5 opacity-60" />
             </a>
           ) : (
             <span />
@@ -159,7 +138,7 @@ export default function PortfolioCard({ project }) {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#25D366]/10 hover:bg-[#25D366]/20 text-[#128C7E] text-xs font-bold transition-colors ml-auto shadow-2xs"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#0866F5] hover:bg-[#0652C5] text-white text-xs font-semibold shadow-xs transition-colors ml-auto"
           >
             <MessageCircle className="w-3.5 h-3.5" />
             <span>Enquire</span>
