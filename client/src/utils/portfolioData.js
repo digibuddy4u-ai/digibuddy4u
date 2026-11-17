@@ -1,7 +1,7 @@
 /**
  * DigiBuddy4U Client Portfolio Projects
  * Comprehensive showcase of 6 verified client brands, deliverables, and creative scopes.
- * All clients are treated as primary agency engagements.
+ * Features an executive, luxury dark-navy aesthetic tailored to each brand's official visual identity.
  */
 
 export const PORTFOLIO_PROJECTS = [
@@ -19,8 +19,10 @@ export const PORTFOLIO_PROJECTS = [
     instagramHandle: 'silverfoxoutdoor',
     instagramUrl: 'https://www.instagram.com/silverfoxoutdoor/',
     location: 'Dubai, United Arab Emirates',
-    bannerGradient: 'from-emerald-800 via-teal-900 to-slate-950',
-    accentColor: '#10B981',
+    bannerGradient: 'from-[#0A1628] via-[#122238] to-[#070E1B]',
+    accentColor: '#94A3B8',
+    badgeBg: 'bg-slate-400/15 text-slate-200 border-slate-400/30',
+    topBorderColor: '#94A3B8',
     services: [
       'Video Editing & Color Grading',
       'Content Writing & Captions',
@@ -58,8 +60,10 @@ export const PORTFOLIO_PROJECTS = [
     instagramHandle: 'makpoolsandgardens',
     instagramUrl: 'https://www.instagram.com/makpoolsandgardens/',
     location: 'Dubai, United Arab Emirates',
-    bannerGradient: 'from-sky-800 via-cyan-900 to-navy-950',
-    accentColor: '#0EA5E9',
+    bannerGradient: 'from-[#08182E] via-[#0E2746] to-[#051120]',
+    accentColor: '#06B6D4',
+    badgeBg: 'bg-cyan-500/15 text-cyan-200 border-cyan-500/30',
+    topBorderColor: '#06B6D4',
     services: [
       'Content Writing & Copywriting',
       'Social Media Strategy',
@@ -97,8 +101,10 @@ export const PORTFOLIO_PROJECTS = [
     instagramHandle: 'makpoolsandgardens',
     instagramUrl: 'https://www.instagram.com/makpoolsandgardens/',
     location: 'Dubai, United Arab Emirates',
-    bannerGradient: 'from-blue-800 via-sky-900 to-slate-950',
-    accentColor: '#0284C7',
+    bannerGradient: 'from-[#091932] via-[#0E294F] to-[#061224]',
+    accentColor: '#38BDF8',
+    badgeBg: 'bg-sky-500/15 text-sky-200 border-sky-500/30',
+    topBorderColor: '#38BDF8',
     services: [
       'E-Commerce Product Creatives',
       'Promotional Video & Reel Editing',
@@ -136,8 +142,10 @@ export const PORTFOLIO_PROJECTS = [
     instagramHandle: 'wheelersauto',
     instagramUrl: 'https://www.instagram.com/wheelersauto/',
     location: 'Al Quoz Industrial Area 3, Dubai, UAE',
-    bannerGradient: 'from-amber-700 via-zinc-900 to-black',
+    bannerGradient: 'from-[#101826] via-[#1A2438] to-[#0A0F19]',
     accentColor: '#F59E0B',
+    badgeBg: 'bg-amber-500/15 text-amber-200 border-amber-500/30',
+    topBorderColor: '#F59E0B',
     services: [
       'High-Energy Reel Video Editing',
       'Automotive Copywriting',
@@ -175,8 +183,10 @@ export const PORTFOLIO_PROJECTS = [
     instagramHandle: 'chapakazi.in',
     instagramUrl: 'https://www.instagram.com/chapakazi.in/',
     location: 'Dubai, UAE & India',
-    bannerGradient: 'from-blue-800 via-indigo-950 to-slate-950',
-    accentColor: '#3B82F6',
+    bannerGradient: 'from-[#0A1932] via-[#12274A] to-[#061122]',
+    accentColor: '#60A5FA',
+    badgeBg: 'bg-blue-500/15 text-blue-200 border-blue-500/30',
+    topBorderColor: '#60A5FA',
     services: [
       'B2B Content Writing & Strategy',
       'Corporate Tax Explainer Graphics',
@@ -214,8 +224,10 @@ export const PORTFOLIO_PROJECTS = [
     instagramHandle: 'rotiwaladelivery',
     instagramUrl: 'https://www.instagram.com/rotiwaladelivery/',
     location: 'Sarkhej, Ahmedabad, India',
-    bannerGradient: 'from-amber-600 via-orange-700 to-amber-950',
-    accentColor: '#EA580C',
+    bannerGradient: 'from-[#121B2C] via-[#1C273D] to-[#09111E]',
+    accentColor: '#FB923C',
+    badgeBg: 'bg-orange-500/15 text-orange-200 border-orange-500/30',
+    topBorderColor: '#FB923C',
     services: [
       'Appetizing Content Writing',
       'AI Video Reels & Kitchen Video Editing',
