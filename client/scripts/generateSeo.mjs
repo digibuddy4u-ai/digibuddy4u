@@ -263,6 +263,15 @@ export function generateSeoArtifacts({ writeDistSnapshots = true } = {}) {
         const targetFile = path.join(distDir, `${cleanSegment}.html`);
         fs.mkdirSync(path.dirname(targetFile), { recursive: true });
         fs.writeFileSync(targetFile, routeHtml, 'utf8');
+
+        // Also write dist/${cleanSegment}/index.html so that directory requests
+        // such as /packages/ or /services/ always find a valid index.html
+        // and never trigger Apache/LiteSpeed 403 Forbidden directory listing blocks.
+        if (cleanSegment !== 'index') {
+          const dirIndexFile = path.join(distDir, cleanSegment, 'index.html');
+          fs.mkdirSync(path.dirname(dirIndexFile), { recursive: true });
+          fs.writeFileSync(dirIndexFile, routeHtml, 'utf8');
+        }
       }
     }
   }
