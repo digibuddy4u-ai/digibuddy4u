@@ -1,31 +1,26 @@
 /**
  * DigiBuddy4U Backend - Hostinger LiteSpeed CommonJS Startup Bridge
  *
- * Hostinger's LiteSpeed runner (/usr/local/lsws/fcgi-bin/lsnode.js) boots Node.js apps
+ * LiteSpeed's runner (/usr/local/lsws/fcgi-bin/lsnode.js) boots Node.js apps
  * using CommonJS `require()`. To prevent ERR_REQUIRE_ASYNC_MODULE on ESM graphs,
- * this bridge uses dynamic `import()` to load the ES Module server cleanly.
+ * this bridge loads environment variables and imports the ESM server via dynamic `import()`.
  */
 
 const path = require('path');
 
-// Pre-load dotenv if present in environment
+// Safely load environment variables from server/.env if present
 try {
-  require('dotenv').config({ path: path.resolve(__dirname, '.env') });
+  require('dotenv').config({
+    path: path.resolve(__dirname, '.env'),
+  });
 } catch (e) {
-  // Ignore if dotenv is already bundled or unnecessary
+  // Ignore if dotenv is omitted or already loaded by environment
 }
 
-console.log('[Hostinger Bridge] Starting DigiBuddy4U Backend via index.cjs...');
+console.log('[Hostinger] Starting DigiBuddy4U...');
 
-// Asynchronously load the ESM server
-import('./src/server.js')
-  .then((module) => {
-    console.log('✅ [Hostinger Bridge] ES Module server graph loaded successfully.');
-    if (module && module.app) {
-      module.exports = module.app;
-    }
-  })
-  .catch((err) => {
-    console.error('❌ [Hostinger Bridge] Fatal error during ESM server startup:', err);
-    process.exit(1);
-  });
+// Dynamically import the ES Module server
+import('./src/server.js').catch((err) => {
+  console.error('Backend startup failed:', err);
+  process.exit(1);
+});
