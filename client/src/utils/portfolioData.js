@@ -1,6 +1,6 @@
 /**
  * DigiBuddy4U Client Portfolio Projects
- * Comprehensive showcase of verified client brands, deliverables, and creative scopes.
+ * Comprehensive showcase of 6 verified client brands, deliverables, and creative scopes.
  * All clients are treated as primary agency engagements.
  */
 
@@ -81,6 +81,45 @@ export const PORTFOLIO_PROJECTS = [
       'Appealing promotional graphics for The PoolStore.ae products and pool accessories',
       'Commercial and residential maintenance contract lead generation creatives',
       'Engaging post descriptions, pricing call-to-actions, and inquiry response workflows',
+    ],
+  },
+  {
+    id: 'pool-store',
+    slug: 'pool-store',
+    title: 'The Pool Store – Premium Swimming Pool Equipment & Chemicals',
+    client: 'The Pool Store (PoolStore.ae)',
+    tagline: 'The official retail & e-commerce destination for swimming pool equipment in Dubai.',
+    industry: 'Pool Supplies, Equipment & Retail',
+    category: 'Outdoor & Landscaping',
+    featured: true,
+    status: 'Active Client Engagement',
+    logo: '/images/clients/poolstore-logo.png',
+    instagramHandle: 'makpoolsandgardens',
+    instagramUrl: 'https://www.instagram.com/makpoolsandgardens/',
+    location: 'Dubai, United Arab Emirates',
+    bannerGradient: 'from-blue-800 via-sky-900 to-slate-950',
+    accentColor: '#0284C7',
+    services: [
+      'E-Commerce Product Creatives',
+      'Promotional Video & Reel Editing',
+      'Catalog Copywriting',
+      'Social Media Marketing',
+    ],
+    overview:
+      'DigiBuddy4U manages digital marketing, promotional video reels, and product creative design for The PoolStore.ae, promoting premium swimming pool filters, heaters, pumps, and water treatment chemicals across Dubai and the UAE.',
+    scope: [
+      'E-Commerce Product Creatives',
+      'Promotional Video & Reel Editing',
+      'Catalog Copywriting & Specifications',
+      'Social Media Marketing',
+      'Seasonal Discount Campaigns',
+      'Brand Visual Identity',
+    ],
+    deliverables: [
+      'Clean e-commerce product feature cards for pool pumps, heaters & robotic cleaners',
+      'Educational explainer reels on water balancing, chlorine dosing & filter maintenance',
+      'Promotional banners and social ads for seasonal pool equipment discounts',
+      'Customer inquiry routing directing buyer leads to WhatsApp store support',
     ],
   },
   {
@@ -179,7 +218,7 @@ export const PORTFOLIO_PROJECTS = [
     accentColor: '#EA580C',
     services: [
       'Appetizing Content Writing',
-      'AI Video Reels & Video Editing',
+      'AI Video Reels & Kitchen Video Editing',
       'Festive Graphic Campaigns',
       'WhatsApp Ordering Setup',
     ],

@@ -25,6 +25,16 @@ export const CLIENT_BRANDS = [
     focus: 'Pool construction, garden maintenance & retail store digital media',
   },
   {
+    id: 'pool-store',
+    name: 'The Pool Store (PoolStore.ae)',
+    industry: 'Pool Equipment & Retail',
+    instagramHandle: 'makpoolsandgardens',
+    instagramUrl: 'https://www.instagram.com/makpoolsandgardens/',
+    logo: '/images/clients/poolstore-logo.png',
+    badge: 'Pool Supplies & Retail',
+    focus: 'E-Commerce pool accessories, chemical supplies & water care retail presence',
+  },
+  {
     id: 'wheelers-auto-services',
     name: 'Wheelers Auto Services',
     industry: 'Automotive Services',
@@ -53,6 +63,5 @@ export const CLIENT_BRANDS = [
     logo: '/images/clients/rotiwala-logo.png',
     badge: 'Food & Delivery',
     focus: 'Fresh homestyle roti delivery branding, social media & video production',
-    caseStudyUrl: '/case-studies/rotiwala',
   },
 ];

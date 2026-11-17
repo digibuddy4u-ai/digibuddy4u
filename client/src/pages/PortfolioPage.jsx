@@ -5,7 +5,6 @@ import SectionHeader from '../components/common/SectionHeader';
 import PortfolioCard from '../components/ui/PortfolioCard';
 import Button from '../components/common/Button';
 import Badge from '../components/common/Badge';
-import ClientsSection from '../sections/ClientsSection';
 import { PORTFOLIO_PROJECTS, UPCOMING_PORTFOLIO_PLACEHOLDERS } from '../utils/portfolioData';
 import { api } from '../utils/api';
 import { getOrganizationSchema, getBreadcrumbSchema } from '../utils/seoConfig';
@@ -22,18 +21,52 @@ export default function PortfolioPage() {
       try {
         const res = await api.get('/portfolio');
         if (isMounted && res.success && Array.isArray(res.data) && res.data.length > 0) {
-          const published = res.data
+          const backendMap = new Map();
+          res.data
             .filter((p) => p.isPublished !== false)
-            .map((p) => ({
-              ...p,
-              id: p.slug || p._id,
-            }));
-          if (published.length > 0) {
-            setProjects(published);
-          }
+            .forEach((p) => {
+              const key = (p.slug || p._id || p.id || '').toLowerCase();
+              if (key) backendMap.set(key, p);
+            });
+
+          // Always preserve our complete verified 6-client catalog, merging backend data by key
+          const merged = PORTFOLIO_PROJECTS.map((staticProj) => {
+            const key = (staticProj.slug || staticProj.id || '').toLowerCase();
+            const fromBackend = backendMap.get(key);
+            if (fromBackend) {
+              return {
+                ...staticProj,
+                ...fromBackend,
+                id: staticProj.id,
+                logo: fromBackend.logo || staticProj.logo,
+                scope: fromBackend.scope && fromBackend.scope.length ? fromBackend.scope : staticProj.scope,
+                deliverables:
+                  fromBackend.deliverables && fromBackend.deliverables.length
+                    ? fromBackend.deliverables
+                    : staticProj.deliverables,
+              };
+            }
+            return staticProj;
+          });
+
+          // Also append any new custom project created in the admin portal
+          res.data.forEach((p) => {
+            const key = (p.slug || p._id || p.id || '').toLowerCase();
+            const exists = PORTFOLIO_PROJECTS.some(
+              (sp) => (sp.slug || sp.id || '').toLowerCase() === key
+            );
+            if (!exists && p.isPublished !== false) {
+              merged.push({
+                ...p,
+                id: p.slug || p._id,
+              });
+            }
+          });
+
+          setProjects(merged);
         }
       } catch {
-        // Fallback to static
+        // Fallback to static PORTFOLIO_PROJECTS
       }
     }
 
@@ -41,7 +74,7 @@ export default function PortfolioPage() {
 
     const handleFocus = () => loadPortfolio();
     window.addEventListener('focus', handleFocus);
-    const interval = setInterval(loadPortfolio, 20000);
+    const interval = setInterval(loadPortfolio, 30000);
 
     return () => {
       isMounted = false;
@@ -102,20 +135,17 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Portfolio Grid */}
+      {/* Portfolio Grid - All 6 Verified Client Brands */}
       <section className="py-12 sm:py-16 lg:py-20 bg-surface-light">
         <div className="site-container space-y-12 sm:space-y-16">
-          {/* Active Projects */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+          {/* Active Projects Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
             {filteredProjects.map((project) => (
               <PortfolioCard key={project.id} project={project} />
             ))}
           </div>
         </div>
       </section>
-
-      {/* Brands We've Worked With Animated Slider */}
-      <ClientsSection />
 
       {/* Upcoming Pipeline & Transparency */}
       <section className="py-12 sm:py-16 bg-surface-light border-t border-slate-200/80">

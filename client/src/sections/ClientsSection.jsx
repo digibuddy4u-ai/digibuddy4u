@@ -73,15 +73,13 @@ function ClientCard({ brand, index }) {
           </a>
         )}
 
-        {brand.caseStudyUrl && (
-          <Link
-            to={brand.caseStudyUrl}
-            className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-cyan-300 hover:text-white font-heading font-bold text-[11px] transition-colors"
-          >
-            <span>Read Case Study</span>
-            <ArrowRight className="w-3 h-3" />
-          </Link>
-        )}
+        <Link
+          to="/portfolio"
+          className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-cyan-300 hover:text-white font-heading font-bold text-[11px] transition-colors"
+        >
+          <span>View Deliverables</span>
+          <ArrowRight className="w-3 h-3" />
+        </Link>
       </div>
     </div>
   );
