@@ -189,24 +189,25 @@ export default function PricingPreviewSection() {
         {/* TAB 1: 3-CARD PRICING SECTION MATCHING USER'S DESIGN     */}
         {/* ======================================================== */}
         {activeTab === 'retainers' && (
-          <div className="relative mt-4 sm:mt-6">
-            {/* Giant Background "Pricing" Typography */}
-            <div className="relative flex justify-center items-center select-none pointer-events-none overflow-hidden pb-4">
-              <span className="text-6xl xs:text-7xl sm:text-8xl md:text-9xl lg:text-[11rem] font-black font-heading tracking-tight leading-none text-blue-600/90 opacity-95">
+          <div className="relative mt-2 sm:mt-4">
+            {/* Giant Background "Pricing" Typography - Elevated & Prominently Visible */}
+            <div className="relative flex justify-center items-center select-none pointer-events-none overflow-visible pt-2 sm:pt-4 pb-2">
+              <span className="text-7xl xs:text-8xl sm:text-9xl md:text-[10.5rem] lg:text-[12.5rem] font-black font-heading tracking-tight leading-none text-blue-600/90 select-none block text-center transform -translate-y-3 sm:-translate-y-5">
                 Pricing
               </span>
             </div>
 
             {/* 3 Pricing Cards Grid */}
-            <div className="relative -mt-10 xs:-mt-12 sm:-mt-20 md:-mt-28 lg:-mt-32 z-10 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-7 xl:gap-8 items-center max-w-6xl mx-auto">
+            <div className="relative -mt-6 sm:-mt-10 md:-mt-12 lg:-mt-14 z-10 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-7 xl:gap-8 items-center max-w-6xl mx-auto">
               {retainerPackages.map((pkg, idx) => {
                 const isGrowth = pkg.slug === 'growth' || pkg.badge === 'Most Popular' || idx === 1;
                 const isPremium = pkg.slug === 'premium' || idx === 2;
                 const isStarter = !isGrowth && !isPremium;
                 const isSaved = isPackageSaved(pkg._id || pkg.slug);
 
-                // Friendly display subtitle
+                // Friendly display subtitle and clean short plan name
                 const cardBadge = isGrowth ? 'Growth' : isStarter ? 'Starter' : 'Scale';
+                const planTitle = isPremium ? 'Ultimate' : pkg.name;
 
                 return (
                   <div
@@ -231,15 +232,15 @@ export default function PricingPreviewSection() {
                       </div>
                     )}
 
-                    <div className="relative z-10 space-y-4">
+                    <div className="relative z-10 space-y-3.5">
                       {/* Top Row: Plan Name / Category & Shortlist Heart */}
-                      <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-start justify-between gap-2">
                         <div>
-                          <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 block mb-0.5">
+                          <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400 block mb-0.5">
                             {cardBadge}
                           </span>
                           <h3 className="font-heading font-extrabold text-xl sm:text-2xl text-navy-950 tracking-tight leading-tight">
-                            {pkg.name}
+                            {planTitle}
                           </h3>
                         </div>
 
@@ -258,8 +259,8 @@ export default function PricingPreviewSection() {
                         </button>
                       </div>
 
-                      {/* Pricing Block */}
-                      <div>
+                      {/* Pricing Block - High up & prominent */}
+                      <div className="pt-0.5">
                         <div className="flex items-baseline gap-1">
                           <span className="text-3xl sm:text-4xl lg:text-[2.65rem] font-heading font-black text-navy-950 tracking-tight leading-none">
                             ₹{pkg.monthlyPrice?.toLocaleString('en-IN')}
@@ -271,7 +272,7 @@ export default function PricingPreviewSection() {
                         <p className="mt-1.5 text-xs text-slate-500 font-medium leading-relaxed">
                           {isStarter && 'Perfect for building consistent social media presence'}
                           {isGrowth && 'Perfect for growing brands needing model reels & Meta ads'}
-                          {isPremium && 'For professional brands seeking multi-channel dominance'}
+                          {isPremium && 'Build your business from scratch with full-scale multi-channel scale'}
                         </p>
                       </div>
 
