@@ -190,190 +190,189 @@ export default function PricingPreviewSection() {
         {/* ======================================================== */}
         {activeTab === 'retainers' && (
           <div className="relative mt-2 sm:mt-4">
-            {/* Giant Background "Pricing" Typography - Elevated & Prominently Visible */}
-            <div className="relative flex justify-center items-center select-none pointer-events-none overflow-visible pt-2 sm:pt-4 pb-2">
-              <span className="text-7xl xs:text-8xl sm:text-9xl md:text-[10.5rem] lg:text-[12.5rem] font-black font-heading tracking-tight leading-none text-blue-600/90 select-none block text-center transform -translate-y-3 sm:-translate-y-5">
+            {/* Giant Background "Pricing" Typography - Sitting Directly Behind Card Tops */}
+            <div className="relative flex justify-center items-center select-none pointer-events-none overflow-visible pt-1 sm:pt-3">
+              <span className="text-7xl xs:text-8xl sm:text-9xl md:text-[10.5rem] lg:text-[12.5rem] font-black font-heading tracking-tight leading-none text-[#146EF5] opacity-95 select-none block text-center transform -translate-y-2 sm:-translate-y-4">
                 Pricing
               </span>
             </div>
 
-            {/* 3 Pricing Cards Grid */}
-            <div className="relative -mt-6 sm:-mt-10 md:-mt-12 lg:-mt-14 z-10 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-7 xl:gap-8 items-center max-w-6xl mx-auto">
+            {/* 3 Pricing Cards Grid with 3D Depth & Hover */}
+            <div className="relative -mt-10 sm:-mt-14 md:-mt-18 lg:-mt-22 z-10 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-7 xl:gap-8 items-center max-w-6xl mx-auto perspective-[1200px]">
               {retainerPackages.map((pkg, idx) => {
                 const isGrowth = pkg.slug === 'growth' || pkg.badge === 'Most Popular' || idx === 1;
                 const isPremium = pkg.slug === 'premium' || idx === 2;
                 const isStarter = !isGrowth && !isPremium;
                 const isSaved = isPackageSaved(pkg._id || pkg.slug);
 
-                // Friendly display subtitle and clean short plan name
-                const cardBadge = isGrowth ? 'Growth' : isStarter ? 'Starter' : 'Scale';
-                const planTitle = isPremium ? 'Ultimate' : pkg.name;
+                // Short 1-word plan label matching the design
+                const cardLabel = isGrowth ? 'Growth' : isStarter ? 'Starter' : 'Scale';
+
+                // Exactly 3 key highlights matching user request ("3 line ma j hoiey")
+                const threeHighlights = isStarter
+                  ? [
+                      '6 Reels per Month (AI or Lifestyle Reels)',
+                      '9 Social Media Posts (Instagram & Facebook)',
+                      'Content Calendar, Script Writing & Audit',
+                    ]
+                  : isGrowth
+                  ? [
+                      '5 Reels (3 Model Based + 2 Founder Face)',
+                      '15 Creatives (10 Posts + 3 Carousels + 2 Memes)',
+                      '2 Meta Ads Campaigns & Full Management',
+                    ]
+                  : [
+                      '10 Reels (6 Model + 4 Influencer Productions)',
+                      '6 Meta Ads Campaigns Run (Strategy & Retargeting)',
+                      'All Shoot, Influencer, Model & Ad Spend Expenses Included',
+                    ];
 
                 return (
                   <div
                     key={pkg.slug || idx}
-                    className={`rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 lg:p-8 flex flex-col justify-between relative transition-all duration-300 ${
+                    className={`relative group transition-all duration-300 ease-out ${
                       isGrowth
-                        ? 'bg-white border-2 border-blue-500 shadow-[0_25px_60px_rgba(8,102,245,0.18)] ring-4 ring-blue-500/10 lg:-translate-y-5 lg:scale-[1.03] z-20'
-                        : 'bg-white border border-slate-200/90 shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:border-blue-200/90 z-10'
+                        ? 'lg:-translate-y-5 lg:scale-[1.03] z-20 hover:-translate-y-7 hover:scale-[1.05]'
+                        : 'z-10 hover:-translate-y-3 hover:scale-[1.02]'
                     }`}
                   >
-                    {/* Center Card Radiant Blue Top Glow */}
-                    {isGrowth && (
-                      <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-blue-500/20 via-blue-500/5 to-transparent rounded-t-[30px] pointer-events-none" />
-                    )}
-
                     {/* Floating "Popular" Pill Badge for Center Card */}
                     {isGrowth && (
                       <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-30">
-                        <span className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full bg-blue-600 text-white font-heading font-extrabold text-xs uppercase tracking-wider shadow-md shadow-blue-500/40">
+                        <span className="inline-flex items-center gap-1.5 px-5 py-1.5 rounded-full bg-blue-600 text-white font-heading font-extrabold text-xs uppercase tracking-wider shadow-md shadow-blue-500/40 border border-blue-400/30">
                           Popular
                         </span>
                       </div>
                     )}
 
-                    <div className="relative z-10 space-y-3.5">
-                      {/* Top Row: Plan Name / Category & Shortlist Heart */}
-                      <div className="flex items-start justify-between gap-2">
-                        <div>
-                          <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400 block mb-0.5">
-                            {cardBadge}
-                          </span>
-                          <h3 className="font-heading font-extrabold text-xl sm:text-2xl text-navy-950 tracking-tight leading-tight">
-                            {planTitle}
+                    {/* Card Surface with Frosted Glass & Blue Ambient Reflection Blur */}
+                    <div
+                      className={`rounded-[30px] sm:rounded-[34px] p-6 sm:p-7 lg:p-8 flex flex-col justify-between relative overflow-hidden backdrop-blur-xl transition-all duration-300 ${
+                        isGrowth
+                          ? 'bg-white/85 border-2 border-blue-500 shadow-[0_25px_60px_rgba(8,102,245,0.20)] ring-4 ring-blue-500/10 hover:shadow-[0_35px_80px_rgba(8,102,245,0.30)]'
+                          : 'bg-white/85 border border-white/90 shadow-xl shadow-slate-200/70 hover:shadow-2xl hover:border-blue-300/80'
+                      }`}
+                    >
+                      {/* Frosted Glass Blue Blur Effect at Top of Cards (matching reference image) */}
+                      {isGrowth && (
+                        <>
+                          <div className="absolute top-0 inset-x-0 h-36 bg-gradient-to-b from-blue-500/30 via-blue-400/15 to-transparent rounded-t-[32px] blur-md pointer-events-none" />
+                          <div className="absolute top-2 left-1/2 -translate-x-1/2 w-48 h-24 bg-blue-500/25 rounded-full blur-xl pointer-events-none" />
+                        </>
+                      )}
+                      {isStarter && (
+                        <div className="absolute -top-4 -right-4 w-36 h-36 bg-blue-500/20 rounded-full blur-2xl pointer-events-none" />
+                      )}
+                      {isPremium && (
+                        <div className="absolute -top-4 -left-4 w-36 h-36 bg-blue-500/20 rounded-full blur-2xl pointer-events-none" />
+                      )}
+
+                      <div className="relative z-10 space-y-3">
+                        {/* Line 1: Plan Name & Shortlist Heart */}
+                        <div className="flex items-center justify-between gap-2">
+                          <h3 className="font-heading font-bold text-lg sm:text-xl text-navy-950 tracking-tight">
+                            {cardLabel}
                           </h3>
+
+                          <button
+                            type="button"
+                            onClick={() => toggleSavePackage(pkg.slug)}
+                            className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+                              isSaved
+                                ? 'bg-red-50 text-red-500 shadow-xs'
+                                : 'bg-slate-100/80 text-slate-400 hover:text-red-500 hover:bg-red-50'
+                            }`}
+                            title={isSaved ? 'Remove from shortlist' : 'Save to shortlist'}
+                            aria-label="Save to shortlist"
+                          >
+                            <Heart className={`w-3.5 h-3.5 ${isSaved ? 'fill-current text-red-500' : ''}`} />
+                          </button>
                         </div>
 
-                        <button
-                          type="button"
-                          onClick={() => toggleSavePackage(pkg.slug)}
-                          className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
-                            isSaved
-                              ? 'bg-red-50 text-red-500 shadow-xs'
-                              : 'bg-slate-100/80 text-slate-400 hover:text-red-500 hover:bg-red-50'
-                          }`}
-                          title={isSaved ? 'Remove from shortlist' : 'Save to shortlist'}
-                          aria-label="Save to shortlist"
-                        >
-                          <Heart className={`w-3.5 h-3.5 ${isSaved ? 'fill-current text-red-500' : ''}`} />
-                        </button>
-                      </div>
-
-                      {/* Pricing Block - High up & prominent */}
-                      <div className="pt-0.5">
-                        <div className="flex items-baseline gap-1">
-                          <span className="text-3xl sm:text-4xl lg:text-[2.65rem] font-heading font-black text-navy-950 tracking-tight leading-none">
-                            ₹{pkg.monthlyPrice?.toLocaleString('en-IN')}
-                          </span>
-                          <span className="text-sm font-semibold text-slate-500">
-                            {pkg.billingType === 'Campaign' ? '/campaign' : '/month'}
-                          </span>
+                        {/* Line 2: Price Block */}
+                        <div>
+                          <div className="flex items-baseline gap-1">
+                            <span className="text-3xl sm:text-4xl lg:text-[2.65rem] font-heading font-black text-navy-950 tracking-tight leading-none">
+                              ₹{pkg.monthlyPrice?.toLocaleString('en-IN')}
+                            </span>
+                            <span className="text-sm font-semibold text-slate-500">
+                              {pkg.billingType === 'Campaign' ? '/month' : '/month'}
+                            </span>
+                          </div>
                         </div>
-                        <p className="mt-1.5 text-xs text-slate-500 font-medium leading-relaxed">
-                          {isStarter && 'Perfect for building consistent social media presence'}
-                          {isGrowth && 'Perfect for growing brands needing model reels & Meta ads'}
-                          {isPremium && 'Build your business from scratch with full-scale multi-channel scale'}
+
+                        {/* Line 3: Subtitle / Tagline */}
+                        <p className="text-xs text-slate-500 font-medium leading-relaxed">
+                          {isStarter && 'Perfect for getting started'}
+                          {isGrowth && 'Perfect for growing creators'}
+                          {isPremium && 'For professional creators'}
                         </p>
-                      </div>
 
-                      {/* Divider Line */}
-                      <div className="pt-1 pb-1 border-t border-slate-100" />
+                        {/* Horizontal Divider Line */}
+                        <div className="pt-2 pb-1 border-t border-slate-200/70" />
 
-                      {/* Deliverables / Features List with Solid Blue Checkmarks */}
-                      <div className="space-y-2.5 pt-1">
-                        {(pkg.keyHighlights || []).slice(0, 8).map((highlight, hIdx) => {
-                          if (highlight.toLowerCase().includes('note:')) return null;
-
-                          return (
-                            <div key={hIdx} className="flex items-start gap-2.5">
-                              {/* Blue Solid Checkmark Icon matching the design */}
-                              <div className="w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center flex-shrink-0 mt-0.5 shadow-xs">
+                        {/* EXACTLY 3 LINES of Features with Solid Blue Checkmarks */}
+                        <div className="space-y-3 pt-1">
+                          {threeHighlights.map((highlight, hIdx) => (
+                            <div key={hIdx} className="flex items-center gap-2.5">
+                              {/* Solid Blue Circle Checkmark */}
+                              <div className="w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center flex-shrink-0 shadow-xs">
                                 <Check className="w-3 h-3 stroke-[3]" />
                               </div>
                               <span className="text-xs font-medium text-slate-700 leading-snug">
                                 {highlight}
                               </span>
                             </div>
-                          );
-                        })}
+                          ))}
+                        </div>
+
+                        {/* Subtle link to inspect full scope */}
+                        <div className="pt-1">
+                          <button
+                            type="button"
+                            onClick={() => handleCardClick(pkg)}
+                            className="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-400 hover:text-blue-600 transition-colors cursor-pointer"
+                          >
+                            <span>View full scope (10+ inclusions)</span>
+                            <ChevronRight className="w-3 h-3" />
+                          </button>
+                        </div>
                       </div>
 
-                      {/* Special Included Expenses Badge for Ultimate (₹80,000) */}
-                      {isPremium && (
-                        <div className="mt-3 p-3 rounded-2xl bg-blue-50/80 border border-blue-200/70 text-[11px] space-y-1 text-navy-950">
-                          <div
-                            onClick={() => setExpandedNotice(!expandedNotice)}
-                            className="flex items-center justify-between font-bold text-blue-900 cursor-pointer"
+                      {/* Bottom CTA Button */}
+                      <div className="pt-5 mt-5 border-t border-slate-100 relative z-10 space-y-2">
+                        {isGrowth ? (
+                          /* Center Card: Vibrant Electric Blue Pill Button */
+                          <button
+                            type="button"
+                            onClick={() => handleGetStarted(pkg)}
+                            className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 hover:from-blue-700 hover:to-blue-600 text-white font-heading font-extrabold text-sm shadow-lg shadow-blue-500/40 hover:shadow-xl hover:shadow-blue-500/50 transition-all duration-200 active:scale-98 flex items-center justify-center gap-2 cursor-pointer"
                           >
-                            <div className="flex items-center gap-1.5">
-                              <ShieldCheck className="w-3.5 h-3.5 text-blue-600 flex-shrink-0" />
-                              <span>All Production Expenses Included</span>
-                            </div>
-                            <span className="text-[10px] text-blue-700 font-bold hover:underline">
-                              {expandedNotice ? 'Hide' : 'View (6)'}
-                            </span>
-                          </div>
-                          {expandedNotice ? (
-                            <ul className="pt-1.5 border-t border-blue-200/80 list-disc list-inside text-[10px] text-slate-700 space-y-0.5">
-                              <li>Influencer Collaboration Fees (Included)</li>
-                              <li>Model Fees / Booking Charges (Included)</li>
-                              <li>Meta Ads Budget / Ad Spend (Included)</li>
-                              <li>Travel & Location / Studio Rental (Included)</li>
-                              <li>Props & Production Setup (Included)</li>
-                            </ul>
-                          ) : (
-                            <p className="text-[10px] text-slate-600 truncate">
-                              Influencer, model, ads budget & shoot expenses included.
-                            </p>
-                          )}
+                            <span>Get Started</span>
+                          </button>
+                        ) : (
+                          /* Outer Cards: Sleek Dark / Black Pill Button */
+                          <button
+                            type="button"
+                            onClick={() => handleGetStarted(pkg)}
+                            className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-slate-900 via-navy-950 to-slate-900 hover:from-black hover:to-slate-900 text-white font-heading font-bold text-sm shadow-md hover:shadow-lg transition-all duration-200 active:scale-98 flex items-center justify-center gap-2 cursor-pointer"
+                          >
+                            <span>Get Started</span>
+                          </button>
+                        )}
+
+                        {/* Secondary Action: PDF Download */}
+                        <div className="flex items-center justify-center text-[11px] pt-0.5">
+                          <button
+                            type="button"
+                            onClick={(e) => handleDownloadPdf(pkg, e)}
+                            className="text-slate-400 hover:text-blue-600 font-semibold transition-colors flex items-center gap-1 cursor-pointer"
+                            title={`Download official ${pkg.name} PDF`}
+                          >
+                            <Download className="w-3 h-3 text-blue-600" />
+                            <span>Download Package PDF</span>
+                          </button>
                         </div>
-                      )}
-                    </div>
-
-                    {/* Bottom CTA Button matching the design */}
-                    <div className="pt-6 mt-6 border-t border-slate-100 relative z-10 space-y-2.5">
-                      {isGrowth ? (
-                        /* Middle Card: Vibrant Electric Blue Pill Button */
-                        <button
-                          type="button"
-                          onClick={() => handleGetStarted(pkg)}
-                          className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 hover:from-blue-700 hover:to-blue-600 text-white font-heading font-extrabold text-sm shadow-lg shadow-blue-500/35 hover:shadow-xl hover:shadow-blue-500/45 transition-all duration-200 active:scale-98 flex items-center justify-center gap-2 cursor-pointer"
-                        >
-                          <span>Get Started</span>
-                          <ArrowRight className="w-4 h-4" />
-                        </button>
-                      ) : (
-                        /* Outer Cards: Sleek Dark / Black Pill Button */
-                        <button
-                          type="button"
-                          onClick={() => handleGetStarted(pkg)}
-                          className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-slate-900 via-navy-950 to-slate-900 hover:from-black hover:to-slate-900 text-white font-heading font-bold text-sm shadow-md hover:shadow-lg transition-all duration-200 active:scale-98 flex items-center justify-center gap-2 cursor-pointer"
-                        >
-                          <span>Get Started</span>
-                          <ArrowRight className="w-4 h-4" />
-                        </button>
-                      )}
-
-                      {/* Secondary Actions: Full Scope & PDF Download */}
-                      <div className="flex items-center justify-between text-[11px] pt-1 px-1">
-                        <button
-                          type="button"
-                          onClick={() => handleCardClick(pkg)}
-                          className="text-slate-500 hover:text-blue-600 font-semibold transition-colors flex items-center gap-1 cursor-pointer"
-                        >
-                          <span>View Full Scope</span>
-                          <ChevronRight className="w-3 h-3" />
-                        </button>
-
-                        <button
-                          type="button"
-                          onClick={(e) => handleDownloadPdf(pkg, e)}
-                          className="text-slate-500 hover:text-blue-600 font-semibold transition-colors flex items-center gap-1 cursor-pointer"
-                          title={`Download official ${pkg.name} PDF`}
-                        >
-                          <Download className="w-3 h-3 text-blue-600" />
-                          <span>Download PDF</span>
-                        </button>
                       </div>
                     </div>
                   </div>
