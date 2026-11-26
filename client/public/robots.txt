@@ -1,9 +1,20 @@
 # robots.txt for DigiBuddy4U
 User-agent: *
 Allow: /
+Allow: /favicon.ico
+Allow: /favicon*.png
+Allow: /apple-touch-icon.png
+Allow: /site.webmanifest
 Disallow: /customer/
 Disallow: /login
 Disallow: /register
 Disallow: /api/
+
+# Ensure Googlebot and Googlebot-Image have full access to brand and favicon assets
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
 
 Sitemap: https://digibuddy4u.vercel.app/sitemap.xml
