@@ -120,11 +120,8 @@ export default function AddonDetailModal({
           <div>
             <div className="flex items-center gap-2 mb-3">
               <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-              <h4 className="text-xs sm:text-sm font-heading font-extrabold uppercase tracking-wider text-navy-950 flex flex-wrap items-center gap-2">
-                <span>Everything Included In This Service</span>
-                <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200/60 normal-case">
-                  (શું સમાવેલ છે)
-                </span>
+              <h4 className="text-xs sm:text-sm font-heading font-extrabold uppercase tracking-wider text-navy-950 flex items-center gap-2">
+                Everything Included In This Service:
               </h4>
             </div>
 
@@ -148,11 +145,8 @@ export default function AddonDetailModal({
             <div className="pt-2">
               <div className="flex items-center gap-2 mb-3">
                 <AlertCircle className="w-4 h-4 text-amber-600 flex-shrink-0" />
-                <h4 className="text-xs sm:text-sm font-heading font-extrabold uppercase tracking-wider text-slate-800 flex flex-wrap items-center gap-2">
-                  <span>Important Scope Notes & Exclusions</span>
-                  <span className="text-[11px] font-bold text-amber-800 bg-amber-100/70 px-2 py-0.5 rounded-md border border-amber-300/60 normal-case">
-                    (શું સમાવેલ નથી)
-                  </span>
+                <h4 className="text-xs sm:text-sm font-heading font-extrabold uppercase tracking-wider text-slate-800 flex items-center gap-2">
+                  Important Scope Notes & Exclusions:
                 </h4>
               </div>
 
