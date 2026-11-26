@@ -10,26 +10,21 @@ import {
   Layers,
   TrendingUp,
   ShieldCheck,
-  AlertCircle,
   Clock,
-  HelpCircle,
   Zap,
   Crown,
-  Info,
   Globe,
   Camera,
   CheckCircle2,
-  Calendar,
-  Compass,
   MessageCircle,
   Film,
-  Search,
   Target,
   MapPin,
+  ChevronRight,
+  ExternalLink,
 } from 'lucide-react';
 import SectionHeader from '../components/common/SectionHeader';
 import Button from '../components/common/Button';
-import Badge from '../components/common/Badge';
 import PackageEnquiryChoiceModal from '../components/packages/PackageEnquiryChoiceModal';
 import { useCustomerAuth } from '../context/CustomerAuthContext';
 import { API_URL } from '../utils/api';
@@ -39,25 +34,10 @@ import {
 } from '../utils/packagesCatalog';
 import { getDeliverableIcon } from '../utils/featureIconHelper';
 
-// Helper icon resolver for chips
-const CHIP_ICONS = {
-  Video,
-  Film,
-  Layers,
-  Globe,
-  Compass,
-  Camera,
-  TrendingUp,
-  CheckCircle2,
-  Zap,
-  Search,
-  Target,
-  MapPin,
-};
-
 export default function PricingPreviewSection() {
   const [packages, setPackages] = useState(PACKAGES_CATALOG);
   const [enquiryModalPkg, setEnquiryModalPkg] = useState(null);
+  const [activeTab, setActiveTab] = useState('retainers'); // 'retainers' | 'setup'
   const [expandedNotice, setExpandedNotice] = useState(false);
   const navigate = useNavigate();
 
@@ -144,525 +124,390 @@ export default function PricingPreviewSection() {
       ? packages.filter((p) => !p.isAddonPackage)
       : (MAIN_PACKAGES || PACKAGES_CATALOG);
 
-  // ₹15,000 One-Time Setup Package (Featured horizontally at the top)
+  // ₹15,000 One-Time Setup Package
   const setupPkg =
     allMainPackages.find((p) => p.slug === 'startup-setup' || p.billingType === 'One-Time') ||
     allMainPackages[1];
 
-  // 3 Retainer & Campaign Packages (Displayed in a 3-column grid below)
+  // 3 Retainer & Campaign Packages (Foundation/Starter, Expansion/Growth, Ultimate/Scale)
   const retainerPackages = allMainPackages.filter(
     (p) => p.slug !== setupPkg?.slug && p.billingType !== 'One-Time'
   );
 
   return (
-    <section id="pricing" className="py-14 sm:py-20 lg:py-24 bg-surface-light relative">
+    <section id="pricing" className="py-14 sm:py-20 lg:py-24 bg-[#F5F8FC] relative overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-10 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-cyan-accent/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-blue-500/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-12 left-10 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="site-container relative z-10">
         {/* Section Header */}
-        <SectionHeader
-          badge="DigiBuddy4U Pricing & Packages"
-          badgeVariant="blue"
-          title="Predictable Pricing for"
-          titleHighlight="Measurable Growth"
-          description="Choose from our specialized one-time business foundation setup or continuous growth retainers tailored for full-scale brand dominance."
-          align="center"
-        />
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-600/10 text-blue-600 text-xs font-bold uppercase tracking-wider mb-2.5">
+            <Sparkles className="w-3.5 h-3.5 text-blue-600 fill-current" />
+            <span>DigiBuddy4U Pricing & Packages</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold text-navy-950 tracking-tight leading-tight">
+            Predictable Pricing for{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
+              Measurable Growth
+            </span>
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+            Choose from our continuous monthly growth retainers or our full-service digital foundation business launch.
+          </p>
+
+          {/* Tab Selector: Retainers vs One-Time Setup */}
+          <div className="mt-6 inline-flex p-1 rounded-full bg-white border border-slate-200/90 shadow-sm">
+            <button
+              type="button"
+              onClick={() => setActiveTab('retainers')}
+              className={`px-5 py-2 rounded-full text-xs font-heading font-bold transition-all ${
+                activeTab === 'retainers'
+                  ? 'bg-blue-600 text-white shadow-md'
+                  : 'text-slate-600 hover:text-navy-950 hover:bg-slate-50'
+              }`}
+            >
+              Growth Retainers & Campaigns (3 Plans)
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab('setup')}
+              className={`px-5 py-2 rounded-full text-xs font-heading font-bold transition-all ${
+                activeTab === 'setup'
+                  ? 'bg-blue-600 text-white shadow-md'
+                  : 'text-slate-600 hover:text-navy-950 hover:bg-slate-50'
+              }`}
+            >
+              One-Time Business Setup (₹15,000)
+            </button>
+          </div>
+        </div>
 
         {/* ======================================================== */}
-        {/* 1. HORIZONTAL FEATURED CARD: Digital Foundation (₹15,000 One-Time) */}
+        {/* TAB 1: 3-CARD PRICING SECTION MATCHING USER'S DESIGN     */}
         {/* ======================================================== */}
-        {setupPkg && (
-          <div className="mt-10 sm:mt-14 w-full rounded-3xl bg-gradient-to-br from-white via-cyan-50/40 to-blue-50/50 border-2 border-cyan-300 shadow-xl shadow-cyan-900/5 relative p-6 sm:p-8 lg:p-10 mb-12 sm:mb-16">
-            {/* Ambient Lighting */}
-            <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-400/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
-
-            {/* Floating Top Pill */}
-            <div className="absolute -top-3.5 left-6 sm:left-10 z-20">
-              <span className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full bg-cyan-600 text-white font-heading font-extrabold text-xs uppercase tracking-wider shadow-md">
-                <Sparkles className="w-3.5 h-3.5 text-accent-yellow fill-current" />
-                Special Foundation Setup • One-Time Investment
+        {activeTab === 'retainers' && (
+          <div className="relative mt-4 sm:mt-6">
+            {/* Giant Background "Pricing" Typography */}
+            <div className="relative flex justify-center items-center select-none pointer-events-none overflow-hidden pb-4">
+              <span className="text-6xl xs:text-7xl sm:text-8xl md:text-9xl lg:text-[11rem] font-black font-heading tracking-tight leading-none text-blue-600/90 opacity-95">
+                Pricing
               </span>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-10 items-stretch relative z-10">
-              {/* Left Column: Title, Price, Description & Chips */}
-              <div className="lg:col-span-4 xl:col-span-3 flex flex-col justify-between pr-0 lg:pr-6 border-b lg:border-b-0 lg:border-r border-slate-200/80 pb-6 lg:pb-0">
-                <div className="space-y-4">
-                  {/* Top Bar Badges */}
-                  <div className="flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-1.5 flex-wrap">
-                      <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-cyan-800 bg-cyan-100 border border-cyan-200 px-2.5 py-1 rounded-lg">
-                        Business Setup
-                      </span>
-                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
-                        One-Time
-                      </span>
-                    </div>
+            {/* 3 Pricing Cards Grid */}
+            <div className="relative -mt-10 xs:-mt-12 sm:-mt-20 md:-mt-28 lg:-mt-32 z-10 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-7 xl:gap-8 items-center max-w-6xl mx-auto">
+              {retainerPackages.map((pkg, idx) => {
+                const isGrowth = pkg.slug === 'growth' || pkg.badge === 'Most Popular' || idx === 1;
+                const isPremium = pkg.slug === 'premium' || idx === 2;
+                const isStarter = !isGrowth && !isPremium;
+                const isSaved = isPackageSaved(pkg._id || pkg.slug);
 
-                    <button
-                      type="button"
-                      onClick={() => toggleSavePackage(setupPkg.slug)}
-                      className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all ${
-                        isPackageSaved(setupPkg._id || setupPkg.slug)
-                          ? 'bg-red-50 text-red-500 shadow-xs'
-                          : 'bg-white text-slate-400 hover:text-red-500 hover:bg-red-50 border border-slate-200'
-                      }`}
-                      title={isPackageSaved(setupPkg._id || setupPkg.slug) ? 'Remove from shortlist' : 'Save to shortlist'}
-                      aria-label="Save to shortlist"
-                    >
-                      <Heart className={`w-3.5 h-3.5 ${isPackageSaved(setupPkg._id || setupPkg.slug) ? 'fill-current' : ''}`} />
-                    </button>
-                  </div>
+                // Friendly display subtitle
+                const cardBadge = isGrowth ? 'Growth' : isStarter ? 'Starter' : 'Scale';
 
-                  {/* Title & Price */}
-                  <div>
-                    <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-navy-950 tracking-tight leading-tight">
-                      {setupPkg.name}
-                    </h3>
+                return (
+                  <div
+                    key={pkg.slug || idx}
+                    className={`rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 lg:p-8 flex flex-col justify-between relative transition-all duration-300 ${
+                      isGrowth
+                        ? 'bg-white border-2 border-blue-500 shadow-[0_25px_60px_rgba(8,102,245,0.18)] ring-4 ring-blue-500/10 lg:-translate-y-5 lg:scale-[1.03] z-20'
+                        : 'bg-white border border-slate-200/90 shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:border-blue-200/90 z-10'
+                    }`}
+                  >
+                    {/* Center Card Radiant Blue Top Glow */}
+                    {isGrowth && (
+                      <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-blue-500/20 via-blue-500/5 to-transparent rounded-t-[30px] pointer-events-none" />
+                    )}
 
-                    <div className="mt-2.5 pb-3 border-b border-slate-200/80">
-                      <div className="flex items-baseline gap-2 flex-wrap">
-                        <span className="text-3xl sm:text-4xl font-heading font-black text-navy-950 tracking-tight">
-                          ₹{setupPkg.monthlyPrice?.toLocaleString('en-IN')}
-                        </span>
-                        <span className="text-sm font-bold text-slate-500">
-                          / One-Time
+                    {/* Floating "Popular" Pill Badge for Center Card */}
+                    {isGrowth && (
+                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-30">
+                        <span className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full bg-blue-600 text-white font-heading font-extrabold text-xs uppercase tracking-wider shadow-md shadow-blue-500/40">
+                          Popular
                         </span>
                       </div>
-                      <span className="text-xs text-content-muted block mt-1 font-medium">
-                        One-time investment • Zero monthly commitment • Full handover
-                      </span>
-                    </div>
+                    )}
 
-                    <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                      {setupPkg.description}
-                    </p>
-                  </div>
+                    <div className="relative z-10 space-y-4">
+                      {/* Top Row: Plan Name / Category & Shortlist Heart */}
+                      <div className="flex items-center justify-between gap-2">
+                        <div>
+                          <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 block mb-0.5">
+                            {cardBadge}
+                          </span>
+                          <h3 className="font-heading font-extrabold text-xl sm:text-2xl text-navy-950 tracking-tight leading-tight">
+                            {pkg.name}
+                          </h3>
+                        </div>
 
-                  {/* Visual Highlight Chips */}
-                  <div className="pt-1">
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 block mb-2">
-                      Core Pillars Included:
-                    </span>
-                    <div className="grid grid-cols-1 gap-1.5">
-                      {(setupPkg.chips || []).map((chip, cIdx) => {
-                        const IconComponent = CHIP_ICONS[chip.icon] || CheckCircle2;
-                        return (
-                          <div
-                            key={cIdx}
-                            className="flex items-center justify-between p-2 rounded-xl text-xs font-semibold bg-white/90 border border-cyan-200/80 text-navy-950 shadow-xs"
-                          >
-                            <div className="flex items-center gap-2 min-w-0">
-                              <div className="w-6 h-6 rounded-lg bg-cyan-600/10 text-cyan-700 flex items-center justify-center flex-shrink-0">
-                                <IconComponent className="w-3.5 h-3.5" />
+                        <button
+                          type="button"
+                          onClick={() => toggleSavePackage(pkg.slug)}
+                          className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+                            isSaved
+                              ? 'bg-red-50 text-red-500 shadow-xs'
+                              : 'bg-slate-100/80 text-slate-400 hover:text-red-500 hover:bg-red-50'
+                          }`}
+                          title={isSaved ? 'Remove from shortlist' : 'Save to shortlist'}
+                          aria-label="Save to shortlist"
+                        >
+                          <Heart className={`w-3.5 h-3.5 ${isSaved ? 'fill-current text-red-500' : ''}`} />
+                        </button>
+                      </div>
+
+                      {/* Pricing Block */}
+                      <div>
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-3xl sm:text-4xl lg:text-[2.65rem] font-heading font-black text-navy-950 tracking-tight leading-none">
+                            ₹{pkg.monthlyPrice?.toLocaleString('en-IN')}
+                          </span>
+                          <span className="text-sm font-semibold text-slate-500">
+                            {pkg.billingType === 'Campaign' ? '/campaign' : '/month'}
+                          </span>
+                        </div>
+                        <p className="mt-1.5 text-xs text-slate-500 font-medium leading-relaxed">
+                          {isStarter && 'Perfect for building consistent social media presence'}
+                          {isGrowth && 'Perfect for growing brands needing model reels & Meta ads'}
+                          {isPremium && 'For professional brands seeking multi-channel dominance'}
+                        </p>
+                      </div>
+
+                      {/* Divider Line */}
+                      <div className="pt-1 pb-1 border-t border-slate-100" />
+
+                      {/* Deliverables / Features List with Solid Blue Checkmarks */}
+                      <div className="space-y-2.5 pt-1">
+                        {(pkg.keyHighlights || []).slice(0, 8).map((highlight, hIdx) => {
+                          if (highlight.toLowerCase().includes('note:')) return null;
+
+                          return (
+                            <div key={hIdx} className="flex items-start gap-2.5">
+                              {/* Blue Solid Checkmark Icon matching the design */}
+                              <div className="w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center flex-shrink-0 mt-0.5 shadow-xs">
+                                <Check className="w-3 h-3 stroke-[3]" />
                               </div>
-                              <span className="font-heading font-bold text-xs truncate">
-                                {chip.label}
+                              <span className="text-xs font-medium text-slate-700 leading-snug">
+                                {highlight}
                               </span>
                             </div>
-                            <span className="text-[10px] font-medium text-slate-500 flex-shrink-0">
-                              {chip.desc}
+                          );
+                        })}
+                      </div>
+
+                      {/* Special Included Expenses Badge for Ultimate (₹80,000) */}
+                      {isPremium && (
+                        <div className="mt-3 p-3 rounded-2xl bg-blue-50/80 border border-blue-200/70 text-[11px] space-y-1 text-navy-950">
+                          <div
+                            onClick={() => setExpandedNotice(!expandedNotice)}
+                            className="flex items-center justify-between font-bold text-blue-900 cursor-pointer"
+                          >
+                            <div className="flex items-center gap-1.5">
+                              <ShieldCheck className="w-3.5 h-3.5 text-blue-600 flex-shrink-0" />
+                              <span>All Production Expenses Included</span>
+                            </div>
+                            <span className="text-[10px] text-blue-700 font-bold hover:underline">
+                              {expandedNotice ? 'Hide' : 'View (6)'}
                             </span>
                           </div>
-                        );
-                      })}
+                          {expandedNotice ? (
+                            <ul className="pt-1.5 border-t border-blue-200/80 list-disc list-inside text-[10px] text-slate-700 space-y-0.5">
+                              <li>Influencer Collaboration Fees (Included)</li>
+                              <li>Model Fees / Booking Charges (Included)</li>
+                              <li>Meta Ads Budget / Ad Spend (Included)</li>
+                              <li>Travel & Location / Studio Rental (Included)</li>
+                              <li>Props & Production Setup (Included)</li>
+                            </ul>
+                          ) : (
+                            <p className="text-[10px] text-slate-600 truncate">
+                              Influencer, model, ads budget & shoot expenses included.
+                            </p>
+                          )}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Bottom CTA Button matching the design */}
+                    <div className="pt-6 mt-6 border-t border-slate-100 relative z-10 space-y-2.5">
+                      {isGrowth ? (
+                        /* Middle Card: Vibrant Electric Blue Pill Button */
+                        <button
+                          type="button"
+                          onClick={() => handleGetStarted(pkg)}
+                          className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 hover:from-blue-700 hover:to-blue-600 text-white font-heading font-extrabold text-sm shadow-lg shadow-blue-500/35 hover:shadow-xl hover:shadow-blue-500/45 transition-all duration-200 active:scale-98 flex items-center justify-center gap-2 cursor-pointer"
+                        >
+                          <span>Get Started</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </button>
+                      ) : (
+                        /* Outer Cards: Sleek Dark / Black Pill Button */
+                        <button
+                          type="button"
+                          onClick={() => handleGetStarted(pkg)}
+                          className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-slate-900 via-navy-950 to-slate-900 hover:from-black hover:to-slate-900 text-white font-heading font-bold text-sm shadow-md hover:shadow-lg transition-all duration-200 active:scale-98 flex items-center justify-center gap-2 cursor-pointer"
+                        >
+                          <span>Get Started</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </button>
+                      )}
+
+                      {/* Secondary Actions: Full Scope & PDF Download */}
+                      <div className="flex items-center justify-between text-[11px] pt-1 px-1">
+                        <button
+                          type="button"
+                          onClick={() => handleCardClick(pkg)}
+                          className="text-slate-500 hover:text-blue-600 font-semibold transition-colors flex items-center gap-1 cursor-pointer"
+                        >
+                          <span>View Full Scope</span>
+                          <ChevronRight className="w-3 h-3" />
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={(e) => handleDownloadPdf(pkg, e)}
+                          className="text-slate-500 hover:text-blue-600 font-semibold transition-colors flex items-center gap-1 cursor-pointer"
+                          title={`Download official ${pkg.name} PDF`}
+                        >
+                          <Download className="w-3 h-3 text-blue-600" />
+                          <span>Download PDF</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
+                );
+              })}
+            </div>
+
+            {/* Bottom Callout Banner for One-Time Business Foundation */}
+            {setupPkg && (
+              <div className="mt-12 sm:mt-16 max-w-4xl mx-auto rounded-3xl bg-white border border-blue-200 shadow-md p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="flex items-center gap-3.5 text-left">
+                  <div className="w-11 h-11 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 border border-blue-100">
+                    <Zap className="w-5 h-5 fill-current text-blue-600" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-heading font-extrabold text-navy-950 text-sm sm:text-base">
+                        Starting a New Business?
+                      </span>
+                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
+                        One-Time • ₹15,000
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-600 mt-0.5">
+                      Get a full mobile-ready website, Google Business, WhatsApp & 1 model advertisement shoot.
+                    </p>
+                  </div>
                 </div>
+
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('setup')}
+                  className="px-5 py-2.5 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-600 font-heading font-bold text-xs transition-colors flex items-center gap-1.5 flex-shrink-0 cursor-pointer"
+                >
+                  <span>Explore Foundation Setup</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ======================================================== */}
+        {/* TAB 2: ONE-TIME BUSINESS SETUP PACKAGE (₹15,000)         */}
+        {/* ======================================================== */}
+        {activeTab === 'setup' && setupPkg && (
+          <div className="mt-6 max-w-4xl mx-auto rounded-3xl bg-white border-2 border-blue-500/80 shadow-2xl p-6 sm:p-8 lg:p-10 relative">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+              <div>
+                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-600 border border-blue-200/80 mb-2">
+                  <Sparkles className="w-3 h-3 fill-current" />
+                  One-Time Business Setup
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-navy-950">
+                  {setupPkg.name}
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-xl">
+                  {setupPkg.description}
+                </p>
               </div>
 
-              {/* Middle Column: Included Scope Checklist */}
-              <div className="lg:col-span-5 xl:col-span-6 flex flex-col justify-between py-2 lg:py-0">
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-navy-950 block">
-                      Everything Included In This Setup:
-                    </span>
-                    <span className="text-[11px] font-semibold text-cyan-700 bg-cyan-100/60 px-2.5 py-0.5 rounded-full">
-                      Full Business Setup
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-2.5 text-xs text-slate-700">
-                    {(setupPkg.keyHighlights || []).map((highlight, hIdx) => {
-                      if (highlight.toLowerCase().includes('note:')) return null;
-                      const { icon: ItemIcon, badgeClass } = getDeliverableIcon(highlight);
-
-                      return (
-                        <div key={hIdx} className="flex items-center gap-2.5 bg-white/90 p-2.5 rounded-xl border border-slate-200/80 shadow-xs hover:border-cyan-300 transition-colors">
-                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${badgeClass}`}>
-                            <ItemIcon className="w-3.5 h-3.5" />
-                          </div>
-                          <span className="leading-snug font-semibold text-slate-800">{highlight}</span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Highlight Reassurance Pill */}
-                <div className="mt-4 p-3 rounded-2xl bg-cyan-100/60 border border-cyan-200 text-xs text-cyan-950 flex items-center gap-2.5">
-                  <Zap className="w-4 h-4 text-cyan-700 flex-shrink-0" />
-                  <span>
-                    <strong>Ready-to-Use Business Foundation:</strong> Complete website, Google Business Profile, WhatsApp setup, Instagram & Facebook setup, and directed model ad shoot.
-                  </span>
-                </div>
+              <div className="text-left md:text-right">
+                <span className="text-3xl sm:text-4xl font-heading font-black text-navy-950 block">
+                  ₹{setupPkg.monthlyPrice?.toLocaleString('en-IN')}
+                </span>
+                <span className="text-xs font-bold text-slate-500">
+                  / One-Time Investment • No Monthly Fee
+                </span>
               </div>
+            </div>
 
-              {/* Right Column: Pricing & Action Buttons */}
-              <div className="lg:col-span-3 xl:col-span-3 flex flex-col justify-center gap-3 pl-0 lg:pl-6 border-t lg:border-t-0 lg:border-l border-slate-200/80 pt-6 lg:pt-0">
-                <div className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm space-y-3.5 text-center">
-                  <div className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200/60">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>One-Time Investment</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 py-6 text-xs text-slate-700">
+              {(setupPkg.keyHighlights || []).map((highlight, hIdx) => {
+                if (highlight.toLowerCase().includes('note:')) return null;
+                return (
+                  <div key={hIdx} className="flex items-center gap-2.5 p-2 rounded-xl bg-slate-50 border border-slate-200/70">
+                    <div className="w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center flex-shrink-0">
+                      <Check className="w-3 h-3 stroke-[3]" />
+                    </div>
+                    <span className="font-semibold text-slate-800 leading-snug">{highlight}</span>
                   </div>
+                );
+              })}
+            </div>
 
-                  <div className="pt-1">
-                    <span className="text-3xl sm:text-4xl font-heading font-black text-navy-950">₹15,000</span>
-                    <span className="text-xs font-bold text-slate-500 block mt-0.5">/ One-Time Setup</span>
-                  </div>
+            <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <button
+                type="button"
+                onClick={() => handleGetStarted(setupPkg)}
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-heading font-extrabold text-sm shadow-lg shadow-blue-500/30 transition-all flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <span>Get Started with Foundation Setup</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
 
-                  <Button
-                    type="button"
-                    onClick={() => handleGetStarted(setupPkg)}
-                    variant="primary"
-                    size="md"
-                    className="w-full justify-center font-heading font-bold text-xs sm:text-sm shadow-md transition-all active:scale-98"
-                    icon={ArrowRight}
-                  >
-                    Choose Plan / Enquire
-                  </Button>
-
-                  <div className="grid grid-cols-2 gap-2 pt-1">
-                    <button
-                      type="button"
-                      onClick={() => handleCardClick(setupPkg)}
-                      className="inline-flex items-center justify-center gap-1 py-2 px-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white text-navy-950 font-heading font-bold text-[11px] transition-colors"
-                    >
-                      <span>Full Scope</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={(e) => handleDownloadPdf(setupPkg, e)}
-                      className="inline-flex items-center justify-center gap-1 py-2 px-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white text-navy-950 font-heading font-bold text-[11px] transition-colors"
-                      title={`Download official ${setupPkg.name} PDF`}
-                    >
-                      <Download className="w-3 h-3 text-primary" />
-                      <span>PDF</span>
-                    </button>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-500 font-medium text-center">
-                  <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
-                  <span>Instant enquiry prefilled on WhatsApp</span>
-                </div>
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => handleCardClick(setupPkg)}
+                  className="text-xs font-bold text-slate-600 hover:text-navy-950 flex items-center gap-1"
+                >
+                  <span>Full Scope Details</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => handleDownloadPdf(setupPkg, e)}
+                  className="text-xs font-bold text-blue-600 hover:underline flex items-center gap-1"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Download PDF</span>
+                </button>
               </div>
             </div>
           </div>
         )}
 
-        {/* ======================================================== */}
-        {/* 2. THREE ONGOING & CAMPAIGN PACKAGES (3-Column Grid) */}
-        {/* ======================================================== */}
-        <div className="mt-8 sm:mt-12">
-          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-2">
-              <Sparkles className="w-3.5 h-3.5 text-accent-yellow" />
-              <span>Ongoing Marketing & Growth Retainers</span>
-            </div>
-            <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-navy-950 tracking-tight">
-              Monthly Retainers & Brand Campaigns
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-600 mt-1.5 leading-relaxed">
-              Build lasting organic presence, viral reels consistency, and high-ROAS Meta advertising campaigns with our dedicated growth tiers.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7 xl:gap-8 w-full items-stretch">
-            {retainerPackages.map((pkg, idx) => {
-              const isGrowth = pkg.slug === 'growth' || pkg.badge === 'Most Popular';
-              const isPremium = pkg.slug === 'premium' || pkg.badge === 'Premium';
-              const isSaved = isPackageSaved(pkg._id || pkg.slug);
-              const chips = pkg.chips || [];
-
-              return (
-                <div
-                  key={pkg.slug || idx}
-                  className={`rounded-3xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 relative group ${
-                    isGrowth
-                      ? 'bg-white border-2 border-primary shadow-2xl ring-4 ring-primary/10 lg:-translate-y-2.5 z-10'
-                      : isPremium
-                      ? 'bg-gradient-to-b from-white via-slate-50/70 to-white border-2 border-navy-900 shadow-2xl ring-4 ring-navy-900/10 lg:-translate-y-2.5 z-10'
-                      : 'bg-white border border-slate-200/90 shadow-card-soft hover:shadow-card-hover'
-                  }`}
-                >
-                  {/* Floating Top Badge for Prominent Packages */}
-                  {isGrowth && (
-                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20">
-                      <span className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full bg-accent-yellow text-navy-950 font-heading font-extrabold text-xs uppercase tracking-wider shadow-md">
-                        <Sparkles className="w-3.5 h-3.5 fill-current text-navy-950" />
-                        Most Popular
-                      </span>
-                    </div>
-                  )}
-
-                  {isPremium && (
-                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20">
-                      <span className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full bg-navy-950 text-cyan-accent border border-cyan-accent/30 font-heading font-extrabold text-xs uppercase tracking-wider shadow-md">
-                        <Crown className="w-3.5 h-3.5 text-accent-yellow" />
-                        Premium Campaign
-                      </span>
-                    </div>
-                  )}
-
-                  <div className="space-y-4">
-                    {/* Top Bar: Category Label & Shortlist Heart */}
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-1.5">
-                        {isGrowth ? (
-                          <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-primary bg-primary/10 px-2.5 py-1 rounded-lg">
-                            Social Growth Retainer
-                          </span>
-                        ) : isPremium ? (
-                          <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-navy-950 bg-slate-100 border border-slate-200 px-2.5 py-1 rounded-lg">
-                            Omnichannel Scale
-                          </span>
-                        ) : (
-                          <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-600 bg-slate-100 px-2.5 py-1 rounded-lg">
-                            Starter Plan
-                          </span>
-                        )}
-                      </div>
-
-                      <button
-                        type="button"
-                        onClick={() => toggleSavePackage(pkg.slug)}
-                        className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all ${
-                          isSaved
-                            ? 'bg-red-50 text-red-500 shadow-xs'
-                            : 'bg-slate-100 text-slate-400 hover:text-red-500 hover:bg-red-50'
-                        }`}
-                        title={isSaved ? 'Remove from shortlist' : 'Save to shortlist'}
-                        aria-label="Save to shortlist"
-                      >
-                        <Heart className={`w-3.5 h-3.5 ${isSaved ? 'fill-current' : ''}`} />
-                      </button>
-                    </div>
-
-                    {/* Package Title & Price Box */}
-                    <div>
-                      <h3 className={`font-heading font-extrabold text-navy-950 tracking-tight leading-snug min-h-[56px] flex items-center ${isPremium ? 'text-lg sm:text-xl' : 'text-xl sm:text-2xl'}`}>
-                        {pkg.name}
-                      </h3>
-
-                      {/* Price and Billing Type */}
-                      <div className="mt-2 pb-3 border-b border-slate-100">
-                        <div className="flex items-baseline gap-1.5 flex-wrap">
-                          <span className="text-2xl sm:text-3xl font-heading font-black text-navy-950 tracking-tight">
-                            ₹{pkg.monthlyPrice?.toLocaleString('en-IN')}
-                          </span>
-                          <span className="text-xs sm:text-sm font-bold text-slate-500">
-                            {pkg.billingType === 'Campaign' ? '/ Campaign' : '/ Month'}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-2 flex-wrap mt-1">
-                          <span className="text-[11px] text-content-muted font-medium">
-                            {pkg.billingType === 'Campaign'
-                              ? 'End-to-end full campaign execution'
-                              : 'Billed monthly'}
-                          </span>
-                          {pkg.billingType === 'Monthly' && (
-                            <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200/80">
-                              <Clock className="w-3 h-3 text-amber-600" />
-                              {pkg.minimumCommitment || 'Minimum 3 Months'}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Short Description */}
-                      <p className="mt-2.5 text-xs text-slate-600 leading-relaxed min-h-[48px]">
-                        {pkg.description}
-                      </p>
-                    </div>
-
-                    {/* 🌟 KEY DELIVERABLES / KHAS HIGHLIGHTS (Visual Chips) */}
-                    <div className="pt-1">
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 block mb-2">
-                        Key Highlights:
-                      </span>
-                      <div className="grid grid-cols-1 gap-1.5">
-                        {chips.map((chip, cIdx) => {
-                          const IconComponent = CHIP_ICONS[chip.icon] || CheckCircle2;
-                          return (
-                            <div
-                              key={cIdx}
-                              className={`flex items-center justify-between p-2 rounded-xl text-xs font-semibold ${
-                                isGrowth
-                                  ? 'bg-primary/5 border border-primary/20 text-navy-950'
-                                  : isPremium
-                                  ? 'bg-navy-950/5 border border-navy-950/15 text-navy-950'
-                                  : 'bg-slate-50 border border-slate-200/80 text-navy-950'
-                              }`}
-                            >
-                              <div className="flex items-center gap-2 min-w-0">
-                                <div
-                                  className={`w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                                    isGrowth
-                                      ? 'bg-primary text-white'
-                                      : isPremium
-                                      ? 'bg-navy-900 text-cyan-accent'
-                                      : 'bg-primary/10 text-primary'
-                                  }`}
-                                >
-                                  <IconComponent className="w-3.5 h-3.5" />
-                                </div>
-                                <span className="font-heading font-bold text-xs truncate">
-                                  {chip.label}
-                                </span>
-                              </div>
-                              <span className="text-[10px] font-medium text-slate-500 flex-shrink-0">
-                                {chip.desc}
-                              </span>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-
-                    {/* Full Included Features Checklist */}
-                    <div className="pt-2 space-y-2">
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 block">
-                        Complete Scope:
-                      </span>
-
-                      <div className="space-y-2 text-xs text-slate-700">
-                        {(pkg.keyHighlights || []).map((highlight, hIdx) => {
-                          if (highlight.toLowerCase().includes('note:')) return null;
-                          const { icon: ItemIcon, badgeClass } = getDeliverableIcon(highlight);
-
-                          return (
-                            <div key={hIdx} className="flex items-center gap-2.5">
-                              <div className={`w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 ${badgeClass}`}>
-                                <ItemIcon className="w-3.5 h-3.5" />
-                              </div>
-                              <span className="leading-snug font-medium text-slate-700">{highlight}</span>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-
-                    {/* Included Expenses Notice for ₹80,000 Package */}
-                    {isPremium && (
-                      <div className="mt-3 p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-200 text-[11px] space-y-1 text-emerald-950">
-                        <div
-                          onClick={() => setExpandedNotice(!expandedNotice)}
-                          className="flex items-center justify-between font-bold text-emerald-900 cursor-pointer"
-                        >
-                          <div className="flex items-center gap-1.5">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
-                            <span>Expenses Included in Package:</span>
-                          </div>
-                          <span className="text-[10px] text-emerald-700 font-bold hover:underline">
-                            {expandedNotice ? 'Hide' : 'View (6)'}
-                          </span>
-                        </div>
-                        {expandedNotice ? (
-                          <div className="pt-1.5 border-t border-emerald-200/80 space-y-1">
-                            <p className="text-[10px] text-emerald-800 font-medium leading-tight">
-                              Included inside the ₹80,000 package price:
-                            </p>
-                            <ul className="list-disc list-inside text-[10px] text-emerald-900 space-y-0.5">
-                              <li>Influencer Collaboration Fees (Included)</li>
-                              <li>Model Fees / Booking Charges (Included)</li>
-                              <li>Meta Ads Budget / Ad Spend (Included)</li>
-                              <li>Travel & Transportation Expenses (Included)</li>
-                              <li>Location / Studio Rental Charges (Included)</li>
-                              <li>Props, Costumes & Production Setup (Included)</li>
-                            </ul>
-                          </div>
-                        ) : (
-                          <p className="text-[10px] text-emerald-800 truncate">
-                            Influencer, model, ads budget & shoot expenses included.
-                          </p>
-                        )}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Bottom Actions: Get Started & Details */}
-                  <div className="pt-5 mt-5 border-t border-slate-100 space-y-2">
-                    <Button
-                      type="button"
-                      onClick={() => handleGetStarted(pkg)}
-                      variant={isGrowth ? 'yellow' : isPremium ? 'primary' : 'primary'}
-                      size="md"
-                      className={`w-full justify-center font-heading font-bold text-xs sm:text-sm shadow-md transition-all active:scale-98 ${
-                        isPremium ? 'bg-navy-950 hover:bg-navy-900 text-white' : ''
-                      }`}
-                      icon={ArrowRight}
-                    >
-                      Choose Plan / Enquire
-                    </Button>
-
-                    <div className="grid grid-cols-2 gap-2">
-                      <button
-                        type="button"
-                        onClick={() => handleCardClick(pkg)}
-                        className="inline-flex items-center justify-center gap-1 py-1.5 px-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-navy-950 font-heading font-bold text-[11px] transition-colors"
-                      >
-                        <span>Full Scope</span>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={(e) => handleDownloadPdf(pkg, e)}
-                        className="inline-flex items-center justify-center gap-1 py-1.5 px-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-navy-950 font-heading font-bold text-[11px] transition-colors"
-                        title={`Download official ${pkg.name} PDF`}
-                      >
-                        <Download className="w-3 h-3 text-primary" />
-                        <span>PDF</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Bottom Navigation Strip */}
+        {/* Bottom Actions & Links */}
         <div className="mt-12 sm:mt-16 text-center flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
           <Button
             to="/packages"
             variant="outlinePrimary"
             size="lg"
             icon={ArrowRight}
-            className="w-full sm:w-auto font-bold text-xs sm:text-sm"
+            className="w-full sm:w-auto font-bold text-xs sm:text-sm rounded-full"
           >
             Compare All Packages & Specifications
           </Button>
-
-          <a
-            href="#addons"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-primary/30 bg-primary/5 hover:bg-primary/10 text-primary font-heading font-bold text-xs sm:text-sm transition-all"
-          >
-            <span>Explore Add-Ons & Extras ↓</span>
-          </a>
 
           <Button
             to="/contact"
             variant="yellow"
             size="lg"
             icon={ArrowRight}
-            className="w-full sm:w-auto font-bold text-xs sm:text-sm"
+            className="w-full sm:w-auto font-bold text-xs sm:text-sm rounded-full"
           >
             Request Custom Scope / Consultation
           </Button>
