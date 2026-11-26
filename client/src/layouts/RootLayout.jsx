@@ -3,7 +3,6 @@ import { Outlet } from 'react-router-dom';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import WhatsAppButton from '../components/common/WhatsAppButton';
-import AutoWhatsAppPopup from '../components/common/AutoWhatsAppPopup';
 import CustomerAuthModal from '../components/auth/CustomerAuthModal';
 import AddonCartDrawer from '../components/addons/AddonCartDrawer';
 import IntroSplash from '../components/common/IntroSplash';
@@ -23,7 +22,6 @@ export default function RootLayout() {
       </main>
       <Footer />
       <WhatsAppButton floating={true} />
-      <AutoWhatsAppPopup delayMs={60000} />
       <CustomerAuthModal />
       <AddonCartDrawer />
     </div>
