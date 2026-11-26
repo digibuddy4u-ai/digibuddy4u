@@ -44,7 +44,8 @@ export default function AddonDetailModal({
     const text = encodeURIComponent(
       `Hi DigiBuddy4U! I am interested in the "${addon.title}" service (${addon.priceDisplay}). Please share more details and availability.`
     );
-    window.open(`https://wa.me/918141478024?text=${text}`, '_blank', 'noopener,noreferrer');
+    const phone = BRAND.phoneRaw || '916352478028';
+    window.open(`https://wa.me/${phone}?text=${text}`, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -98,11 +99,11 @@ export default function AddonDetailModal({
             </div>
 
             {/* Price Box */}
-            <div className="rounded-2xl bg-blue-50/90 border border-blue-200/80 px-4 py-2 sm:text-right shadow-xs">
+            <div className="rounded-2xl bg-blue-50/90 border border-blue-200/80 px-4 py-2 sm:text-right shadow-xs whitespace-nowrap flex-shrink-0">
               <span className="text-[10px] font-mono uppercase text-slate-400 font-bold block">
                 Estimated Price
               </span>
-              <span className="text-base sm:text-lg font-heading font-black text-navy-950">
+              <span className="text-base sm:text-lg font-heading font-black text-navy-950 whitespace-nowrap">
                 {addon.priceDisplay}
               </span>
             </div>
@@ -129,10 +130,10 @@ export default function AddonDetailModal({
               {(addon.inclusions || []).map((item, idx) => (
                 <div
                   key={idx}
-                  className="flex items-start gap-2.5 p-3 rounded-2xl bg-emerald-50/40 border border-emerald-200/60 shadow-xs"
+                  className="flex items-center gap-2.5 p-3 rounded-2xl bg-emerald-50/40 border border-emerald-200/60 shadow-xs"
                 >
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-xs font-semibold text-slate-800 leading-snug">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                  <span className="text-xs font-bold text-slate-800 leading-snug">
                     {item}
                   </span>
                 </div>
