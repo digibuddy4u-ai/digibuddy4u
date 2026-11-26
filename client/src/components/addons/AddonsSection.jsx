@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import {
   Plus,
   Check,
@@ -21,10 +22,7 @@ import {
   ArrowRight,
   ArrowUpRight,
   MessageCircle,
-  ChevronDown,
-  ChevronUp,
 } from 'lucide-react';
-import SectionHeader from '../common/SectionHeader';
 import { useAddonCart } from '../../context/AddonCartContext';
 import { API_URL } from '../../utils/api';
 
@@ -48,78 +46,18 @@ const ICON_MAP = {
   MessageCircle,
 };
 
-// 6 Core Featured Add-ons upfront as requested by user
-const FEATURED_SIX = [
-  {
-    title: 'Google Business Profile Setup',
-    slug: 'google-profile-setup',
-    category: 'Local Growth & Maps',
-    badge: 'Local SEO',
-    priceDisplay: '₹1,000 one-time',
-    subtitle: 'Complete GBP verification, Maps ranking & review optimization.',
-    icon: MapPin,
-    gradient: 'from-violet-600 to-indigo-500 shadow-violet-500/25',
-    glowColor: 'bg-violet-500/15',
-  },
-  {
-    title: 'Website Development',
-    slug: 'website-basic',
-    category: 'Website & IT',
-    badge: 'Mobile-Ready',
-    priceDisplay: 'From ₹5,000 one-time',
-    subtitle: 'Modern, high-converting responsive business sites & landing pages.',
-    icon: Layout,
-    gradient: 'from-pink-500 to-rose-600 shadow-pink-500/25',
-    glowColor: 'bg-rose-500/15',
-  },
-  {
-    title: 'Corporate Video & Camera Shoot',
-    slug: 'corporate-videos-shoot-on-camera',
-    category: 'Video & Production',
-    badge: '4K Cinema',
-    priceDisplay: 'From ₹5,000 / shoot day',
-    subtitle: 'Cinema camera & iPhone shoots with pro lighting and creative direction.',
-    icon: Camera,
-    gradient: 'from-amber-500 to-orange-500 shadow-orange-500/25',
-    glowColor: 'bg-amber-500/15',
-  },
-  {
-    title: 'Meta & Google Ads Setup',
-    slug: 'meta-ads',
-    category: 'Paid Advertising',
-    badge: 'High ROAS',
-    priceDisplay: 'From ₹1,000 / campaign',
-    subtitle: 'High-converting Facebook, Instagram & Google search ad campaigns.',
-    icon: Target,
-    gradient: 'from-purple-600 to-fuchsia-500 shadow-purple-500/25',
-    glowColor: 'bg-purple-500/15',
-  },
-  {
-    title: 'SEO & Online Presence',
-    slug: 'seo-advance-on-page-and-off-page',
-    category: 'Search Engine Optimization',
-    badge: 'Google Ranking',
-    priceDisplay: 'From ₹5,000',
-    subtitle: 'Technical audit, on-page SEO & high-authority local search visibility.',
-    icon: TrendingUp,
-    gradient: 'from-blue-600 to-cyan-500 shadow-blue-500/25',
-    glowColor: 'bg-blue-500/15',
-  },
-  {
-    title: 'Brand Identity & Logo Design',
-    slug: 'logo-design',
-    category: 'Branding & Identity',
-    badge: 'Vector Design',
-    priceDisplay: 'From ₹3,500 one-time',
-    subtitle: 'Creative vector logo marks, visiting card design & brand guidelines.',
-    icon: Palette,
-    gradient: 'from-amber-500 to-yellow-500 shadow-amber-500/25',
-    glowColor: 'bg-yellow-500/15',
-  },
+// 6 Core Featured Add-ons upfront on Home Page
+const FEATURED_SIX_SLUGS = [
+  'google-profile-setup',
+  'website-basic',
+  'corporate-videos-shoot-on-camera',
+  'meta-ads',
+  'seo-advance-on-page-and-off-page',
+  'logo-design',
 ];
 
-// Fallback baseline 15 add-ons in case API is temporarily loading
-const FALLBACK_ADDONS = [
+// Fallback baseline 17 add-ons
+const ALL_ADDONS = [
   {
     title: 'Google Business Profile Setup',
     slug: 'google-profile-setup',
@@ -127,51 +65,57 @@ const FALLBACK_ADDONS = [
     badge: 'Local SEO',
     priceDisplay: '₹1,000 one-time',
     iconName: 'MapPin',
+    subtitle: 'Complete GBP verification, Maps ranking & local review optimization.',
     shortDescription: 'Complete Google Business Profile setup, official verification, and local category optimization. Helps local clients discover, call, and navigate to your business on Google Maps.',
   },
   {
-    title: 'Basic Website',
+    title: 'Website Development',
     slug: 'website-basic',
     category: 'Website & IT',
     badge: 'Sub-Second Load',
-    priceDisplay: 'From ₹5000 one-time',
+    priceDisplay: 'From ₹5,000 one-time',
     iconName: 'Layout',
+    subtitle: 'Modern, high-converting responsive business sites & landing pages.',
     shortDescription: 'Modern, high-speed single-page website or landing page with mobile responsiveness. Features click-to-WhatsApp action, contact forms, and instant speed optimization.',
   },
   {
-    title: 'Corporate Videos Shoot On Camera',
+    title: 'Corporate Video & Camera Shoot',
     slug: 'corporate-videos-shoot-on-camera',
     category: 'Video & Production',
     badge: 'Cinema 4K Quality',
-    priceDisplay: 'From ₹10,000 / shoot day',
+    priceDisplay: 'From ₹5,000 / shoot day',
     iconName: 'Camera',
+    subtitle: 'Cinema camera & iPhone shoots with pro lighting and creative direction.',
     shortDescription: 'High-end 4K production shoot inside Ahmedabad using cinematic mirrorless cameras, studio lighting, and pro mics. Perfect for founder stories, factory tours, and brand ad films.',
   },
   {
-    title: 'Meta Ads Setup',
+    title: 'Meta & Google Ads Setup',
     slug: 'meta-ads',
     category: 'Paid Advertising',
     badge: 'High ROAS',
     priceDisplay: 'From ₹1,000 / campaign',
     iconName: 'Target',
+    subtitle: 'High-converting Facebook, Instagram & Google search ad campaigns.',
     shortDescription: 'High-converting Facebook & Instagram ad campaigns with custom audience targeting. Includes A/B creative testing and direct WhatsApp / lead form conversion funnels.',
   },
   {
-    title: 'SEO Advance (On Page And Off Page)',
+    title: 'SEO & Online Presence',
     slug: 'seo-advance-on-page-and-off-page',
     category: 'Search Engine Optimization',
     badge: 'Full Scale Growth',
-    priceDisplay: '₹20,000',
+    priceDisplay: 'From ₹5,000',
     iconName: 'Globe',
+    subtitle: 'Technical audit, on-page SEO & high-authority local search visibility.',
     shortDescription: 'Comprehensive technical SEO audit, high-authority backlink building, and local citation outreach. Drives sustainable organic rankings and long-term customer search traffic.',
   },
   {
-    title: 'Logo Design',
+    title: 'Brand Identity & Logo Design',
     slug: 'logo-design',
     category: 'Branding & Identity',
     badge: 'Vector Brand Mark',
     priceDisplay: 'From ₹3,500 one-time',
     iconName: 'Palette',
+    subtitle: 'Creative vector logo marks, visiting card design & brand guidelines.',
     shortDescription: 'Distinctive, custom vector logo mark paired with brand typography rules and high-contrast color codes. Delivered in full resolution across all web and print vector formats.',
   },
   {
@@ -181,6 +125,7 @@ const FALLBACK_ADDONS = [
     badge: 'High Intent',
     priceDisplay: 'From ₹1,000 / campaign',
     iconName: 'Search',
+    subtitle: 'Search, Display, and Performance Max ad campaigns capturing active buyers.',
     shortDescription: 'Intent-driven Google Search, Display, and Performance Max ad campaigns. Captures ready-to-buy prospects actively searching for your services in your target city.',
   },
   {
@@ -190,15 +135,17 @@ const FALLBACK_ADDONS = [
     badge: 'Essential',
     priceDisplay: '₹5,000',
     iconName: 'TrendingUp',
+    subtitle: 'Meta titles, headings & image alt optimization across your core website.',
     shortDescription: 'Meta title, meta description, heading structure, and image alt text optimization across your website. Ensures search engines properly understand and index your core pages.',
   },
   {
-    title: 'Advance Website',
+    title: 'Advance Custom Website & Portal',
     slug: 'website-advance',
     category: 'Website & IT',
     badge: 'Custom Web Portal',
     priceDisplay: 'Starting From ₹12,000 one-time',
     iconName: 'Code2',
+    subtitle: 'Custom multi-page business portal built with React, Node.js & Tailwind.',
     shortDescription: 'Custom multi-page web platform or business portal built with modern React, Tailwind, and Node.js. Includes interactive UX, custom inquiry management, and scalable cloud hosting.',
   },
   {
@@ -208,15 +155,17 @@ const FALLBACK_ADDONS = [
     badge: 'Social First',
     priceDisplay: 'From ₹5,000 / shoot day',
     iconName: 'Smartphone',
+    subtitle: 'Agile 4K iPhone shoots with gimbal stabilization & wireless mics for reels.',
     shortDescription: 'Agile 4K iPhone video shoot with motorized gimbal stabilization and clip-on wireless microphones. Ideal for high-retention vertical reels, behind-the-scenes, and office vibes.',
   },
   {
     title: 'Product Photography',
     slug: 'product-photography',
-    category: 'Creative & Media',
+    category: 'Video & Production',
     badge: 'Studio Lighting',
     priceDisplay: 'From ₹5,000',
     iconName: 'Camera',
+    subtitle: 'High-res studio & lifestyle product photography formatted for web & ads.',
     shortDescription: 'High-resolution studio and lifestyle product photography with specialized background sets and lighting. Retouched and formatted for ecommerce listings and social media feeds.',
   },
   {
@@ -226,33 +175,37 @@ const FALLBACK_ADDONS = [
     badge: 'High Engagement',
     priceDisplay: 'From ₹5,000 / video',
     iconName: 'Video',
+    subtitle: 'Authentic User-Generated Content style reels with relatable creators.',
     shortDescription: 'Authentic User-Generated Content (UGC) style videos featuring relatable creators or staff presentations. Proven to build organic social trust and slash customer acquisition costs.',
   },
   {
     title: 'Influencer Marketing',
     slug: 'influencer-marketing',
-    category: 'Social & Brand Growth',
+    category: 'Paid Advertising',
     badge: 'Targeted Reach',
     priceDisplay: 'Starting From ₹10,000 / campaign',
     iconName: 'Users',
+    subtitle: 'Micro and niche influencer identification, outreach & shoot coordination.',
     shortDescription: 'Targeted micro and niche influencer identification, outreach, campaign briefing, and shoot coordination. Amplifies your brand recognition across verified local target audiences.',
   },
   {
-    title: 'Business Card Design And Printing',
+    title: 'Business Card Design & Printing',
     slug: 'business-card-design-and-printing',
     category: 'Branding & Identity',
     badge: 'Print Ready',
     priceDisplay: 'From ₹2,000 (Design + Print)',
     iconName: 'CreditCard',
+    subtitle: 'Premium visiting cards with spot UV, velvet matte & doorstep delivery.',
     shortDescription: 'Premium double-sided visiting card design with spot UV, velvet matte lamination, or gold foil options. Includes bespoke graphic design plus physical printing delivered to you.',
   },
   {
-    title: 'Catalog Design',
+    title: 'Catalog & Menu Design',
     slug: 'catalog-design',
     category: 'Branding & Identity',
     badge: 'Multi-Page Layout',
     priceDisplay: 'From ₹4,500 / catalog',
     iconName: 'BookOpen',
+    subtitle: 'Polished digital & printable product catalogs, brochures, and menus.',
     shortDescription: 'Structured, polished digital and printable product catalog, brochure, or restaurant menu. Features organized visual hierarchy designed to make customer ordering seamless.',
   },
   {
@@ -262,6 +215,7 @@ const FALLBACK_ADDONS = [
     badge: 'AI & Video Creation',
     priceDisplay: '₹5,000 / package',
     iconName: 'Video',
+    subtitle: 'AI-powered and raw clips reel editing with scriptwriting & audio sync.',
     shortDescription: 'Professional AI-powered and raw video reel creation to help businesses create engaging social media content. Includes AI reels, raw clips editing, scriptwriting, captions, and hashtag suggestions.',
   },
   {
@@ -271,9 +225,68 @@ const FALLBACK_ADDONS = [
     badge: 'Channel Setup',
     priceDisplay: '₹1,000 one-time',
     iconName: 'MessageCircle',
+    subtitle: 'Official WhatsApp Business profile, auto-replies & product catalog.',
     shortDescription: 'Get your WhatsApp Business account professionally configured to communicate with customers and showcase your products or services. Includes profile branding, catalog setup, and automated messaging.',
   },
 ];
+
+// Helper to assign a consistent gradient and icon to any addon
+const getAddonVisuals = (addon) => {
+  const slug = addon.slug || '';
+  if (slug.includes('google-profile')) {
+    return { icon: MapPin, gradient: 'from-violet-600 to-indigo-500 shadow-violet-500/25' };
+  }
+  if (slug.includes('website-advance')) {
+    return { icon: Code2, gradient: 'from-rose-600 to-red-500 shadow-rose-500/25' };
+  }
+  if (slug.includes('website')) {
+    return { icon: Layout, gradient: 'from-pink-500 to-rose-600 shadow-pink-500/25' };
+  }
+  if (slug.includes('camera') || slug.includes('shoot-on-camera')) {
+    return { icon: Camera, gradient: 'from-amber-500 to-orange-500 shadow-orange-500/25' };
+  }
+  if (slug.includes('iphone')) {
+    return { icon: Smartphone, gradient: 'from-orange-500 to-amber-600 shadow-amber-500/25' };
+  }
+  if (slug.includes('meta-ads')) {
+    return { icon: Target, gradient: 'from-purple-600 to-fuchsia-500 shadow-purple-500/25' };
+  }
+  if (slug.includes('google-ads')) {
+    return { icon: Search, gradient: 'from-blue-600 to-indigo-600 shadow-blue-500/25' };
+  }
+  if (slug.includes('seo-advance') || slug.includes('seo-advance-on-page-and-off-page')) {
+    return { icon: Globe, gradient: 'from-blue-600 to-cyan-500 shadow-blue-500/25' };
+  }
+  if (slug.includes('seo')) {
+    return { icon: TrendingUp, gradient: 'from-cyan-600 to-blue-500 shadow-cyan-500/25' };
+  }
+  if (slug.includes('logo')) {
+    return { icon: Palette, gradient: 'from-amber-500 to-yellow-500 shadow-amber-500/25' };
+  }
+  if (slug.includes('business-card')) {
+    return { icon: CreditCard, gradient: 'from-emerald-600 to-teal-500 shadow-emerald-500/25' };
+  }
+  if (slug.includes('catalog')) {
+    return { icon: BookOpen, gradient: 'from-indigo-600 to-purple-600 shadow-indigo-500/25' };
+  }
+  if (slug.includes('photography')) {
+    return { icon: Camera, gradient: 'from-orange-600 to-red-500 shadow-orange-500/25' };
+  }
+  if (slug.includes('ugc')) {
+    return { icon: Video, gradient: 'from-pink-600 to-purple-600 shadow-pink-500/25' };
+  }
+  if (slug.includes('influencer')) {
+    return { icon: Users, gradient: 'from-violet-600 to-pink-500 shadow-violet-500/25' };
+  }
+  if (slug.includes('ai-reel')) {
+    return { icon: Video, gradient: 'from-fuchsia-600 to-purple-600 shadow-fuchsia-500/25' };
+  }
+  if (slug.includes('whatsapp')) {
+    return { icon: MessageCircle, gradient: 'from-emerald-500 to-green-600 shadow-emerald-500/25' };
+  }
+  const FallbackIcon = ICON_MAP[addon.iconName] || Sparkles;
+  return { icon: FallbackIcon, gradient: 'from-blue-600 to-indigo-600 shadow-blue-500/25' };
+};
 
 const CATEGORIES = [
   'All',
@@ -285,10 +298,13 @@ const CATEGORIES = [
   'Local Growth & Maps',
 ];
 
-export default function AddonsSection() {
-  const [addons, setAddons] = useState(FALLBACK_ADDONS);
-  const [showAll, setShowAll] = useState(false);
+export default function AddonsSection({ isPackagesPage = false }) {
+  const [addons, setAddons] = useState(ALL_ADDONS);
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const location = useLocation();
+
+  // True if explicitly passed or on /packages route
+  const onPackagesPage = isPackagesPage || location.pathname.startsWith('/packages');
 
   const { toggleCartItem, isInCart, totalCount, openDrawer } = useAddonCart();
 
@@ -299,7 +315,12 @@ export default function AddonsSection() {
         const res = await fetch(`${API_URL}/addons`);
         const json = await res.json();
         if (isMounted && json.success && Array.isArray(json.data) && json.data.length > 0) {
-          setAddons(json.data);
+          // Merge remote with local subtitle fallbacks
+          const merged = json.data.map((remote) => {
+            const local = ALL_ADDONS.find((a) => a.slug === remote.slug);
+            return local ? { ...remote, subtitle: local.subtitle || remote.shortDescription } : remote;
+          });
+          setAddons(merged);
         }
       } catch (err) {
         // Fallback already in place
@@ -317,9 +338,13 @@ export default function AddonsSection() {
     };
   }, []);
 
-  const filteredAddons = addons
-    .filter((item) => item.isPublished !== false)
-    .filter((item) => (selectedCategory === 'All' ? true : item.category === selectedCategory));
+  // On Home Page: Show the 6 core featured ones
+  // On Packages Page: Show all 17 filtered by category
+  const displayAddons = onPackagesPage
+    ? addons
+        .filter((item) => item.isPublished !== false)
+        .filter((item) => (selectedCategory === 'All' ? true : item.category === selectedCategory))
+    : FEATURED_SIX_SLUGS.map((slug) => addons.find((a) => a.slug === slug)).filter(Boolean);
 
   return (
     <section id="addons" className="py-14 sm:py-20 lg:py-24 bg-[#F8FAFC] border-t border-slate-100 relative overflow-hidden">
@@ -329,95 +354,25 @@ export default function AddonsSection() {
 
       <div className="site-container relative z-10 max-w-6xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-10 sm:mb-12 max-w-2xl mx-auto">
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider mb-2.5 border border-blue-200/60">
-            <Sparkles className="w-3.5 h-3.5 fill-current" />
-            A La Carte Add-Ons & Extras
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-navy-950 tracking-tight leading-tight">
-            Customize Your Scope With{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
-              On-Demand Services
+        {onPackagesPage ? (
+          /* Packages Page Header */
+          <div className="text-center mb-10 sm:mb-12 max-w-2xl mx-auto">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider mb-2.5 border border-blue-200/60">
+              <Sparkles className="w-3.5 h-3.5 fill-current" />
+              All 17 A La Carte Add-Ons
             </span>
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
-            Pick any extra service below to add to your custom growth quote or combine with your monthly retainer.
-          </p>
-        </div>
+            <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-navy-950 tracking-tight leading-tight">
+              On-Demand Services &{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
+                Extra Capabilities
+              </span>
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+              Explore our full catalogue of on-demand capabilities to customize your quotation or combine with your monthly retainer.
+            </p>
 
-        {/* ======================================================== */}
-        {/* 6 CORE FEATURED ADD-ONS (2-Column Grid as in Image)     */}
-        {/* ======================================================== */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-          {FEATURED_SIX.map((item, idx) => {
-            const Icon = item.icon;
-            // Match with active cart status
-            const activeAddon = addons.find((a) => a.slug === item.slug) || item;
-            const added = isInCart(activeAddon._id || activeAddon.slug);
-
-            return (
-              <div
-                key={idx}
-                onClick={() => toggleCartItem(activeAddon)}
-                className={`group cursor-pointer rounded-2xl sm:rounded-[22px] p-4 sm:p-5 flex items-center justify-between gap-4 transition-all duration-300 relative border ${
-                  added
-                    ? 'bg-blue-50/70 border-blue-500 shadow-md ring-2 ring-blue-500/20'
-                    : 'bg-white border-slate-200/80 shadow-xs hover:shadow-md hover:border-blue-300 hover:-translate-y-0.5'
-                }`}
-              >
-                {/* Left Side: Gradient Icon Container + Info */}
-                <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
-                  {/* Glowing Gradient Circular Icon */}
-                  <div
-                    className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 text-white bg-gradient-to-tr ${item.gradient} ring-4 ring-slate-100 group-hover:scale-105 transition-transform`}
-                  >
-                    <Icon className="w-5 h-5" />
-                  </div>
-
-                  {/* Title & Subtitle */}
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-heading font-bold text-base sm:text-lg text-navy-950 group-hover:text-blue-600 transition-colors truncate">
-                        {item.title}
-                      </h3>
-                      {added && (
-                        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-                          <Check className="w-2.5 h-2.5" />
-                          Added
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-xs sm:text-[13px] text-slate-500 leading-snug mt-0.5 line-clamp-1">
-                      {item.subtitle}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Right Side: Price & Arrow */}
-                <div className="flex items-center gap-2 flex-shrink-0">
-                  <span className="hidden sm:inline-block text-[11px] font-semibold text-slate-400 group-hover:text-blue-600 transition-colors">
-                    {item.priceDisplay}
-                  </span>
-                  <div className="w-8 h-8 rounded-full bg-slate-50 group-hover:bg-blue-50 flex items-center justify-center transition-colors">
-                    {added ? (
-                      <Check className="w-4 h-4 text-emerald-600" />
-                    ) : (
-                      <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                    )}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* ======================================================== */}
-        {/* EXPANDABLE SECTION FOR ALL 15+ ADD-ONS                   */}
-        {/* ======================================================== */}
-        {showAll && (
-          <div className="mt-8 pt-8 border-t border-slate-200/80 animate-in fade-in slide-in-from-top-4 duration-300">
-            {/* Category Filter Pills */}
-            <div className="mb-6 flex flex-wrap items-center justify-center gap-2">
+            {/* Category Filter Pills on Packages Page */}
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
               {CATEGORIES.map((cat) => (
                 <button
                   key={cat}
@@ -433,104 +388,105 @@ export default function AddonsSection() {
                 </button>
               ))}
             </div>
-
-            {/* Complete Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-              {filteredAddons.map((addon, index) => {
-                const added = isInCart(addon._id || addon.slug);
-                const IconComponent = ICON_MAP[addon.iconName] || Sparkles;
-
-                return (
-                  <div
-                    key={addon.slug || addon._id || index}
-                    className={`rounded-2xl p-4 sm:p-5 flex flex-col justify-between transition-all duration-300 relative group border ${
-                      added
-                        ? 'bg-blue-50/60 border-blue-500 shadow-md ring-2 ring-blue-500/20'
-                        : 'bg-white border-slate-200/80 shadow-xs hover:shadow-md hover:border-blue-300'
-                    }`}
-                  >
-                    <div>
-                      <div className="flex items-start justify-between gap-3 mb-3">
-                        <div className="flex items-center gap-2.5">
-                          <div
-                            className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors flex-shrink-0 ${
-                              added
-                                ? 'bg-blue-600 text-white shadow-sm'
-                                : 'bg-slate-100 text-blue-600 group-hover:bg-blue-600 group-hover:text-white'
-                            }`}
-                          >
-                            <IconComponent className="w-5 h-5" />
-                          </div>
-                          <div>
-                            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-blue-600 block">
-                              {addon.category}
-                            </span>
-                            {addon.badge && (
-                              <span className="inline-block text-[10px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200/60 mt-0.5">
-                                {addon.badge}
-                              </span>
-                            )}
-                          </div>
-                        </div>
-
-                        <button
-                          type="button"
-                          onClick={() => toggleCartItem(addon)}
-                          className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all ${
-                            added
-                              ? 'bg-emerald-500 text-white shadow-sm'
-                              : 'bg-slate-100 text-slate-600 hover:bg-blue-600 hover:text-white'
-                          }`}
-                          aria-label={`${added ? 'Remove' : 'Add'} ${addon.title}`}
-                        >
-                          {added ? <Check className="w-4 h-4 stroke-[2.5]" /> : <Plus className="w-4 h-4 stroke-[2.5]" />}
-                        </button>
-                      </div>
-
-                      <h4 className="text-base font-heading font-bold text-navy-950 group-hover:text-blue-600 transition-colors leading-snug">
-                        {addon.title}
-                      </h4>
-                      <p className="mt-1.5 text-xs text-slate-600 leading-relaxed line-clamp-2 min-h-[32px]">
-                        {addon.shortDescription}
-                      </p>
-                    </div>
-
-                    <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between">
-                      <strong className="text-xs font-heading font-extrabold text-navy-950">
-                        {addon.priceDisplay}
-                      </strong>
-                      <button
-                        type="button"
-                        onClick={() => toggleCartItem(addon)}
-                        className={`text-[11px] font-bold px-2.5 py-1 rounded-lg transition-colors ${
-                          added
-                            ? 'bg-emerald-50 text-emerald-700'
-                            : 'bg-slate-100 text-slate-700 hover:bg-blue-600 hover:text-white'
-                        }`}
-                      >
-                        {added ? 'Added' : '+ Add Service'}
-                      </button>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+          </div>
+        ) : (
+          /* Home Page Header matching Screenshot */
+          <div className="text-left mb-8 sm:mb-10 max-w-3xl">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-heading font-extrabold text-navy-950 tracking-tight leading-tight">
+              We don’t just design, we build brands{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
+                that launch and grow.
+              </span>
+            </h2>
+            <p className="text-xs sm:text-sm font-heading font-bold text-slate-500 mt-3 uppercase tracking-wider">
+              OUR ON-DEMAND SERVICES & ADD-ONS:
+            </p>
           </div>
         )}
 
         {/* ======================================================== */}
-        {/* BOTTOM ACTION BUTTONS: "MORE ADD-ONS" & SHORTLIST        */}
+        {/* 2-COLUMN UNIFIED SLEEK CARDS (6 on Home, All 17 on Packages) */}
+        {/* ======================================================== */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+          {displayAddons.map((addon, idx) => {
+            const visuals = getAddonVisuals(addon);
+            const ItemIcon = visuals.icon;
+            const added = isInCart(addon._id || addon.slug);
+
+            return (
+              <div
+                key={addon.slug || addon._id || idx}
+                onClick={() => toggleCartItem(addon)}
+                className={`group cursor-pointer rounded-2xl sm:rounded-[22px] p-4 sm:p-5 flex items-center justify-between gap-4 transition-all duration-300 relative border ${
+                  added
+                    ? 'bg-blue-50/70 border-blue-500 shadow-md ring-2 ring-blue-500/20'
+                    : 'bg-white border-slate-200/80 shadow-xs hover:shadow-md hover:border-blue-300 hover:-translate-y-0.5'
+                }`}
+              >
+                {/* Left Side: Glowing Circular Gradient Icon + Text */}
+                <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
+                  <div
+                    className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 text-white bg-gradient-to-tr ${visuals.gradient} ring-4 ring-slate-100 group-hover:scale-105 transition-transform`}
+                  >
+                    <ItemIcon className="w-5 h-5" />
+                  </div>
+
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <h3 className="font-heading font-bold text-base sm:text-lg text-navy-950 group-hover:text-blue-600 transition-colors truncate">
+                        {addon.title}
+                      </h3>
+                      {added && (
+                        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                          <Check className="w-2.5 h-2.5" />
+                          Added
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs sm:text-[13px] text-slate-500 leading-snug mt-0.5 line-clamp-1">
+                      {addon.subtitle || addon.shortDescription}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Right Side: Price & Toggle Action */}
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  <span className="hidden sm:inline-block text-[11px] font-semibold text-slate-400 group-hover:text-blue-600 transition-colors">
+                    {addon.priceDisplay}
+                  </span>
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
+                      added
+                        ? 'bg-emerald-500 text-white shadow-xs'
+                        : 'bg-slate-50 group-hover:bg-blue-50 text-slate-400 group-hover:text-blue-600'
+                    }`}
+                  >
+                    {added ? (
+                      <Check className="w-4 h-4 stroke-[2.5]" />
+                    ) : (
+                      <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                    )}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* ======================================================== */}
+        {/* BOTTOM ACTION BUTTONS                                    */}
         {/* ======================================================== */}
         <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3.5">
-          {/* Main "More Add-Ons" toggle button requested by user */}
-          <button
-            type="button"
-            onClick={() => setShowAll(!showAll)}
-            className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-white hover:bg-slate-50 text-navy-950 border border-slate-300/80 font-heading font-extrabold text-xs sm:text-sm shadow-sm hover:shadow transition-all flex items-center justify-center gap-2 cursor-pointer"
-          >
-            <span>{showAll ? 'Show Fewer Add-Ons' : 'More Add-Ons (15+ Services)'}</span>
-            {showAll ? <ChevronUp className="w-4 h-4 text-blue-600" /> : <ChevronDown className="w-4 h-4 text-blue-600" />}
-          </button>
+          {!onPackagesPage && (
+            /* On Home Page: Redirects directly to /packages#addons */
+            <Link
+              to="/packages#addons"
+              className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-white hover:bg-slate-50 text-navy-950 border border-slate-300/80 font-heading font-extrabold text-xs sm:text-sm shadow-sm hover:shadow transition-all flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <span>More Add-Ons (17+ Services)</span>
+              <ArrowRight className="w-4 h-4 text-blue-600" />
+            </Link>
+          )}
 
           {/* View Shortlist Drawer button */}
           <button
