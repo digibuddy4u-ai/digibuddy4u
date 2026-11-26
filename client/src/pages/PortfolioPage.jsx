@@ -7,7 +7,7 @@ import { PORTFOLIO_PROJECTS, UPCOMING_PORTFOLIO_PLACEHOLDERS } from '../utils/po
 import { api } from '../utils/api';
 import { getOrganizationSchema, getBreadcrumbSchema } from '../utils/seoConfig';
 
-const CATEGORIES = ['All', 'Outdoor & Landscaping', 'Automotive', 'Corporate & B2B', 'Food & Beverage'];
+const CATEGORIES = ['All', 'Corporate & B2B', 'Food & Beverage'];
 
 export default function PortfolioPage() {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -27,7 +27,8 @@ export default function PortfolioPage() {
               if (key) backendMap.set(key, p);
             });
 
-          // Always preserve our complete verified 6-client catalog, merging backend data by key
+          // Only display approved client brands: Chapa Kazi and RotiWala
+          const ALLOWED_SLUGS = ['chapa-kazi', 'rotiwala'];
           const merged = PORTFOLIO_PROJECTS.map((staticProj) => {
             const key = (staticProj.slug || staticProj.id || '').toLowerCase();
             const fromBackend = backendMap.get(key);
@@ -45,21 +46,7 @@ export default function PortfolioPage() {
               };
             }
             return staticProj;
-          });
-
-          // Also append any new custom project created in the admin portal
-          res.data.forEach((p) => {
-            const key = (p.slug || p._id || p.id || '').toLowerCase();
-            const exists = PORTFOLIO_PROJECTS.some(
-              (sp) => (sp.slug || sp.id || '').toLowerCase() === key
-            );
-            if (!exists && p.isPublished !== false) {
-              merged.push({
-                ...p,
-                id: p.slug || p._id,
-              });
-            }
-          });
+          }).filter((p) => ALLOWED_SLUGS.includes((p.slug || p.id || '').toLowerCase()));
 
           setProjects(merged);
         }

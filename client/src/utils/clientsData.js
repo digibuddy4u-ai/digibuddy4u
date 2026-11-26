@@ -1,49 +1,9 @@
 /**
  * DigiBuddy4U Verified Client Brands
- * Brands and businesses whose accounts, creative content, and digital marketing projects DigiBuddy4U has worked with.
+ * Client showcase featuring exclusively verified client engagements: Chapa Kazi and RotiWala.
  */
 
 export const CLIENT_BRANDS = [
-  {
-    id: 'silver-fox-outdoor',
-    name: 'Silver Fox Outdoor',
-    industry: 'Landscaping & Outdoor Services',
-    instagramHandle: 'silverfoxoutdoor',
-    instagramUrl: 'https://www.instagram.com/silverfoxoutdoor/',
-    logo: '/images/clients/silver-fox-outdoor.png',
-    badge: 'Landscaping & Outdoor',
-    focus: 'Outdoor living transformations & landscaping digital presence',
-  },
-  {
-    id: 'mak-pools-gardens',
-    name: 'MAK Pools & Gardens',
-    industry: 'Pools, Gardens & Landscaping',
-    instagramHandle: 'makpoolsandgardens',
-    instagramUrl: 'https://www.instagram.com/makpoolsandgardens/',
-    logo: '/images/clients/mak-pools-gardens.png',
-    badge: 'Pools & Gardens',
-    focus: 'Pool construction, garden maintenance & retail store digital media',
-  },
-  {
-    id: 'pool-store',
-    name: 'The Pool Store (PoolStore.ae)',
-    industry: 'Pool Equipment & Retail',
-    instagramHandle: 'makpoolsandgardens',
-    instagramUrl: 'https://www.instagram.com/makpoolsandgardens/',
-    logo: '/images/clients/poolstore-logo.png',
-    badge: 'Pool Supplies & Retail',
-    focus: 'E-Commerce pool accessories, chemical supplies & water care retail presence',
-  },
-  {
-    id: 'wheelers-auto-services',
-    name: 'Wheelers Auto Services',
-    industry: 'Automotive Services',
-    instagramHandle: 'wheelersauto',
-    instagramUrl: 'https://www.instagram.com/wheelersauto/',
-    logo: '/images/clients/wheelers-auto-services.png',
-    badge: 'Automotive',
-    focus: 'Auto body shop, detailing craftsmanship & social media content',
-  },
   {
     id: 'chapa-kazi',
     name: 'Chapa Kazi Business Services',

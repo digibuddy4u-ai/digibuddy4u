@@ -130,8 +130,10 @@ export default function ClientsSection() {
     setIsPaused(false);
   };
 
-  // Quadruple items to guarantee seamless continuous infinite loop without any blank gaps
+  // Repeat items to guarantee seamless continuous infinite loop without any blank gaps
   const marqueeItems = [
+    ...CLIENT_BRANDS,
+    ...CLIENT_BRANDS,
     ...CLIENT_BRANDS,
     ...CLIENT_BRANDS,
     ...CLIENT_BRANDS,
