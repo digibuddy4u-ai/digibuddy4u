@@ -205,8 +205,18 @@ export default function PricingPreviewSection() {
                 const isStarter = !isGrowth && !isPremium;
                 const isSaved = isPackageSaved(pkg._id || pkg.slug);
 
-                // Short 1-word plan label matching the design
-                const cardLabel = isGrowth ? 'Growth' : isStarter ? 'Starter' : 'Scale';
+                // Package names and badges matching Image 2 exactly
+                const cardBadge = isGrowth ? 'GROWTH' : isStarter ? 'STARTER' : 'SCALE';
+                const packageName = isStarter
+                  ? 'Foundation'
+                  : isGrowth
+                  ? 'Expansion'
+                  : 'Ultimate (Build Your Business from Scratch)';
+                const subtitleText = isStarter
+                  ? 'Perfect for building consistent social media presence'
+                  : isGrowth
+                  ? 'Perfect for growing brands needing model reels & Meta ads'
+                  : 'For professional brands seeking multi-channel dominance';
 
                 // Exactly 3 key highlights matching user request ("3 line ma j hoiey")
                 const threeHighlights = isStarter
@@ -267,12 +277,17 @@ export default function PricingPreviewSection() {
                         <div className="absolute -top-4 -left-4 w-36 h-36 bg-blue-500/20 rounded-full blur-2xl pointer-events-none" />
                       )}
 
-                      <div className="relative z-10 space-y-3">
-                        {/* Line 1: Plan Name & Shortlist Heart */}
-                        <div className="flex items-center justify-between gap-2">
-                          <h3 className="font-heading font-bold text-lg sm:text-xl text-navy-950 tracking-tight">
-                            {cardLabel}
-                          </h3>
+                      <div className="relative z-10 space-y-2.5">
+                        {/* Line 1: Category Badge & Plan Name from Image 2 */}
+                        <div className="flex items-start justify-between gap-2">
+                          <div>
+                            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400 block mb-0.5">
+                              {cardBadge}
+                            </span>
+                            <h3 className="font-heading font-extrabold text-xl sm:text-2xl text-navy-950 tracking-tight leading-snug">
+                              {packageName}
+                            </h3>
+                          </div>
 
                           <button
                             type="button"
@@ -290,22 +305,20 @@ export default function PricingPreviewSection() {
                         </div>
 
                         {/* Line 2: Price Block */}
-                        <div>
+                        <div className="pt-0.5">
                           <div className="flex items-baseline gap-1">
                             <span className="text-3xl sm:text-4xl lg:text-[2.65rem] font-heading font-black text-navy-950 tracking-tight leading-none">
                               ₹{pkg.monthlyPrice?.toLocaleString('en-IN')}
                             </span>
                             <span className="text-sm font-semibold text-slate-500">
-                              {pkg.billingType === 'Campaign' ? '/month' : '/month'}
+                              {pkg.billingType === 'Campaign' ? '/campaign' : '/month'}
                             </span>
                           </div>
                         </div>
 
-                        {/* Line 3: Subtitle / Tagline */}
-                        <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                          {isStarter && 'Perfect for getting started'}
-                          {isGrowth && 'Perfect for growing creators'}
-                          {isPremium && 'For professional creators'}
+                        {/* Line 3: Subtitle / Tagline from Image 2 */}
+                        <p className="text-xs text-slate-500 font-medium leading-relaxed min-h-[32px]">
+                          {subtitleText}
                         </p>
 
                         {/* Horizontal Divider Line */}
