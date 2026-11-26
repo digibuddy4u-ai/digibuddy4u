@@ -328,16 +328,20 @@ export default function AddonsSection() {
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-cyan-400/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="site-container relative z-10 max-w-6xl mx-auto">
-        {/* Section Header matching the reference styling */}
-        <div className="text-left mb-8 sm:mb-10 max-w-3xl">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-heading font-extrabold text-navy-950 tracking-tight leading-tight">
-            We don’t just design, we build brands{' '}
+        {/* Section Header */}
+        <div className="text-center mb-10 sm:mb-12 max-w-2xl mx-auto">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider mb-2.5 border border-blue-200/60">
+            <Sparkles className="w-3.5 h-3.5 fill-current" />
+            A La Carte Add-Ons & Extras
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-navy-950 tracking-tight leading-tight">
+            Customize Your Scope With{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
-              that launch and grow.
+              On-Demand Services
             </span>
           </h2>
-          <p className="text-sm font-heading font-bold text-slate-500 mt-3 uppercase tracking-wider">
-            Our On-Demand Services & Add-Ons:
+          <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+            Pick any extra service below to add to your custom growth quote or combine with your monthly retainer.
           </p>
         </div>
 
