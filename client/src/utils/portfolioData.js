@@ -3,6 +3,7 @@
  * Comprehensive showcase of verified client brands, deliverables, and creative scopes:
  * 1. Chapa Kazi Business Services (UAE Business Consulting)
  * 2. RotiWala (Food & Fresh Roti Business, Ahmedabad)
+ * 3. Zam Zam Jewellers (Fine Jewellery & Retail, Sarkhej, Ahmedabad)
  */
 
 export const PORTFOLIO_PROJECTS = [
@@ -86,6 +87,47 @@ export const PORTFOLIO_PROJECTS = [
       'Festive campaign designs for Diwali, corporate bulk lunches, and community bhandaras',
       'Social media graphics with transparent bulk pricing and direct delivery prompts',
       'One-click WhatsApp ordering funnel integration across social bio and posts',
+    ],
+  },
+  {
+    id: 'zam-zam-jewellers',
+    slug: 'zam-zam-jewellers',
+    title: 'Zam Zam Jewellers – Gold Rate Advisory, Festival Reels & Showroom Branding',
+    client: 'Zam Zam Jewellers',
+    tagline: 'Sarkhej’s trusted destination for 916 hallmarked Gold & Silver jewellery, festive offers & lucky draws.',
+    industry: 'Fine Jewellery & Retail',
+    category: 'Jewellery & Retail',
+    featured: true,
+    status: 'Active Client Engagement',
+    logo: '/images/clients/zam-zam-jewellers.png',
+    instagramHandle: 'zam_zam_jewellers428',
+    instagramUrl: 'https://www.instagram.com/zam_zam_jewellers428/',
+    location: 'Sarkhej, Ahmedabad, India',
+    bannerGradient: 'from-[#1A150A] via-[#2A1F0D] to-[#0D0B05]',
+    accentColor: '#F59E0B',
+    badgeBg: 'bg-amber-500/15 text-amber-200 border-amber-500/30',
+    topBorderColor: '#F59E0B',
+    services: [
+      'Jewellery Video Reels Production',
+      'Gold Price Trend Analysis Content',
+      'Festive Lucky Draw Campaigns',
+      'WhatsApp Inbound Enquiries Flow',
+    ],
+    overview:
+      'DigiBuddy4U drives the social media marketing and video production for Zam Zam Jewellers in Sarkhej, Ahmedabad. We produce high-impact gold price trend reels, festival lucky draw announcements, and transparent customer awareness campaigns.',
+    scope: [
+      'Jewellery Video Reels Production',
+      'Gold Price Trend Analysis Content',
+      'Festival Lucky Draw Promotional Graphics',
+      'Social Media Management',
+      'Local Sarkhej Showroom Brand Awareness',
+      'WhatsApp Inbound Enquiries Flow',
+    ],
+    deliverables: [
+      'High-converting vertical reels discussing daily gold rate movements and buyer savings insights',
+      'Festive lucky draw campaign creatives, coupon announcements, and bumper prize winner spotlights',
+      'Curated product showcase designs displaying bridal ornaments and hallmark gold collections',
+      'Direct WhatsApp click-to-chat integration connecting local buyers directly with the showroom team',
     ],
   },
 ];

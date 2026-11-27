@@ -24,7 +24,7 @@ export default function AboutIntroSection() {
             </p>
 
             <p className="text-sm sm:text-base text-content-muted leading-relaxed">
-              Serving brands across <strong>Ahmedabad, Gujarat &amp; Pan-India</strong>—from emerging local food ventures like <strong>RotiWala</strong> to direct-to-consumer companies—we eliminate the guesswork from digital marketing, SEO services, and website development. From setting up cohesive brand visuals to managing daily publishing schedules, we ensure your brand remains top-of-mind.
+              Serving brands across <strong>Ahmedabad, Gujarat &amp; Pan-India</strong>—from emerging local food ventures like <strong>RotiWala</strong> and fine jewellery showrooms like <strong>Zam Zam Jewellers</strong> to corporate consultancies—we eliminate the guesswork from digital marketing, SEO services, and website development. From setting up cohesive brand visuals to managing daily publishing schedules, we ensure your brand remains top-of-mind.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">

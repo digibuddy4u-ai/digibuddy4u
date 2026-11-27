@@ -1,6 +1,6 @@
 /**
  * DigiBuddy4U Verified Client Brands
- * Client showcase featuring exclusively verified client engagements: Chapa Kazi and RotiWala.
+ * Client showcase featuring exclusively verified client engagements: Chapa Kazi, RotiWala, and Zam Zam Jewellers.
  */
 
 export const CLIENT_BRANDS = [
@@ -23,5 +23,15 @@ export const CLIENT_BRANDS = [
     logo: '/images/clients/rotiwala-logo.png',
     badge: 'Food & Delivery',
     focus: 'Fresh homestyle roti delivery branding, social media & video production',
+  },
+  {
+    id: 'zam-zam-jewellers',
+    name: 'Zam Zam Jewellers',
+    industry: '916 Hallmarked Gold & Silver Jewellery',
+    instagramHandle: 'zam_zam_jewellers428',
+    instagramUrl: 'https://www.instagram.com/zam_zam_jewellers428/',
+    logo: '/images/clients/zam-zam-jewellers.png',
+    badge: 'Jewellery & Retail',
+    focus: 'Gold rate movement reels, festive lucky draws, bridal collection showcase & Sarkhej showroom branding',
   },
 ];

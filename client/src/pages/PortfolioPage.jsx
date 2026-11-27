@@ -7,7 +7,7 @@ import { PORTFOLIO_PROJECTS, UPCOMING_PORTFOLIO_PLACEHOLDERS } from '../utils/po
 import { api } from '../utils/api';
 import { getOrganizationSchema, getBreadcrumbSchema } from '../utils/seoConfig';
 
-const CATEGORIES = ['All', 'Corporate & B2B', 'Food & Beverage'];
+const CATEGORIES = ['All', 'Corporate & B2B', 'Food & Beverage', 'Jewellery & Retail'];
 
 export default function PortfolioPage() {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -27,8 +27,8 @@ export default function PortfolioPage() {
               if (key) backendMap.set(key, p);
             });
 
-          // Only display approved client brands: Chapa Kazi and RotiWala
-          const ALLOWED_SLUGS = ['chapa-kazi', 'rotiwala'];
+          // Only display approved client brands: Chapa Kazi, RotiWala, and Zam Zam Jewellers
+          const ALLOWED_SLUGS = ['chapa-kazi', 'rotiwala', 'zam-zam-jewellers'];
           const merged = PORTFOLIO_PROJECTS.map((staticProj) => {
             const key = (staticProj.slug || staticProj.id || '').toLowerCase();
             const fromBackend = backendMap.get(key);
