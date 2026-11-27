@@ -7,7 +7,7 @@ import {
   Layers,
   MessageCircle,
 } from 'lucide-react';
-import { InstagramIcon } from '../common/SocialIcons';
+import { InstagramIcon, GoogleIcon } from '../common/SocialIcons';
 import { BRAND } from '../../utils/brandConstants';
 
 export default function PortfolioCard({ project }) {
@@ -131,7 +131,19 @@ export default function PortfolioCard({ project }) {
 
         {/* Action Link & Socials */}
         <div className="pt-3.5 border-t border-[#E2E8F0] flex items-center justify-between gap-2">
-          {project.instagramUrl ? (
+          {project.googleBusinessUrl ? (
+            <a
+              href={project.googleBusinessUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-emerald-200 bg-emerald-50/70 hover:bg-emerald-100/80 text-emerald-950 text-xs font-semibold transition-colors shadow-2xs"
+              title={`View ${project.client} on Google Business Profile`}
+            >
+              <GoogleIcon className="w-3.5 h-3.5 flex-shrink-0" />
+              <span>Google Listing</span>
+              <ExternalLink className="w-2.5 h-2.5 opacity-60" />
+            </a>
+          ) : project.instagramUrl ? (
             <a
               href={project.instagramUrl}
               target="_blank"

@@ -7,7 +7,7 @@ import { PORTFOLIO_PROJECTS, UPCOMING_PORTFOLIO_PLACEHOLDERS } from '../utils/po
 import { api } from '../utils/api';
 import { getOrganizationSchema, getBreadcrumbSchema } from '../utils/seoConfig';
 
-const CATEGORIES = ['All', 'Corporate & B2B', 'Food & Beverage', 'Jewellery & Retail'];
+const CATEGORIES = ['All', 'Corporate & B2B', 'Food & Beverage', 'Jewellery & Retail', 'Google Business Setup'];
 
 export default function PortfolioPage() {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -27,8 +27,8 @@ export default function PortfolioPage() {
               if (key) backendMap.set(key, p);
             });
 
-          // Only display approved client brands: Chapa Kazi, RotiWala, and Zam Zam Jewellers
-          const ALLOWED_SLUGS = ['chapa-kazi', 'rotiwala', 'zam-zam-jewellers'];
+          // Only display approved client brands: Chapa Kazi, RotiWala, Zam Zam Jewellers, Lutf Jewellers, and Al Hamd Jewellers
+          const ALLOWED_SLUGS = ['chapa-kazi', 'rotiwala', 'zam-zam-jewellers', 'lutf-jewellers', 'al-hamd-jewellers'];
           const merged = PORTFOLIO_PROJECTS.map((staticProj) => {
             const key = (staticProj.slug || staticProj.id || '').toLowerCase();
             const fromBackend = backendMap.get(key);
@@ -71,7 +71,11 @@ export default function PortfolioPage() {
   const filteredProjects =
     activeCategory === 'All'
       ? projects
-      : projects.filter((p) => p.category?.includes(activeCategory));
+      : projects.filter(
+          (p) =>
+            p.category?.includes(activeCategory) ||
+            (activeCategory === 'Google Business Setup' && Boolean(p.googleBusinessUrl))
+        );
 
   return (
     <div className="bg-[#F5F8FC] min-h-screen">

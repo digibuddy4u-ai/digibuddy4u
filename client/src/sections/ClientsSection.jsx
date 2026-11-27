@@ -6,7 +6,7 @@ import {
   ArrowRight,
   ShieldCheck,
 } from 'lucide-react';
-import { InstagramIcon } from '../components/common/SocialIcons';
+import { InstagramIcon, GoogleIcon } from '../components/common/SocialIcons';
 import { CLIENT_BRANDS } from '../utils/clientsData';
 
 function ClientCard({ brand, index }) {
@@ -55,7 +55,19 @@ function ClientCard({ brand, index }) {
 
       {/* Card Actions Bottom */}
       <div className="mt-auto pt-3 border-t border-white/10 space-y-1.5">
-        {brand.instagramUrl && (
+        {brand.googleBusinessUrl ? (
+          <a
+            href={brand.googleBusinessUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-gradient-to-r from-emerald-600/90 via-teal-600/90 to-cyan-600/90 hover:from-emerald-500 hover:to-cyan-500 text-white font-heading font-bold text-xs shadow-md transition-all active:scale-98 group/btn border border-emerald-400/30"
+            title={`View ${brand.name} on Google Business Profile`}
+          >
+            <GoogleIcon className="w-3.5 h-3.5 flex-shrink-0" />
+            <span className="truncate">Google Business Profile</span>
+            <ExternalLink className="w-3 h-3 opacity-80 group-hover/btn:translate-x-0.5 transition-transform flex-shrink-0" />
+          </a>
+        ) : brand.instagramUrl ? (
           <a
             href={brand.instagramUrl}
             target="_blank"
@@ -63,11 +75,11 @@ function ClientCard({ brand, index }) {
             className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-gradient-to-r from-primary to-blue-600 hover:from-primary-hover hover:to-blue-700 text-white font-heading font-bold text-xs shadow-md transition-all active:scale-98"
             title={`View @${brand.instagramHandle} on Instagram`}
           >
-            <InstagramIcon className="w-3.5 h-3.5" />
+            <InstagramIcon className="w-3.5 h-3.5 flex-shrink-0" />
             <span>View Instagram</span>
-            <ExternalLink className="w-3 h-3 opacity-70 group-hover:translate-x-0.5 transition-transform" />
+            <ExternalLink className="w-3 h-3 opacity-70 group-hover:translate-x-0.5 transition-transform flex-shrink-0" />
           </a>
-        )}
+        ) : null}
 
         <Link
           to="/portfolio"
@@ -132,8 +144,6 @@ export default function ClientsSection() {
 
   // Repeat items to guarantee seamless continuous infinite loop without any blank gaps
   const marqueeItems = [
-    ...CLIENT_BRANDS,
-    ...CLIENT_BRANDS,
     ...CLIENT_BRANDS,
     ...CLIENT_BRANDS,
     ...CLIENT_BRANDS,
